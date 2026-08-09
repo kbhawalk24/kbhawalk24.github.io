@@ -1,24 +1,34 @@
 'use client'
 
 import { useLayoutEffect, useRef, useState } from 'react'
+import { BackgroundViz } from '@/components/background-viz'
+
 import Image from 'next/image'
 import {
   motion,
-  useMotionTemplate,
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
 } from 'motion/react'
 
+export function mapClamp(v: number, inMin: number, inMax: number, outMin: number, outMax: number) {
+  const t = Math.min(1, Math.max(0, (v - inMin) / (inMax - inMin)))
+  return outMin + t * (outMax - outMin)
+}
+
+// Scroll-progress thresholds driving the hero's illustration → bio crossfade.
+// Illustration fully fades out right as the bio starts fading in, so the
+// handoff reads as one continuous motion instead of two independent fades.
+export const ILLUSTRATION_FADE_RANGE = { start: 0.2, end: 0.4 }
+export const BIO_OPACITY_RANGE = { start: 0.4, end: 0.62 }
+export const BIO_BLUR_RANGE = { start: 0.4, end: 0.52 }
+
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
   const reducedMotionPref = useReducedMotion()
   const reducedMotion = reducedMotionPref !== false
   const [viewportH, setViewportH] = useState(0)
-  // Once the bio has fully revealed, lock it in place so it never fades
-  // out as the user continues scrolling.
-  const [bioLocked, setBioLocked] = useState(false)
 
   useLayoutEffect(() => {
     setViewportH(window.innerHeight)
@@ -32,37 +42,37 @@ export function Hero() {
     offset: ['start start', 'end end'],
   })
 
-  // Lock bio once fully revealed scrolling down.
-  // Unlock it when scrolling back up past the reveal start so it hides
-  // before the name travels back down through it.
-  useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    if (v >= 0.78) setBioLocked(true)
-    if (v < 0.50) setBioLocked(false)
-  })
-
-  // ── Name: rises from bottom to heading position ─────────────────────────
+  // ── Name rises from bottom to heading position ──────────────────────────
   const nameY = useTransform(
     scrollYProgress,
-    [0, 0.50],
+    [0, 0.62],
     reducedMotion ? [0, 0] : [viewportH * 0.44, 0],
   )
 
-  // ── Illustration: drifts down (counter-parallax) ────────────────────────
+  // ── Illustration drifts down (counter-parallax) ─────────────────────────
   const illustrationY = useTransform(
     scrollYProgress,
     [0, 1],
     reducedMotion ? [0, 0] : [0, viewportH * 0.28],
   )
 
-  // ── Illustration: blurs out completely BEFORE bio appears, then fades ───
-  const illustrationBlurPx = useTransform(scrollYProgress, [0.28, 0.50], [0, 20])
-  const illustrationFilter = useMotionTemplate`blur(${illustrationBlurPx}px)`
-  const illustrationOpacity = useTransform(scrollYProgress, [0.78, 1.0], [1, 0])
+  // Opacity/blur for the illustration and bio are driven through plain React
+  // state (not raw MotionValues in `style`) because Motion offloads clamped
+  // opacity/filter transforms to the browser's native scroll-timeline, which
+  // does not respect the input-range clamp and snaps back to 1 past it.
+  const [illustrationFade, setIllustrationFade] = useState({ opacity: 1, blurPx: 0 })
+  const [bioFade, setBioFade] = useState({ opacity: 0, blurPx: 14 })
 
-  // ── Bio: blurs in after illustration is fully blurred ───────────────────
-  const bioOpacity = useTransform(scrollYProgress, [0.52, 0.80], [0, 1])
-  const bioBlurPx  = useTransform(scrollYProgress, [0.52, 0.80], [14, 0])
-  const bioFilter  = useMotionTemplate`blur(${bioBlurPx}px)`
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    setIllustrationFade({
+      opacity: mapClamp(v, ILLUSTRATION_FADE_RANGE.start, ILLUSTRATION_FADE_RANGE.end, 1, 0),
+      blurPx:  mapClamp(v, ILLUSTRATION_FADE_RANGE.start, ILLUSTRATION_FADE_RANGE.end, 0, 20),
+    })
+    setBioFade({
+      opacity: mapClamp(v, BIO_OPACITY_RANGE.start, BIO_OPACITY_RANGE.end, 0, 1),
+      blurPx:  mapClamp(v, BIO_BLUR_RANGE.start, BIO_BLUR_RANGE.end, 14, 0),
+    })
+  })
 
   return (
     <section
@@ -73,20 +83,30 @@ export function Hero() {
       <div className="sticky top-0 flex min-h-screen overflow-hidden bg-background">
         <div className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-start px-6 py-8 md:px-14">
 
-          {/* Dot-grid */}
+          {/* Data viz background */}
+          <BackgroundViz />
+
+          {/* Light-blue circle behind the name */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0 opacity-45 [background-image:linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [background-position-x:24px] [background-size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent_78%)] md:[background-position-x:0px]"
+            className="pointer-events-none absolute z-[2] rounded-full"
+            style={{
+              width:  'min(110vh, 1000px)',
+              height: 'min(110vh, 1000px)',
+              top:    '-5%',
+              left:   '-5%',
+              background: 'radial-gradient(circle, #d0ecf6 0%, #dff3f9 62%, transparent 100%)',
+            }}
           />
 
-          {/* Illustration — drifts down, blurs before bio, fades at end */}
+          {/* Illustration */}
           <motion.div
             style={{
-              y: illustrationY,
-              opacity: illustrationOpacity,
-              filter: illustrationFilter,
+              y:       illustrationY,
+              opacity: illustrationFade.opacity,
+              filter:  `blur(${illustrationFade.blurPx}px)`,
             }}
-            className="pointer-events-none absolute right-2 top-[6%] z-10 w-[62vw] max-w-[460px] md:right-14 md:top-[7%] md:w-[42vw] md:max-w-[520px]"
+            className="pointer-events-none absolute right-4 top-[33%] z-10 w-[60vw] max-w-[420px] -translate-y-1/2 md:right-36 md:top-[44%] md:w-[40vw] md:max-w-[490px]"
           >
             <Image
               src="/images/designer-illustration.png"
@@ -98,30 +118,26 @@ export function Hero() {
             />
           </motion.div>
 
-          {/* Content — left-aligned, full width */}
+          {/* Content column */}
           <div className="relative z-20 flex min-h-screen w-full flex-col items-start justify-start pt-[9vh]">
 
-            {/* Name — left-aligned, parallax rise */}
+            {/* Name — parallax rise */}
             <motion.h1
               style={{ y: nameY }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="text-left font-sans text-[clamp(4rem,12vw,10rem)] font-semibold leading-[0.82] tracking-[-0.04em] text-foreground"
+              className="ml-[13%] mt-[8vh] text-left font-sans text-[clamp(3rem,6vw,5.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-foreground"
             >
               Kanchi
               <br />
               Bhawalkar
             </motion.h1>
 
-            {/* Bio — blurs in, then locked visible. Never fades out. */}
-            <motion.div
-              style={
-                bioLocked
-                  ? { opacity: 1, filter: 'blur(0px)' }
-                  : { opacity: bioOpacity, filter: bioFilter }
-              }
-              className="mt-8 w-full text-left md:max-w-[70vw]"
+            {/* Bio — blurs in as scroll progresses */}
+            <div
+              style={{ opacity: bioFade.opacity, filter: `blur(${bioFade.blurPx}px)` }}
+              className="mt-8 w-full ml-[13%] text-left md:max-w-[70vw]"
             >
               <p className="text-balance font-serif text-2xl leading-tight tracking-tight text-foreground md:text-4xl">
                 I am a Strategic Design Leader with 12+ years of experience
@@ -153,7 +169,7 @@ export function Hero() {
                   Work <span aria-hidden="true">↓</span>
                 </a>
               </div>
-            </motion.div>
+            </div>
 
           </div>
         </div>
