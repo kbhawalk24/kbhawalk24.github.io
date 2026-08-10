@@ -197,10 +197,22 @@ export const ROLES: TimelineRole[] = [
     entries: [
       {
         track: 'ic',
-        headline: 'Launched three analytics products end to end',
+        headline: 'Designed 605 Impact',
         detail:
-          'Designed and shipped 605 Impact, 605 Platform, and 605 Indxr — measuring TV advertising’s effect on consumer behavior.',
+          'Attribution analytics that answered media buyers’ core question — did this campaign work, and what should change?',
         metric: '$20M+ revenue generated',
+      },
+      {
+        track: 'ic',
+        headline: 'Built 605 Platform',
+        detail:
+          'Self-serve analytics that let media buyers run their own campaign reports without waiting on an analyst.',
+      },
+      {
+        track: 'ic',
+        headline: 'Shipped 605 Indxr',
+        detail:
+          'Audience indexing that measured which viewer segments a TV campaign actually reached.',
       },
       {
         track: 'ic',

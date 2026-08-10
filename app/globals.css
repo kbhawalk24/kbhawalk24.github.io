@@ -40,8 +40,9 @@
 
 :root {
   color-scheme: light;
-  /* Pure white editorial base */
-  --background: oklch(1 0 0);
+  /* Soft-gray editorial base — cards (--card) stay pure white so they read
+     as distinct surfaces sitting on this canvas. */
+  --background: oklch(0.97 0 0);
   --foreground: oklch(0.22 0.01 75);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.22 0.01 75);

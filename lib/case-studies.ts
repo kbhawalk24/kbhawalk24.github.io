@@ -553,22 +553,17 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
   },
 
   // ── 605 LLC ────────────────────────────────────────────────────────
-  'Launched three analytics products end to end': {
-    subtitle: '605 Impact, Platform, and Indxr: TV ad analytics from zero to $20M',
+  'Designed 605 Impact': {
+    subtitle: 'Attribution analytics for TV ad campaigns',
     context:
-      '605 measured how TV advertising changes real consumer behavior, using viewership data from millions of households. As lead designer, I owned three products from conception through commercial launch.',
+      '605 measured how TV advertising changes real consumer behavior, using viewership data from millions of households. 605 Impact was the attribution product — turning that data into a defensible answer for media buyers.',
     challenge:
-      'Design analytics products that make statistically complex attribution legible to media buyers — an audience of marketers, not data scientists.',
+      'Make statistically complex attribution legible to media buyers — an audience of marketers, not data scientists.',
     approach: [
       {
         title: 'Designed around the buyer’s decision, not the model',
         detail:
-          'Anchored every report on the question “did this campaign work, and what should I change?” — surfacing methodology as supporting detail, not the headline.',
-      },
-      {
-        title: 'Ran design end to end across three products',
-        detail:
-          'Owned research, IA, visual design, and dev handoff for 605 Impact (attribution), 605 Platform (self-serve analytics), and 605 Indxr (audience indexing).',
+          'Anchored every report on “did this campaign work, and what should I change?” — surfacing methodology as supporting detail, not the headline.',
       },
       {
         title: 'Validated with real sales conversations',
@@ -577,12 +572,68 @@ export const CASE_STUDIES: Record<string, CaseStudy> = {
       },
     ],
     outcomes: [
-      'All three products reached commercial launch.',
-      'The product line generated over $20M in revenue.',
+      'Reached commercial launch and anchored the three-product 605 line.',
+      'Contributed to $20M+ in combined product-line revenue.',
+    ],
+    metrics: [
+      { value: '$20M+', label: 'Product-line revenue' },
+      { value: '1 of 3', label: 'Products shipped end to end' },
+    ],
+  },
+
+  'Built 605 Platform': {
+    subtitle: 'Self-serve analytics for media buyers',
+    context:
+      'Media buyers needed to run their own campaign reports without waiting on a 605 analyst — Platform was the self-serve counterpart to Impact’s attribution engine.',
+    challenge:
+      'Give non-technical buyers direct access to the same data analysts used, without requiring them to understand the underlying methodology.',
+    approach: [
+      {
+        title: 'Built report templates around common buyer questions',
+        detail:
+          'Pre-built views for the handful of questions buyers asked repeatedly, instead of a general-purpose query builder.',
+      },
+      {
+        title: 'Ran design end to end',
+        detail:
+          'Owned research, IA, visual design, and dev handoff as part of the three-product 605 line.',
+      },
+    ],
+    outcomes: [
+      'Reduced buyers’ dependence on analyst-run reports.',
+      'Shipped alongside Impact and Indxr as part of a $20M+ product line.',
     ],
     metrics: [
       { value: '3', label: 'Products shipped end to end' },
-      { value: '$20M+', label: 'Revenue generated' },
+      { value: '$20M+', label: 'Combined product-line revenue' },
+    ],
+  },
+
+  'Shipped 605 Indxr': {
+    subtitle: 'Audience indexing for TV campaigns',
+    context:
+      'Indxr measured which viewer segments a campaign actually reached — the audience-side complement to Impact’s outcome measurement.',
+    challenge:
+      'Present household-level viewership data as a clear audience index without overwhelming media buyers with the underlying sample methodology.',
+    approach: [
+      {
+        title: 'Indexed audiences the way buyers already planned around',
+        detail:
+          'Mapped viewership data onto the audience segments buyers were already targeting in their media plans.',
+      },
+      {
+        title: 'Ran design end to end',
+        detail:
+          'Owned research, IA, visual design, and dev handoff as part of the three-product 605 line.',
+      },
+    ],
+    outcomes: [
+      'Completed the three-product 605 line alongside Impact and Platform.',
+      'Gave buyers a clearer read on audience reach than prior indexing tools.',
+    ],
+    metrics: [
+      { value: '3', label: 'Products shipped end to end' },
+      { value: '$20M+', label: 'Combined product-line revenue' },
     ],
   },
 

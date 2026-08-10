@@ -4,38 +4,10 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import {
-  TRACKS,
-  type Track,
-  type TimelineEntry,
-  type TimelineRole,
-} from '@/lib/timeline-data'
+import { type TimelineEntry, type TimelineRole } from '@/lib/timeline-data'
+import { trackStyles } from '@/lib/track-styles'
 import { CASE_STUDIES } from '@/lib/case-studies'
-
-const trackStyles: Record<
-  Track,
-  { badge: string; dot: string; accentText: string; accentBorder: string }
-> = {
-  management: {
-    badge:
-      'bg-track-management/10 text-track-management border-track-management/25',
-    dot: 'bg-track-management',
-    accentText: 'text-track-management',
-    accentBorder: 'border-track-management',
-  },
-  strategy: {
-    badge: 'bg-track-strategy/10 text-track-strategy border-track-strategy/25',
-    dot: 'bg-track-strategy',
-    accentText: 'text-track-strategy',
-    accentBorder: 'border-track-strategy',
-  },
-  ic: {
-    badge: 'bg-track-ic/10 text-track-ic border-track-ic/25',
-    dot: 'bg-track-ic',
-    accentText: 'text-track-ic',
-    accentBorder: 'border-track-ic',
-  },
-}
+import { TrackBadge } from '@/components/track-badge'
 
 export interface SelectedCase {
   entry: TimelineEntry
@@ -89,21 +61,7 @@ export function CaseStudyPanel({
       <header className="flex items-start justify-between gap-4 border-b border-border px-5 py-5 md:px-8">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <span
-              className={cn(
-                'inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 font-sans text-[10px] font-semibold uppercase tracking-widest',
-                trackStyles[selected.entry.track].badge,
-              )}
-            >
-              <span
-                aria-hidden="true"
-                className={cn(
-                  'size-1.5 rounded-full',
-                  trackStyles[selected.entry.track].dot,
-                )}
-              />
-              {TRACKS[selected.entry.track].label}
-            </span>
+            <TrackBadge track={selected.entry.track} />
             <span className="font-sans text-xs text-muted-foreground">
               {selected.role.title} · {selected.role.company} ·{' '}
               {selected.role.period}
