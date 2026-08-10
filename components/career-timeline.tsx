@@ -265,14 +265,25 @@ function TimelineList({
               >
                 {role.title}
               </h3>
-              <p
-                className={cn(
-                  'text-muted-foreground',
-                  isOpen ? 'mt-0.5 text-xs' : 'mt-1 text-lg',
-                )}
-              >
-                {role.company}
-              </p>
+              {role.companyLogo ? (
+                <img
+                  src={role.companyLogo}
+                  alt={role.company}
+                  className={cn(
+                    'inline-block w-auto',
+                    isOpen ? 'mt-0.5 h-3.5' : 'mt-2 h-5',
+                  )}
+                />
+              ) : (
+                <p
+                  className={cn(
+                    'text-muted-foreground',
+                    isOpen ? 'mt-0.5 text-xs' : 'mt-1 text-lg',
+                  )}
+                >
+                  {role.company}
+                </p>
+              )}
             </div>
 
             {/* RIGHT: overview of the work, then the projects themselves */}
