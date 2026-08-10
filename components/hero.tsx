@@ -81,7 +81,7 @@ export function Hero() {
       className="relative min-h-[200vh] overflow-clip border-b border-border"
     >
       <div className="sticky top-0 flex min-h-screen overflow-hidden bg-background">
-        <div className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-start px-6 py-8 md:px-14">
+        <div className="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col items-start px-6 py-8 md:px-10 lg:px-14">
 
           {/* Data viz background */}
           <BackgroundViz />
