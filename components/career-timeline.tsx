@@ -278,7 +278,7 @@ function TimelineList({
             {/* RIGHT: overview of the work, then the projects themselves */}
             <div className={cn(!isOpen && 'mt-6 sm:mt-0')}>
               {!isOpen && (
-                <p className="max-w-2xl text-pretty leading-relaxed text-muted-foreground">
+                <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
                   {role.summary}
                 </p>
               )}

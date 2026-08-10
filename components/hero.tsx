@@ -127,7 +127,7 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="ml-[13%] mt-[8vh] text-left font-sans text-[clamp(3rem,6vw,5.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-foreground"
+              className="mt-[8vh] text-left font-sans text-[clamp(3rem,6vw,5.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-foreground"
             >
               Kanchi
               <br />
@@ -137,7 +137,7 @@ export function Hero() {
             {/* Bio — blurs in as scroll progresses */}
             <div
               style={{ opacity: bioFade.opacity, filter: `blur(${bioFade.blurPx}px)` }}
-              className="mt-8 w-full ml-[13%] text-left md:max-w-[70vw]"
+              className="mt-8 w-full text-left md:max-w-[70vw]"
             >
               <p className="text-balance font-serif text-2xl leading-tight tracking-tight text-foreground md:text-4xl">
                 I am a Strategic Design Leader with 12+ years of experience
