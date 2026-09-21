@@ -22,3 +22,12 @@ pnpm-debug.log*
 
 # Local tooling config
 .claude/
+
+# Local scratch and pre-redesign backups, not part of the site
+.backup-pre-skeleton/
+_to_delete/
+SKELETON-README.md
+public/images/SKELETON-README.md.zip
+public/images/individual_svgs.zip
+public/portfolio_eye_tracking.html
+public/images/Screenshot*.png
