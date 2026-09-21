@@ -11,8 +11,18 @@ import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
 import { LENS_ROLES, LensProvider, useLens } from '@/components/lens'
 import { VisualSlot } from '@/components/visual-slot'
+import { ChapterPager, ChapterRail } from '@/components/chapter-nav'
+import { withLens } from '@/components/lens'
 
-function ChapterSection({ chapter, index }: { chapter: Chapter; index: number }) {
+function ChapterSection({
+  chapter,
+  prev,
+  next,
+}: {
+  chapter: Chapter
+  prev?: Chapter
+  next?: Chapter
+}) {
   const { lens } = useLens()
   // The lens lights the chapters that speak to the reader's role and dims
   // the badge on the rest. Content is never hidden.
@@ -22,7 +32,7 @@ function ChapterSection({ chapter, index }: { chapter: Chapter; index: number })
       {/* id and scroll-margin must sit on the SAME element — with the margin
           on the outer section the timeline strip's anchors landed this
           heading underneath the fixed header pill. */}
-      <div id={chapter.id} className="grid scroll-mt-28 gap-8 md:grid-cols-[220px_1fr] md:gap-12">
+      <div id={chapter.id} className="grid scroll-mt-[9.5rem] gap-8 md:grid-cols-[220px_1fr] md:gap-12">
         <div>
           <p className="label-micro text-muted-foreground">
             {chapter.period}
@@ -81,18 +91,36 @@ function ChapterSection({ chapter, index }: { chapter: Chapter; index: number })
               ))}
             </div>
           )}
+
+          <ChapterPager prev={prev} next={next} />
         </div>
       </div>
     </Reveal>
   )
 }
 
+/** The story that follows this one, in the narrative order of PAGES. The
+ *  last page has none; its readers get the "Keep reading" grid instead. */
+export function nextStory(page: PortfolioPage): PortfolioPage | null {
+  return PAGES[PAGES.findIndex((p) => p.slug === page.slug) + 1] ?? null
+}
+
 export function CaseStudyLayout({ page }: { page: PortfolioPage }) {
+  return (
+    <LensProvider>
+      <CaseStudyPage page={page} />
+    </LensProvider>
+  )
+}
+
+/** Inside the provider so the lens can be read for outbound links. */
+function CaseStudyPage({ page }: { page: PortfolioPage }) {
+  const { lens } = useLens()
   const others = PAGES.filter((p) => p.slug !== page.slug)
+  const next = nextStory(page)
 
   return (
     <MotionConfig reducedMotion="user">
-      <LensProvider>
       <SkipLink />
       <SiteHeader onHome={false} />
 
@@ -145,9 +173,16 @@ export function CaseStudyLayout({ page }: { page: PortfolioPage }) {
           </Reveal>
         )}
 
-        <div className="mt-12">
+        <ChapterRail chapters={page.chapters} containerId="chapters" />
+
+        <div id="chapters" className="mt-12">
           {page.chapters.map((c, i) => (
-            <ChapterSection key={c.id} chapter={c} index={i} />
+            <ChapterSection
+              key={c.id}
+              chapter={c}
+              prev={page.chapters[i - 1]}
+              next={page.chapters[i + 1]}
+            />
           ))}
         </div>
 
@@ -163,6 +198,28 @@ export function CaseStudyLayout({ page }: { page: PortfolioPage }) {
                 ))}
               </div>
             </div>
+          </Reveal>
+        )}
+
+        {next && (
+          <Reveal as="section" className="border-t border-border pt-10">
+            <Link
+              href={withLens(next.href, lens)}
+              className="group block rounded-[14px] bg-panel-soft p-6 transition-transform hover:-translate-y-0.5 md:p-8"
+            >
+              <span className="label-micro text-muted-foreground">Next story</span>
+              <span className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="font-heading text-2xl font-semibold tracking-tight group-hover:underline md:text-3xl">
+                  {next.title}
+                </span>
+                <span aria-hidden="true" className="text-muted-foreground transition-transform group-hover:translate-x-0.5">
+                  &rarr;
+                </span>
+              </span>
+              <span className="mt-2 block max-w-[52ch] text-pretty font-sans text-sm leading-relaxed text-muted-foreground">
+                {next.claim}
+              </span>
+            </Link>
           </Reveal>
         )}
 
@@ -183,7 +240,6 @@ export function CaseStudyLayout({ page }: { page: PortfolioPage }) {
         </Reveal>
       </main>
       <ContactFooter />
-      </LensProvider>
     </MotionConfig>
   )
 }
