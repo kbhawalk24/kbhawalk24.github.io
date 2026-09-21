@@ -12,7 +12,7 @@ export const TRACKS: Record<
   strategy: {
     label: 'Design Strategy',
     short: 'STRAT',
-    description: 'Vision, roadmaps, and architectural direction as a manager',
+    description: 'Vision, roadmaps, and architectural direction',
   },
   ic: {
     label: 'IC Craft',
@@ -21,11 +21,22 @@ export const TRACKS: Record<
   },
 }
 
+export interface TimelineMetric {
+  value: string
+  label: string
+}
+
 export interface TimelineEntry {
   track: Track
   headline: string
   detail: string
-  metric?: string
+  /** One to three value + label pairs. The first is the headline stat
+   *  (the featured card's pill); the carousel shows all of them as a stat
+   *  strip. Values stay short (a number, a before → after); the label says
+   *  what was measured. */
+  metrics?: TimelineMetric[]
+  /** Where this entry is told in full: a page, optionally with a chapter anchor. */
+  href?: string
 }
 
 export interface TimelineRole {
@@ -41,219 +52,257 @@ export interface TimelineRole {
   entries: TimelineEntry[]
 }
 
+/**
+ * Every metric here is sourced (year-end summaries FY22-FY26, the April 2026
+ * "Design for Data" deck, or Kanchi directly). Baselines are given wherever
+ * one exists. Plain language only, no internal acronyms.
+ */
 export const ROLES: TimelineRole[] = [
   {
     id: 'intuit-manager',
-    period: 'Aug 2024 — Present',
+    period: 'Aug 2024 - Jul 2026',
     startYear: '2024',
     title: 'Product Design Manager',
     company: 'Intuit',
-    companyLogo: '/images/intuit-logo.png',
+    companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
-      'Leading UX strategy and a team of designers for Intuit’s enterprise data platform — spanning data discovery, governance, lineage, observability, and pipeline authoring.',
+      'Led UX strategy and a team of three product designers for Intuit’s enterprise data platform: data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring. The platform supports ~550 engineers and 16 product managers.',
     entries: [
       {
         track: 'management',
         headline: 'Scaled the platform into company-wide infrastructure',
         detail:
-          'Grew Intuit’s data platform from a localized discovery tool into infrastructure used across the company.',
-        metric: '6,000+ monthly users',
+          'From a single-team discovery tool to the default way Intuit finds, trusts, and gets data. The team shipped 24 launches in the final twelve months.',
+        metrics: [
+          { value: '~2,700 → 6,000+', label: 'Monthly users' },
+        ],        href: '/leadership#shipped',
       },
       {
         track: 'management',
-        headline: 'Guided operational workflows for data access',
+        headline: 'Access from weeks to minutes',
         detail:
-          'Reduced access provisioning from 9 to 3 days and cut restricted-data denials by 85%.',
-        metric: '4,000 hrs/year saved',
+          'Directed the redesign of data-access workflows: provisioning 9 → 3 days, most routine requests auto-approved, restricted-data denials down 85%.',
+        metrics: [
+          { value: '~4,000 hrs', label: 'Saved per year' },
+        ],        href: '/work/trusting-data#access',
       },
       {
         track: 'management',
-        headline: 'Talent development and team outcomes',
+        headline: 'Promoted all three direct reports',
         detail:
-          'Led recruitment, assessment, and growth across the team — securing promotions for all direct reports.',
-        metric: '100% of reports promoted',
+          'Wrote the promotion-case framework they used; backed a team-led design sign-off practice that engineering adopted.',
+        metrics: [
+          { value: '3 of 3', label: 'Direct reports promoted' },
+        ],        href: '/leadership#people',
       },
       {
         track: 'strategy',
-        headline: 'UX strategy for enterprise data maturity',
+        headline: 'Data maturity standards across the platform',
         detail:
-          'Directed lineage and observability strategy, ensuring zero marketing-data incidents during the 2025 tax peak.',
-        metric: '35 → 0 critical incidents',
+          'Quality scorecards, a company-wide maturity dashboard, and self-service certification of trusted data.',
+        metrics: [
+          { value: '0 incidents', label: 'Marketing data, 2025 peak' },
+        ],        href: '/work/trusting-data#maturity',
       },
       {
         track: 'strategy',
-        headline: 'Architectural strategy for agentic data search',
+        headline: 'Moved discovery into the coding agent',
         detail:
-          'Drove architectural adoption of the Cursor/Claude data search MCP server across the platform.',
-        metric: 'Time-to-insight < 4 min',
+          'Architected the strategy to collapse the find → access → explore loop by putting the catalog inside Cursor and Claude instead of building a better chat.',
+        metrics: [
+          { value: '45 min → 4 min', label: 'Time to insight' },
+        ],        href: '/work/finding-data#agent',
       },
       {
         track: 'ic',
-        headline: 'Authored the agentic search interaction model',
+        headline: 'Designed how the data agent answers',
         detail:
-          'Personally designed the structured interaction model powering agentic data search, refining interaction rules hands-on.',
-        metric: '90%+ search accuracy',
+          'Wrote the agent’s rules, designed its responses, and worked on trust in what it returns, then shipped merged production pull requests myself.',
+        metrics: [
+          { value: '11% → 81%', label: 'Precision in 3 months' },
+        ],        href: '/work/finding-data#agent',
       },
       {
         track: 'ic',
         headline: 'Shipped a GenAI onboarding workflow',
         detail:
-          'Designed a workflow that auto-populates and pre-validates parameters, accelerating data pipeline integrations for marketers.',
-        metric: '1–2 weeks → < 24 hrs',
+          'AI pre-fills the form and validates up front, so marketers integrate data pipelines in under a day instead of one to two weeks.',
+        metrics: [
+          { value: '1-2 weeks → <24 hrs', label: 'Pipeline onboarding' },
+        ],        href: '/work/trusting-data#access',
       },
     ],
   },
   {
     id: 'intuit-principal',
-    period: 'Jan 2024 — Aug 2024',
+    period: 'Jan 2024 - Aug 2024',
     startYear: '2024',
     title: 'Principal Product Designer',
     company: 'Intuit',
-    companyLogo: '/images/intuit-logo.png',
+    companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
-      'Principal-level IC owning search, discoverability, and data trust across the enterprise data platform.',
+      'Principal-level IC owning search, discoverability, and data trust across the platform, plus the research that set the next year’s roadmap.',
     entries: [
       {
         track: 'ic',
-        headline: 'Redesigned platform search with a semantic layer',
+        headline: 'Designed data-quality trust features',
         detail:
-          'Introduced a semantic interaction layer to the data platform’s search experience.',
-        metric: '89% search precision',
+          'AI-generated descriptions, maturity scorecards, and AI classification tags.',
+        metrics: [
+          { value: '7,000+', label: 'Trusted data products' },
+        ],        href: '/work/trusting-data#maturity',
       },
       {
         track: 'strategy',
-        headline: 'Defined the FY25 platform roadmap',
+        headline: 'Research that set the FY25 roadmap',
         detail:
-          'Spearheaded foundational user research and cross-functional synthesis workshops that directly shaped the roadmap.',
+          '20 in-context user visits across business units and a cross-functional ideation workshop; the group product lead called it “a major contributor to our FY25 roadmap.”',
+        metrics: [
+          { value: '1 in 5', label: 'Searches for unfamiliar data' },
+        ],        href: '/work/finding-data#search-2',
       },
       {
         track: 'ic',
-        headline: 'Modernized architecture for complex data marts',
+        headline: 'Designed search rebuilt on meaning',
         detail:
-          'Made ~2,000 previously siloed data assets discoverable, driving a 42% growth in monthly active users.',
-        metric: '1,886 → 2,664 MAU',
+          'The semantic search and facet model that launched as Search 2.0 in March 2025, across every data type on the platform.',
+        metrics: [
+          { value: '81% → 89%', label: 'Search precision' },
+          { value: '51s → 2s', label: 'Query latency' },
+        ],        href: '/work/finding-data#search-2',
       },
       {
         track: 'ic',
-        headline: 'Designed clean-data trust features',
+        headline: 'Made complex data marts discoverable',
         detail:
-          'AI-generated descriptions and maturity scorecards made high-quality data products discoverable.',
-        metric: '7,000+ data products',
+          'Re-architected the catalog for the new data-product model; ~2,000 previously siloed tables became findable.',
+        metrics: [
+          { value: '+42%', label: '1,886 → 2,664 monthly users' },
+        ],        href: '/work/trusting-data#maturity',
       },
       {
         track: 'management',
         headline: 'Co-led intern hiring and mentorship',
         detail:
-          'Sourced 50+ candidates, mentored high-potential talent, and converted interns into full-time roles.',
+          'Sourced 50+ candidates, managed a design intern who later became a direct report.',
+        href: '/leadership#people',
       },
     ],
   },
   {
     id: 'intuit-senior',
-    period: 'Jun 2021 — Jan 2024',
+    period: 'Jun 2021 - Jan 2024',
     startYear: '2021',
     title: 'Senior Product Designer',
     company: 'Intuit',
-    companyLogo: '/images/intuit-logo.png',
+    companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
-      'Founding designer of Intuit’s internal data catalog — from zero to the company’s system of record for data.',
+      'Founding designer of Intuit’s internal data catalog, which grew from tables and columns into the company’s system of record for data.',
     entries: [
       {
         track: 'ic',
         headline: 'Founded the internal data catalog from scratch',
         detail:
-          'Replaced a legacy third-party system (Alation); designed search, browse, and trust tooling end to end.',
-        metric: '96% top-5 CTR · 45 days → 3',
+          'Trust flags, documentation, query information, ownership, new sources: enough to retire the third-party catalog the company was paying for.',
+        metrics: [
+          { value: '68% → 96%', label: 'Top-5 click-through' },
+        ],        href: '/work/finding-data#catalog',
       },
       {
         track: 'ic',
-        headline: 'Shipped Intuit’s first agentic data tooling',
+        headline: 'Designed the Data Map',
         detail:
-          'Data Copilot doubled SQL writing speed and was presented by the CTO at Investor Day 2023.',
-        metric: '500+ MAU',
+          'Organized the catalog by what the data is about, with every physical copy (batch, real-time, marketing) under one entry. No other catalog had done it.',
+        metrics: [
+          { value: '~20', label: 'In-context user sessions' },
+        ],        href: '/work/finding-data#data-map',
+      },
+      {
+        track: 'ic',
+        headline: 'Led design for Data Copilot',
+        detail:
+          'Intuit’s first AI data tooling: sixteen hackathon explorations consolidated into one chat experience, shipped in four months, presented by the CTO at Investor Day 2023.',
+        metrics: [
+          { value: '500+', label: 'Monthly users' },
+          { value: '2×', label: 'Faster SQL authoring' },
+        ],        href: '/work/finding-data#copilot',
       },
       {
         track: 'ic',
         headline: 'Built the first data lineage UI in 4 weeks',
         detail:
-          'Rendered impact graphs for ~30K tables and ~7K pipelines — the technical foundation for data reliability.',
-        metric: '~30K tables visualized',
-      },
-      {
-        track: 'ic',
-        headline: 'Expanded the catalog into a management platform',
-        detail:
-          'Added access requests, governance workflows, and a unified data map combining physical and logical objects.',
+          'Impact graphs across ~30K tables and ~7K pipelines; ~500 monthly users in the first year.',
+        metrics: [
+          { value: '~30K', label: 'Tables visualized' },
+        ],        href: '/work/trusting-data#lineage',
       },
     ],
   },
   {
     id: '605',
-    period: 'Oct 2017 — Jun 2021',
+    period: 'Oct 2017 - Jun 2021',
     startYear: '2017',
-    title: 'Product Designer',
-    company: '605 LLC',
+    title: 'Lead Product Designer',
+    company: '605',
     location: 'New York, NY',
     summary:
-      'Lead designer for TV ad-analytics products, taking three data products from conception to commercial launch.',
+      'Lead designer for TV ad-analytics products, taking three data products from concept to commercial launch.',
     entries: [
       {
         track: 'ic',
         headline: 'Designed 605 Impact',
         detail:
-          'Attribution analytics that answered media buyers’ core question — did this campaign work, and what should change?',
-        metric: '$20M+ revenue generated',
-      },
-      {
-        track: 'ic',
-        headline: 'Built 605 Platform',
-        detail:
-          'Self-serve analytics that let media buyers run their own campaign reports without waiting on an analyst.',
+          'A first-of-its-kind platform measuring TV advertising’s effect on consumer behavior; 32 statistical reports of 500+ rows condensed into a two-screen report.',
+        metrics: [
+          { value: '$20M+', label: 'Revenue across three products' },
+        ],        href: '/605#impact',
       },
       {
         track: 'ic',
         headline: 'Shipped 605 Indxr',
-        detail:
-          'Audience indexing that measured which viewer segments a TV campaign actually reached.',
+        detail: 'Audience targeting that cut report generation from 15 days to 2 hours.',
+        metrics: [
+          { value: '15 days → 2 hrs', label: 'Report generation' },
+        ],        href: '/605#indxr',
+      },
+      {
+        track: 'ic',
+        headline: 'Redesigned 605 Platform',
+        detail: 'Self-serve analytics; halved report-building time.',
+        metrics: [
+          { value: '−50%', label: 'Report-building time' },
+        ],        href: '/605#platform',
       },
       {
         track: 'ic',
         headline: 'Built a data-visualization design system',
-        detail:
-          'Created an accessible, dataviz-focused design system that scaled to support multivariate visualizations.',
-      },
-      {
-        track: 'strategy',
-        headline: 'Introduced a formal product design process',
-        detail:
-          'Streamlined design operations and coordinated weekly design meetings for the 605 design team.',
+        detail: 'Accessible, built for multivariate charts, hand-coded where needed.',
+        href: '/605#design-system',
       },
     ],
   },
   {
     id: 'tibco',
-    period: 'Jul 2012 — Jun 2015',
+    period: 'Jul 2012 - Jun 2015',
     startYear: '2012',
     title: 'Software Developer',
     company: 'TIBCO Software',
     location: 'Pune, India',
     summary:
-      'Java back-end developer on BusinessWorks, TIBCO’s enterprise integration platform — the engineering foundation behind a data-fluent design career.',
+      'Java back-end developer on TIBCO’s enterprise integration platform, the engineering foundation behind a data-fluent design career.',
     entries: [
       {
         track: 'ic',
         headline: 'Shipped enterprise integration enhancements',
-        detail:
-          'Translated customer requirements into shipped features for BusinessWorks.',
+        detail: 'Translated customer requirements into shipped features.',
       },
       {
         track: 'strategy',
-        headline: 'Defined the MVP for TIBCO Expresso',
-        detail:
-          'Shaped the mobile integration platform’s feature set through competitive analysis and user research.',
+        headline: 'Defined the MVP for a mobile integration product',
+        detail: 'Through competitive analysis and user research.',
       },
     ],
   },
@@ -261,7 +310,7 @@ export const ROLES: TimelineRole[] = [
 
 export const STATS = [
   { value: '12+', label: 'Years in enterprise tech' },
-  { value: '6,000+', label: 'Monthly users on platform led' },
-  { value: '$20M+', label: 'Revenue from shipped products' },
-  { value: '350 → 7,000+', label: 'Trustworthy data products scaled' },
+  { value: '45 days → seconds', label: 'Time to find, trust, and get data (2021 → 2026)' },
+  { value: '6,000+', label: 'Monthly users on the platform I led' },
+  { value: '$20M+', label: 'Revenue from products shipped at 605' },
 ]

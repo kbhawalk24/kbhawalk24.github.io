@@ -1,20 +1,26 @@
 'use client'
 
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, type MouseEvent, type ReactNode } from 'react'
 import {
   motion,
   useInView,
   useMotionValue,
+  useReducedMotion,
   useSpring,
   type Variants,
 } from 'motion/react'
+
+// Sitewide entrance curve — a soft ease-out. Every Motion transition that
+// needs a custom (non-spring) curve should import this rather than
+// retyping the array, so there is one place to retune the site's feel.
+export const EASE_OUT: [number, number, number, number] = [0.21, 0.47, 0.32, 0.98]
 
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] },
+    transition: { duration: 0.6, ease: EASE_OUT },
   },
 }
 
@@ -40,7 +46,7 @@ export function Reveal({
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-64px' }}
-      transition={{ duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      transition={{ duration: 0.6, delay, ease: EASE_OUT }}
       className={className}
     >
       {children}
@@ -98,5 +104,96 @@ export function AnimatedStat({ value }: { value: string }) {
       <span ref={ref}>0</span>
       {suffix}
     </span>
+  )
+}
+
+/**
+ * Wraps its child in a magnetic-pull hover effect: the element nudges
+ * toward the cursor within `strength`, then springs back on mouseleave.
+ * Driven entirely through motion values (never `useState`) so tracking the
+ * cursor doesn't re-render React on every pixel of movement. Inert when
+ * the visitor prefers reduced motion, or on touch (no mousemove to drive it).
+ */
+export function MagneticWrap({
+  children,
+  strength = 0.3,
+  className,
+}: {
+  children: ReactNode
+  strength?: number
+  className?: string
+}) {
+  const reducedMotion = useReducedMotion()
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.3 })
+  const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.3 })
+
+  const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+    if (reducedMotion) return
+    const rect = event.currentTarget.getBoundingClientRect()
+    x.set((event.clientX - rect.left - rect.width / 2) * strength)
+    y.set((event.clientY - rect.top - rect.height / 2) * strength)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
+  return (
+    <motion.div
+      style={{ x: springX, y: springY }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+/**
+ * 3D tilt that tracks the cursor across the card (Parallax Tilt Card).
+ * Same motion-value-only, reduced-motion-gated approach as MagneticWrap.
+ */
+export function TiltCard({
+  children,
+  className,
+  max = 5,
+}: {
+  children: ReactNode
+  className?: string
+  max?: number
+}) {
+  const reducedMotion = useReducedMotion()
+  const rotateX = useMotionValue(0)
+  const rotateY = useMotionValue(0)
+  const springRotateX = useSpring(rotateX, { stiffness: 200, damping: 22 })
+  const springRotateY = useSpring(rotateY, { stiffness: 200, damping: 22 })
+
+  const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+    if (reducedMotion) return
+    const rect = event.currentTarget.getBoundingClientRect()
+    const px = (event.clientX - rect.left) / rect.width - 0.5
+    const py = (event.clientY - rect.top) / rect.height - 0.5
+    rotateY.set(px * max)
+    rotateX.set(py * -max)
+  }
+
+  const handleMouseLeave = () => {
+    rotateX.set(0)
+    rotateY.set(0)
+  }
+
+  return (
+    <motion.div
+      style={{ rotateX: springRotateX, rotateY: springRotateY, transformPerspective: 800 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={className}
+    >
+      {children}
+    </motion.div>
   )
 }

@@ -1,60 +1,151 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion, useScroll, useSpring } from 'motion/react'
+import { useEffect, useId, useRef, useState } from 'react'
+import Link from 'next/link'
+import { AnimatePresence, motion } from 'motion/react'
+import { ChevronDown } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { EASE_OUT } from '@/components/motion-primitives'
+import { LensSwitch, useLens, withLens } from '@/components/lens'
 
-export function SiteHeader() {
-  const [visible, setVisible] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    restDelta: 0.001,
-  })
+/** Floating pill nav, on every page from load: Timeline / Contact plus the
+ *  IC–Manager lens. Case studies are reached from the timeline itself (each
+ *  role's featured entry links out), so there is no separate index here. On
+ *  phones the two links fold into "Menu". */
+export function SiteHeader({ onHome = true }: { onHome?: boolean }) {
+  const { lens } = useLens()
 
-  useEffect(() => {
-    const hero = document.getElementById('hero')
-    if (!hero) return
-
-    // Cache trigger position — recompute only on resize, not every scroll tick
-    let trigger = hero.offsetTop + hero.offsetHeight * 0.42
-
-    const onScroll = () => setVisible(window.scrollY >= trigger)
-    const onResize = () => {
-      trigger = hero.offsetTop + hero.offsetHeight * 0.42
-      onScroll()
-    }
-
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onResize, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onResize)
-    }
-  }, [])
+  const links = [
+    { label: 'Timeline', href: onHome ? '#timeline' : '/#timeline' },
+    { label: 'Contact', href: onHome ? '#contact' : '/#contact' },
+  ]
 
   return (
-    <motion.header
-      initial={false}
-      animate={{ y: visible ? 0 : '-100%' }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md"
-    >
-      <div className="mx-auto flex max-w-6xl items-baseline gap-3 px-6 py-4 md:px-10 lg:px-14">
-        <p className="font-sans text-lg font-semibold tracking-tight">
+    <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4 md:top-6">
+      <motion.nav
+        aria-label="Site"
+        initial={{ y: -12, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.4, delay: 0.3, ease: EASE_OUT }}
+        className="pointer-events-auto flex w-max max-w-full items-center gap-1 rounded-full bg-background/75 py-1.5 pl-4 pr-1.5 shadow-float ring-1 ring-foreground/[7%] backdrop-blur-xl sm:gap-2 sm:pl-5"
+      >
+        <Link
+          href={withLens('/', lens)}
+          translate="no"
+          className="-my-2 mr-1 rounded-full py-2 font-sans text-sm font-semibold tracking-tight transition-colors hover:text-accent-brand"
+        >
           Kanchi Bhawalkar
-        </p>
-        <p className="hidden font-sans text-xs text-muted-foreground sm:block">
-          Product Design Leader · Enterprise Data
-        </p>
-      </div>
-      {/* Reading progress */}
-      <motion.div
-        aria-hidden="true"
-        style={{ scaleX }}
-        className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-foreground"
-      />
-    </motion.header>
+        </Link>
+
+        <div className="hidden items-center sm:flex">
+          {links.map((l) => (
+            <NavLink key={l.label} href={withLens(l.href, lens)}>
+              {l.label}
+            </NavLink>
+          ))}
+        </div>
+
+        {/* Phone: the links fold into one menu. */}
+        <div className="sm:hidden">
+          <NavMenu items={links} />
+        </div>
+
+        <LensSwitch className="ml-1" />
+      </motion.nav>
+    </header>
+  )
+}
+
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className="inline-flex min-h-9 items-center rounded-full px-3 font-sans text-sm text-muted-foreground transition-colors hover:text-foreground"
+    >
+      {children}
+    </Link>
+  )
+}
+
+function NavMenu({ items }: { items: { label: string; href: string }[] }) {
+  const { lens } = useLens()
+  const [open, setOpen] = useState(false)
+  const id = useId()
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    const onClick = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    window.addEventListener('mousedown', onClick)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('mousedown', onClick)
+    }
+  }, [open])
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => setOpen((o) => !o)}
+        className={cn(
+          'inline-flex min-h-9 items-center gap-1 rounded-full px-3 font-sans text-sm transition-colors hover:text-foreground',
+          open ? 'text-foreground' : 'text-muted-foreground',
+        )}
+      >
+        Menu
+        <ChevronDown
+          aria-hidden="true"
+          strokeWidth={1.5}
+          className={cn('size-3.5 transition-transform duration-200', open && 'rotate-180')}
+        />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            id={id}
+            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.98 }}
+            transition={{ duration: 0.16, ease: EASE_OUT }}
+            className="absolute left-1/2 top-[calc(100%+10px)] w-44 -translate-x-1/2 rounded-[14px] bg-background p-1.5 shadow-float ring-1 ring-foreground/[7%]"
+          >
+            {items.map((l) => (
+              <li key={l.href}>
+                <MenuItem href={withLens(l.href, lens)} onClick={() => setOpen(false)}>
+                  {l.label}
+                </MenuItem>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function MenuItem({
+  href,
+  onClick,
+  children,
+}: {
+  href: string
+  onClick: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className="block rounded-[10px] px-3 py-2 font-sans text-sm text-foreground transition-colors hover:bg-panel-soft"
+    >
+      {children}
+    </Link>
   )
 }

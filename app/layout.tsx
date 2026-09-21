@@ -1,17 +1,29 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Newsreader } from 'next/font/google'
+import { IBM_Plex_Mono, League_Spartan, Mulish } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
-const newsreader = Newsreader({
+// League Spartan carries display and headings, Mulish carries body. Plex
+// Mono is loaded only for the small uppercase labels (`.label-micro`), the
+// one element borrowed from the Claude Design reference deck.
+const mulish = Mulish({
   subsets: ['latin'],
-  style: ['normal', 'italic'],
-  variable: '--font-newsreader',
+  weight: ['400', '500', '600'],
+  variable: '--font-mulish',
+})
+const leagueSpartan = League_Spartan({
+  subsets: ['latin'],
+  weight: ['600', '700', '800'],
+  variable: '--font-league-spartan',
+})
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['500'],
+  variable: '--font-plex-mono',
 })
 
 export const metadata: Metadata = {
-  title: 'Kanchi Bhawalkar — Product Design Leader',
+  title: 'Kanchi Bhawalkar, Product Design Leader',
   description:
     'Design leader with 12+ years across enterprise data platforms and agentic AI tooling. A career timeline of design management, design strategy, and hands-on IC craft.',
 
@@ -19,7 +31,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#f7f5f0',
+  themeColor: '#ffffff',
 }
 
 export default function RootLayout({
@@ -30,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`bg-background ${geistSans.variable} ${newsreader.variable}`}
+      className={`bg-background ${mulish.variable} ${leagueSpartan.variable} ${plexMono.variable}`}
     >
       <body className="antialiased">
         {children}

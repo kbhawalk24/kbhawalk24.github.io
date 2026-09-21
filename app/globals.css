@@ -4,6 +4,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Redefines the built-in `hover:` variant so every existing `hover:` utility
+   sitewide only applies on devices with real hover + a fine pointer — touch
+   taps no longer trigger or get stuck in hover states. */
+@custom-variant hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
 @theme inline {
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -29,56 +40,151 @@
   --color-track-strategy-foreground: var(--track-strategy-foreground);
   --color-track-ic: var(--track-ic);
   --color-track-ic-foreground: var(--track-ic-foreground);
+  --color-accent-brand: var(--accent-brand);
+  --color-canvas: var(--canvas);
+  --color-panel: var(--panel);
+  --color-panel-soft: var(--panel-soft);
+  --color-stripe: var(--stripe-a);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --font-serif: var(--font-newsreader), Georgia, serif;
+  /* Mulish for body, League Spartan (a geometric sans) for headings, and
+     IBM Plex Mono only for the small uppercase labels. */
+  --font-sans: var(--font-mulish), system-ui, sans-serif;
+  --font-heading: var(--font-league-spartan), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+  /* Float/CTA shadows, all tinted from one ink so nothing hardcodes rgba.
+     Cards themselves are flat; only the expanded featured card lifts. */
+  --shadow-card-raised: 0 40px 72px -32px rgb(var(--shadow-ink) / 0.45);
+  --shadow-float: 0 20px 40px -22px rgb(var(--shadow-ink) / 0.28);
+  --shadow-cta: 0 18px 30px -16px rgb(var(--shadow-ink) / 0.55);
+  --shadow-cta-hover: 0 22px 38px -14px rgb(var(--shadow-ink) / 0.6);
 }
 
 :root {
   color-scheme: light;
-  /* Soft-gray editorial base — cards (--card) stay pure white so they read
-     as distinct surfaces sitting on this canvas. */
-  --background: oklch(0.97 0 0);
-  --foreground: oklch(0.22 0.01 75);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.01 75);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.01 75);
+  /* One palette temperature: every neutral carries a faint bias toward the
+     brand violet (hue 293) so borders, text and surfaces read as chosen
+     rather than as three unrelated greys. Contrast is unchanged —
+     foreground 17.3:1 and muted-foreground 6.0:1 on the background. */
+  /* Palette lifted from the Claude Design reference deck (Timeline Case
+     Studies): near-black ink, warm greys, one violet. */
+  --background: #ffffff;
+  --foreground: #141414;
+  --card: #ffffff;
+  --card-foreground: #141414;
+  --popover: #ffffff;
+  --popover-foreground: #141414;
   /* Primary: ink */
-  --primary: oklch(0.22 0.01 75);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.22 0.01 75);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.5 0.01 75);
-  --accent: oklch(0.96 0 0);
-  --accent-foreground: oklch(0.22 0.01 75);
+  --primary: #141414;
+  --primary-foreground: #ffffff;
+  --secondary: #f6f5f3;
+  --secondary-foreground: #141414;
+  --muted: #f6f5f3;
+  --muted-foreground: #5f5f5b;
+  --accent: #f6f5f3;
+  --accent-foreground: #141414;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.91 0 0);
-  --input: oklch(0.91 0 0);
-  --ring: oklch(0.45 0.13 255);
+  --border: #e4e2dd;
+  --input: #e4e2dd;
+  --ring: #6d28d9;
   --radius: 0.375rem;
-  /* Work-type tracks */
-  --track-management: oklch(0.45 0.13 255); /* deep blue */
-  --track-management-foreground: oklch(1 0 0);
-  --track-strategy: oklch(0.62 0.14 55); /* burnt amber */
-  --track-strategy-foreground: oklch(1 0 0);
-  --track-ic: oklch(0.52 0.1 175); /* deep teal */
-  --track-ic-foreground: oklch(1 0 0);
+  /* Shadow ink (violet-leaning near-black), as channels so each shadow token
+     can set its own alpha. */
+  --shadow-ink: 23 21 28;
+  /* The violet wash behind the hero. */
+  --accent-brand-wash: #ede9fe;
+  --accent-brand-wash-soft: #f5f3ff;
+  /* Card system, from the Claude Design reference deck. One flat language
+     everywhere: on the white page, cards are `--panel-soft` grey panels
+     (14px radius, no border); on the paper `--canvas` (timeline), cards are
+     white with a 1px `--border` outline (20px radius) and carry `--panel`
+     grey panels inside. Depth comes from tone, not shadow. */
+  --canvas: #f0eee9;
+  --panel: #ededec;
+  --panel-soft: #f6f5f3;
+  --stripe-a: #e0ded9;
+  --stripe-b: #d6d4ce;
+  /* Brand accent — the deck's signature violet, used for the heading dot,
+     links, and focus rings. */
+  --accent-brand: #6d28d9;
+  /* Work-type tracks (reference deck's violet / amber / teal, using the
+     deeper amber variant it also ships so small text stays AA on white). */
+  --track-management: #6d28d9;
+  --track-management-foreground: #ffffff;
+  --track-strategy: #b4531a;
+  --track-strategy-foreground: #ffffff;
+  --track-ic: #157f5f;
+  --track-ic-foreground: #ffffff;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   html {
     scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground font-sans;
+  }
+  /* Kills the 300ms double-tap-zoom delay and the blue flash on tap. */
+  a,
+  button,
+  [role='button'],
+  summary {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: color-mix(in oklch, var(--ring) 18%, transparent);
+  }
+}
+
+/* One focus ring for the whole site. Previously only 7 of ~20 interactive
+   elements carried an explicit `focus-visible:` class and the rest fell back
+   to a half-opacity default, so the ring changed strength as you tabbed
+   across the page. Deliberately UNLAYERED (not inside `@layer base`): the
+   shadcn base layer also sets an outline colour on `*`, and unlayered rules
+   beat every cascade layer regardless of source order. */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@layer components {
+  /* The one micro-label treatment: card metadata, badges, captions. Was
+     previously split between 12px/0.1em and 10px/0.1em with no rule for
+     which went where. */
+  .label-micro {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+}
+
+/* Type scale — four steps, one heading face (League Spartan, loaded at
+   600/700/800, so `font-semibold` is the floor and `font-extrabold` the
+   display weight):
+     display   font-heading text-4xl md:text-6xl font-extrabold tracking-tight
+     section   font-heading text-3xl md:text-4xl font-semibold tracking-tight
+     sub       font-heading text-2xl md:text-3xl font-semibold tracking-tight
+     card      font-heading text-xl font-semibold  (text-lg when compact)
+     micro     .label-micro
+   Body copy is Mulish; measure capped at ~62ch. */
+
+/* Motion's `reducedMotion="user"` only silences Motion-driven animation.
+   Plain CSS transitions (hover states, underline sweeps, etc.) need their
+   own gate, applied once here instead of a `duration-0` override per class. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

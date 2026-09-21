@@ -1,667 +1,457 @@
 'use client'
 
-import { useRef, useState, type RefObject } from 'react'
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useSpring,
-  type MotionValue,
-} from 'motion/react'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { AnimatePresence, motion } from 'motion/react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   ROLES,
   TRACKS,
   type TimelineEntry,
-  type TimelineRole,
   type Track,
 } from '@/lib/timeline-data'
-import { CASE_STUDIES } from '@/lib/case-studies'
 import { trackStyles } from '@/lib/track-styles'
-import { Reveal } from '@/components/motion-primitives'
-import { TrackBadge } from '@/components/track-badge'
-import { MockPlaceholder, type MockVariant } from '@/components/mock-placeholder'
-import {
-  CaseStudyPanel,
-  type SelectedCase,
-} from '@/components/case-study-panel'
+import { resolveChapterHref } from '@/lib/site-content'
+import { LENS_TRACKS, useLens } from '@/components/lens'
+import { EASE_OUT, Reveal } from '@/components/motion-primitives'
+import { InlineCasePreview } from '@/components/case-preview'
+import { HeadingDot } from '@/components/heading-dot'
 
-// Temporarily showing only a curated handful of case studies. The rest of
-// CASE_STUDIES stays intact in lib/case-studies.ts — this is just a gate on
-// which cards render as clickable, so more can be turned back on later by
-// adding headlines here. Each also gets a placeholder mock variant until
-// real screenshots/diagrams replace them.
-const FEATURED_CASE_STUDIES: Record<string, MockVariant> = {
-  'Scaled the platform into company-wide infrastructure': 'dashboard',
-  'UX strategy for enterprise data maturity': 'dashboard',
-  'Architectural strategy for agentic data search': 'flow',
-  'Founded the internal data catalog from scratch': 'list',
-  'Shipped Intuit’s first agentic data tooling': 'flow',
-}
+// The timeline is the index. Each role is one white card on a paper canvas
+// (matched to the Claude Design reference, frame 13a): role facts on the
+// left; on the right, the featured case study (image, metric pill, grey
+// content panel) with the remaining highlights in a small carousel under
+// it. Only the featured card opens an inline preview; every featured card
+// links out to the full chapter (see lib/site-content.ts).
 
 const TRACK_ORDER: Track[] = ['management', 'strategy', 'ic']
 
-type ViewMode = 'timeline' | 'resume'
-
-interface ResumeViewProps {
-  activeTrack: Track | null
-  selectedCase: SelectedCase | null
-  onSelect: (entry: TimelineEntry, role: TimelineRole) => void
+const DIAGONAL_STRIPES = {
+  backgroundImage:
+    'repeating-linear-gradient(45deg, var(--stripe-a) 0, var(--stripe-a) 10px, var(--stripe-b) 10px, var(--stripe-b) 20px)',
 }
 
-function ResumeView({ activeTrack, selectedCase, onSelect }: ResumeViewProps) {
-  return (
-    <div className="flex flex-col divide-y divide-border">
-      {ROLES.map((role) => {
-        const visibleEntries = activeTrack
-          ? role.entries.filter((entry) => entry.track === activeTrack)
-          : role.entries
+// Falls back to the plain company name if the logo image 404s (or none was
+// given), rather than letting a broken-image glyph render.
+function CompanyMark({ logo, name }: { logo?: string; name: string }) {
+  const [errored, setErrored] = useState(false)
 
-        return (
-          <div key={role.id} className="py-6 first:pt-0 last:pb-0">
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-              <h3 className="font-serif text-lg tracking-tight">
-                {role.title}{' '}
-                <span className="text-muted-foreground">· {role.company}</span>
-              </h3>
-              <p className="font-sans text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                {role.period}
-              </p>
-            </div>
+  useEffect(() => {
+    if (!logo) return
+    let cancelled = false
+    const probe = new window.Image()
+    probe.onload = () => !cancelled && setErrored(false)
+    probe.onerror = () => !cancelled && setErrored(true)
+    probe.src = logo
+    return () => {
+      cancelled = true
+    }
+  }, [logo])
 
-            {visibleEntries.length === 0 ? (
-              <p className="mt-3 font-sans text-xs text-muted-foreground">
-                No {TRACKS[activeTrack!].label.toLowerCase()} work in this
-                role.
-              </p>
-            ) : (
-              <ul className="mt-3 grid max-w-2xl gap-1.5">
-                {visibleEntries.map((entry) => {
-                  const hasCaseStudy =
-                    Boolean(FEATURED_CASE_STUDIES[entry.headline]) &&
-                    Boolean(CASE_STUDIES[entry.headline])
-                  const isSelected =
-                    selectedCase?.entry.headline === entry.headline
-
-                  return (
-                    <li key={entry.headline} className="flex items-baseline gap-2.5">
-                      <span
-                        aria-hidden="true"
-                        className={cn(
-                          'mt-[0.4em] size-1.5 shrink-0 self-start rounded-full',
-                          trackStyles[entry.track].dot,
-                        )}
-                      />
-                      {hasCaseStudy ? (
-                        <button
-                          type="button"
-                          onClick={() => onSelect(entry, role)}
-                          aria-pressed={isSelected}
-                          className={cn(
-                            'text-pretty text-left text-sm leading-snug underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring',
-                            isSelected
-                              ? 'text-foreground underline'
-                              : 'text-foreground hover:text-foreground',
-                          )}
-                        >
-                          {entry.headline}
-                          {entry.metric && (
-                            <span className="text-muted-foreground">
-                              {' '}
-                              — {entry.metric}
-                            </span>
-                          )}
-                        </button>
-                      ) : (
-                        <p className="text-pretty text-sm leading-snug text-foreground/70">
-                          {entry.headline}
-                          {entry.metric && (
-                            <span className="text-muted-foreground">
-                              {' '}
-                              — {entry.metric}
-                            </span>
-                          )}
-                        </p>
-                      )}
-                    </li>
-                  )
-                })}
-              </ul>
-            )}
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-interface TimelineListProps {
-  timelineRef: RefObject<HTMLOListElement | null>
-  lineProgress: MotionValue<number>
-  isOpen: boolean
-  activeTrack: Track | null
-  selectedCase: SelectedCase | null
-  onSelect: (entry: TimelineEntry, role: TimelineRole) => void
-}
-
-function TimelineList({
-  timelineRef,
-  lineProgress,
-  isOpen,
-  activeTrack,
-  selectedCase,
-  onSelect,
-}: TimelineListProps) {
-  return (
-    <ol
-      ref={timelineRef}
-      className={cn(
-        'relative transition-all duration-500',
-        isOpen ? 'pl-6' : 'pl-8 sm:pl-0',
-      )}
-    >
-      {/* Static track + scroll-drawn spine. Sits at the ol's left edge in
-          compact/mobile layouts, but shifts into the gutter between the
-          title and content columns once the two-column layout kicks in. */}
-      <div
-        aria-hidden="true"
-        className={cn(
-          'absolute bottom-0 top-0 w-px bg-border',
-          isOpen ? 'left-0' : 'left-0 sm:left-[176px]',
-        )}
-      />
-      <motion.div
-        aria-hidden="true"
-        style={{ scaleY: lineProgress }}
-        className={cn(
-          'absolute bottom-0 top-0 w-px origin-top bg-foreground',
-          isOpen ? 'left-0' : 'left-0 sm:left-[176px]',
-        )}
-      />
-
-      {ROLES.map((role, roleIndex) => {
-        const visibleEntries = activeTrack
-          ? role.entries.filter((entry) => entry.track === activeTrack)
-          : role.entries
-        const isDimmed = activeTrack !== null && visibleEntries.length === 0
-
-        // Only the current role (Product Design Manager) spans all three
-        // tracks — split that one into IC craft vs. the two management-level
-        // tracks combined. Every other role stays a single flat grid; a
-        // repeated per-track header on every role added little.
-        const icEntries = role.entries.filter((entry) => entry.track === 'ic')
-        const stratMgmtEntries = role.entries.filter(
-          (entry) => entry.track === 'strategy' || entry.track === 'management',
-        )
-
-        const renderCardGrid = (entries: TimelineEntry[]) => (
-          // auto-fill (not auto-fit) so a short row of cards keeps its
-          // natural ~240-320px width instead of stretching to fill the row —
-          // the empty tracks stay reserved as blank canvas.
-          <ul className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-4">
-            {entries.map((entry) => (
-              <EntryCard
-                key={entry.headline}
-                entry={entry}
-                role={role}
-                compact={false}
-                showBadge={false}
-                isSelected={selectedCase?.entry.headline === entry.headline}
-                onSelect={() => onSelect(entry, role)}
-              />
-            ))}
-          </ul>
-        )
-
-        return (
-          <motion.li
-            key={role.id}
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{
-              duration: 0.6,
-              ease: [0.21, 0.47, 0.32, 0.98],
-            }}
-            className={cn(
-              'relative transition-opacity duration-300 last:pb-0',
-              isOpen ? 'pb-10' : 'pb-16',
-              !isOpen && 'sm:grid sm:grid-cols-[160px_1fr] sm:gap-8',
-              isDimmed && 'opacity-40',
-            )}
-          >
-            {/* Node */}
-            <motion.span
-              aria-hidden="true"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{
-                type: 'spring',
-                stiffness: 300,
-                damping: 18,
-                delay: 0.15,
-              }}
-              className={cn(
-                'absolute top-1 flex size-4 -translate-x-1/2 items-center justify-center rounded-full border-2 border-background bg-foreground',
-                isOpen ? '-left-6' : '-left-8 sm:left-[176px]',
-              )}
-            >
-              {roleIndex === 0 && (
-                <span className="absolute size-4 animate-ping rounded-full bg-foreground/40" />
-              )}
-            </motion.span>
-
-            {/* LEFT: role identity — period, title, company */}
-            <div className={cn(!isOpen && 'sm:text-right')}>
-              <p className="font-sans text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                {role.period}
-              </p>
-              <h3
-                className={cn(
-                  'mt-2 tracking-tight',
-                  isOpen ? 'text-sm font-semibold' : 'font-serif text-2xl',
-                )}
-              >
-                {role.title}
-              </h3>
-              {role.companyLogo ? (
-                <img
-                  src={role.companyLogo}
-                  alt={role.company}
-                  className={cn(
-                    'inline-block w-auto',
-                    isOpen ? 'mt-0.5 h-3.5' : 'mt-2 h-5',
-                  )}
-                />
-              ) : (
-                <p
-                  className={cn(
-                    'text-muted-foreground',
-                    isOpen ? 'mt-0.5 text-xs' : 'mt-1 text-lg',
-                  )}
-                >
-                  {role.company}
-                </p>
-              )}
-            </div>
-
-            {/* RIGHT: overview of the work, then the projects themselves */}
-            <div className={cn(!isOpen && 'mt-6 sm:mt-0')}>
-              {!isOpen && (
-                <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
-                  {role.summary}
-                </p>
-              )}
-
-              {isDimmed ? (
-                <p className="mt-5 font-sans text-xs text-muted-foreground">
-                  No {TRACKS[activeTrack!].label.toLowerCase()} work in this
-                  role.
-                </p>
-              ) : isOpen || activeTrack ? (
-                /* Single stacked column: compact rail mode or filtered view */
-                <motion.ul
-                  layout
-                  className={cn(
-                    'grid max-w-2xl',
-                    isOpen ? 'mt-4 gap-2' : 'mt-6 gap-3',
-                  )}
-                >
-                  <AnimatePresence mode="popLayout" initial={false}>
-                    {visibleEntries.map((entry) => (
-                      <EntryCard
-                        key={entry.headline}
-                        entry={entry}
-                        role={role}
-                        compact={isOpen}
-                        showBadge={isOpen}
-                        isSelected={
-                          selectedCase?.entry.headline === entry.headline
-                        }
-                        onSelect={() => onSelect(entry, role)}
-                      />
-                    ))}
-                  </AnimatePresence>
-                </motion.ul>
-              ) : role.id === 'intuit-manager' ? (
-                <div className="mt-6 flex flex-col gap-8">
-                  <div>
-                    <TrackBadge track="ic" />
-                    <div className="mt-4">{renderCardGrid(icEntries)}</div>
-                  </div>
-                  <div>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-2 py-0.5 font-sans text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                      <span className="flex -space-x-0.5" aria-hidden="true">
-                        <span
-                          className={cn(
-                            'size-1.5 rounded-full ring-2 ring-card',
-                            trackStyles.management.dot,
-                          )}
-                        />
-                        <span
-                          className={cn(
-                            'size-1.5 rounded-full ring-2 ring-card',
-                            trackStyles.strategy.dot,
-                          )}
-                        />
-                      </span>
-                      Design Strategy &amp; Management
-                    </span>
-                    <div className="mt-4">
-                      {renderCardGrid(stratMgmtEntries)}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="mt-6">{renderCardGrid(role.entries)}</div>
-              )}
-            </div>
-          </motion.li>
-        )
-      })}
-    </ol>
-  )
-}
-
-interface EntryCardProps {
-  entry: TimelineEntry
-  role: TimelineRole
-  compact: boolean
-  showBadge: boolean
-  isSelected: boolean
-  onSelect: () => void
-}
-
-function EntryCard({
-  entry,
-  role,
-  compact,
-  showBadge,
-  isSelected,
-  onSelect,
-}: EntryCardProps) {
-  const mockVariant = FEATURED_CASE_STUDIES[entry.headline]
-  const hasCaseStudy = Boolean(mockVariant) && Boolean(CASE_STUDIES[entry.headline])
-  const showMock = hasCaseStudy && !compact
-
-  return (
-    <motion.li
-      layout
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.25 }}
-      whileHover={compact ? undefined : { y: -3 }}
-      className="group"
-    >
-      <button
-        type="button"
-        disabled={!hasCaseStudy}
-        onClick={onSelect}
-        aria-pressed={isSelected}
-        className={cn(
-          'relative flex h-full w-full flex-col items-start rounded-lg bg-card text-left shadow-sm transition-all',
-          compact ? 'p-3' : 'p-4',
-          isSelected &&
-            cn('border-l-2', trackStyles[entry.track].accentBorder),
-          hasCaseStudy
-            ? 'cursor-pointer hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring'
-            : 'cursor-default',
-        )}
-      >
-        {showBadge && (
-          <span
-            aria-hidden="true"
-            className={cn(
-              'mb-2 size-1.5 rounded-full',
-              trackStyles[entry.track].dot,
-            )}
-          />
-        )}
-        {showMock && (
-          <MockPlaceholder
-            track={entry.track}
-            variant={mockVariant}
-            className="mb-3"
-          />
-        )}
-        <h4
-          className={cn(
-            'text-pretty font-medium leading-snug',
-            compact && 'text-sm',
-          )}
-        >
-          {entry.headline}
-        </h4>
-        {entry.metric && !compact && (
-          <span
-            className={cn(
-              'mt-3 font-serif text-xl leading-none tracking-tight',
-              trackStyles[entry.track].accentText,
-            )}
-          >
-            {entry.metric}
-          </span>
-        )}
-        {hasCaseStudy && !compact && (
-          <span className="mt-4 inline-flex items-center gap-1 font-sans text-xs font-medium text-muted-foreground transition-all group-hover:gap-1.5 group-hover:text-foreground">
-            View case study <span aria-hidden="true">→</span>
-          </span>
-        )}
-      </button>
-    </motion.li>
-  )
-}
-
-export function CareerTimeline() {
-  const [activeTrack, setActiveTrack] = useState<Track | null>(null)
-  const [viewMode, setViewMode] = useState<ViewMode>('timeline')
-  const [selectedCase, setSelectedCase] = useState<SelectedCase | null>(null)
-  const timelineRef = useRef<HTMLOListElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ['start 0.75', 'end 0.6'],
-  })
-  const lineProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 30,
-    restDelta: 0.001,
-  })
-
-  const isOpen = selectedCase !== null
-
-  const selectEntry = (entry: TimelineEntry, role: TimelineRole) => {
-    setSelectedCase((current) =>
-      current?.entry.headline === entry.headline ? null : { entry, role },
-    )
+  if (!logo || errored) {
+    return <p className="mt-1 font-sans text-lg font-semibold text-accent-brand">{name}</p>
   }
 
   return (
-    <section
-      id="timeline"
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={logo}
+      alt={name}
+      onError={() => setErrored(true)}
+      className="mt-2 inline-block h-5 w-auto"
+    />
+  )
+}
+
+function TrackBadge({ track }: { track: Track }) {
+  return (
+    <span
       className={cn(
-        'relative mx-auto px-6 py-20 transition-[max-width] duration-500 md:px-10 md:py-28 lg:px-14',
-        isOpen ? 'max-w-[1440px]' : 'max-w-6xl',
+        'inline-flex items-center rounded-full px-2.5 py-1 label-micro',
+        trackStyles[track].badgeFlat,
       )}
     >
-      {/* Echoes the hero's blue glow so the two sections read as one
-          continuous canvas instead of a hard cut. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-24 -top-24 -z-10 rounded-full"
-        style={{
-          width: 'min(70vh, 640px)',
-          height: 'min(70vh, 640px)',
-          background:
-            'radial-gradient(circle, #d0ecf6 0%, #dff3f9 62%, transparent 100%)',
-        }}
-      />
+      {TRACKS[track].label}
+    </span>
+  )
+}
 
-      <Reveal>
-        <h2 className="mb-4 font-serif text-3xl tracking-tight md:text-4xl">
-          Career timeline
-        </h2>
-        <p className="mb-8 text-pretty leading-relaxed text-muted-foreground">
-          {viewMode === 'timeline'
-            ? 'Three parallel tracks of work. Select any card for the full case study.'
-            : 'A condensed summary of the same work. Underlined lines open the full case study.'}
-        </p>
-      </Reveal>
+/** Featured card: image with the metric pill floating on it, then a grey
+ *  content panel. Flat (no bezel), 14px radius, matching the reference. */
+function FeaturedEntryCard({
+  entry,
+  isExpanded,
+  onToggle,
+}: {
+  entry: TimelineEntry
+  isExpanded: boolean
+  onToggle?: () => void
+}) {
+  // The pill carries the headline stat only; the carousel shows the rest.
+  const headlineStat = entry.metrics?.[0]
+  const metricText = headlineStat ? `${headlineStat.value} · ${headlineStat.label}` : null
 
-      {/* Legend / filter */}
-      <div className="sticky top-[68px] z-10 -mx-6 mb-12 border-y border-border bg-background/90 px-6 py-3 backdrop-blur-md md:-mx-10 md:px-10 lg:-mx-14 lg:px-14">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div
-            role="group"
-            aria-label="Filter timeline by type of work"
-            className="flex flex-wrap items-center gap-2"
+  return (
+    <motion.div
+      layout
+      className={cn(
+        'relative overflow-hidden rounded-[14px] text-left transition-shadow',
+        isExpanded && 'shadow-card-raised',
+      )}
+    >
+      <div className="relative aspect-[16/10] w-full" style={DIAGONAL_STRIPES}>
+        <span className="absolute right-4 top-4 rounded-[6px] bg-background px-2.5 py-1 font-mono text-xs text-muted-foreground">
+          laptop screen 16:10
+        </span>
+        {metricText && (
+          <span
+            className={cn(
+              'absolute bottom-5 left-5 right-5 rounded-[8px] px-4 py-2.5 font-heading text-base font-semibold tabular-nums text-white sm:right-auto',
+              trackStyles[entry.track].dot,
+            )}
           >
+            {metricText}
+          </span>
+        )}
+      </div>
+
+      <div className="bg-panel px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
+        <TrackBadge track={entry.track} />
+        {/* The heading owns the toggle (APG accordion); its ::after
+            stretches over the whole card so the tile stays clickable. */}
+        <h4 className="mt-4 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight sm:text-2xl">
+          {entry.href ? (
             <button
               type="button"
-              onClick={() => setActiveTrack(null)}
-              aria-pressed={activeTrack === null}
+              onClick={onToggle}
+              aria-expanded={isExpanded}
+              className="text-left after:absolute after:inset-0 after:content-['']"
+            >
+              {entry.headline}
+            </button>
+          ) : (
+            entry.headline
+          )}
+        </h4>
+        <p className="mt-2 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
+          {entry.detail}
+        </p>
+
+        {entry.href && (
+          <div className="relative z-10 mt-5 border-t border-foreground/10 pt-4">
+            {/* Opens the real case-study page in a new tab — distinct from
+                the toggle above, which just peeks at it inline. */}
+            <Link
+              href={entry.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
-                'rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-200 active:scale-95',
-                activeTrack === null
-                  ? 'border-primary bg-primary text-primary-foreground'
-                  : 'border-border bg-card text-muted-foreground hover:-translate-y-0.5 hover:text-foreground',
+                '-my-2 inline-flex min-h-11 items-center gap-2 py-2 font-sans text-base font-semibold transition-colors hover:underline',
+                trackStyles[entry.track].accentText,
               )}
             >
-              All work
-            </button>
-            {TRACK_ORDER.map((track) => (
-              <button
-                key={track}
-                type="button"
-                onClick={() =>
-                  setActiveTrack((current) => (current === track ? null : track))
-                }
-                aria-pressed={activeTrack === track}
+              Read the case study <span aria-hidden="true">→</span>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </Link>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  )
+}
+
+/** A highlight in the carousel: flat, lighter grey, static. Copy takes the
+ *  full width; the stats sit in their own strip at the foot of the card, one
+ *  value + label per stat, so a two-stat entry reads as two stats and never
+ *  squeezes the text. */
+function CarouselEntryCard({ entry }: { entry: TimelineEntry }) {
+  const stats = entry.metrics ?? []
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: 0.2, ease: EASE_OUT }}
+      className="rounded-[14px] bg-panel-soft p-6 text-left sm:p-7"
+    >
+      <TrackBadge track={entry.track} />
+      <h4 className="mt-3 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight">
+        {entry.headline}
+      </h4>
+      <p className="mt-2 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
+        {entry.detail}
+      </p>
+
+      {stats.length > 0 && (
+        <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-3 border-t border-foreground/10 pt-4">
+          {stats.map((m) => (
+            <div key={m.label} className="flex flex-col-reverse">
+              <dt className="mt-1.5 label-micro text-muted-foreground">{m.label}</dt>
+              <dd
                 className={cn(
-                  'flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-200 active:scale-95',
-                  activeTrack === track
-                    ? trackStyles[track].chipActive
-                    : 'border-border bg-card text-muted-foreground hover:-translate-y-0.5 hover:text-foreground',
+                  'font-heading text-xl font-semibold leading-tight tabular-nums',
+                  trackStyles[entry.track].accentText,
                 )}
+              >
+                {m.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </motion.div>
+  )
+}
+
+function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
+  const [index, setIndex] = useState(0)
+  const safeIndex = Math.min(index, entries.length - 1)
+  const entry = entries[safeIndex]
+  const atStart = safeIndex === 0
+  const atEnd = safeIndex === entries.length - 1
+
+  const navButton =
+    'flex size-11 items-center justify-center rounded-full bg-panel text-foreground transition-colors hover:bg-stripe disabled:cursor-default disabled:opacity-40 disabled:hover:bg-panel'
+
+  return (
+    <div className="mt-5">
+      {entries.length > 1 && (
+        <div className="mb-4 flex items-center justify-between gap-4">
+          {/* Each dot keeps a 44px hit box around a small visual; that row
+              doesn't fit next to the arrows on a narrow phone, so the dots
+              are sm+ only and the counter carries the position on mobile. */}
+          <div aria-label="Featured highlights" className="hidden items-center sm:flex">
+            {entries.map((e, i) => (
+              <button
+                key={e.headline}
+                type="button"
+                onClick={() => setIndex(i)}
+                aria-label={`Show highlight ${i + 1} of ${entries.length}`}
+                aria-current={i === safeIndex}
+                className="group flex size-11 items-center justify-center rounded-full first:-ml-4"
               >
                 <span
                   aria-hidden="true"
                   className={cn(
-                    'size-2 rounded-full',
-                    activeTrack === track ? 'bg-current' : trackStyles[track].dot,
+                    'h-2 rounded-full transition-[width,background-color] duration-200',
+                    i === safeIndex
+                      ? 'w-7 bg-accent-brand'
+                      : 'w-2 bg-foreground/15 group-hover:bg-foreground/35',
                   )}
                 />
-                {TRACKS[track].label}
               </button>
             ))}
           </div>
+          <p className="label-micro text-muted-foreground">
+            Featured highlights &middot;{' '}
+            <span className="tabular-nums">
+              {safeIndex + 1} / {entries.length}
+            </span>
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIndex(safeIndex - 1)}
+              disabled={atStart}
+              aria-label="Previous highlight"
+              className={navButton}
+            >
+              <ChevronLeft aria-hidden="true" strokeWidth={2} className="size-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setIndex(safeIndex + 1)}
+              disabled={atEnd}
+              aria-label="Next highlight"
+              className={navButton}
+            >
+              <ChevronRight aria-hidden="true" strokeWidth={2} className="size-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
-          <div
-            role="group"
-            aria-label="Timeline display mode"
-            className="flex items-center gap-1 rounded-full border border-border bg-card p-1"
-          >
-            {(
-              [
-                { mode: 'timeline', label: 'Timeline' },
-                { mode: 'resume', label: 'Resume view' },
-              ] as const
-            ).map(({ mode, label }) => (
+      <AnimatePresence mode="wait" initial={false}>
+        <CarouselEntryCard key={entry.headline} entry={entry} />
+      </AnimatePresence>
+    </div>
+  )
+}
+
+export function CareerTimeline() {
+  const { lens } = useLens()
+  const [activeTrack, setActiveTrack] = useState<Track | null>(null)
+  const [expandedHeadline, setExpandedHeadline] = useState<string | null>(null)
+
+  const setActiveTrackAndCollapse = (next: Track | null) => {
+    setActiveTrack(next)
+    setExpandedHeadline(null)
+  }
+
+  const toggleEntry = (headline: string) =>
+    setExpandedHeadline((current) => (current === headline ? null : headline))
+
+  return (
+    <section
+      id="timeline"
+      className="scroll-mt-28"
+      style={{
+        // The paper canvas fades in over the top padding rather than
+        // starting on a hard line under the hero's wash.
+        background: 'linear-gradient(to bottom, var(--background) 0, var(--canvas) 22rem)',
+      }}
+    >
+      <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28 lg:px-14">
+        <Reveal className="mb-8">
+          <h2 className="mb-6 font-heading text-3xl font-semibold tracking-tight md:text-4xl">
+            Career timeline
+            <HeadingDot />
+          </h2>
+
+          <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+            <div role="group" aria-label="Filter timeline by type of work" className="flex flex-wrap items-center gap-2">
               <button
-                key={mode}
                 type="button"
-                onClick={() => setViewMode(mode)}
-                aria-pressed={viewMode === mode}
+                onClick={() => setActiveTrackAndCollapse(null)}
+                aria-pressed={activeTrack === null}
                 className={cn(
-                  'rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200',
-                  viewMode === mode
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:text-foreground',
+                  'inline-flex min-h-11 items-center rounded-full px-4 py-2 font-heading text-sm font-semibold ring-1 transition-colors duration-200',
+                  activeTrack === null
+                    ? 'bg-track-management text-track-management-foreground ring-track-management'
+                    : 'bg-background text-foreground ring-foreground/10 hover:ring-foreground/30',
                 )}
               >
-                {label}
+                All work
               </button>
-            ))}
+              {TRACK_ORDER.map((track) => (
+                <button
+                  key={track}
+                  type="button"
+                  onClick={() => setActiveTrackAndCollapse(activeTrack === track ? null : track)}
+                  aria-pressed={activeTrack === track}
+                  className={cn(
+                    'inline-flex min-h-11 items-center rounded-full px-4 py-2 font-heading text-sm font-semibold ring-1 transition-colors duration-200',
+                    activeTrack === track
+                      ? trackStyles[track].chipActive
+                      : 'bg-background text-foreground ring-foreground/10 hover:ring-foreground/30',
+                  )}
+                >
+                  {TRACKS[track].label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-        <AnimatePresence>
-          {activeTrack && (
-            <motion.p
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="overflow-hidden font-sans text-xs text-muted-foreground"
-            >
-              <span className="block pt-2">
-                {TRACKS[activeTrack].description}
-              </span>
-            </motion.p>
-          )}
-        </AnimatePresence>
+
+          <AnimatePresence>
+            {activeTrack && (
+              <motion.p
+                initial={{ opacity: 0, gridTemplateRows: '0fr' }}
+                animate={{ opacity: 1, gridTemplateRows: '1fr' }}
+                exit={{ opacity: 0, gridTemplateRows: '0fr' }}
+                transition={{ duration: 0.2, ease: EASE_OUT }}
+                className="grid font-sans text-sm text-muted-foreground"
+              >
+                <span className="min-h-0 overflow-hidden">
+                  <span className="block pt-3">{TRACKS[activeTrack].description}</span>
+                </span>
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </Reveal>
+
+        <ol className="grid gap-6">
+          {ROLES.map((role) => {
+            const filtered = activeTrack
+              ? role.entries.filter((entry) => entry.track === activeTrack)
+              : role.entries
+            // The lens promotes the first entry on its tracks to featured;
+            // nothing is removed, the rest keep their order in the carousel.
+            const promoted = lens ? filtered.find((e) => LENS_TRACKS[lens].includes(e.track)) : undefined
+            const visibleEntries = promoted
+              ? [promoted, ...filtered.filter((e) => e !== promoted)]
+              : filtered
+            const isDimmed = activeTrack !== null && visibleEntries.length === 0
+            const [featured, ...rest] = visibleEntries
+            const featuredIsExpanded = featured ? expandedHeadline === featured.headline : false
+            const featuredResolved = featured?.href ? resolveChapterHref(featured.href) : null
+
+            return (
+              <motion.li
+                key={role.id}
+                id={role.id}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6, ease: EASE_OUT }}
+                className={cn(
+                  'rounded-[20px] border border-border bg-background p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
+                  isDimmed && 'opacity-40',
+                )}
+              >
+                <div>
+                  <p className="label-micro tabular-nums text-muted-foreground">{role.period}</p>
+                  <h3 className="mt-3 text-balance font-heading text-2xl font-semibold leading-tight tracking-tight">
+                    {role.title}
+                  </h3>
+                  <CompanyMark logo={role.companyLogo} name={role.company} />
+                  <p className="mt-3 label-micro text-muted-foreground">{role.location}</p>
+                  <p className="mt-4 max-w-[42ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
+                    {role.summary}
+                  </p>
+                </div>
+
+                <div className="mt-8 min-w-0 sm:mt-0">
+                  {isDimmed ? (
+                    <p className="font-sans text-sm text-muted-foreground">
+                      No {TRACKS[activeTrack!].label.toLowerCase()} work in this role.
+                    </p>
+                  ) : featured ? (
+                    <>
+                      <p className="label-micro text-muted-foreground">Featured case study</p>
+                      <div className="mt-3">
+                        <FeaturedEntryCard
+                          entry={featured}
+                          isExpanded={featuredIsExpanded}
+                          onToggle={() => toggleEntry(featured.headline)}
+                        />
+                      </div>
+                      <AnimatePresence>
+                        {featuredIsExpanded && featuredResolved && (
+                          <InlineCasePreview
+                            track={featured.track}
+                            page={featuredResolved.page}
+                            chapter={featuredResolved.chapter}
+                            metricFallback={featured.metrics?.[0]}
+                            onClose={() => toggleEntry(featured.headline)}
+                          />
+                        )}
+                      </AnimatePresence>
+
+                      {rest.length > 0 && <EntryCarousel entries={rest} />}
+                    </>
+                  ) : null}
+                </div>
+              </motion.li>
+            )
+          })}
+        </ol>
+
+        <Reveal className="mt-10 rounded-[20px] border border-border bg-background p-6 md:p-10">
+          <p className="label-micro text-muted-foreground">Education</p>
+          <div className="mt-3 grid gap-2 font-sans text-base">
+            <p>
+              <span className="font-semibold">MS in Information, Human-Computer Interaction</span>{' '}
+              <span className="text-muted-foreground">- University of Michigan, Ann Arbor (2017)</span>
+            </p>
+            <p>
+              <span className="font-semibold">BE in Computer Engineering</span>{' '}
+              <span className="text-muted-foreground">- University of Pune (2012)</span>
+            </p>
+          </div>
+        </Reveal>
       </div>
-
-      {/* Timeline + inline case study, side by side */}
-      <div className="flex flex-col gap-6 md:flex-row md:items-start">
-        {/* Timeline column — compresses to a 20% rail when a case study is open */}
-        <div
-          className={cn(
-            'min-w-0 transition-all duration-500',
-            isOpen ? 'hidden md:block md:w-1/5' : 'w-full',
-          )}
-        >
-          {viewMode === 'resume' ? (
-            <ResumeView
-              activeTrack={activeTrack}
-              selectedCase={selectedCase}
-              onSelect={selectEntry}
-            />
-          ) : (
-            <TimelineList
-              timelineRef={timelineRef}
-              lineProgress={lineProgress}
-              isOpen={isOpen}
-              activeTrack={activeTrack}
-              selectedCase={selectedCase}
-              onSelect={selectEntry}
-            />
-          )}
-        </div>
-
-        {/* Case study column — 80% of the horizontal space */}
-        <AnimatePresence mode="wait">
-          {selectedCase && (
-            <CaseStudyPanel
-              selected={selectedCase}
-              onClose={() => setSelectedCase(null)}
-            />
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Education note */}
-      <Reveal className="mt-16 border-t border-border pt-8">
-        <p className="font-sans text-xs font-medium uppercase tracking-widest text-muted-foreground">
-          Education
-        </p>
-        <div className="mt-3 grid gap-2 text-sm">
-          <p>
-            <span className="font-medium">
-              MS in Information, Human-Computer Interaction
-            </span>{' '}
-            <span className="text-muted-foreground">
-              — University of Michigan, Ann Arbor (2017)
-            </span>
-          </p>
-          <p>
-            <span className="font-medium">BE in Computer Engineering</span>{' '}
-            <span className="text-muted-foreground">
-              — University of Pune (2012)
-            </span>
-          </p>
-        </div>
-      </Reveal>
     </section>
   )
 }
