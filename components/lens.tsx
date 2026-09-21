@@ -95,7 +95,7 @@ export function LensSwitch({ className }: { className?: string }) {
             className={cn(
               'min-h-9 rounded-full px-3 font-sans text-xs font-semibold transition-colors',
               active
-                ? 'bg-background text-foreground shadow-float'
+                ? 'bg-card text-foreground shadow-float'
                 : 'text-muted-foreground hover:text-foreground',
             )}
           >

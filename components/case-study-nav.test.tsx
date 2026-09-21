@@ -49,12 +49,23 @@ describe('chapter navigation', () => {
     expect(screen.queryByText('Next story')).toBeNull()
   })
 
-  it('keeps the chapter dock unmounted until the reader reaches the chapters', () => {
-    // jsdom's IntersectionObserver never fires, so `inRange` stays false and
-    // the fixed dock must not be in the DOM (nothing invisible in the tab
-    // order or the accessibility tree).
+  it('lists every chapter in the rail, in order', () => {
     render(<CaseStudyLayout page={FINDING_DATA} />)
-    expect(screen.queryByRole('navigation', { name: 'Chapters' })).toBeNull()
+    const rail = screen.getByRole('navigation', { name: 'Chapters' })
+    const hrefs = within(rail)
+      .getAllByRole('link')
+      .map((a) => a.getAttribute('href'))
+    expect(hrefs).toEqual(FINDING_DATA.chapters.map((c) => `#${c.id}`))
+  })
+
+  it('keeps the rail out of the layout below lg, where the header carries the chapters', () => {
+    // The rail is a column, not a floating bar. Below lg there is no column,
+    // so it is display:none (out of the tab order and the a11y tree) and the
+    // header pill exposes the same chapters instead.
+    render(<CaseStudyLayout page={FINDING_DATA} />)
+    const rail = screen.getByRole('navigation', { name: 'Chapters' })
+    expect(rail.className).toContain('hidden')
+    expect(rail.className).toContain('lg:block')
   })
 
   it('gives chapter anchors scroll margin that clears the fixed dock', () => {

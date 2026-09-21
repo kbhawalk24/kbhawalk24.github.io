@@ -29,32 +29,25 @@ function ChapterSection({
   const lit = !lens || LENS_ROLES[lens].includes(chapter.role)
   return (
     <Reveal as="section" className="border-t border-border py-12 md:py-16">
-      {/* id and scroll-margin must sit on the SAME element — with the margin
-          on the outer section the timeline strip's anchors landed this
-          heading underneath the fixed header pill. */}
-      <div id={chapter.id} className="grid scroll-mt-[9.5rem] gap-8 md:grid-cols-[220px_1fr] md:gap-12">
-        <div>
-          <p className="label-micro text-muted-foreground">
-            {chapter.period}
-          </p>
+      {/* id and scroll-margin must sit on the SAME element, or an anchor
+          lands the heading under the fixed header pill. */}
+      <div id={chapter.id} className="scroll-mt-28">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <p className="label-micro tabular-nums text-muted-foreground">{chapter.period}</p>
           <span
             className={cn(
-              'mt-3 inline-flex rounded-full px-2 py-0.5 label-micro font-semibold transition-opacity',
+              'inline-flex rounded-full px-2 py-0.5 label-micro font-semibold transition-opacity',
               CHAPTER_ROLE_STYLE[chapter.role],
               !lit && 'opacity-40',
             )}
           >
             {CHAPTER_ROLE_LABEL[chapter.role]}
           </span>
-          {chapter.draft && (
-            <span className="mt-3 block label-micro text-destructive">
-              Draft
-            </span>
-          )}
+          {chapter.draft && <span className="label-micro text-destructive">Draft</span>}
         </div>
 
         <div className="min-w-0">
-          <h2 className="text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">
+          <h2 className="mt-3 text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">
             {chapter.title}
           </h2>
           <div className="mt-4 grid max-w-2xl gap-4">
@@ -64,7 +57,7 @@ function ChapterSection({
           </div>
 
           {chapter.decision && (
-            <aside className="mt-6 max-w-2xl rounded-lg border-l-2 border-track-strategy bg-muted/60 p-4 md:p-5">
+            <aside className="mt-6 max-w-2xl rounded-[14px] border-l-2 border-track-strategy bg-card p-4 md:p-5">
               <p className="label-micro text-muted-foreground">The decision</p>
               <p className="mt-1 font-medium">{chapter.decision.title}</p>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{chapter.decision.detail}</p>
@@ -76,7 +69,7 @@ function ChapterSection({
               {chapter.metrics.map((m) => (
                 /* dt before dd in source (the dl content model requires it);
                    flex-col-reverse keeps the value visually on top. */
-                <div key={m.label} className="flex flex-col-reverse rounded-[14px] bg-panel-soft p-4">
+                <div key={m.label} className="flex flex-col-reverse rounded-[14px] bg-card p-4">
                     <dt className="mt-1 text-xs leading-relaxed text-muted-foreground">{m.label}</dt>
                     <dd className="font-heading text-xl font-semibold tabular-nums">{m.value}</dd>
                 </div>
@@ -122,7 +115,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
   return (
     <MotionConfig reducedMotion="user">
       <SkipLink />
-      <SiteHeader onHome={false} />
+      <SiteHeader onHome={false} chapters={page.chapters} />
 
       <main id="main" className="mx-auto max-w-6xl px-6 pb-20 pt-32 md:px-10 lg:px-14">
         <Reveal>
@@ -140,7 +133,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           <ol className="flex gap-3 overflow-x-auto pb-2">
             {page.chapters.map((c, i) => (
               <li key={c.id} className="min-w-[160px] flex-1">
-                <a href={`#${c.id}`} className="block rounded-[14px] bg-panel-soft transition-transform hover:-translate-y-0.5">
+                <a href={`#${c.id}`} className="block rounded-[14px] bg-card transition-transform hover:-translate-y-0.5">
                   <div className="p-3">
                     <p className="label-micro tabular-nums text-muted-foreground">
                       {c.period}
@@ -156,7 +149,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
         <Reveal className="mt-8">
           <dl className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {page.metrics.map((m) => (
-              <div key={m.label} className="flex flex-col-reverse rounded-[14px] bg-panel-soft p-5">
+              <div key={m.label} className="flex flex-col-reverse rounded-[14px] bg-card p-5">
                   <dt className="mt-2 text-xs leading-relaxed text-muted-foreground md:text-sm">{m.label}</dt>
                   <dd className="font-heading text-2xl font-semibold tabular-nums md:text-3xl">{m.value}</dd>
               </div>
@@ -173,9 +166,10 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           </Reveal>
         )}
 
-        <ChapterRail chapters={page.chapters} containerId="chapters" />
+        <div className="mt-12 lg:grid lg:grid-cols-[190px_1fr] lg:gap-14">
+          <ChapterRail chapters={page.chapters} />
 
-        <div id="chapters" className="mt-12">
+          <div id="chapters" className="min-w-0">
           {page.chapters.map((c, i) => (
             <ChapterSection
               key={c.id}
@@ -184,15 +178,16 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
               next={page.chapters[i + 1]}
             />
           ))}
+          </div>
         </div>
 
         {page.reflection && (
           <Reveal as="section" className="border-t border-border py-12 md:py-16">
-            <div className="grid gap-8 md:grid-cols-[220px_1fr] md:gap-12">
+            <div>
               <h2 className="text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">
                 What I&rsquo;d do differently
               </h2>
-              <div className="grid max-w-[52ch] gap-4">
+              <div className="mt-4 grid max-w-[52ch] gap-4">
                 {page.reflection.map((p, i) => (
                   <p key={i} className="text-pretty font-heading text-lg leading-relaxed">{p}</p>
                 ))}
@@ -205,7 +200,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           <Reveal as="section" className="border-t border-border pt-10">
             <Link
               href={withLens(next.href, lens)}
-              className="group block rounded-[14px] bg-panel-soft p-6 transition-transform hover:-translate-y-0.5 md:p-8"
+              className="group block rounded-[14px] bg-card p-6 transition-transform hover:-translate-y-0.5 md:p-8"
             >
               <span className="label-micro text-muted-foreground">Next story</span>
               <span className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -228,7 +223,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           <ul className="mt-4 grid gap-4 md:grid-cols-3">
             {others.map((p) => (
               <li key={p.slug}>
-                <Link href={p.href} className="block h-full rounded-[14px] bg-panel-soft transition-transform hover:-translate-y-0.5">
+                <Link href={p.href} className="block h-full rounded-[14px] bg-card transition-transform hover:-translate-y-0.5">
                   <div className="h-full p-5">
                     <p className="label-micro text-muted-foreground">{p.eyebrow}</p>
                     <p className="mt-2 font-heading text-xl font-semibold">{p.title}</p>

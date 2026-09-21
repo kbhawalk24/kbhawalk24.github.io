@@ -53,7 +53,7 @@ export function InlineCasePreview({
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-3 top-3 rounded-full bg-background p-3.5 text-muted-foreground ring-1 ring-foreground/10 transition-colors hover:bg-secondary hover:text-foreground hover:ring-foreground/30"
+            className="absolute right-3 top-3 rounded-full bg-card p-3.5 text-muted-foreground ring-1 ring-foreground/10 transition-colors hover:bg-secondary hover:text-foreground hover:ring-foreground/30"
           >
             <X className="size-4" strokeWidth={1.5} aria-hidden="true" />
             <span className="sr-only">Close preview</span>
@@ -79,7 +79,7 @@ export function InlineCasePreview({
           {metrics.length > 0 && (
             <dl className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {metrics.slice(0, 3).map((m) => (
-                <div key={m.label} className="flex flex-col-reverse rounded-[10px] bg-background p-3">
+                <div key={m.label} className="flex flex-col-reverse rounded-[10px] bg-card p-3">
                     <dt className="mt-1 text-[11px] leading-snug text-muted-foreground">{m.label}</dt>
                     <dd className="font-heading text-lg font-semibold tabular-nums">{m.value}</dd>
                 </div>

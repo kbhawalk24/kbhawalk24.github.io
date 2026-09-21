@@ -101,7 +101,7 @@ function FeaturedEntryCard({
       )}
     >
       <div className="relative aspect-[16/10] w-full" style={DIAGONAL_STRIPES}>
-        <span className="absolute right-4 top-4 rounded-[6px] bg-background px-2.5 py-1 font-mono text-xs text-muted-foreground">
+        <span className="absolute right-4 top-4 rounded-[6px] bg-card px-2.5 py-1 font-mono text-xs text-muted-foreground">
           laptop screen 16:10
         </span>
         {metricText && (
@@ -294,15 +294,7 @@ export function CareerTimeline() {
     setExpandedHeadline((current) => (current === headline ? null : headline))
 
   return (
-    <section
-      id="timeline"
-      className="scroll-mt-28"
-      style={{
-        // The paper canvas fades in over the top padding rather than
-        // starting on a hard line under the hero's wash.
-        background: 'linear-gradient(to bottom, var(--background) 0, var(--canvas) 22rem)',
-      }}
-    >
+    <section id="timeline" className="scroll-mt-28">
       <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28 lg:px-14">
         <Reveal className="mb-8">
           <h2 className="mb-6 font-heading text-3xl font-semibold tracking-tight md:text-4xl">
@@ -320,7 +312,7 @@ export function CareerTimeline() {
                   'inline-flex min-h-11 items-center rounded-full px-4 py-2 font-heading text-sm font-semibold ring-1 transition-colors duration-200',
                   activeTrack === null
                     ? 'bg-track-management text-track-management-foreground ring-track-management'
-                    : 'bg-background text-foreground ring-foreground/10 hover:ring-foreground/30',
+                    : 'bg-card text-foreground ring-foreground/10 hover:ring-foreground/30',
                 )}
               >
                 All work
@@ -335,7 +327,7 @@ export function CareerTimeline() {
                     'inline-flex min-h-11 items-center rounded-full px-4 py-2 font-heading text-sm font-semibold ring-1 transition-colors duration-200',
                     activeTrack === track
                       ? trackStyles[track].chipActive
-                      : 'bg-background text-foreground ring-foreground/10 hover:ring-foreground/30',
+                      : 'bg-card text-foreground ring-foreground/10 hover:ring-foreground/30',
                   )}
                 >
                   {TRACKS[track].label}
@@ -386,7 +378,7 @@ export function CareerTimeline() {
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.6, ease: EASE_OUT }}
                 className={cn(
-                  'rounded-[20px] border border-border bg-background p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
+                  'rounded-[20px] border border-border bg-card p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
                   isDimmed && 'opacity-40',
                 )}
               >
@@ -438,7 +430,7 @@ export function CareerTimeline() {
           })}
         </ol>
 
-        <Reveal className="mt-10 rounded-[20px] border border-border bg-background p-6 md:p-10">
+        <Reveal className="mt-10 rounded-[20px] border border-border bg-card p-6 md:p-10">
           <p className="label-micro text-muted-foreground">Education</p>
           <div className="mt-3 grid gap-2 font-sans text-base">
             <p>

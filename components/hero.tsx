@@ -116,6 +116,11 @@ export function Hero() {
           style={{
             background:
               'radial-gradient(circle 900px at 0% 100%, var(--accent-brand-wash) 0%, transparent 100%)',
+            // The sticky box clips the wash, so when the pin releases its
+            // bottom edge was a dead straight line across the page. Fading
+            // the last band dissolves that edge without touching the bloom.
+            WebkitMaskImage: 'linear-gradient(to bottom, #000 78%, transparent 100%)',
+            maskImage: 'linear-gradient(to bottom, #000 78%, transparent 100%)',
           }}
         />
 

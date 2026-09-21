@@ -65,13 +65,14 @@
 
 :root {
   color-scheme: light;
-  /* One palette temperature: every neutral carries a faint bias toward the
-     brand violet (hue 293) so borders, text and surfaces read as chosen
-     rather than as three unrelated greys. Contrast is unchanged —
-     foreground 17.3:1 and muted-foreground 6.0:1 on the background. */
-  /* Palette lifted from the Claude Design reference deck (Timeline Case
-     Studies): near-black ink, warm greys, one violet. */
-  --background: #ffffff;
+  /* Palette from the Claude Design reference deck (Timeline Case Studies):
+     near-black ink, warm greys, one violet.
+
+     ONE ground for the whole site: the warm paper canvas. Surfaces that sit
+     on the ground are white (--card); the grey panels (--panel,
+     --panel-soft) are only ever used INSIDE a white surface. Two levels, no
+     third, and so no seam anywhere between sections. */
+  --background: #f0eee9;
   --foreground: #141414;
   --card: #ffffff;
   --card-foreground: #141414;
@@ -97,11 +98,10 @@
   /* The violet wash behind the hero. */
   --accent-brand-wash: #ede9fe;
   --accent-brand-wash-soft: #f5f3ff;
-  /* Card system, from the Claude Design reference deck. One flat language
-     everywhere: on the white page, cards are `--panel-soft` grey panels
-     (14px radius, no border); on the paper `--canvas` (timeline), cards are
-     white with a 1px `--border` outline (20px radius) and carry `--panel`
-     grey panels inside. Depth comes from tone, not shadow. */
+  /* Flat card language: white cards on the canvas carry a 1px --border and a
+     20px radius; panels nested inside them are grey at a 14px radius. Depth
+     comes from tone, not shadow. --canvas is an alias of --background, kept
+     so a section can restate the ground explicitly.  */
   --canvas: #f0eee9;
   --panel: #ededec;
   --panel-soft: #f6f5f3;
