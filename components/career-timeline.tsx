@@ -219,12 +219,13 @@ function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
     <div className="mt-5">
       {entries.length > 1 && (
         <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-          {/* Wraps: between sm and xl the dots, counter and arrows together
-              are wider than the card's right-hand column, and without the
-              wrap this row pushed the page into a horizontal scroll. */}
-          {/* Each dot keeps a 44px hit box around a small visual; that row
-              doesn't fit next to the arrows on a narrow phone, so the dots
-              are sm+ only and the counter carries the position on mobile. */}
+          {/* The row wraps: between sm and xl the dots, counter and arrows
+              together are wider than the card's right-hand column, and
+              without the wrap this pushed the page into a horizontal
+              scroll. Each dot also keeps a 44px hit box around a small
+              visual, which does not fit beside the arrows on a phone, so
+              the dots are sm+ only and the counter carries the position
+              below that. */}
           <div aria-label="Featured highlights" className="hidden items-center sm:flex">
             {entries.map((e, i) => (
               <button
@@ -381,7 +382,7 @@ export function CareerTimeline() {
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.6, ease: EASE_OUT }}
                 className={cn(
-                  'rounded-[20px] bg-card-tint p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
+                  'rounded-[20px] bg-card-soft p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
                   isDimmed && 'opacity-40',
                 )}
               >
@@ -433,7 +434,7 @@ export function CareerTimeline() {
           })}
         </ol>
 
-        <Reveal className="mt-10 rounded-[20px] bg-card-tint p-6 md:p-10">
+        <Reveal className="mt-10 rounded-[20px] bg-card-soft p-6 md:p-10">
           <p className="label-micro text-muted-foreground">Education</p>
           <div className="mt-3 grid gap-2 font-sans text-base">
             <p>
