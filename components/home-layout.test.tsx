@@ -2,14 +2,14 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import Page from '@/app/page'
 import { PAGES } from '@/lib/site-content'
-import { ROLES } from '@/lib/timeline-data'
+import { ROLES, TRACKS } from '@/lib/timeline-data'
 
 beforeEach(() => {
   window.localStorage.clear()
   window.history.replaceState(null, '', '/')
 })
 
-const switchTo = (label: 'A' | 'B') => {
+const switchTo = (label: 'A' | 'B' | 'C') => {
   const group = screen.getByRole('group', { name: 'Home page layout' })
   fireEvent.click(within(group).getByRole('button', { name: `Layout ${label}` }))
 }
@@ -46,6 +46,29 @@ describe('home layout switch', () => {
 
     expect(screen.getByRole('link', { name: 'Case studies' }).getAttribute('href')).toBe('#case-studies')
     expect(screen.getByRole('link', { name: 'Experience' }).getAttribute('href')).toBe('#experience')
+  })
+
+  it('C keeps the case studies and lists highlights as rows grouped by track', () => {
+    render(<Page />)
+    switchTo('C')
+
+    expect(document.getElementById('case-studies')).not.toBeNull()
+    const experience = document.getElementById('experience') as HTMLElement
+    const [first] = ROLES
+    const row = within(experience).getByRole('heading', { name: first.title, level: 3 }).closest('li') as HTMLElement
+    // Track headings instead of badges; every highlight present with its stat.
+    const tracks = new Set(first.entries.map((e) => e.track))
+    tracks.forEach((t) => expect(within(row).getByRole('heading', { name: TRACKS[t].label, level: 4 })).toBeTruthy())
+    first.entries.forEach((e) => {
+      expect(within(row).getByRole('link', { name: e.headline })).toBeTruthy()
+      if (e.metrics?.[0]) expect(within(row).getByText(e.metrics[0].value)).toBeTruthy()
+    })
+    expect(within(row).queryByText(first.entries[0].detail)).toBeNull()
+  })
+
+  it('no longer shows the IC / Manager lens switch', () => {
+    render(<Page />)
+    expect(screen.queryByRole('group', { name: 'Show the work for' })).toBeNull()
   })
 
   it('remembers the choice in the URL and localStorage', () => {

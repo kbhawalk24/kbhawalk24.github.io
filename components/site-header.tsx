@@ -7,14 +7,15 @@ import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { EASE_OUT } from '@/components/motion-primitives'
 import type { Chapter } from '@/lib/site-content'
-import { LensSwitch, useLens, withLens } from '@/components/lens'
+import { useLens, withLens } from '@/components/lens'
 import { LayoutSwitch, useLayoutMode } from '@/components/layout-mode'
 
-/** Floating pill nav, on every page from load: Timeline / Contact plus the
- *  IC–Manager lens, and on the home page the A/B layout switch. In layout A
- *  case studies are reached from the timeline itself (each role's featured
- *  entry links out); in layout B they have their own section, so the links
- *  become Case studies / Experience / Contact.
+/** Floating pill nav, on every page from load: Timeline / Contact and, on
+ *  the home page, the layout switch. In layout A case studies are reached
+ *  from the timeline itself (each role's featured entry links out); in B and
+ *  C they have their own section, so the links become Case studies /
+ *  Experience / Contact. (The IC/Manager lens switch used to sit here; the
+ *  lens still rides along in links if a URL carries it, but has no control.)
  *
  *  On a case study the pill also carries the chapter list, but only below
  *  `lg`, where the page has no room for the left-hand chapter rail. One
@@ -32,7 +33,7 @@ export function SiteHeader({
   const home = onHome ? '' : '/'
 
   const links =
-    mode === 'b'
+    mode !== 'a'
       ? [
           { label: 'Case studies', href: `${home}#case-studies` },
           { label: 'Experience', href: `${home}#experience` },
@@ -92,7 +93,6 @@ export function SiteHeader({
           />
         </div>
 
-        <LensSwitch className="ml-1" />
         {onHome && <LayoutSwitch className="ml-1 hidden sm:flex" />}
       </motion.nav>
     </header>

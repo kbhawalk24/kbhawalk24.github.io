@@ -217,7 +217,7 @@ export function Hero() {
                   </a>
                 </MagneticWrap>
                 <a
-                  href={mode === 'b' ? '#case-studies' : '#timeline'}
+                  href={mode === 'a' ? '#timeline' : '#case-studies'}
                   className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25"
                 >
                   Work <span aria-hidden="true">↓</span>

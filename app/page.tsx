@@ -29,16 +29,15 @@ export default function Page() {
 }
 
 /** A: the career timeline. B: case studies first, then the roles as an
- *  experience list. Picked from the header (components/layout-mode.tsx). */
+ *  experience list. C: the same, with the list as one-line rows grouped by
+ *  track. Picked from the header (components/layout-mode.tsx). */
 function HomeBody() {
   const { mode } = useLayoutMode()
-  if (mode === 'b') {
-    return (
-      <>
-        <CaseStudyIndex />
-        <CareerTimeline variant="experience" />
-      </>
-    )
-  }
-  return <CareerTimeline />
+  if (mode === 'a') return <CareerTimeline />
+  return (
+    <>
+      <CaseStudyIndex />
+      <CareerTimeline variant={mode === 'c' ? 'experience-rows' : 'experience'} />
+    </>
+  )
 }

@@ -27,8 +27,11 @@ import { HeadingDot } from '@/components/heading-dot'
 // keeps the same rows but drops the featured card and carousel: the case
 // studies have their own section above, so here every highlight sits in
 // one compact list per role, resume-style, each with its stats inline.
+// `experience-rows` (layout C) goes one step denser: one line per
+// highlight, stat on the right, no detail, grouped under track headings
+// instead of badged.
 
-export type TimelineVariant = 'timeline' | 'experience'
+export type TimelineVariant = 'timeline' | 'experience' | 'experience-rows'
 
 const TRACK_ORDER: Track[] = ['management', 'strategy', 'ic']
 
@@ -237,6 +240,64 @@ function HighlightList({ entries }: { entries: TimelineEntry[] }) {
   )
 }
 
+/** Layout C: highlights grouped by track, each group a heading and one row
+ *  per highlight: headline on the left (linking to its chapter), stat on
+ *  the right. No detail line; that is on the case-study page. */
+function HighlightRows({ entries }: { entries: TimelineEntry[] }) {
+  const { lens } = useLens()
+  const groups = TRACK_ORDER.map((track) => ({
+    track,
+    entries: entries.filter((e) => e.track === track),
+  })).filter((g) => g.entries.length > 0)
+
+  return (
+    <div className="grid gap-8">
+      {groups.map(({ track, entries: group }) => (
+        <div key={track}>
+          <h4 className={cn('label-micro', trackStyles[track].accentText)}>{TRACKS[track].label}</h4>
+          <ul className="mt-2 divide-y divide-border border-t border-border">
+            {group.map((entry) => {
+              const stat = entry.metrics?.[0]
+              return (
+                <li
+                  key={entry.headline}
+                  className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                >
+                  <p className="text-pretty font-heading text-base font-semibold leading-snug tracking-tight">
+                    {entry.href ? (
+                      <Link
+                        href={withLens(entry.href, lens)}
+                        className="transition-colors hover:text-accent-brand hover:underline"
+                      >
+                        {entry.headline}
+                      </Link>
+                    ) : (
+                      entry.headline
+                    )}
+                  </p>
+                  {stat && (
+                    <p className="flex shrink-0 items-baseline gap-2 sm:flex-col sm:items-end sm:gap-0.5 sm:text-right">
+                      <span
+                        className={cn(
+                          'font-heading text-base font-semibold leading-tight tabular-nums',
+                          trackStyles[track].accentText,
+                        )}
+                      >
+                        {stat.value}
+                      </span>
+                      <span className="label-micro text-muted-foreground">{stat.label}</span>
+                    </p>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
   const [index, setIndex] = useState(0)
   const safeIndex = Math.min(index, entries.length - 1)
@@ -319,7 +380,7 @@ function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
 export function CareerTimeline({ variant = 'timeline' }: { variant?: TimelineVariant }) {
   const { lens } = useLens()
   const [activeTrack, setActiveTrack] = useState<Track | null>(null)
-  const isExperience = variant === 'experience'
+  const isExperience = variant !== 'timeline'
 
   return (
     <section id={isExperience ? 'experience' : 'timeline'} className="scroll-mt-28">
@@ -425,6 +486,8 @@ export function CareerTimeline({ variant = 'timeline' }: { variant?: TimelineVar
                     <p className="font-sans text-sm text-muted-foreground">
                       No {TRACKS[activeTrack!].label.toLowerCase()} work in this role.
                     </p>
+                  ) : variant === 'experience-rows' ? (
+                    visibleEntries.length > 0 && <HighlightRows entries={visibleEntries} />
                   ) : isExperience ? (
                     visibleEntries.length > 0 && <HighlightList entries={visibleEntries} />
                   ) : featured ? (

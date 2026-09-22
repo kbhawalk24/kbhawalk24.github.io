@@ -11,12 +11,14 @@ import { cn } from '@/lib/utils'
  *      card and a carousel of the remaining highlights.
  *  B · case studies first, as four editorial entries, then an Experience
  *      section where each role lists its highlights as a compact list.
+ *  C · like B, but the Experience list is one line per highlight, grouped
+ *      under track headings instead of badged, stat on the right.
  *
  *  Held in the URL (`?layout=a|b`) so a link carries it, and in localStorage
  *  so it survives navigation. */
-export type LayoutMode = 'a' | 'b'
+export type LayoutMode = 'a' | 'b' | 'c'
 
-export const LAYOUT_LABEL: Record<LayoutMode, string> = { a: 'A', b: 'B' }
+export const LAYOUT_LABEL: Record<LayoutMode, string> = { a: 'A', b: 'B', c: 'C' }
 
 const LayoutModeContext = createContext<{
   mode: LayoutMode
@@ -27,7 +29,8 @@ const LayoutModeContext = createContext<{
 })
 
 const KEY = 'layout'
-const parse = (v: string | null): LayoutMode | null => (v === 'a' || v === 'b' ? v : null)
+const parse = (v: string | null): LayoutMode | null =>
+  v === 'a' || v === 'b' || v === 'c' ? v : null
 
 export function LayoutModeProvider({ children }: { children: React.ReactNode }) {
   const [mode, setModeState] = useState<LayoutMode>('a')
@@ -58,7 +61,7 @@ export function LayoutModeProvider({ children }: { children: React.ReactNode }) 
 
 export const useLayoutMode = () => useContext(LayoutModeContext)
 
-/** Two-way toggle, "A" / "B", one always on. */
+/** "A" / "B" / "C", one always on. */
 export function LayoutSwitch({ className }: { className?: string }) {
   const { mode, setMode } = useLayoutMode()
   return (
@@ -67,7 +70,7 @@ export function LayoutSwitch({ className }: { className?: string }) {
       aria-label="Home page layout"
       className={cn('flex items-center gap-0.5 rounded-full bg-foreground/[6%] p-0.5', className)}
     >
-      {(['a', 'b'] as const).map((m) => {
+      {(['a', 'b', 'c'] as const).map((m) => {
         const active = mode === m
         return (
           <button
