@@ -19,7 +19,7 @@ import { HeadingDot } from '@/components/heading-dot'
 // The timeline is the index. Roles are not cards: each is a row on the page,
 // separated by a hairline, with the role facts on the left. Only the work
 // gets a card: on the right, the featured case study (image, metric pill,
-// grey content panel) with the remaining highlights in a small carousel
+// white content panel) with the remaining highlights in a small carousel
 // under it. Cards are static; the featured card links out to the full
 // chapter on its case-study page (see lib/site-content.ts).
 
@@ -75,9 +75,9 @@ function TrackBadge({ track }: { track: Track }) {
   )
 }
 
-/** Featured card: image with the metric pill floating on it, then a grey
- *  content panel. Flat, 14px radius, matching the reference. Static: the
- *  only interaction is the "Read the case study" link. */
+/** Featured card: image with the metric pill floating on it, then a white
+ *  content panel. Flat, 14px radius. Static: the only interaction is the
+ *  "Read the case study" link. */
 function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
   const { lens } = useLens()
   // The pill carries the headline stat only; the carousel shows the rest.
@@ -102,7 +102,7 @@ function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
         )}
       </div>
 
-      <div className="bg-card-soft px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
+      <div className="bg-card px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
         <TrackBadge track={entry.track} />
         <h4 className="mt-4 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight sm:text-2xl">
           {entry.headline}
