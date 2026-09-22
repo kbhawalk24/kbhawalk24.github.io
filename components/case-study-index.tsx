@@ -7,9 +7,10 @@ import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
 // Layout B's first section: the four case studies as editorial entries,
-// one white card each. Image on the left with the headline stat floating on
-// it, the claim and two more stats on the right. Same card language as the
-// timeline's featured card (white fill, soft shadow, 14px radius).
+// one white card each. Image on the left, the claim and the two headline
+// stats on the right; the stats live there only, not also as a pill on the
+// image. Same card language as the timeline's featured card (white fill,
+// soft shadow, 14px radius).
 
 const DIAGONAL_STRIPES = {
   backgroundImage:
@@ -34,8 +35,7 @@ export function CaseStudyIndex() {
 
         <ol className="grid gap-6">
           {PAGES.map((page, i) => {
-            const [headline, ...rest] = page.metrics
-            const stats = rest.slice(0, 2)
+            const stats = page.metrics.slice(0, 2)
             return (
               <Reveal
                 key={page.slug}
@@ -44,15 +44,9 @@ export function CaseStudyIndex() {
                 className="overflow-hidden rounded-[14px] bg-card shadow-soft md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
               >
                 <div
-                  className="relative aspect-[16/10] w-full md:aspect-auto md:min-h-full"
+                  className="aspect-[16/10] w-full md:aspect-auto md:min-h-full"
                   style={DIAGONAL_STRIPES}
-                >
-                  {headline && (
-                    <span className="absolute bottom-5 left-5 right-5 rounded-[8px] bg-accent-brand px-4 py-2.5 font-heading text-base font-semibold tabular-nums text-white sm:right-auto">
-                      {headline.value} · {headline.label}
-                    </span>
-                  )}
-                </div>
+                />
 
                 <div className="px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
                   <p className="label-micro text-accent-brand">{page.eyebrow}</p>
