@@ -382,7 +382,7 @@ export function CareerTimeline() {
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.6, ease: EASE_OUT }}
                 className={cn(
-                  'rounded-[20px] bg-card p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
+                  'rounded-[20px] bg-card shadow-soft p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
                   isDimmed && 'opacity-40',
                 )}
               >
@@ -434,7 +434,7 @@ export function CareerTimeline() {
           })}
         </ol>
 
-        <Reveal className="mt-10 rounded-[20px] bg-card p-6 md:p-10">
+        <Reveal className="mt-10 rounded-[20px] bg-card shadow-soft p-6 md:p-10">
           <p className="label-micro text-muted-foreground">Education</p>
           <div className="mt-3 grid gap-2 font-sans text-base">
             <p>

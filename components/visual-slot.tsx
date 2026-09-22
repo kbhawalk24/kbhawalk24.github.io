@@ -6,7 +6,7 @@ import type { Visual } from '@/lib/site-content'
 export function VisualSlot({ visual }: { visual: Visual }) {
   if (visual.src) {
     return (
-      <figure className="overflow-hidden rounded-[14px] bg-card">
+      <figure className="overflow-hidden rounded-[14px] bg-card shadow-soft">
         <div>
           {visual.kind === 'video' ? (
             <video src={visual.src} controls muted playsInline className="w-full" />

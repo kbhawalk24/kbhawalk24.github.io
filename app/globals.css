@@ -55,6 +55,15 @@
   --font-mono: var(--font-plex-mono), ui-monospace, 'SF Mono', Menlo, monospace;
   /* Float/CTA shadows, all tinted from one ink so nothing hardcodes rgba.
      Cards themselves are flat; only the expanded featured card lifts. */
+  /* Resting card: layered ambient + contact shadow, which is what holds a
+     white card apart from the white ground now that neither carries a
+     fill. Deliberately soft; the cards should read as set down on the
+     page, not lifted off it. */
+  /* Named `soft`, not `card`: `shadow-card` collides with the --color-card
+     token, and Tailwind resolves the colour first, so the utility set a
+     shadow colour with no shadow and nothing rendered. */
+  --shadow-soft: 0 1px 2px rgb(var(--shadow-ink) / 0.04),
+    0 14px 34px -18px rgb(var(--shadow-ink) / 0.16);
   --shadow-card-raised: 0 40px 72px -32px rgb(var(--shadow-ink) / 0.45);
   --shadow-float: 0 20px 40px -22px rgb(var(--shadow-ink) / 0.28);
   --shadow-cta: 0 18px 30px -16px rgb(var(--shadow-ink) / 0.55);
@@ -66,14 +75,13 @@
   /* Palette from the Claude Design reference deck (Timeline Case Studies):
      near-black ink, warm greys, one violet.
 
-     ONE ground for the whole site, and it is the wash: a faint violet base
-     (--background) carrying a fixed bloom (--wash-bloom, painted by the
-     locked layer in layout.tsx) that stays bottom-left of the viewport at
-     every scroll position. Cards sitting on that ground are WHITE; panels
-     nested inside a card step down to --card-soft. Two levels, no third,
-     and no seam anywhere because the ground never changes colour between
-     sections. */
-  --background: #f6f4fc;
+     ONE ground for the whole site: WHITE, with a light violet wash over it.
+     The wash is a gradient, never a flat tint, and it is painted by the
+     locked layer in layout.tsx so it stays put at every scroll position.
+     Cards sitting on that ground are white and separate by a soft ambient
+     shadow rather than a fill, since the ground under them is white too;
+     panels nested inside a card step down to --card-soft. */
+  --background: #ffffff;
   --foreground: #141414;
   --card: #ffffff;
   --card-foreground: #141414;
@@ -96,10 +104,13 @@
   /* Shadow ink (violet-leaning near-black), as channels so each shadow token
      can set its own alpha. */
   --shadow-ink: 23 21 28;
-  /* The bloom sitting on the ground, strongest at the bottom-left of the
-     viewport. Locked (position: fixed) so it reads the same on every
-     screen rather than scrolling away with the hero. */
-  --wash-bloom: #e9e3fc;
+  /* The wash: two soft violet blooms over the white ground, the strong one
+     anchored bottom-left and a fainter one top-right so the gradient
+     carries across the viewport instead of dying in one corner. Locked
+     (position: fixed) so it reads the same on every screen rather than
+     scrolling away with the hero. */
+  --wash-bloom: #e4ddfb;
+  --wash-bloom-far: #f1eefd;
   /* Flat card language, two levels only: a card on the washed ground is
      white with no border (20px radius for the big role cards, 14px for the
      rest), and a panel nested inside a card steps down to --card-soft.

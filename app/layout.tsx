@@ -55,7 +55,7 @@ export default function RootLayout({
           className="pointer-events-none fixed inset-0 -z-10"
           style={{
             background:
-              'radial-gradient(circle 1000px at 0% 100%, var(--wash-bloom) 0%, transparent 70%)',
+              'radial-gradient(circle 1100px at 0% 100%, var(--wash-bloom) 0%, transparent 72%), radial-gradient(circle 900px at 100% 0%, var(--wash-bloom-far) 0%, transparent 70%)',
           }}
         />
         {children}
