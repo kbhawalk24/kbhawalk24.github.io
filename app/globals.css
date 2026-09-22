@@ -53,8 +53,7 @@
   --font-sans: var(--font-mulish), system-ui, sans-serif;
   --font-heading: var(--font-league-spartan), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, 'SF Mono', Menlo, monospace;
-  /* Float/CTA shadows, all tinted from one ink so nothing hardcodes rgba.
-     Cards themselves are flat; only the expanded featured card lifts. */
+  /* Float/CTA shadows, all tinted from one ink so nothing hardcodes rgba. */
   /* Resting card: layered ambient + contact shadow, which is what holds a
      white card apart from the white ground now that neither carries a
      fill. Deliberately soft; the cards should read as set down on the
@@ -64,7 +63,6 @@
      shadow colour with no shadow and nothing rendered. */
   --shadow-soft: 0 1px 2px rgb(var(--shadow-ink) / 0.04),
     0 14px 34px -18px rgb(var(--shadow-ink) / 0.16);
-  --shadow-card-raised: 0 40px 72px -32px rgb(var(--shadow-ink) / 0.45);
   --shadow-float: 0 20px 40px -22px rgb(var(--shadow-ink) / 0.28);
   --shadow-cta: 0 18px 30px -16px rgb(var(--shadow-ink) / 0.55);
   --shadow-cta-hover: 0 22px 38px -14px rgb(var(--shadow-ink) / 0.6);

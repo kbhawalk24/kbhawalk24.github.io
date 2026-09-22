@@ -12,18 +12,16 @@ import {
   type Track,
 } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
-import { resolveChapterHref } from '@/lib/site-content'
 import { LENS_TRACKS, useLens } from '@/components/lens'
 import { EASE_OUT, Reveal } from '@/components/motion-primitives'
-import { InlineCasePreview } from '@/components/case-preview'
 import { HeadingDot } from '@/components/heading-dot'
 
 // The timeline is the index. Each role is one soft-grey card on the white
 // page (layout matched to the Claude Design reference, frame 13a): role
 // facts on the left; on the right, the featured case study (image, metric
 // pill, white content panel) with the remaining highlights in a small
-// carousel under it. Only the featured card opens an inline preview; every
-// featured card links out to the full chapter (see lib/site-content.ts).
+// carousel under it. Cards are static; the featured card links out to the
+// full chapter on its case-study page (see lib/site-content.ts).
 
 const TRACK_ORDER: Track[] = ['management', 'strategy', 'ic']
 
@@ -78,28 +76,15 @@ function TrackBadge({ track }: { track: Track }) {
 }
 
 /** Featured card: image with the metric pill floating on it, then a grey
- *  content panel. Flat (no bezel), 14px radius, matching the reference. */
-function FeaturedEntryCard({
-  entry,
-  isExpanded,
-  onToggle,
-}: {
-  entry: TimelineEntry
-  isExpanded: boolean
-  onToggle?: () => void
-}) {
+ *  content panel. Flat, 14px radius, matching the reference. Static: the
+ *  only interaction is the "Read the case study" link. */
+function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
   // The pill carries the headline stat only; the carousel shows the rest.
   const headlineStat = entry.metrics?.[0]
   const metricText = headlineStat ? `${headlineStat.value} · ${headlineStat.label}` : null
 
   return (
-    <motion.div
-      layout
-      className={cn(
-        'relative overflow-hidden rounded-[14px] text-left transition-shadow',
-        isExpanded && 'shadow-card-raised',
-      )}
-    >
+    <motion.div layout className="relative overflow-hidden rounded-[14px] text-left">
       <div className="relative aspect-[16/10] w-full" style={DIAGONAL_STRIPES}>
         <span className="absolute right-4 top-4 rounded-[6px] bg-card px-2.5 py-1 font-mono text-xs text-muted-foreground">
           laptop screen 16:10
@@ -118,28 +103,15 @@ function FeaturedEntryCard({
 
       <div className="bg-card-soft px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
         <TrackBadge track={entry.track} />
-        {/* The heading owns the toggle (APG accordion); its ::after
-            stretches over the whole card so the tile stays clickable. */}
         <h4 className="mt-4 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight sm:text-2xl">
-          {entry.href ? (
-            <button
-              type="button"
-              onClick={onToggle}
-              aria-expanded={isExpanded}
-              className="text-left after:absolute after:inset-0 after:content-['']"
-            >
-              {entry.headline}
-            </button>
-          ) : (
-            entry.headline
-          )}
+          {entry.headline}
         </h4>
         <p className="mt-2 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
           {entry.detail}
         </p>
 
         {entry.href && (
-          <div className="relative z-10 mt-5 border-t border-foreground/10 pt-4">
+          <div className="mt-5 border-t border-foreground/10 pt-4">
             {/* Opens the real case-study page in a new tab — distinct from
                 the toggle above, which just peeks at it inline. */}
             <Link
@@ -287,15 +259,6 @@ function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
 export function CareerTimeline() {
   const { lens } = useLens()
   const [activeTrack, setActiveTrack] = useState<Track | null>(null)
-  const [expandedHeadline, setExpandedHeadline] = useState<string | null>(null)
-
-  const setActiveTrackAndCollapse = (next: Track | null) => {
-    setActiveTrack(next)
-    setExpandedHeadline(null)
-  }
-
-  const toggleEntry = (headline: string) =>
-    setExpandedHeadline((current) => (current === headline ? null : headline))
 
   return (
     <section id="timeline" className="scroll-mt-28">
@@ -310,7 +273,7 @@ export function CareerTimeline() {
             <div role="group" aria-label="Filter timeline by type of work" className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
-                onClick={() => setActiveTrackAndCollapse(null)}
+                onClick={() => setActiveTrack(null)}
                 aria-pressed={activeTrack === null}
                 className={cn(
                   'inline-flex min-h-11 items-center rounded-full px-4 py-2 font-heading text-sm font-semibold ring-1 transition-colors duration-200',
@@ -325,7 +288,7 @@ export function CareerTimeline() {
                 <button
                   key={track}
                   type="button"
-                  onClick={() => setActiveTrackAndCollapse(activeTrack === track ? null : track)}
+                  onClick={() => setActiveTrack(activeTrack === track ? null : track)}
                   aria-pressed={activeTrack === track}
                   className={cn(
                     'inline-flex min-h-11 items-center rounded-full px-4 py-2 font-heading text-sm font-semibold ring-1 transition-colors duration-200',
@@ -370,8 +333,6 @@ export function CareerTimeline() {
               : filtered
             const isDimmed = activeTrack !== null && visibleEntries.length === 0
             const [featured, ...rest] = visibleEntries
-            const featuredIsExpanded = featured ? expandedHeadline === featured.headline : false
-            const featuredResolved = featured?.href ? resolveChapterHref(featured.href) : null
 
             return (
               <motion.li
@@ -407,23 +368,8 @@ export function CareerTimeline() {
                     <>
                       <p className="label-micro text-muted-foreground">Featured case study</p>
                       <div className="mt-3">
-                        <FeaturedEntryCard
-                          entry={featured}
-                          isExpanded={featuredIsExpanded}
-                          onToggle={() => toggleEntry(featured.headline)}
-                        />
+                        <FeaturedEntryCard entry={featured} />
                       </div>
-                      <AnimatePresence>
-                        {featuredIsExpanded && featuredResolved && (
-                          <InlineCasePreview
-                            track={featured.track}
-                            page={featuredResolved.page}
-                            chapter={featuredResolved.chapter}
-                            metricFallback={featured.metrics?.[0]}
-                            onClose={() => toggleEntry(featured.headline)}
-                          />
-                        )}
-                      </AnimatePresence>
 
                       {rest.length > 0 && <EntryCarousel entries={rest} />}
                     </>
