@@ -10,6 +10,7 @@ import { HeadingDot } from '@/components/heading-dot'
 import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
 import { LENS_ROLES, LensProvider, useLens } from '@/components/lens'
+import { LayoutModeProvider } from '@/components/layout-mode'
 import { VisualSlot } from '@/components/visual-slot'
 import { ChapterPager, ChapterRail } from '@/components/chapter-nav'
 import { withLens } from '@/components/lens'
@@ -101,7 +102,9 @@ export function nextStory(page: PortfolioPage): PortfolioPage | null {
 export function CaseStudyLayout({ page }: { page: PortfolioPage }) {
   return (
     <LensProvider>
-      <CaseStudyPage page={page} />
+      <LayoutModeProvider>
+        <CaseStudyPage page={page} />
+      </LayoutModeProvider>
     </LensProvider>
   )
 }

@@ -22,6 +22,13 @@ import { HeadingDot } from '@/components/heading-dot'
 // white content panel) with the remaining highlights in a small carousel
 // under it. Cards are static; the featured card links out to the full
 // chapter on its case-study page (see lib/site-content.ts).
+//
+// The `experience` variant (home layout B, see components/layout-mode.tsx)
+// keeps the same rows but drops the featured card and carousel: the case
+// studies have their own section above, so here every highlight sits in
+// one compact list per role, resume-style, each with its stats inline.
+
+export type TimelineVariant = 'timeline' | 'experience'
 
 const TRACK_ORDER: Track[] = ['management', 'strategy', 'ic']
 
@@ -178,6 +185,58 @@ function CarouselEntryCard({ entry }: { entry: TimelineEntry }) {
   )
 }
 
+/** Layout B: one role's highlights as a list. Headline, detail, then the
+ *  stats on one line; a hairline between items. Each links to its chapter. */
+function HighlightList({ entries }: { entries: TimelineEntry[] }) {
+  const { lens } = useLens()
+  return (
+    <ul className="divide-y divide-border">
+      {entries.map((entry) => {
+        const stats = entry.metrics ?? []
+        return (
+          <li key={entry.headline} className="py-5 first:pt-0 last:pb-0">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <TrackBadge track={entry.track} />
+            </div>
+            <h4 className="mt-2 text-pretty font-heading text-lg font-semibold leading-snug tracking-tight">
+              {entry.href ? (
+                <Link
+                  href={withLens(entry.href, lens)}
+                  className="transition-colors hover:text-accent-brand hover:underline"
+                >
+                  {entry.headline}
+                </Link>
+              ) : (
+                entry.headline
+              )}
+            </h4>
+            <p className="mt-1 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
+              {entry.detail}
+            </p>
+            {stats.length > 0 && (
+              <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+                {stats.map((m) => (
+                  <div key={m.label} className="flex flex-row-reverse items-baseline gap-2">
+                    <dt className="label-micro text-muted-foreground">{m.label}</dt>
+                    <dd
+                      className={cn(
+                        'font-heading text-base font-semibold leading-tight tabular-nums',
+                        trackStyles[entry.track].accentText,
+                      )}
+                    >
+                      {m.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
 function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
   const [index, setIndex] = useState(0)
   const safeIndex = Math.min(index, entries.length - 1)
@@ -257,16 +316,17 @@ function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
   )
 }
 
-export function CareerTimeline() {
+export function CareerTimeline({ variant = 'timeline' }: { variant?: TimelineVariant }) {
   const { lens } = useLens()
   const [activeTrack, setActiveTrack] = useState<Track | null>(null)
+  const isExperience = variant === 'experience'
 
   return (
-    <section id="timeline" className="scroll-mt-28">
+    <section id={isExperience ? 'experience' : 'timeline'} className="scroll-mt-28">
       <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28 lg:px-14">
         <Reveal className="mb-8">
           <h2 className="mb-6 font-heading text-3xl font-semibold tracking-tight md:text-4xl">
-            Career timeline
+            {isExperience ? 'Experience' : 'Career timeline'}
             <HeadingDot />
           </h2>
 
@@ -365,6 +425,8 @@ export function CareerTimeline() {
                     <p className="font-sans text-sm text-muted-foreground">
                       No {TRACKS[activeTrack!].label.toLowerCase()} work in this role.
                     </p>
+                  ) : isExperience ? (
+                    visibleEntries.length > 0 && <HighlightList entries={visibleEntries} />
                   ) : featured ? (
                     <>
                       <p className="label-micro text-muted-foreground">Featured case study</p>
