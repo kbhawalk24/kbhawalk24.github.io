@@ -57,7 +57,7 @@ function ChapterSection({
           </div>
 
           {chapter.decision && (
-            <aside className="mt-6 max-w-2xl rounded-[14px] border-l-2 border-track-strategy bg-card p-4 md:p-5">
+            <aside className="mt-6 max-w-2xl rounded-[14px] border-l-2 border-track-strategy bg-card-tint p-4 md:p-5">
               <p className="label-micro text-muted-foreground">The decision</p>
               <p className="mt-1 font-medium">{chapter.decision.title}</p>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{chapter.decision.detail}</p>
@@ -69,7 +69,7 @@ function ChapterSection({
               {chapter.metrics.map((m) => (
                 /* dt before dd in source (the dl content model requires it);
                    flex-col-reverse keeps the value visually on top. */
-                <div key={m.label} className="flex flex-col-reverse rounded-[14px] bg-card p-4">
+                <div key={m.label} className="flex flex-col-reverse rounded-[14px] bg-card-tint p-4">
                     <dt className="mt-1 text-xs leading-relaxed text-muted-foreground">{m.label}</dt>
                     <dd className="font-heading text-xl font-semibold tabular-nums">{m.value}</dd>
                 </div>
@@ -133,7 +133,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           <ol className="flex gap-3 overflow-x-auto pb-2">
             {page.chapters.map((c, i) => (
               <li key={c.id} className="min-w-[160px] flex-1">
-                <a href={`#${c.id}`} className="block rounded-[14px] bg-card transition-transform hover:-translate-y-0.5">
+                <a href={`#${c.id}`} className="block rounded-[14px] bg-card-tint transition-transform hover:-translate-y-0.5">
                   <div className="p-3">
                     <p className="label-micro tabular-nums text-muted-foreground">
                       {c.period}
@@ -149,7 +149,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
         <Reveal className="mt-8">
           <dl className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {page.metrics.map((m) => (
-              <div key={m.label} className="flex flex-col-reverse rounded-[14px] bg-card p-5">
+              <div key={m.label} className="flex flex-col-reverse rounded-[14px] bg-card-tint p-5">
                   <dt className="mt-2 text-xs leading-relaxed text-muted-foreground md:text-sm">{m.label}</dt>
                   <dd className="font-heading text-2xl font-semibold tabular-nums md:text-3xl">{m.value}</dd>
               </div>
@@ -200,7 +200,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           <Reveal as="section" className="border-t border-border pt-10">
             <Link
               href={withLens(next.href, lens)}
-              className="group block rounded-[14px] bg-card p-6 transition-transform hover:-translate-y-0.5 md:p-8"
+              className="group block rounded-[14px] bg-card-tint p-6 transition-transform hover:-translate-y-0.5 md:p-8"
             >
               <span className="label-micro text-muted-foreground">Next story</span>
               <span className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -223,7 +223,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           <ul className="mt-4 grid gap-4 md:grid-cols-3">
             {others.map((p) => (
               <li key={p.slug}>
-                <Link href={p.href} className="block h-full rounded-[14px] bg-card transition-transform hover:-translate-y-0.5">
+                <Link href={p.href} className="block h-full rounded-[14px] bg-card-tint transition-transform hover:-translate-y-0.5">
                   <div className="h-full p-5">
                     <p className="label-micro text-muted-foreground">{p.eyebrow}</p>
                     <p className="mt-2 font-heading text-xl font-semibold">{p.title}</p>

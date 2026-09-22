@@ -48,7 +48,7 @@ export function InlineCasePreview({
       className="col-span-full grid"
     >
       <div className="min-h-0 overflow-hidden">
-      <div className="mt-1 rounded-[14px] bg-panel">
+      <div className="mt-1 rounded-[14px] bg-card">
         <div className="relative p-6 md:p-8">
           <button
             type="button"
@@ -79,7 +79,7 @@ export function InlineCasePreview({
           {metrics.length > 0 && (
             <dl className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {metrics.slice(0, 3).map((m) => (
-                <div key={m.label} className="flex flex-col-reverse rounded-[10px] bg-card p-3">
+                <div key={m.label} className="flex flex-col-reverse rounded-[10px] bg-card-tint p-3">
                     <dt className="mt-1 text-[11px] leading-snug text-muted-foreground">{m.label}</dt>
                     <dd className="font-heading text-lg font-semibold tabular-nums">{m.value}</dd>
                 </div>

@@ -18,12 +18,12 @@ import { EASE_OUT, Reveal } from '@/components/motion-primitives'
 import { InlineCasePreview } from '@/components/case-preview'
 import { HeadingDot } from '@/components/heading-dot'
 
-// The timeline is the index. Each role is one white card on a paper canvas
-// (matched to the Claude Design reference, frame 13a): role facts on the
-// left; on the right, the featured case study (image, metric pill, grey
-// content panel) with the remaining highlights in a small carousel under
-// it. Only the featured card opens an inline preview; every featured card
-// links out to the full chapter (see lib/site-content.ts).
+// The timeline is the index. Each role is one soft-grey card on the white
+// page (layout matched to the Claude Design reference, frame 13a): role
+// facts on the left; on the right, the featured case study (image, metric
+// pill, white content panel) with the remaining highlights in a small
+// carousel under it. Only the featured card opens an inline preview; every
+// featured card links out to the full chapter (see lib/site-content.ts).
 
 const TRACK_ORDER: Track[] = ['management', 'strategy', 'ic']
 
@@ -116,7 +116,7 @@ function FeaturedEntryCard({
         )}
       </div>
 
-      <div className="bg-panel px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
+      <div className="bg-card px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
         <TrackBadge track={entry.track} />
         {/* The heading owns the toggle (APG accordion); its ::after
             stretches over the whole card so the tile stays clickable. */}
@@ -174,7 +174,7 @@ function CarouselEntryCard({ entry }: { entry: TimelineEntry }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.2, ease: EASE_OUT }}
-      className="rounded-[14px] bg-panel-soft p-6 text-left sm:p-7"
+      className="rounded-[14px] bg-card p-6 text-left sm:p-7"
     >
       <TrackBadge track={entry.track} />
       <h4 className="mt-3 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight">
@@ -213,12 +213,15 @@ function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
   const atEnd = safeIndex === entries.length - 1
 
   const navButton =
-    'flex size-11 items-center justify-center rounded-full bg-panel text-foreground transition-colors hover:bg-stripe disabled:cursor-default disabled:opacity-40 disabled:hover:bg-panel'
+    'flex size-11 items-center justify-center rounded-full bg-card text-foreground transition-colors hover:bg-stripe disabled:cursor-default disabled:opacity-40 disabled:hover:bg-card'
 
   return (
     <div className="mt-5">
       {entries.length > 1 && (
-        <div className="mb-4 flex items-center justify-between gap-4">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+          {/* Wraps: between sm and xl the dots, counter and arrows together
+              are wider than the card's right-hand column, and without the
+              wrap this row pushed the page into a horizontal scroll. */}
           {/* Each dot keeps a 44px hit box around a small visual; that row
               doesn't fit next to the arrows on a narrow phone, so the dots
               are sm+ only and the counter carries the position on mobile. */}
@@ -378,7 +381,7 @@ export function CareerTimeline() {
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.6, ease: EASE_OUT }}
                 className={cn(
-                  'rounded-[20px] border border-border bg-card p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
+                  'rounded-[20px] bg-card-tint p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
                   isDimmed && 'opacity-40',
                 )}
               >
@@ -430,7 +433,7 @@ export function CareerTimeline() {
           })}
         </ol>
 
-        <Reveal className="mt-10 rounded-[20px] border border-border bg-card p-6 md:p-10">
+        <Reveal className="mt-10 rounded-[20px] bg-card-tint p-6 md:p-10">
           <p className="label-micro text-muted-foreground">Education</p>
           <div className="mt-3 grid gap-2 font-sans text-base">
             <p>

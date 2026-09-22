@@ -6,7 +6,7 @@ import type { Visual } from '@/lib/site-content'
 export function VisualSlot({ visual }: { visual: Visual }) {
   if (visual.src) {
     return (
-      <figure className="overflow-hidden rounded-[14px] bg-card">
+      <figure className="overflow-hidden rounded-[14px] bg-card-tint">
         <div>
           {visual.kind === 'video' ? (
             <video src={visual.src} controls muted playsInline className="w-full" />
@@ -20,7 +20,7 @@ export function VisualSlot({ visual }: { visual: Visual }) {
     )
   }
   return (
-    <figure className="flex min-h-40 flex-col justify-end rounded-[14px] border border-dashed border-border bg-card p-4">
+    <figure className="flex min-h-40 flex-col justify-end rounded-[14px] border border-dashed border-border bg-card-tint p-4">
       <p className="label-micro text-muted-foreground">
         {visual.kind === 'video' ? 'Video needed' : 'Image needed'}
       </p>

@@ -185,7 +185,7 @@ function MenuItem({
     <Link
       href={href}
       onClick={onClick}
-      className="block rounded-[10px] px-3 py-2 font-sans text-sm text-foreground transition-colors hover:bg-panel-soft"
+      className="block rounded-[10px] px-3 py-2 font-sans text-sm text-foreground transition-colors hover:bg-card-tint"
     >
       {children}
     </Link>

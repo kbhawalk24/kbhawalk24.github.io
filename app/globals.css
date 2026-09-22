@@ -41,9 +41,7 @@
   --color-track-ic: var(--track-ic);
   --color-track-ic-foreground: var(--track-ic-foreground);
   --color-accent-brand: var(--accent-brand);
-  --color-canvas: var(--canvas);
-  --color-panel: var(--panel);
-  --color-panel-soft: var(--panel-soft);
+  --color-card-tint: var(--card-tint);
   --color-stripe: var(--stripe-a);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -68,11 +66,13 @@
   /* Palette from the Claude Design reference deck (Timeline Case Studies):
      near-black ink, warm greys, one violet.
 
-     ONE ground for the whole site: the warm paper canvas. Surfaces that sit
-     on the ground are white (--card); the grey panels (--panel,
-     --panel-soft) are only ever used INSIDE a white surface. Two levels, no
-     third, and so no seam anywhere between sections. */
-  --background: #f0eee9;
+     ONE ground for the whole site: white, with the hero's soft violet wash
+     over it. Cards that sit on the ground take --card-tint; anything nested
+     INSIDE a card goes back to white. Two levels, no third, and so no seam
+     anywhere between sections. The deck's paper canvas was tried as a
+     second ground and dropped: that is what produced the hard edge under
+     the hero. The warmth it carried now lives in the card tint instead. */
+  --background: #ffffff;
   --foreground: #141414;
   --card: #ffffff;
   --card-foreground: #141414;
@@ -81,11 +81,11 @@
   /* Primary: ink */
   --primary: #141414;
   --primary-foreground: #ffffff;
-  --secondary: #f6f5f3;
+  --secondary: #f4f2fb;
   --secondary-foreground: #141414;
-  --muted: #f6f5f3;
+  --muted: #f4f2fb;
   --muted-foreground: #5f5f5b;
-  --accent: #f6f5f3;
+  --accent: #f4f2fb;
   --accent-foreground: #141414;
   --destructive: oklch(0.577 0.245 27.325);
   --border: #e4e2dd;
@@ -98,15 +98,15 @@
   /* The violet wash behind the hero. */
   --accent-brand-wash: #ede9fe;
   --accent-brand-wash-soft: #f5f3ff;
-  /* Flat card language: white cards on the canvas carry a 1px --border and a
-     20px radius; panels nested inside them are grey at a 14px radius. Depth
-     comes from tone, not shadow. --canvas is an alias of --background, kept
-     so a section can restate the ground explicitly.  */
-  --canvas: #f0eee9;
-  --panel: #ededec;
-  --panel-soft: #f6f5f3;
-  --stripe-a: #e0ded9;
-  --stripe-b: #d6d4ce;
+  /* Flat card language, two levels only: a card on the white ground is
+     --card-tint with no border (20px radius for the big role cards, 14px
+     for the rest), and anything nested inside a card goes back to white.
+     Depth comes from tone, not shadow. The tint is a faint violet drawn
+     from the hero's wash, so the one accent colours the surfaces too
+     instead of a fourth neutral appearing. */
+  --card-tint: #f4f2fb;
+  --stripe-a: #e7e4f1;
+  --stripe-b: #dcd8ea;
   /* Brand accent — the deck's signature violet, used for the heading dot,
      links, and focus rings. */
   --accent-brand: #6d28d9;
