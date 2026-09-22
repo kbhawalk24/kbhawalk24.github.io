@@ -138,8 +138,13 @@
   html {
     scroll-behavior: smooth;
   }
+  /* No background on body. <html> carries --background (it propagates to
+     the canvas), and the wash is a fixed layer at z-index -10 inside body:
+     in the root stacking context that layer paints above the canvas but
+     below any in-flow block, so a body fill would sit on top of the wash
+     and hide it completely. Body stays transparent. */
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply text-foreground font-sans;
   }
   /* Kills the 300ms double-tap-zoom delay and the blue flash on tap. */
   a,
