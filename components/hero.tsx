@@ -103,27 +103,6 @@ export function Hero() {
       className="relative min-h-[200vh] overflow-clip"
     >
       <div className="sticky top-0 flex min-h-dvh overflow-hidden">
-        {/* Full-screen gradient wash, anchored to the bottom-left of the
-            sticky viewport (not the full 200vh section — its "0% 100%"
-            origin needs to sit right at the visible viewport's bottom edge
-            to read at rest). Static (no scroll-driven transform): it moves
-            as one unit with the rest of the pinned content, so there's never
-            a separately-animated edge for the overflow-hidden clip to
-            reveal once the pin releases. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              'radial-gradient(circle 900px at 0% 100%, var(--accent-brand-wash) 0%, transparent 100%)',
-            // The sticky box clips the wash, so when the pin releases its
-            // bottom edge was a dead straight line across the page. Fading
-            // the last band dissolves that edge without touching the bloom.
-            WebkitMaskImage: 'linear-gradient(to bottom, #000 78%, transparent 100%)',
-            maskImage: 'linear-gradient(to bottom, #000 78%, transparent 100%)',
-          }}
-        />
-
         <div className="relative mx-auto flex min-h-dvh w-full max-w-6xl flex-col items-start px-6 py-8 md:px-10 lg:px-14">
 
           {/* Content column */}

@@ -45,6 +45,19 @@ export default function RootLayout({
       className={`bg-background ${mulish.variable} ${leagueSpartan.variable} ${plexMono.variable}`}
     >
       <body className="antialiased">
+        {/* The wash, locked to the viewport. The ground itself carries a
+            faint violet base (--background) and this fixed layer adds the
+            bloom on top, so the gradient reads the same on every screen
+            instead of scrolling away with the hero. Inert and behind all
+            content; nothing animates, so it costs one paint. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 -z-10"
+          style={{
+            background:
+              'radial-gradient(circle 1000px at 0% 100%, var(--wash-bloom) 0%, transparent 70%)',
+          }}
+        />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

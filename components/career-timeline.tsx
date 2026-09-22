@@ -116,7 +116,7 @@ function FeaturedEntryCard({
         )}
       </div>
 
-      <div className="bg-card px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
+      <div className="bg-card-soft px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
         <TrackBadge track={entry.track} />
         {/* The heading owns the toggle (APG accordion); its ::after
             stretches over the whole card so the tile stays clickable. */}
@@ -174,7 +174,7 @@ function CarouselEntryCard({ entry }: { entry: TimelineEntry }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.2, ease: EASE_OUT }}
-      className="rounded-[14px] bg-card p-6 text-left sm:p-7"
+      className="rounded-[14px] bg-card-soft p-6 text-left sm:p-7"
     >
       <TrackBadge track={entry.track} />
       <h4 className="mt-3 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight">
@@ -213,7 +213,7 @@ function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
   const atEnd = safeIndex === entries.length - 1
 
   const navButton =
-    'flex size-11 items-center justify-center rounded-full bg-card text-foreground transition-colors hover:bg-stripe disabled:cursor-default disabled:opacity-40 disabled:hover:bg-card'
+    'flex size-11 items-center justify-center rounded-full bg-card-soft text-foreground transition-colors hover:bg-stripe disabled:cursor-default disabled:opacity-40 disabled:hover:bg-card-soft'
 
   return (
     <div className="mt-5">
@@ -382,7 +382,7 @@ export function CareerTimeline() {
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.6, ease: EASE_OUT }}
                 className={cn(
-                  'rounded-[20px] bg-card-soft p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
+                  'rounded-[20px] bg-card p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
                   isDimmed && 'opacity-40',
                 )}
               >
@@ -434,7 +434,7 @@ export function CareerTimeline() {
           })}
         </ol>
 
-        <Reveal className="mt-10 rounded-[20px] bg-card-soft p-6 md:p-10">
+        <Reveal className="mt-10 rounded-[20px] bg-card p-6 md:p-10">
           <p className="label-micro text-muted-foreground">Education</p>
           <div className="mt-3 grid gap-2 font-sans text-base">
             <p>
