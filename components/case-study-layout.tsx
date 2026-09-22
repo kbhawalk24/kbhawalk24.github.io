@@ -223,7 +223,7 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           <ul className="mt-4 grid gap-4 md:grid-cols-3">
             {others.map((p) => (
               <li key={p.slug}>
-                <Link href={p.href} className="block h-full rounded-[14px] bg-card shadow-soft transition-transform hover:-translate-y-0.5">
+                <Link href={withLens(p.href, lens)} className="block h-full rounded-[14px] bg-card shadow-soft transition-transform hover:-translate-y-0.5">
                   <div className="h-full p-5">
                     <p className="label-micro text-muted-foreground">{p.eyebrow}</p>
                     <p className="mt-2 font-heading text-xl font-semibold">{p.title}</p>

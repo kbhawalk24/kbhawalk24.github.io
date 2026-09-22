@@ -12,16 +12,16 @@ import {
   type Track,
 } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
-import { LENS_TRACKS, useLens } from '@/components/lens'
+import { LENS_TRACKS, useLens, withLens } from '@/components/lens'
 import { EASE_OUT, Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
-// The timeline is the index. Each role is one soft-grey card on the white
-// page (layout matched to the Claude Design reference, frame 13a): role
-// facts on the left; on the right, the featured case study (image, metric
-// pill, white content panel) with the remaining highlights in a small
-// carousel under it. Cards are static; the featured card links out to the
-// full chapter on its case-study page (see lib/site-content.ts).
+// The timeline is the index. Roles are not cards: each is a row on the page,
+// separated by a hairline, with the role facts on the left. Only the work
+// gets a card: on the right, the featured case study (image, metric pill,
+// grey content panel) with the remaining highlights in a small carousel
+// under it. Cards are static; the featured card links out to the full
+// chapter on its case-study page (see lib/site-content.ts).
 
 const TRACK_ORDER: Track[] = ['management', 'strategy', 'ic']
 
@@ -79,12 +79,13 @@ function TrackBadge({ track }: { track: Track }) {
  *  content panel. Flat, 14px radius, matching the reference. Static: the
  *  only interaction is the "Read the case study" link. */
 function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
+  const { lens } = useLens()
   // The pill carries the headline stat only; the carousel shows the rest.
   const headlineStat = entry.metrics?.[0]
   const metricText = headlineStat ? `${headlineStat.value} · ${headlineStat.label}` : null
 
   return (
-    <motion.div layout className="relative overflow-hidden rounded-[14px] text-left">
+    <motion.div layout className="relative overflow-hidden rounded-[14px] bg-card text-left shadow-soft">
       <div className="relative aspect-[16/10] w-full" style={DIAGONAL_STRIPES}>
         <span className="absolute right-4 top-4 rounded-[6px] bg-card px-2.5 py-1 font-mono text-xs text-muted-foreground">
           laptop screen 16:10
@@ -115,7 +116,7 @@ function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
             {/* Opens the real case-study page in a new tab — distinct from
                 the toggle above, which just peeks at it inline. */}
             <Link
-              href={entry.href}
+              href={withLens(entry.href, lens)}
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
@@ -146,7 +147,7 @@ function CarouselEntryCard({ entry }: { entry: TimelineEntry }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.2, ease: EASE_OUT }}
-      className="rounded-[14px] bg-card-soft p-6 text-left sm:p-7"
+      className="rounded-[14px] bg-card p-6 text-left shadow-soft sm:p-7"
     >
       <TrackBadge track={entry.track} />
       <h4 className="mt-3 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight">
@@ -320,7 +321,7 @@ export function CareerTimeline() {
           </AnimatePresence>
         </Reveal>
 
-        <ol className="grid gap-6">
+        <ol className="divide-y divide-border">
           {ROLES.map((role) => {
             const filtered = activeTrack
               ? role.entries.filter((entry) => entry.track === activeTrack)
@@ -343,7 +344,7 @@ export function CareerTimeline() {
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.6, ease: EASE_OUT }}
                 className={cn(
-                  'rounded-[20px] bg-card shadow-soft p-6 transition-opacity duration-300 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:p-10 lg:p-12',
+                  'py-12 transition-opacity duration-300 first:pt-0 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:py-16 lg:gap-14',
                   isDimmed && 'opacity-40',
                 )}
               >
@@ -380,7 +381,7 @@ export function CareerTimeline() {
           })}
         </ol>
 
-        <Reveal className="mt-10 rounded-[20px] bg-card shadow-soft p-6 md:p-10">
+        <Reveal className="mt-4 border-t border-border pt-12 md:pt-16">
           <p className="label-micro text-muted-foreground">Education</p>
           <div className="mt-3 grid gap-2 font-sans text-base">
             <p>

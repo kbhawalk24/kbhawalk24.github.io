@@ -44,14 +44,6 @@ export const CHAPTER_ROLE_STYLE: Record<ChapterRole, string> = {
   Both: 'bg-track-strategy/10 text-track-strategy',
 }
 
-/** Track-colored ambient shadow tint for the borderless double-bezel
- *  expansion panel, keyed by the same chapter role as CHAPTER_ROLE_STYLE. */
-export const CHAPTER_ROLE_GLOW: Record<ChapterRole, string> = {
-  IC: 'shadow-track-ic/25',
-  Team: 'shadow-track-management/25',
-  Both: 'shadow-track-strategy/25',
-}
-
 export interface PortfolioPage {
   slug: string
   href: string
