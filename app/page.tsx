@@ -6,7 +6,6 @@ import { SiteHeader } from '@/components/site-header'
 import { LensProvider } from '@/components/lens'
 import { LayoutModeProvider, useLayoutMode } from '@/components/layout-mode'
 import { Hero } from '@/components/hero'
-import { Overview } from '@/components/overview'
 import { CareerTimeline } from '@/components/career-timeline'
 import { CaseStudyIndex } from '@/components/case-study-index'
 import { ContactFooter } from '@/components/contact-footer'
@@ -20,7 +19,6 @@ export default function Page() {
           <SiteHeader />
           <main id="main">
             <Hero />
-            <Overview />
             <HomeBody />
           </main>
           <ContactFooter />

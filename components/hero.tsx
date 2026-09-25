@@ -28,7 +28,7 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative overflow-clip">
-      <div className="mx-auto grid min-h-dvh max-w-6xl items-center gap-10 px-6 pb-16 pt-28 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:gap-14 md:px-10 md:pt-32 lg:px-14">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 pb-10 pt-28 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:gap-14 md:px-10 md:pb-14 md:pt-32 lg:px-14">
         <motion.div {...enter(0.1)} className="order-2 md:order-1">
           <h1
             translate="no"
@@ -39,9 +39,15 @@ export function Hero() {
             Bhawalkar
           </h1>
 
-          <p className="mt-6 max-w-[36ch] text-pretty font-sans text-xl leading-snug text-foreground md:text-2xl">
-            Product Design Manager with 12+ years of experience transforming complex
-            enterprise infrastructure into intuitive products.
+          <p className="mt-6 max-w-[52ch] text-pretty font-sans text-lg leading-relaxed text-foreground md:text-xl">
+            Leading UX strategy and a team of three for <span translate="no">Intuit</span>
+            &rsquo;s enterprise data platform, spanning{' '}
+            <span className="font-semibold text-accent-brand">
+              data discovery, governance, lineage, observability,
+            </span>{' '}
+            and <span className="font-semibold text-accent-brand">pipeline authoring</span>. Ten
+            years shipping the work, two years leading the team that ships it, still in the
+            codebase.
           </p>
           <p className="mt-4 max-w-[52ch] text-pretty font-sans text-base font-semibold leading-relaxed text-accent-brand md:text-lg">
             Expertise in agentic AI experience design, data visualization, and design

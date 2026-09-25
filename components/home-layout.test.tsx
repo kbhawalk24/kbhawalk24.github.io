@@ -66,11 +66,11 @@ describe('home layout switch', () => {
     expect(within(row).queryByText(first.entries[0].detail)).toBeNull()
   })
 
-  it('opens with the hero and the overview on every layout', () => {
+  it('opens with the hero on every layout, no separate overview', () => {
     render(<Page />)
     for (const label of ['A', 'B', 'C'] as const) {
       switchTo(label)
-      expect(document.getElementById('overview')).not.toBeNull()
+      expect(document.getElementById('overview')).toBeNull()
       const hero = document.getElementById('hero') as HTMLElement
       expect(within(hero).getByRole('link', { name: /resume/i })).toBeTruthy()
       expect(within(hero).getByRole('link', { name: /linkedin/i })).toBeTruthy()
