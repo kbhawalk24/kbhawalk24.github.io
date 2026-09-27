@@ -209,6 +209,34 @@
     transform: scaleX(0.35);
   }
 }
+/* The lion that eats it: a trot while it walks in and out. */
+.lion-walking {
+  animation: lion-trot 0.32s ease-in-out infinite alternate;
+}
+.lion-walking .leg {
+  animation: lion-step 0.32s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+.lion-walking .leg-b {
+  animation-direction: alternate-reverse;
+}
+@keyframes lion-trot {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-3px);
+  }
+}
+@keyframes lion-step {
+  from {
+    transform: rotate(-14deg);
+  }
+  to {
+    transform: rotate(14deg);
+  }
+}
 
 /* Motion's `reducedMotion="user"` only silences Motion-driven animation.
    Plain CSS transitions (hover states, underline sweeps, etc.) need their
