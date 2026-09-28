@@ -241,8 +241,9 @@ function HighlightList({ entries }: { entries: TimelineEntry[] }) {
 }
 
 /** Layout C: highlights grouped by track, each group a heading and one row
- *  per highlight: headline on the left (linking to its chapter), stat on
- *  the right. No detail line; that is on the case-study page. */
+ *  per highlight, resume style: the headline as a bold lead-in (linking to
+ *  its chapter) with the detail running on in the same paragraph, and the
+ *  stat on the right. */
 function HighlightRows({ entries }: { entries: TimelineEntry[] }) {
   const { lens } = useLens()
   const groups = TRACK_ORDER.map((track) => ({
@@ -263,17 +264,21 @@ function HighlightRows({ entries }: { entries: TimelineEntry[] }) {
                   key={entry.headline}
                   className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                 >
-                  <p className="text-pretty font-heading text-base font-semibold leading-snug tracking-tight">
-                    {entry.href ? (
-                      <Link
-                        href={withLens(entry.href, lens)}
-                        className="transition-colors hover:text-accent-brand hover:underline"
-                      >
-                        {entry.headline}
-                      </Link>
-                    ) : (
-                      entry.headline
-                    )}
+                  <p className="max-w-[64ch] text-pretty font-sans text-[15px] leading-relaxed text-muted-foreground">
+                    <span className="font-heading text-base font-semibold text-foreground">
+                      {entry.href ? (
+                        <Link
+                          href={withLens(entry.href, lens)}
+                          className="transition-colors hover:text-accent-brand hover:underline"
+                        >
+                          {entry.headline}
+                        </Link>
+                      ) : (
+                        entry.headline
+                      )}
+                      .
+                    </span>{' '}
+                    {entry.detail}
                   </p>
                   {stat && (
                     <p className="flex shrink-0 items-baseline gap-2 sm:flex-col sm:items-end sm:gap-0.5 sm:text-right">

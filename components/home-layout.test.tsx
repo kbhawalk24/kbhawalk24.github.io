@@ -48,7 +48,7 @@ describe('home layout switch', () => {
     expect(screen.getByRole('link', { name: 'Experience' }).getAttribute('href')).toBe('#experience')
   })
 
-  it('C keeps the case studies and lists highlights as rows grouped by track', () => {
+  it('C keeps the case studies and lists highlights as resume rows grouped by track', () => {
     render(<Page />)
     switchTo('C')
 
@@ -63,7 +63,7 @@ describe('home layout switch', () => {
       expect(within(row).getByRole('link', { name: e.headline })).toBeTruthy()
       if (e.metrics?.[0]) expect(within(row).getByText(e.metrics[0].value)).toBeTruthy()
     })
-    expect(within(row).queryByText(first.entries[0].detail)).toBeNull()
+    expect(within(row).getByText(first.entries[0].detail, { exact: false })).toBeTruthy()
   })
 
   it('opens with the hero on every layout, no separate overview', () => {
