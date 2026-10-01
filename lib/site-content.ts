@@ -57,6 +57,10 @@ export interface PortfolioPage {
   /** The insight that organizes the page, shown near the top. */
   insight?: string
   metrics: { value: string; label: string }[]
+  /** The home-page cover: a large screenshot (2300×1150 WebP) or a short
+   *  muted loop (MP4 1080p, under ~8 MB, with a poster). Placeholder until
+   *  set. */
+  cover?: Visual & { poster?: string }
   chapters: Chapter[]
   reflection?: string[]
 }
