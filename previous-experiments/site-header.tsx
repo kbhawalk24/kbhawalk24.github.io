@@ -8,11 +8,14 @@ import { cn } from '@/lib/utils'
 import { EASE_OUT } from '@/components/motion-primitives'
 import type { Chapter } from '@/lib/site-content'
 import { useLens, withLens } from '@/components/lens'
+import { LayoutSwitch, useLayoutMode } from '@/components/layout-mode'
 
-/** Floating pill nav, on every page from load: Case studies / Experience /
- *  Contact. (The IC/Manager lens switch and the A/B/C layout switch used to
- *  sit here; see previous-experiments/. The lens still rides along in links
- *  if a URL carries it, but has no control.)
+/** Floating pill nav, on every page from load: Timeline / Contact and, on
+ *  the home page, the layout switch. In layout A case studies are reached
+ *  from the timeline itself (each role's featured entry links out); in B and
+ *  C they have their own section, so the links become Case studies /
+ *  Experience / Contact. (The IC/Manager lens switch used to sit here; the
+ *  lens still rides along in links if a URL carries it, but has no control.)
  *
  *  On a case study the pill also carries the chapter list, but only below
  *  `lg`, where the page has no room for the left-hand chapter rail. One
@@ -26,13 +29,20 @@ export function SiteHeader({
   chapters?: Chapter[]
 }) {
   const { lens } = useLens()
+  const { mode } = useLayoutMode()
   const home = onHome ? '' : '/'
 
-  const links = [
-    { label: 'Case studies', href: `${home}#case-studies` },
-    { label: 'Experience', href: `${home}#experience` },
-    { label: 'Contact', href: `${home}#contact` },
-  ]
+  const links =
+    mode !== 'a'
+      ? [
+          { label: 'Case studies', href: `${home}#case-studies` },
+          { label: 'Experience', href: `${home}#experience` },
+          { label: 'Contact', href: `${home}#contact` },
+        ]
+      : [
+          { label: 'Timeline', href: `${home}#timeline` },
+          { label: 'Contact', href: `${home}#contact` },
+        ]
   const chapterItems = chapters.map((c) => ({ label: c.title, href: `#${c.id}` }))
 
   return (
@@ -65,10 +75,25 @@ export function SiteHeader({
           )}
         </div>
 
-        {/* Phone: everything folds into one menu. */}
+        {/* Phone: everything folds into one menu, the layout switch too:
+            beside the lens it pushed the pill past the viewport at 375px. */}
         <div className="sm:hidden">
-          <NavMenu items={links} groupLabel={chapters.length > 0 ? 'Chapters' : undefined} group={chapterItems} />
+          <NavMenu
+            items={links}
+            groupLabel={chapters.length > 0 ? 'Chapters' : undefined}
+            group={chapterItems}
+            footer={
+              onHome ? (
+                <div className="flex items-center justify-between gap-3 px-3 py-1.5">
+                  <span className="label-micro text-muted-foreground">Layout</span>
+                  <LayoutSwitch />
+                </div>
+              ) : undefined
+            }
+          />
         </div>
+
+        {onHome && <LayoutSwitch className="ml-1 hidden sm:flex" />}
       </motion.nav>
     </header>
   )
@@ -90,11 +115,14 @@ function NavMenu({
   label = 'Menu',
   groupLabel,
   group = [],
+  footer,
 }: {
   items: { label: string; href: string }[]
   label?: string
   groupLabel?: string
   group?: { label: string; href: string }[]
+  /** Rendered after the links, under a hairline: a control, not a link. */
+  footer?: React.ReactNode
 }) {
   const { lens } = useLens()
   const [open, setOpen] = useState(false)
@@ -166,6 +194,8 @@ function NavMenu({
                 </MenuItem>
               </li>
             ))}
+            {footer && <li aria-hidden="true" className="mx-2 my-1 border-t border-border" />}
+            {footer && <li>{footer}</li>}
           </motion.ul>
         )}
       </AnimatePresence>

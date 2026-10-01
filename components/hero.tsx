@@ -12,7 +12,6 @@ import {
 } from 'motion/react'
 
 import { EASE_OUT, MagneticWrap } from '@/components/motion-primitives'
-import { useLayoutMode } from '@/components/layout-mode'
 
 export function mapClamp(v: number, inMin: number, inMax: number, outMin: number, outMax: number) {
   const t = Math.min(1, Math.max(0, (v - inMin) / (inMax - inMin)))
@@ -28,7 +27,6 @@ export const BIO_OPACITY_RANGE = { start: 0.4, end: 0.62 }
 export const BIO_BLUR_RANGE = { start: 0.4, end: 0.52 }
 
 export function Hero() {
-  const { mode } = useLayoutMode()
   const heroRef = useRef<HTMLElement>(null)
   const reducedMotionPref = useReducedMotion()
   const reducedMotion = reducedMotionPref !== false
@@ -213,7 +211,7 @@ export function Hero() {
                   </a>
                 </MagneticWrap>
                 <a
-                  href={mode === 'a' ? '#timeline' : '#case-studies'}
+                  href="#case-studies"
                   className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25"
                 >
                   Work <span aria-hidden="true">↓</span>
