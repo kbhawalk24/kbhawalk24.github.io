@@ -178,7 +178,7 @@ export function Hero() {
               style={{ opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
               className="mt-14 w-full text-left"
             >
-              <p className="max-w-[52ch] text-pretty font-sans text-lg leading-relaxed text-foreground md:text-xl">
+              <p className="text-pretty font-sans text-lg leading-relaxed text-foreground md:text-xl">
                 Leading UX strategy and a team of three for <span translate="no">Intuit</span>
                 &rsquo;s enterprise data platform, spanning{' '}
                 <span className="font-semibold text-accent-brand">
@@ -188,7 +188,7 @@ export function Hero() {
                 Ten years shipping the work, two years leading the team that ships it, still
                 in the codebase.
               </p>
-              <p className="mt-4 max-w-[52ch] text-pretty font-sans text-base font-semibold leading-relaxed text-accent-brand md:text-lg">
+              <p className="mt-4 text-pretty font-sans text-base font-semibold leading-relaxed text-accent-brand md:text-lg">
                 Expertise in agentic AI experience design, data visualization, and design
                 strategy for complex data environments.
               </p>
