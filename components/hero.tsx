@@ -179,7 +179,7 @@ export function Hero() {
               className="mt-14 w-full text-left"
             >
               <p className="text-pretty font-sans text-lg leading-relaxed text-foreground md:text-xl">
-                When I joined <span translate="no">Intuit</span> in 2021, it took 45 days on
+                When I joined <span translate="no">Intuit</span>{' '}in 2021, it took 45 days on
                 average to find a dataset, get access to it and start exploring it. I was the
                 first designer on the company&rsquo;s data catalog. Five years later it took
                 under 4 minutes, and the catalog had grown into a data platform with more than
