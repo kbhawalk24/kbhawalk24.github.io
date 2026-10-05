@@ -37,16 +37,29 @@ export function Hero() {
   // range) — the real offsets only apply once mounted, avoiding a hydration
   // mismatch warning.
   const [mounted, setMounted] = useState(false)
+  // The pin-and-crossfade only runs from `md` up. Below that the column is
+  // taller than the viewport (illustration stacked above the text), so a
+  // pinned stage would clip the about text; phones get a plain hero.
+  const [isDesktop, setIsDesktop] = useState(true)
 
   useLayoutEffect(() => {
     setViewportH(window.innerHeight)
-    const onResize = () => setViewportH(window.innerHeight)
+    // jsdom has no matchMedia; treat that as desktop.
+    const mq = typeof window.matchMedia === 'function' ? window.matchMedia('(min-width: 768px)') : null
+    setIsDesktop(mq ? mq.matches : true)
+    const onResize = () => {
+      setViewportH(window.innerHeight)
+      setIsDesktop(mq ? mq.matches : true)
+    }
     window.addEventListener('resize', onResize)
     setMounted(true)
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  const animationsEnabled = mounted && !reducedMotion
+  const animationsEnabled = mounted && !reducedMotion && isDesktop
+  // With no choreography (phones, reduced motion before the first scroll
+  // event) everything is simply visible.
+  const still = mounted && !animationsEnabled
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -100,26 +113,27 @@ export function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-[200vh] overflow-clip"
+      className="relative overflow-clip md:min-h-[200vh]"
     >
-      <div className="sticky top-0 flex min-h-dvh overflow-hidden">
-        <div className="relative mx-auto flex min-h-dvh w-full max-w-6xl flex-col items-start px-6 py-8 md:px-10 lg:px-14">
+      <div className="flex md:sticky md:top-0 md:min-h-dvh md:overflow-hidden">
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start px-6 py-8 md:min-h-dvh md:px-10 lg:px-14">
 
           {/* Content column */}
           <motion.div
             style={{ y: contentExitY }}
-            className="relative z-20 flex min-h-dvh w-full flex-col items-start justify-center pt-[14vh]"
+            className="relative z-20 flex w-full flex-col items-start justify-center pt-24 md:min-h-dvh md:pt-[6vh]"
           >
 
             {/* Name (lower-left) + illustration (upper-right) — a diagonal
                 composition; the illustration fades out via scroll (state
                 above) right as the bio below finishes fading in. */}
-            <div className="relative flex min-h-[48vh] w-full flex-col items-start justify-between gap-10 md:block">
+            <div className="relative flex w-full flex-col items-start justify-between gap-10 md:block md:min-h-[34vh]">
               <div
-                style={{
-                  opacity: fade.illustrationOpacity,
-                  filter: `blur(${fade.illustrationBlurPx}px)`,
-                }}
+                style={
+                  still
+                    ? undefined
+                    : { opacity: fade.illustrationOpacity, filter: `blur(${fade.illustrationBlurPx}px)` }
+                }
                 className="w-full max-w-md shrink-0 md:absolute md:-top-64 md:right-0 md:w-96 md:max-w-none lg:w-[28rem] xl:w-[32rem]"
               >
                 <motion.div
@@ -172,64 +186,79 @@ export function Hero() {
               </div>
             </div>
 
-            {/* About: blurs in as scroll progresses. Scope and expertise only;
-                the impact numbers live on the case-study cards and rows. */}
+            {/* About: blurs in as scroll progresses. Two paragraphs of prose
+                and the expertise line, then a hairline, then the ask with the
+                buttons on its right. */}
             <div
-              style={{ opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-14 w-full text-left"
+              style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
+              className="mt-8 w-full text-left"
             >
-              <p className="text-pretty font-sans text-lg leading-relaxed text-foreground md:text-xl">
-                When I joined <span translate="no">Intuit</span>{' '}in 2021, it took 45 days on
-                average to find a dataset, get access to it and start exploring it. I was the
-                first designer on the company&rsquo;s data catalog. Five years later it took
-                under 4 minutes, and the catalog had grown into a data platform with more than
-                6,000 monthly users. By then I was leading its design team across{' '}
+              <p className="text-pretty font-sans text-base leading-relaxed text-foreground">
+                I&rsquo;m a design manager who works on data and AI tools. For the last two
+                years I led the design team for <span translate="no">Intuit</span>&rsquo;s
+                data platform, across{' '}
                 <span className="font-semibold text-accent-brand">
                   data discovery, governance, lineage, observability,
                 </span>{' '}
                 and <span className="font-semibold text-accent-brand">pipeline authoring</span>.
-                My last project was designing how our data agent answers questions inside
-                Cursor and Claude. I was a software engineer before I became a designer. These
-                days that shows up as doing my own SQL analysis and vibe-coding prototypes. I
-                ask a lot of questions before I draw anything.
+                In that time monthly users grew from 2,664 to more than 6,000. I spent the three
+                years before that as the first designer on the platform&rsquo;s data catalog.
+                When I joined in 2021, it took 45 days on average to find a dataset, get access
+                to it and start exploring it. By 2026 it took seconds.
               </p>
-              <p className="mt-4 text-pretty font-sans text-base font-semibold leading-relaxed text-accent-brand md:text-lg">
+              <p className="mt-3 text-pretty font-sans text-base leading-relaxed text-foreground">
+                Before <span translate="no">Intuit</span> I was at{' '}
+                <span translate="no">605</span>, a TV advertising analytics company, where I
+                designed three products that generated more than $20M in revenue. I was a
+                software engineer before I became a designer. I spent three years at{' '}
+                <span translate="no">TIBCO</span> writing back-end Java for its enterprise
+                integration platform.
+              </p>
+              <p className="mt-3 text-pretty font-sans text-base font-semibold leading-relaxed text-accent-brand">
                 Expertise in agentic AI experience design, data visualization, and design
                 strategy for complex data environments.
               </p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <MagneticWrap className="inline-block">
+
+              <div className="mt-5 grid gap-5 border-t border-border pt-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10">
+                <p className="max-w-[70ch] text-pretty font-sans text-base leading-relaxed text-foreground">
+                  I&rsquo;m looking for my next role in the Bay Area, either as a principal
+                  designer or leading a design team, at a company building AI, data, or
+                  developer tools. Physical AI is what I&rsquo;m most curious about.
+                </p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <MagneticWrap className="inline-block">
+                    <a
+                      href="/kanchi-bhawalkar-resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-3 rounded-full bg-primary py-1.5 pl-6 pr-1.5 text-sm font-medium text-primary-foreground shadow-cta transition-[box-shadow,transform] hover:shadow-cta-hover active:scale-[0.98]"
+                    >
+                      Resume
+                      <span className="sr-only"> (opens in a new tab)</span>
+                      <span
+                        aria-hidden="true"
+                        className="flex size-8 items-center justify-center rounded-full bg-primary-foreground/15 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      >
+                        ↗
+                      </span>
+                    </a>
+                  </MagneticWrap>
                   <a
-                    href="/kanchi-bhawalkar-resume.pdf"
+                    href="#case-studies"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25"
+                  >
+                    Work <span aria-hidden="true">↓</span>
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/kanchib"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3 rounded-full bg-primary py-1.5 pl-6 pr-1.5 text-sm font-medium text-primary-foreground shadow-cta transition-[box-shadow,transform] hover:shadow-cta-hover active:scale-[0.98]"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25"
                   >
-                    Resume
+                    LinkedIn <span aria-hidden="true">↗</span>
                     <span className="sr-only"> (opens in a new tab)</span>
-                    <span
-                      aria-hidden="true"
-                      className="flex size-8 items-center justify-center rounded-full bg-primary-foreground/15 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    >
-                      ↗
-                    </span>
                   </a>
-                </MagneticWrap>
-                <a
-                  href="#case-studies"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25"
-                >
-                  Work <span aria-hidden="true">↓</span>
-                </a>
-                <a
-                  href="https://linkedin.com/in/kanchib"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25"
-                >
-                  LinkedIn <span aria-hidden="true">↗</span>
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
+                </div>
               </div>
             </div>
 
