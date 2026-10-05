@@ -223,7 +223,7 @@ export function Hero() {
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
               className="mt-12 w-full text-left"
             >
-              <p className="max-w-[72ch] text-pretty font-sans text-lg leading-[1.6] text-foreground">
+              <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
                 I&rsquo;m a design manager who works on data and AI tools. For the last two
                 years I led the design team for <span translate="no">Intuit</span>&rsquo;s
                 data platform, across{' '}
@@ -238,13 +238,13 @@ export function Hero() {
                 <span translate="no">TIBCO</span> writing back-end Java for its enterprise
                 integration platform.
               </p>
-              <p className="mt-6 max-w-[72ch] text-pretty font-heading text-[19px] font-semibold leading-[1.6] text-foreground">
+              <p className="mt-6 text-pretty font-heading text-[19px] font-semibold leading-[1.6] text-foreground">
                 Expertise in agentic AI experience design, data visualization, and design
                 strategy for complex data environments.
               </p>
 
               <div className="mt-10 border-t border-border pt-10">
-                <p className="max-w-[72ch] text-balance font-sans text-lg leading-[1.6] text-foreground">
+                <p className="text-balance font-sans text-lg leading-[1.6] text-foreground">
                   I&rsquo;m looking for my next role in the Bay Area, either as a principal
                   designer or leading a design team, at a company building AI, data, or
                   developer tools.
