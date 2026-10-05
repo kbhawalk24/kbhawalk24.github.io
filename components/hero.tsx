@@ -179,14 +179,19 @@ export function Hero() {
               className="mt-14 w-full text-left"
             >
               <p className="text-pretty font-sans text-lg leading-relaxed text-foreground md:text-xl">
-                Leading UX strategy and a team of three for <span translate="no">Intuit</span>
-                &rsquo;s enterprise data platform, spanning{' '}
+                When I joined <span translate="no">Intuit</span> in 2021, it took 45 days on
+                average to find a dataset, get access to it and start exploring it. I was the
+                first designer on the company&rsquo;s data catalog. Five years later it took
+                under 4 minutes, and the catalog had grown into a data platform with more than
+                6,000 monthly users. By then I was leading its design team across{' '}
                 <span className="font-semibold text-accent-brand">
                   data discovery, governance, lineage, observability,
                 </span>{' '}
                 and <span className="font-semibold text-accent-brand">pipeline authoring</span>.
-                Ten years shipping the work, two years leading the team that ships it, still
-                in the codebase.
+                My last project was designing how our data agent answers questions inside
+                Cursor and Claude. I was a software engineer before I became a designer. These
+                days that shows up as doing my own SQL analysis and vibe-coding prototypes. I
+                ask a lot of questions before I draw anything.
               </p>
               <p className="mt-4 text-pretty font-sans text-base font-semibold leading-relaxed text-accent-brand md:text-lg">
                 Expertise in agentic AI experience design, data visualization, and design
