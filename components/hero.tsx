@@ -89,6 +89,15 @@ export function Hero() {
     animationsEnabled ? [0, -viewportH * 0.22] : [0, 0],
   )
 
+  // ── The name block is tall at rest, so the illustration (absolute, hanging
+  //    above it) has room and the title line clears it, then shrinks as the
+  //    illustration fades, so the about text fits under it in one screen ──
+  const nameBlockMinH = useTransform(
+    scrollYProgress,
+    [0, 0.62],
+    animationsEnabled ? [viewportH * 0.48, viewportH * 0.26] : [0, 0],
+  )
+
   // Opacity/blur are driven through plain React state (not a raw MotionValue
   // in `style`) because Motion offloads clamped opacity/filter transforms to
   // the browser's native scroll-timeline, which does not respect the
@@ -121,20 +130,23 @@ export function Hero() {
           {/* Content column */}
           <motion.div
             style={{ y: contentExitY }}
-            className="relative z-20 flex w-full flex-col items-start justify-center pt-24 md:min-h-dvh md:pt-[4vh]"
+            className="relative z-20 flex w-full flex-col items-start justify-center pt-24 md:min-h-dvh md:pt-[2vh]"
           >
 
             {/* Name (lower-left) + illustration (upper-right) — a diagonal
                 composition; the illustration fades out via scroll (state
                 above) right as the bio below finishes fading in. */}
-            <div className="relative flex w-full flex-col items-start justify-between gap-10 md:block md:min-h-[26vh]">
+            <motion.div
+              style={animationsEnabled ? { minHeight: nameBlockMinH } : undefined}
+              className="relative flex w-full flex-col items-start justify-between gap-10 md:block md:min-h-[48vh]"
+            >
               <div
                 style={
                   still
                     ? undefined
                     : { opacity: fade.illustrationOpacity, filter: `blur(${fade.illustrationBlurPx}px)` }
                 }
-                className="w-full max-w-md shrink-0 md:absolute md:-top-64 md:right-0 md:w-96 md:max-w-none lg:w-[28rem] xl:w-[32rem]"
+                className="w-full max-w-md shrink-0 md:absolute md:-top-64 md:right-0 md:w-96 md:max-w-none lg:w-[28rem] xl:w-[30rem]"
               >
                 <motion.div
                   style={{ y: nameY }}
@@ -172,7 +184,7 @@ export function Hero() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT }}
-                  className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground md:text-xl"
+                  className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground"
                 >
                   <span>Product Design Manager / Principal Designer for Data Platform at</span>
                   <Image
@@ -180,18 +192,18 @@ export function Hero() {
                     alt="Intuit"
                     width={160}
                     height={90}
-                    className="h-7 w-auto md:h-9"
+                    className="h-7 w-auto mix-blend-multiply md:h-9"
                   />
                 </motion.div>
               </div>
-            </div>
+            </motion.div>
 
             {/* About: blurs in as scroll progresses. Two paragraphs of prose
                 and the expertise line, then a hairline, then the ask with the
                 buttons on its right. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-[4.5rem] w-full text-left"
+              className="mt-16 w-full text-left"
             >
               <p className="text-pretty font-sans text-base leading-relaxed text-foreground">
                 I&rsquo;m a design manager who works on data and AI tools. For the last two
@@ -201,12 +213,6 @@ export function Hero() {
                   data discovery, governance, lineage, observability,
                 </span>{' '}
                 and <span className="font-semibold text-accent-brand">pipeline authoring</span>.
-                In that time monthly users grew from 2,664 to more than 6,000. I spent the three
-                years before that as the first designer on the platform&rsquo;s data catalog.
-                When I joined in 2021, it took 45 days on average to find a dataset, get access
-                to it and start exploring it. By 2026 it took seconds.
-              </p>
-              <p className="mt-3 text-pretty font-sans text-base leading-relaxed text-foreground">
                 Before <span translate="no">Intuit</span> I was at{' '}
                 <span translate="no">605</span>, a TV advertising analytics company, where I
                 designed three products that generated more than $20M in revenue. I was a
@@ -220,7 +226,7 @@ export function Hero() {
               </p>
 
               <div className="mt-5 border-t border-border pt-5">
-                <p className="max-w-[70ch] text-pretty font-sans text-base leading-relaxed text-foreground">
+                <p className="text-balance font-sans text-base leading-relaxed text-foreground xl:whitespace-nowrap xl:text-[15px]">
                   I&rsquo;m looking for my next role in the Bay Area, either as a principal
                   designer or leading a design team, at a company building AI, data, or
                   developer tools.
