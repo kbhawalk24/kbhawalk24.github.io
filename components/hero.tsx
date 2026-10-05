@@ -121,13 +121,13 @@ export function Hero() {
           {/* Content column */}
           <motion.div
             style={{ y: contentExitY }}
-            className="relative z-20 flex w-full flex-col items-start justify-center pt-24 md:min-h-dvh md:pt-[6vh]"
+            className="relative z-20 flex w-full flex-col items-start justify-center pt-24 md:min-h-dvh md:pt-[4vh]"
           >
 
             {/* Name (lower-left) + illustration (upper-right) — a diagonal
                 composition; the illustration fades out via scroll (state
                 above) right as the bio below finishes fading in. */}
-            <div className="relative flex w-full flex-col items-start justify-between gap-10 md:block md:min-h-[34vh]">
+            <div className="relative flex w-full flex-col items-start justify-between gap-10 md:block md:min-h-[26vh]">
               <div
                 style={
                   still
@@ -191,7 +191,7 @@ export function Hero() {
                 buttons on its right. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-8 w-full text-left"
+              className="mt-[4.5rem] w-full text-left"
             >
               <p className="text-pretty font-sans text-base leading-relaxed text-foreground">
                 I&rsquo;m a design manager who works on data and AI tools. For the last two
@@ -219,13 +219,13 @@ export function Hero() {
                 strategy for complex data environments.
               </p>
 
-              <div className="mt-5 grid gap-5 border-t border-border pt-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10">
+              <div className="mt-5 border-t border-border pt-5">
                 <p className="max-w-[70ch] text-pretty font-sans text-base leading-relaxed text-foreground">
                   I&rsquo;m looking for my next role in the Bay Area, either as a principal
                   designer or leading a design team, at a company building AI, data, or
-                  developer tools. Physical AI is what I&rsquo;m most curious about.
+                  developer tools.
                 </p>
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="mt-5 flex flex-wrap items-center gap-3">
                   <MagneticWrap className="inline-block">
                     <a
                       href="/kanchi-bhawalkar-resume.pdf"
