@@ -31,6 +31,7 @@ export function Hero() {
   const reducedMotionPref = useReducedMotion()
   const reducedMotion = reducedMotionPref !== false
   const [viewportH, setViewportH] = useState(0)
+  const [viewportW, setViewportW] = useState(0)
 
   // Gates every viewportH/reducedMotion-dependent transform below so the
   // first client render matches SSR exactly (both render the "off" [0, 0]
@@ -44,11 +45,13 @@ export function Hero() {
 
   useLayoutEffect(() => {
     setViewportH(window.innerHeight)
+    setViewportW(window.innerWidth)
     // jsdom has no matchMedia; treat that as desktop.
     const mq = typeof window.matchMedia === 'function' ? window.matchMedia('(min-width: 768px)') : null
     setIsDesktop(mq ? mq.matches : true)
     const onResize = () => {
       setViewportH(window.innerHeight)
+      setViewportW(window.innerWidth)
       setIsDesktop(mq ? mq.matches : true)
     }
     window.addEventListener('resize', onResize)
@@ -92,10 +95,22 @@ export function Hero() {
   // ── The name block is tall at rest, so the illustration (absolute, hanging
   //    above it) has room and the title line clears it, then shrinks as the
   //    illustration fades, so the about text fits under it in one screen ──
-  const nameBlockMinH = useTransform(
+  //    Driven through state in the scroll handler below, like the fades: a
+  //    useTransform here only recomputes when scroll moves, so a range set
+  //    after mount never reaches the element at rest.
+  const nameBlockRest = isDesktop ? viewportH * 0.48 : 0
+  const [nameBlockMinH, setNameBlockMinH] = useState<number | null>(null)
+  useLayoutEffect(() => {
+    if (mounted) setNameBlockMinH(nameBlockRest)
+  }, [mounted, nameBlockRest])
+
+  // ── The name is display-sized at rest (the class clamp, here in px) and
+  //    settles to a heading as the about text arrives ───────────────────────
+  const nameRestPx = Math.min(108, Math.max(52, viewportW * 0.075))
+  const nameSize = useTransform(
     scrollYProgress,
     [0, 0.62],
-    animationsEnabled ? [viewportH * 0.48, viewportH * 0.26] : [0, 0],
+    animationsEnabled ? [nameRestPx, 60] : [nameRestPx, nameRestPx],
   )
 
   // Opacity/blur are driven through plain React state (not a raw MotionValue
@@ -110,6 +125,9 @@ export function Hero() {
   })
 
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    if (animationsEnabled) {
+      setNameBlockMinH(mapClamp(v, 0, 0.62, viewportH * 0.48, viewportH * 0.14))
+    }
     setFade({
       illustrationOpacity: mapClamp(v, ILLUSTRATION_FADE_RANGE.start, ILLUSTRATION_FADE_RANGE.end, 1, 0),
       illustrationBlurPx: mapClamp(v, ILLUSTRATION_BLUR_RANGE.start, ILLUSTRATION_BLUR_RANGE.end, 0, 16),
@@ -136,8 +154,8 @@ export function Hero() {
             {/* Name (lower-left) + illustration (upper-right) — a diagonal
                 composition; the illustration fades out via scroll (state
                 above) right as the bio below finishes fading in. */}
-            <motion.div
-              style={animationsEnabled ? { minHeight: nameBlockMinH } : undefined}
+            <div
+              style={nameBlockMinH === null ? undefined : { minHeight: nameBlockMinH }}
               className="relative flex w-full flex-col items-start justify-between gap-10 md:block md:min-h-[48vh]"
             >
               <div
@@ -167,7 +185,7 @@ export function Hero() {
 
               <div className="w-full shrink-0 md:absolute md:-bottom-8 md:left-0 md:w-auto">
                 <motion.h1
-                  style={{ y: nameTaglineY }}
+                  style={animationsEnabled ? { y: nameTaglineY, fontSize: nameSize } : { y: nameTaglineY }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT }}
@@ -184,7 +202,7 @@ export function Hero() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT }}
-                  className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground"
+                  className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground"
                 >
                   <span>Product Design Manager / Principal Designer for Data Platform at</span>
                   <Image
@@ -196,16 +214,16 @@ export function Hero() {
                   />
                 </motion.div>
               </div>
-            </motion.div>
+            </div>
 
             {/* About: blurs in as scroll progresses. Two paragraphs of prose
                 and the expertise line, then a hairline, then the ask with the
                 buttons on its right. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-16 w-full text-left"
+              className="mt-12 w-full text-left"
             >
-              <p className="text-pretty font-sans text-base leading-relaxed text-foreground">
+              <p className="max-w-[72ch] text-pretty font-sans text-lg leading-[1.6] text-foreground">
                 I&rsquo;m a design manager who works on data and AI tools. For the last two
                 years I led the design team for <span translate="no">Intuit</span>&rsquo;s
                 data platform, across{' '}
@@ -220,18 +238,18 @@ export function Hero() {
                 <span translate="no">TIBCO</span> writing back-end Java for its enterprise
                 integration platform.
               </p>
-              <p className="mt-3 text-pretty font-sans text-base font-semibold leading-relaxed text-accent-brand">
+              <p className="mt-6 max-w-[72ch] text-pretty font-sans text-lg font-semibold leading-[1.6] text-accent-brand">
                 Expertise in agentic AI experience design, data visualization, and design
                 strategy for complex data environments.
               </p>
 
-              <div className="mt-5 border-t border-border pt-5">
-                <p className="text-balance font-sans text-base leading-relaxed text-foreground xl:whitespace-nowrap xl:text-[15px]">
+              <div className="mt-10 border-t border-border pt-10">
+                <p className="max-w-[72ch] text-balance font-sans text-lg leading-[1.6] text-foreground">
                   I&rsquo;m looking for my next role in the Bay Area, either as a principal
                   designer or leading a design team, at a company building AI, data, or
                   developer tools.
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-3">
+                <div className="mt-8 flex flex-wrap items-center gap-3">
                   <MagneticWrap className="inline-block">
                     <a
                       href="/kanchi-bhawalkar-resume.pdf"
