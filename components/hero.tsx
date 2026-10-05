@@ -227,10 +227,10 @@ export function Hero() {
                 I&rsquo;m a design manager who works on data and AI tools. For the last two
                 years I led the design team for <span translate="no">Intuit</span>&rsquo;s
                 data platform, across{' '}
-                <span className="font-semibold text-accent-brand">
+                <span className="font-heading text-[19px] font-semibold text-foreground">
                   data discovery, governance, lineage, observability,
                 </span>{' '}
-                and <span className="font-semibold text-accent-brand">pipeline authoring</span>.
+                and <span className="font-heading text-[19px] font-semibold text-foreground">pipeline authoring</span>.
                 Before <span translate="no">Intuit</span> I was at{' '}
                 <span translate="no">605</span>, a TV advertising analytics company, where I
                 designed three products that generated more than $20M in revenue. I was a
@@ -238,7 +238,7 @@ export function Hero() {
                 <span translate="no">TIBCO</span> writing back-end Java for its enterprise
                 integration platform.
               </p>
-              <p className="mt-6 max-w-[72ch] text-pretty font-sans text-lg font-semibold leading-[1.6] text-accent-brand">
+              <p className="mt-6 max-w-[72ch] text-pretty font-heading text-[19px] font-semibold leading-[1.6] text-foreground">
                 Expertise in agentic AI experience design, data visualization, and design
                 strategy for complex data environments.
               </p>
