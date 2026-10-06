@@ -48,6 +48,11 @@ export interface PortfolioPage {
   slug: string
   href: string
   kind: 'case-study' | 'leadership' | 'overview'
+  /** Coming soon: the page exists and the numbers are real, but the
+   *  write-up is in progress. The home card says so instead of linking,
+   *  the experience rows stop linking to its chapters, and the page itself
+   *  carries a notice. Omit once the chapters are written. */
+  status?: 'coming-soon'
   eyebrow: string
   title: string
   /** One sentence: the claim the page proves. */
@@ -70,6 +75,7 @@ export interface PortfolioPage {
 // ───────────────────────────────────────────────────────────────────────────
 export const FINDING_DATA: PortfolioPage = {
   slug: 'finding-data',
+  status: 'coming-soon',
   href: '/work/finding-data',
   kind: 'case-study',
   eyebrow: 'Case study 01 · Intuit, 2021-2026',
@@ -204,6 +210,7 @@ export const FINDING_DATA: PortfolioPage = {
 // ───────────────────────────────────────────────────────────────────────────
 export const TRUSTING_DATA: PortfolioPage = {
   slug: 'trusting-data',
+  status: 'coming-soon',
   href: '/work/trusting-data',
   kind: 'case-study',
   eyebrow: 'Case study 02 · Intuit, 2021-2026',
@@ -313,6 +320,7 @@ export const TRUSTING_DATA: PortfolioPage = {
 // ───────────────────────────────────────────────────────────────────────────
 export const LEADERSHIP: PortfolioPage = {
   slug: 'leadership',
+  status: 'coming-soon',
   href: '/leadership',
   kind: 'leadership',
   eyebrow: 'Intuit · Product Design Manager, 2024-2026',
@@ -396,6 +404,7 @@ export const LEADERSHIP: PortfolioPage = {
 // ───────────────────────────────────────────────────────────────────────────
 export const SIX_O_FIVE: PortfolioPage = {
   slug: '605',
+  status: 'coming-soon',
   href: '/605',
   kind: 'overview',
   eyebrow: '605 · Lead Product Designer, 2017-2021',
@@ -455,6 +464,12 @@ export const PAGES: PortfolioPage[] = [FINDING_DATA, TRUSTING_DATA, LEADERSHIP, 
  * Resolves a timeline entry's href (e.g. "/work/finding-data#agent") to the
  * page and chapter it points at, for the timeline's inline preview.
  */
+/** True when an internal href points into a page that is still coming soon. */
+export function isComingSoon(href: string): boolean {
+  const [path] = href.split('#')
+  return PAGES.some((p) => p.href === path && p.status === 'coming-soon')
+}
+
 export function resolveChapterHref(
   href: string,
 ): { page: PortfolioPage; chapter: Chapter } | null {

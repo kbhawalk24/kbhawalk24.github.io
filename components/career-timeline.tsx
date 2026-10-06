@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { ROLES, TRACKS, type TimelineEntry, type Track } from '@/lib/timeline-data'
+import { isComingSoon } from '@/lib/site-content'
 import { trackStyles } from '@/lib/track-styles'
 import { LENS_TRACKS, useLens, withLens } from '@/components/lens'
 import { EASE_OUT, Reveal } from '@/components/motion-primitives'
@@ -76,7 +77,7 @@ function HighlightRows({ entries }: { entries: TimelineEntry[] }) {
                 >
                   <p className="max-w-[64ch] text-pretty font-sans text-[15px] leading-relaxed text-muted-foreground">
                     <span className="font-heading text-base font-semibold text-foreground">
-                      {entry.href ? (
+                      {entry.href && !isComingSoon(entry.href) ? (
                         <Link
                           href={withLens(entry.href, lens)}
                           className="transition-colors hover:text-accent-brand hover:underline"

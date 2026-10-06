@@ -70,6 +70,16 @@ function Stats({ page, className }: { page: PortfolioPage; className?: string })
 
 function ReadLink({ page }: { page: PortfolioPage }) {
   const { lens } = useLens()
+  if (page.status === 'coming-soon') {
+    return (
+      <p className="mt-5 flex min-h-11 flex-wrap items-center gap-x-3 gap-y-1">
+        <span className="inline-flex items-center rounded-full bg-card-soft px-3 py-1.5 label-micro text-foreground ring-1 ring-foreground/10">
+          Coming soon
+        </span>
+        <span className="font-sans text-sm text-muted-foreground">The write-up is in progress.</span>
+      </p>
+    )
+  }
   return (
     <Link
       href={withLens(page.href, lens)}

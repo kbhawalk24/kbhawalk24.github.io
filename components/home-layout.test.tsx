@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import Page from '@/app/page'
-import { PAGES } from '@/lib/site-content'
+import { PAGES, isComingSoon } from '@/lib/site-content'
 import { ROLES, TRACKS } from '@/lib/timeline-data'
 
 describe('home page', () => {
@@ -13,11 +13,14 @@ describe('home page', () => {
     expect(within(hero).getByRole('link', { name: /work/i }).getAttribute('href')).toBe('#case-studies')
   })
 
-  it('lists the four case studies, each linking to its page', () => {
+  it('lists the four case studies: a link when published, "Coming soon" when not', () => {
     render(<Page />)
     const index = document.getElementById('case-studies') as HTMLElement
-    const links = within(index).getAllByRole('link', { name: /read the case study/i })
-    expect(links.map((l) => l.getAttribute('href'))).toEqual(PAGES.map((p) => p.href))
+    const published = PAGES.filter((p) => p.status !== 'coming-soon')
+    const links = within(index).queryAllByRole('link', { name: /read the case study/i })
+    expect(links.map((l) => l.getAttribute('href'))).toEqual(published.map((p) => p.href))
+    expect(within(index).queryAllByText('Coming soon')).toHaveLength(PAGES.length - published.length)
+    PAGES.forEach((p) => expect(within(index).getByRole('heading', { name: p.title, level: 3 })).toBeTruthy())
   })
 
   it('lists every role, with highlights as resume rows grouped by track', () => {
@@ -35,19 +38,23 @@ describe('home page', () => {
       expect(within(row).getByRole('heading', { name: TRACKS[t].label, level: 4 })).toBeTruthy(),
     )
     first.entries.forEach((e) => {
-      expect(within(row).getByRole('link', { name: e.headline })).toBeTruthy()
+      if (e.href && !isComingSoon(e.href)) {
+        expect(within(row).getByRole('link', { name: e.headline })).toBeTruthy()
+      } else {
+        expect(within(row).getByText(e.headline, { exact: false })).toBeTruthy()
+        expect(within(row).queryByRole('link', { name: e.headline })).toBeNull()
+      }
       expect(within(row).getByText(e.detail, { exact: false })).toBeTruthy()
       if (e.metrics?.[0]) expect(within(row).getByText(e.metrics[0].value)).toBeTruthy()
     })
   })
 
-  it('offers two card styles and keeps the four links in both', () => {
+  it('offers two card styles and keeps the four studies in both', () => {
     render(<Page />)
     const group = screen.getByRole('group', { name: 'Case study card style' })
     fireEvent.click(within(group).getByRole('button', { name: 'Card style 2' }))
     const index = document.getElementById('case-studies') as HTMLElement
-    const links = within(index).getAllByRole('link', { name: /read the case study/i })
-    expect(links.map((l) => l.getAttribute('href'))).toEqual(PAGES.map((p) => p.href))
+    PAGES.forEach((p) => expect(within(index).getByRole('heading', { name: p.title, level: 3 })).toBeTruthy())
     expect(window.localStorage.getItem('cards')).toBe('2')
     fireEvent.click(within(group).getByRole('button', { name: 'Card style 1' }))
     expect(window.localStorage.getItem('cards')).toBe('1')
