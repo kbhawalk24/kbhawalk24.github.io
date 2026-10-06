@@ -81,7 +81,7 @@ export const FINDING_DATA: PortfolioPage = {
   eyebrow: 'Case study 01 · Intuit, 2021-2026',
   title: 'Finding data',
   claim:
-    'One question, designed five times over five years, each time closer to how people really behave: how does someone find data they can actually use?',
+    'I spent five years at Intuit on one question: how does someone find data they can actually use? I designed the answer five times, and each one was closer to how people really look for data than the last.',
   period: '2021 - 2026',
   role: 'Founding designer, then design lead, then manager. Still hands-on.',
   insight:
@@ -216,7 +216,7 @@ export const TRUSTING_DATA: PortfolioPage = {
   eyebrow: 'Case study 02 · Intuit, 2021-2026',
   title: 'Trusting data, and getting it',
   claim:
-    'Finding data is useless if you can’t trust it or can’t get it. This is the other half of the 45-days-to-seconds story, and the half where I moved from doing the work to leading the team that did it.',
+    'Finding data isn’t much use if you can’t trust it or can’t get access to it. This is the other half of the story, and the part where I went from doing the work myself to running the team that did it.',
   period: '2021 - 2026',
   role: 'IC, then manager of three designers',
   metrics: [
@@ -326,7 +326,7 @@ export const LEADERSHIP: PortfolioPage = {
   eyebrow: 'Intuit · Product Design Manager, 2024-2026',
   title: 'How I lead',
   claim:
-    'Three designers, about 550 engineers, sixteen product managers: one designer for every 85 engineers, and 24 launches in twelve months.',
+    'I managed three designers on a platform with about 550 engineers and sixteen product managers. That is one designer for every 85 engineers. We shipped 24 launches in a year.',
   period: '2024 - 2026',
   role: 'Manager of three, still hands-on',
   metrics: [
@@ -410,7 +410,7 @@ export const SIX_O_FIVE: PortfolioPage = {
   eyebrow: '605 · Lead Product Designer, 2017-2021',
   title: 'The tools I built at 605',
   claim:
-    'Three analytics products for TV advertising, from concept to market, that generated $20M+ in revenue, and where the data-visualization craft comes from.',
+    'At 605 I designed three analytics products for TV advertising, from the first sketch to paying customers. Together they brought in more than $20M. It is also where I learned to design charts.',
   period: '2017 - 2021',
   role: 'Lead Product Designer',
   metrics: [
