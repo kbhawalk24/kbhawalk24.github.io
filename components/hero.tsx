@@ -73,7 +73,7 @@ export function Hero() {
   const nameY = useTransform(
     scrollYProgress,
     [0, 0.62],
-    animationsEnabled ? [viewportH * 0.12, 0] : [0, 0],
+    animationsEnabled ? [viewportH * 0.24, 0] : [0, 0],
   )
 
   // ── Name + tagline sit a little lower at rest, then settle into the same
@@ -81,7 +81,7 @@ export function Hero() {
   const nameTaglineY = useTransform(
     scrollYProgress,
     [0, 0.62],
-    animationsEnabled ? [viewportH * 0.12 + 40, 0] : [0, 0],
+    animationsEnabled ? [viewportH * 0.24 + 40, 0] : [0, 0],
   )
 
   // ── Content holds its centered position, then rises out of view right
