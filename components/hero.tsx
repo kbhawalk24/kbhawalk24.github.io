@@ -28,6 +28,13 @@ export const BIO_BLUR_RANGE = { start: 0.4, end: 0.52 }
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+  // The pinned stage is viewport-tall but the settled about block is not,
+  // so there is blank stage under the buttons at release. Measured once the
+  // about text has settled and taken off the section's bottom, so the next
+  // section tucks a fixed 48px under the buttons instead.
+  const [releaseOverlap, setReleaseOverlap] = useState(0)
   const reducedMotionPref = useReducedMotion()
   const reducedMotion = reducedMotionPref !== false
   const [viewportH, setViewportH] = useState(0)
@@ -84,13 +91,10 @@ export function Hero() {
     animationsEnabled ? [viewportH * 0.24 + 40, 0] : [0, 0],
   )
 
-  // ── Content holds its centered position, then rises out of view right
-  //    before the hero releases into the next section ─────────────────────
-  const contentExitY = useTransform(
-    scrollYProgress,
-    [0.78, 1],
-    animationsEnabled ? [0, -viewportH * 0.22] : [0, 0],
-  )
+  // ── Content holds its centered position until the hero releases. (It used
+  //    to rise out early, which left a blank band between the buttons and
+  //    the next section.) ─────────────────────────────────────────────────
+  const contentExitY = useTransform(scrollYProgress, [0.78, 1], [0, 0])
 
   // ── The name block is tall at rest, so the illustration (absolute, hanging
   //    above it) has room and the title line clears it, then shrinks as the
@@ -103,6 +107,17 @@ export function Hero() {
   useLayoutEffect(() => {
     if (mounted) setNameBlockMinH(nameBlockRest)
   }, [mounted, nameBlockRest])
+
+  // Measured after the settled block height has committed (a measurement
+  // inside the scroll handler sees the previous frame's layout).
+  const settled = animationsEnabled && nameBlockMinH !== null && nameBlockMinH <= viewportH * 0.14 + 0.5
+  useLayoutEffect(() => {
+    if (!settled || !stageRef.current || !ctaRef.current) return
+    const leftover =
+      stageRef.current.getBoundingClientRect().bottom - ctaRef.current.getBoundingClientRect().bottom
+    const next = Math.max(0, Math.round(leftover - 48))
+    setReleaseOverlap((prev) => (Math.abs(prev - next) > 1 ? next : prev))
+  }, [settled, viewportH, viewportW])
 
   // ── The name is display-sized at rest (the class clamp, here in px) and
   //    settles to a heading as the about text arrives ───────────────────────
@@ -141,8 +156,9 @@ export function Hero() {
       id="hero"
       ref={heroRef}
       className="relative overflow-clip md:min-h-[200vh]"
+      style={animationsEnabled && releaseOverlap ? { marginBottom: -releaseOverlap } : undefined}
     >
-      <div className="flex md:sticky md:top-0 md:min-h-dvh md:overflow-hidden">
+      <div ref={stageRef} className="flex md:sticky md:top-0 md:min-h-dvh md:overflow-hidden">
         <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start px-6 py-8 md:min-h-dvh md:px-10 lg:px-14">
 
           {/* Content column */}
@@ -249,7 +265,7 @@ export function Hero() {
                   designer or leading a design team, at a company building AI, data, or
                   developer tools.
                 </p>
-                <div className="mt-8 flex flex-wrap items-center gap-3">
+                <div ref={ctaRef} className="mt-8 flex flex-wrap items-center gap-3">
                   <MagneticWrap className="inline-block">
                     <a
                       href="/kanchi-bhawalkar-resume.pdf"

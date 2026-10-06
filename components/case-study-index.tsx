@@ -165,8 +165,8 @@ export function CaseStudyIndex() {
   const [style, setStyle] = useCardStyle()
 
   return (
-    <section id="case-studies" className="scroll-mt-28">
-      <div className="mx-auto max-w-6xl px-6 pt-20 md:px-10 md:pt-28 lg:px-14">
+    <section id="case-studies" className="relative z-10 scroll-mt-28">
+      <div className="mx-auto max-w-6xl px-6 pt-12 md:px-10 md:pt-16 lg:px-14">
         <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
           <div>
             <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
