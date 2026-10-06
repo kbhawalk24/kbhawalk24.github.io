@@ -183,9 +183,6 @@ export function CaseStudyIndex() {
               Case studies
               <HeadingDot />
             </h2>
-            <p className="mt-3 max-w-[52ch] font-sans text-base leading-relaxed text-muted-foreground">
-              Four stories, 2017 to now. Each one links to the full write-up.
-            </p>
           </div>
           <div
             role="group"

@@ -83,7 +83,7 @@ export const FINDING_DATA: PortfolioPage = {
   claim:
     'One question, designed five times over five years, each time closer to how people really behave: how does someone find data they can actually use?',
   period: '2021 - 2026',
-  role: 'Founding designer → design lead → manager, still hands-on',
+  role: 'Founding designer, then design lead, then manager. Still hands-on.',
   insight:
     'Research before the search redesign showed that people look for new data only about one time in five. Four times in five, they are going back to something they already know. Search was never the whole job.',
   metrics: [
@@ -174,7 +174,7 @@ export const FINDING_DATA: PortfolioPage = {
       period: '2025',
       role: 'Both',
       body: [
-        'If people return to familiar data four times out of five, the catalog should make the familiar effortless. I pushed for Collections as design strategy, against resistance, and architected it; a designer on my team designed it.',
+        'If people return to familiar data four times out of five, the catalog should make the familiar effortless. I pushed for Collections when the roadmap didn’t have room for it and laid out how it should work; a designer on my team designed it.',
       ],
       metrics: [{ value: '41% → 61%', label: 'Session conversion' }],
       visuals: [{ caption: 'A collection: the handful of tables a team actually uses, shareable.' }],
@@ -218,7 +218,7 @@ export const TRUSTING_DATA: PortfolioPage = {
   claim:
     'Finding data is useless if you can’t trust it or can’t get it. This is the other half of the 45-days-to-seconds story, and the half where I moved from doing the work to leading the team that did it.',
   period: '2021 - 2026',
-  role: 'IC → manager of three designers',
+  role: 'IC, then manager of three designers',
   metrics: [
     { value: '0', label: 'Marketing-data incidents at the 2025 tax peak' },
     { value: '9 → 3 days', label: 'Access provisioning' },
@@ -232,7 +232,7 @@ export const TRUSTING_DATA: PortfolioPage = {
       period: '2021 - 2022',
       role: 'IC',
       body: [
-        'Trust flags, documentation, usage statistics, ownership: the first signals that let someone decide whether to use a table without asking a person.',
+        'The first version of trust was four signals on a table page: trust flags, documentation, usage statistics, and ownership. Enough to decide whether to use a table without asking a person.',
       ],
       visuals: [{ caption: 'Trust flags and usage statistics on a table page.' }],
       draft: true,
@@ -244,7 +244,7 @@ export const TRUSTING_DATA: PortfolioPage = {
       role: 'Both',
       body: [
         'I shipped the first lineage UI on a four-week deadline: impact graphs across ~30K tables and ~7K pipelines, ~500 monthly users in the first year.',
-        'Then I handed it off. A designer on my team took it from a table-level graph to attribute-level impact reports; usage passed 1,000 a month and incident investigations went from about four hours to minutes. This is the first place on this site where “I” becomes “we.”',
+        'Then I handed it off. A designer on my team took it from a table-level graph to attribute-level impact reports; usage passed 1,000 a month and incident investigations went from about four hours to minutes.',
       ],
       metrics: [
         { value: '4 weeks', label: 'To first release' },
@@ -263,8 +263,8 @@ export const TRUSTING_DATA: PortfolioPage = {
       period: '2023 - 2025',
       role: 'Both',
       body: [
-        'A scorecard first, then AI-generated descriptions and classification, then a company-wide maturity dashboard, then self-service certification. I designed the scorecard itself, including the 2★ → 3★ and 3★ → 4★ maturity criteria, while my team built the paved-path pipelines that produced clean data and the workflows that promoted data from unclean to clean. 1,600 newly certified products in one year; 7,000+ discoverable.',
-        'The outcome that matters: zero marketing-data incidents at the 2025 tax peak. That result belongs to this work, not to lineage.',
+        'A scorecard first, then AI-generated descriptions and classification, then a company-wide maturity dashboard, then self-service certification. I designed the scorecard itself, including the criteria for moving from two stars to three and from three to four, while my team built the paved-path pipelines that produced clean data and the workflows that promoted data from unclean to clean. 1,600 newly certified products in one year; 7,000+ discoverable.',
+        'The result I care about most: zero marketing-data incidents at the 2025 tax peak.',
         'This is the same governance work Intuit later presented publicly: the five-dimension scorecard (stewardship, documentation, data model, data observability, operational stability) that a Distinguished Engineer walked through at AWS re:Invent 2025 grew directly out of what we built here.',
       ],
       decision: {
@@ -285,8 +285,8 @@ export const TRUSTING_DATA: PortfolioPage = {
       period: '2024 - 2026',
       role: 'Both',
       body: [
-        'My piece: a self-service onboarding flow that stalled in 2024 on technical constraints and shipped in 2025, taking onboarding from one to two weeks down to under 24 hours, with AI pre-filling the form and validation up front.',
-        'The team’s: topic access from two-three weeks to three days; decryption access from nine days to three at 360K+ requests a month; batch access from days to minutes; restricted-data denials down 85%; auto-approval to near-instant. Access requests grew from 10K to 18K in a year because asking stopped hurting.',
+        'The part I designed myself was a self-service onboarding flow. It stalled in 2024 on technical constraints and shipped in 2025, with AI pre-filling the form and validation up front; onboarding went from one to two weeks to under 24 hours.',
+        'The team did the rest: topic access from two to three weeks down to three days; decryption access from nine days to three at 360K+ requests a month; batch access from days to minutes; restricted-data denials down 85%; auto-approval to near-instant. Access requests grew from 10K to 18K in a year because asking stopped hurting.',
       ],
       metrics: [
         { value: '1-2 wks → <24 h', label: 'Self-service onboarding' },
@@ -306,7 +306,7 @@ export const TRUSTING_DATA: PortfolioPage = {
       period: '2026 · in flight',
       role: 'Both',
       body: [
-        'Where it was heading: access integrated into collections, so the agent’s context is also its access boundary. In flight when my role ended. [DRAFT: one paragraph on the semantic-layer direction, labeled as unshipped.]',
+        'Where it was going next: access tied to collections, so the tables the agent can see are also the tables you are allowed to use. In progress when my role ended. [DRAFT: one paragraph on the semantic-layer direction, labeled as unshipped.]',
       ],
       visuals: [],
       draft: true,
@@ -342,7 +342,7 @@ export const LEADERSHIP: PortfolioPage = {
       period: '2024 →',
       role: 'Team',
       body: [
-        'The first thing that changed when I became a manager: I could strategize before executing, joining the meetings where the problem was defined and asking questions there instead of receiving a spec.',
+        'The first thing that changed when I became a manager is that I was in the room when the problem got defined. I could ask questions there instead of receiving a spec afterwards.',
         '[DRAFT: one concrete case. The original ask, the question, what shipped differently.]',
       ],
       visuals: [],
@@ -366,7 +366,7 @@ export const LEADERSHIP: PortfolioPage = {
       role: 'Team',
       body: [
         'All three direct reports were promoted: one in the January cycle, two approved before I left and confirmed after. I wrote the promotion-case framework they used.',
-        'What I watch for is what a team does on its own: one designer started a design sign-off practice that the engineering org adopted; another’s AI-generated launch videos became the format other teams copied; a third stepped in and filled the gap when I moved onto the agent work. [DRAFT: one sentence on what that says about how you manage.]',
+        'What I pay attention to is what a team does when nobody asked: one designer started a design sign-off practice that the engineering org adopted; another’s AI-generated launch videos became the format other teams copied; a third stepped in and filled the gap when I moved onto the agent work. [DRAFT: one sentence on what that says about how you manage.]',
       ],
       visuals: [{ caption: 'The 6-slide promotion framework (sanitized).' }],
       draft: true,
@@ -377,8 +377,8 @@ export const LEADERSHIP: PortfolioPage = {
       period: '2025 - 2026',
       role: 'Both',
       body: [
-        'v0, Figma Make, Builder, NotebookLM, AI-generated launch videos, and me in the codebase writing the rules that govern AI coding agents. The team’s standard became: a working prototype before a spec.',
-        'Magellan for Tax is the clearest example: sole designer, v0 prototypes including a mobile customer flow, demoed to Intuit’s founder. It did not ship; it is here as evidence of method, not outcome.',
+        'v0, Figma Make, Builder, NotebookLM, AI-generated launch videos, and me in the codebase writing the rules that govern AI coding agents. The rule the team settled on: a working prototype before a spec.',
+        'Magellan for Tax is the clearest example: sole designer, v0 prototypes including a mobile customer flow, demoed to Intuit’s founder. It did not ship. It is here to show how we work, not what shipped.',
       ],
       visuals: [{ caption: 'Magellan v0 prototype recording (mobile flow) or the “Lucy” storytelling video.', kind: 'video' }],
       draft: true,
@@ -424,7 +424,7 @@ export const SIX_O_FIVE: PortfolioPage = {
       title: '605 Impact',
       period: '2018 - 2020',
       role: 'IC',
-      body: ['A first-of-its-kind platform measuring TV advertising’s effect on consumer behavior. Condensed 32 statistical reports of 500+ rows each into a two-screen interactive report.'],
+      body: ['The first platform to measure TV advertising’s effect on consumer behavior. I condensed 32 statistical reports of 500+ rows each into a two-screen interactive report.'],
       visuals: [{ caption: '605 Impact: the two-screen report.' }],
       draft: true,
     },
@@ -442,7 +442,7 @@ export const SIX_O_FIVE: PortfolioPage = {
       title: '605 Platform',
       period: '2017 - 2019',
       role: 'IC',
-      body: ['Redesign of the self-serve analytics tool; halved report-building time.'],
+      body: ['I redesigned the self-serve analytics tool; building a report took half as long.'],
       visuals: [{ caption: '605 Platform before / after.' }],
       draft: true,
     },

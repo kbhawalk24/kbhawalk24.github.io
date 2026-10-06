@@ -67,13 +67,13 @@ export const ROLES: TimelineRole[] = [
     companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
-      'Led UX strategy and a team of three product designers for Intuit’s enterprise data platform: data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring. The platform supports ~550 engineers and 16 product managers.',
+      'I ran design for Intuit’s data platform and managed the designers on it. The platform covers data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring.',
     entries: [
       {
         track: 'management',
-        headline: 'Scaled the platform into company-wide infrastructure',
+        headline: 'Scaled the platform from one team’s tool to the whole company’s',
         detail:
-          'From a single-team discovery tool to the default way Intuit finds, trusts, and gets data. The team shipped 24 launches in the final twelve months.',
+          'From a single-team discovery tool to the default way Intuit finds, trusts, and gets data. The team shipped 24 launches in my last twelve months.',
         metrics: [
           { value: '~2,700 → 6,000+', label: 'Monthly users' },
         ],        href: '/leadership#shipped',
@@ -82,7 +82,7 @@ export const ROLES: TimelineRole[] = [
         track: 'management',
         headline: 'Access from weeks to minutes',
         detail:
-          'Directed the redesign of data-access workflows: provisioning 9 → 3 days, most routine requests auto-approved, restricted-data denials down 85%.',
+          'Led the redesign of data-access workflows: provisioning 9 → 3 days, most routine requests auto-approved, restricted-data denials down 85%.',
         metrics: [
           { value: '~4,000 hrs', label: 'Saved per year' },
         ],        href: '/work/trusting-data#access',
@@ -100,7 +100,7 @@ export const ROLES: TimelineRole[] = [
         track: 'strategy',
         headline: 'Data maturity standards across the platform',
         detail:
-          'Quality scorecards, a company-wide maturity dashboard, and self-service certification of trusted data.',
+          'A quality scorecard on every data product, a maturity dashboard for leaders, and self-service certification of trusted data.',
         metrics: [
           { value: '0 incidents', label: 'Marketing data, 2025 peak' },
         ],        href: '/work/trusting-data#maturity',
@@ -109,7 +109,7 @@ export const ROLES: TimelineRole[] = [
         track: 'strategy',
         headline: 'Moved discovery into the coding agent',
         detail:
-          'Architected the strategy to collapse the find → access → explore loop by putting the catalog inside Cursor and Claude instead of building a better chat.',
+          'Instead of building a better chat, we put the catalog inside Cursor and Claude, so finding data, getting access, and exploring it stopped being three separate steps.',
         metrics: [
           { value: '45 min → 4 min', label: 'Time to insight' },
         ],        href: '/work/finding-data#agent',
@@ -118,7 +118,7 @@ export const ROLES: TimelineRole[] = [
         track: 'ic',
         headline: 'Designed how the data agent answers',
         detail:
-          'Wrote the agent’s rules, designed its responses, and worked on trust in what it returns, then shipped merged production pull requests myself.',
+          'Wrote the agent’s rules, designed its responses, and worked on whether people could trust what it returned. I also merged production pull requests myself.',
         metrics: [
           { value: '11% → 81%', label: 'Precision in 3 months' },
         ],        href: '/work/finding-data#agent',
@@ -143,13 +143,13 @@ export const ROLES: TimelineRole[] = [
     companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
-      'Principal-level IC owning search, discoverability, and data trust across the platform, plus the research that set the next year’s roadmap.',
+      'Hands-on again for a stretch. I owned search, discoverability, and data trust across the platform, and ran the research that set the next year’s roadmap.',
     entries: [
       {
         track: 'ic',
         headline: 'Designed data-quality trust features',
         detail:
-          'AI-generated descriptions, maturity scorecards, and AI classification tags.',
+          'AI-generated descriptions where nobody had written one, maturity scorecards, and AI classification tags.',
         metrics: [
           { value: '7,000+', label: 'Trusted data products' },
         ],        href: '/work/trusting-data#maturity',
@@ -158,7 +158,7 @@ export const ROLES: TimelineRole[] = [
         track: 'strategy',
         headline: 'Research that set the FY25 roadmap',
         detail:
-          '20 in-context user visits across business units and a cross-functional ideation workshop; the group product lead called it “a major contributor to our FY25 roadmap.”',
+          '20 in-context user visits across business units, then a cross-functional ideation workshop. The group product lead called it “a major contributor to our FY25 roadmap.”',
         metrics: [
           { value: '1 in 5', label: 'Searches for unfamiliar data' },
         ],        href: '/work/finding-data#search-2',
@@ -177,7 +177,7 @@ export const ROLES: TimelineRole[] = [
         track: 'ic',
         headline: 'Made complex data marts discoverable',
         detail:
-          'Re-architected the catalog for the new data-product model; ~2,000 previously siloed tables became findable.',
+          'Reworked the catalog for the new data-product model; ~2,000 previously siloed tables became findable.',
         metrics: [
           { value: '+42%', label: '1,886 → 2,664 monthly users' },
         ],        href: '/work/trusting-data#maturity',
@@ -200,13 +200,13 @@ export const ROLES: TimelineRole[] = [
     companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
-      'Founding designer of Intuit’s internal data catalog, which grew from tables and columns into the company’s system of record for data.',
+      'Founding designer of Intuit’s internal data catalog. When I joined it listed tables and columns; by the end of this role it was where the company went to find its data.',
     entries: [
       {
         track: 'ic',
         headline: 'Founded the internal data catalog from scratch',
         detail:
-          'Trust flags, documentation, query information, ownership, new sources: enough to retire the third-party catalog the company was paying for.',
+          'Trust flags, documentation, query information, ownership, and new sources. Enough that the company retired the third-party catalog it was paying for.',
         metrics: [
           { value: '68% → 96%', label: 'Top-5 click-through' },
         ],        href: '/work/finding-data#catalog',
@@ -249,13 +249,13 @@ export const ROLES: TimelineRole[] = [
     company: '605',
     location: 'New York, NY',
     summary:
-      'Lead designer for TV ad-analytics products, taking three data products from concept to commercial launch.',
+      'Lead designer for TV ad-analytics products. I took three data products from concept to commercial launch.',
     entries: [
       {
         track: 'ic',
         headline: 'Designed 605 Impact',
         detail:
-          'A first-of-its-kind platform measuring TV advertising’s effect on consumer behavior; 32 statistical reports of 500+ rows condensed into a two-screen report.',
+          'The first platform to measure TV advertising’s effect on consumer behavior; 32 statistical reports of 500+ rows condensed into a two-screen report.',
         metrics: [
           { value: '$20M+', label: 'Revenue across three products' },
         ],        href: '/605#impact',
@@ -292,7 +292,7 @@ export const ROLES: TimelineRole[] = [
     company: 'TIBCO Software',
     location: 'Pune, India',
     summary:
-      'Java back-end developer on TIBCO’s enterprise integration platform, the engineering foundation behind a data-fluent design career.',
+      'Java back-end developer on TIBCO’s enterprise integration platform. This is where I learned how data systems are built, and it still shapes how I design.',
     entries: [
       {
         track: 'ic',
