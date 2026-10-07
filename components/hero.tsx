@@ -252,12 +252,6 @@ export function Hero() {
                 <span translate="no">TIBCO</span> writing back-end Java for its enterprise
                 integration platform.
               </p>
-              <p className="mt-6 text-pretty font-sans text-lg leading-[1.6] text-foreground">
-                <span className="mark">
-                  Skills: agentic AI experience design, data visualization, and design strategy
-                  for complex data environments.
-                </span>
-              </p>
 
               <div className="mt-10 border-t border-border pt-10">
                 <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
