@@ -9,7 +9,7 @@ import { EASE_OUT } from '@/components/motion-primitives'
 import type { Chapter } from '@/lib/site-content'
 import { useLens, withLens } from '@/components/lens'
 
-/** Floating pill nav, on every page from load: Timeline / Resume / LinkedIn /
+/** Floating pill nav, on every page from load: Work / Resume / LinkedIn /
  *  Contact. (The IC/Manager lens switch used to sit here; the lens still
  *  rides along in links if a URL carries it, but has no control.)
  *
@@ -28,7 +28,7 @@ export function SiteHeader({
   const home = onHome ? '' : '/'
 
   const links: NavItem[] = [
-    { label: 'Timeline', href: `${home}#timeline` },
+    { label: 'Work', href: `${home}#timeline` },
     { label: 'Resume', href: '/kanchi-bhawalkar-resume.pdf', external: true },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/kanchib', external: true },
     { label: 'Contact', href: `${home}#contact` },

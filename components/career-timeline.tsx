@@ -23,8 +23,6 @@ import { HeadingDot } from '@/components/heading-dot'
 // under it. Cards are static; the featured card links out to the full
 // chapter on its case-study page (see lib/site-content.ts).
 
-const TRACK_ORDER: Track[] = ['management', 'strategy', 'ic']
-
 const DIAGONAL_STRIPES = {
   backgroundImage:
     'repeating-linear-gradient(45deg, var(--stripe-a) 0, var(--stripe-a) 10px, var(--stripe-b) 10px, var(--stripe-b) 20px)',
@@ -75,8 +73,8 @@ function TrackBadge({ track }: { track: Track }) {
   )
 }
 
-/** Featured card: image with the metric pill floating on it beside a white
- *  content panel (stacked on phones). Flat, 14px radius. Static: the only interaction is the
+/** Featured card: image with the metric pill floating on it, then a white
+ *  content panel. Flat, 14px radius. Static: the only interaction is the
  *  "Read the case study" link. */
 function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
   const { lens } = useLens()
@@ -85,15 +83,10 @@ function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
   const metricText = headlineStat ? `${headlineStat.value} · ${headlineStat.label}` : null
 
   return (
-    <motion.div
-      layout
-      className="relative overflow-hidden rounded-[14px] bg-card text-left shadow-soft md:grid md:grid-cols-[5fr_7fr]"
-    >
-      {/* Landscape card: the image sits beside the text from md up, so the
-          card is ~300px tall instead of ~700px. On phones it stacks. */}
-      <div className="relative aspect-[16/10] w-full md:aspect-auto md:min-h-full" style={DIAGONAL_STRIPES}>
+    <motion.div layout className="relative overflow-hidden rounded-[14px] bg-card text-left shadow-soft">
+      <div className="relative aspect-[16/10] w-full" style={DIAGONAL_STRIPES}>
         <span className="absolute right-4 top-4 rounded-[6px] bg-card px-2.5 py-1 font-mono text-xs text-muted-foreground">
-          screenshot
+          laptop screen 16:10
         </span>
         {metricText && (
           <span
@@ -154,31 +147,37 @@ function CarouselEntryCard({ entry }: { entry: TimelineEntry }) {
       transition={{ duration: 0.2, ease: EASE_OUT }}
       className="rounded-[14px] bg-card p-6 text-left shadow-soft sm:p-7"
     >
-      <TrackBadge track={entry.track} />
-      <h4 className="mt-3 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight">
+      <h4 className="text-pretty font-heading text-xl font-semibold leading-snug tracking-tight">
         {entry.headline}
       </h4>
       <p className="mt-2 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
         {entry.detail}
       </p>
 
-      {stats.length > 0 && (
-        <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-3 border-t border-foreground/10 pt-4">
-          {stats.map((m) => (
-            <div key={m.label} className="flex flex-col-reverse">
-              <dt className="mt-1.5 label-micro text-muted-foreground">{m.label}</dt>
-              <dd
-                className={cn(
-                  'font-heading text-xl font-semibold leading-tight tabular-nums',
-                  trackStyles[entry.track].accentText,
-                )}
-              >
-                {m.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      )}
+      {/* Footer: stats on the left, track badge bottom-right. Moving the
+          badge down here saves a line above the headline. */}
+      <div className="mt-5 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 border-t border-foreground/10 pt-4">
+        {stats.length > 0 && (
+          <dl className="flex flex-wrap gap-x-8 gap-y-3">
+            {stats.map((m) => (
+              <div key={m.label} className="flex flex-col-reverse">
+                <dt className="mt-1.5 label-micro text-muted-foreground">{m.label}</dt>
+                <dd
+                  className={cn(
+                    'font-heading text-xl font-semibold leading-tight tabular-nums',
+                    trackStyles[entry.track].accentText,
+                  )}
+                >
+                  {m.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        <div className="ml-auto">
+          <TrackBadge track={entry.track} />
+        </div>
+      </div>
     </motion.div>
   )
 }
@@ -264,80 +263,26 @@ function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
 
 export function CareerTimeline() {
   const { lens } = useLens()
-  const [activeTrack, setActiveTrack] = useState<Track | null>(null)
 
   return (
     <section id="timeline" className="scroll-mt-28">
       <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28 lg:px-14">
         <Reveal className="mb-8">
-          <h2 className="mb-6 font-heading text-3xl font-semibold tracking-tight md:text-4xl">
-            Career timeline
+          <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
+            Work highlights
             <HeadingDot />
           </h2>
-
-          <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
-            <div role="group" aria-label="Filter timeline by type of work" className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActiveTrack(null)}
-                aria-pressed={activeTrack === null}
-                className={cn(
-                  'inline-flex min-h-11 items-center rounded-full px-4 py-2 font-heading text-sm font-semibold ring-1 transition-colors duration-200',
-                  activeTrack === null
-                    ? 'bg-track-management text-track-management-foreground ring-track-management'
-                    : 'bg-card text-foreground ring-foreground/10 hover:ring-foreground/30',
-                )}
-              >
-                All work
-              </button>
-              {TRACK_ORDER.map((track) => (
-                <button
-                  key={track}
-                  type="button"
-                  onClick={() => setActiveTrack(activeTrack === track ? null : track)}
-                  aria-pressed={activeTrack === track}
-                  className={cn(
-                    'inline-flex min-h-11 items-center rounded-full px-4 py-2 font-heading text-sm font-semibold ring-1 transition-colors duration-200',
-                    activeTrack === track
-                      ? trackStyles[track].chipActive
-                      : 'bg-card text-foreground ring-foreground/10 hover:ring-foreground/30',
-                  )}
-                >
-                  {TRACKS[track].label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <AnimatePresence>
-            {activeTrack && (
-              <motion.p
-                initial={{ opacity: 0, gridTemplateRows: '0fr' }}
-                animate={{ opacity: 1, gridTemplateRows: '1fr' }}
-                exit={{ opacity: 0, gridTemplateRows: '0fr' }}
-                transition={{ duration: 0.2, ease: EASE_OUT }}
-                className="grid font-sans text-sm text-muted-foreground"
-              >
-                <span className="min-h-0 overflow-hidden">
-                  <span className="block pt-3">{TRACKS[activeTrack].description}</span>
-                </span>
-              </motion.p>
-            )}
-          </AnimatePresence>
         </Reveal>
 
         <ol className="divide-y divide-border">
           {ROLES.map((role) => {
-            const filtered = activeTrack
-              ? role.entries.filter((entry) => entry.track === activeTrack)
-              : role.entries
+            const filtered = role.entries
             // The lens promotes the first entry on its tracks to featured;
             // nothing is removed, the rest keep their order in the carousel.
             const promoted = lens ? filtered.find((e) => LENS_TRACKS[lens].includes(e.track)) : undefined
             const visibleEntries = promoted
               ? [promoted, ...filtered.filter((e) => e !== promoted)]
               : filtered
-            const isDimmed = activeTrack !== null && visibleEntries.length === 0
             const [featured, ...rest] = visibleEntries
 
             return (
@@ -350,7 +295,6 @@ export function CareerTimeline() {
                 transition={{ duration: 0.6, ease: EASE_OUT }}
                 className={cn(
                   'py-12 transition-opacity duration-300 first:pt-0 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:py-16 lg:gap-14',
-                  isDimmed && 'opacity-40',
                 )}
               >
                 <div>
@@ -366,11 +310,7 @@ export function CareerTimeline() {
                 </div>
 
                 <div className="mt-8 min-w-0 sm:mt-0">
-                  {isDimmed ? (
-                    <p className="font-sans text-sm text-muted-foreground">
-                      No {TRACKS[activeTrack!].label.toLowerCase()} work in this role.
-                    </p>
-                  ) : featured ? (
+                  {featured ? (
                     <>
                       <p className="label-micro text-muted-foreground">Featured case study</p>
                       <div className="mt-3">
