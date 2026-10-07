@@ -58,7 +58,7 @@ export function ContactFooter() {
         </motion.div>
         <motion.p variants={fadeUp} className="mt-8 max-w-[52ch] font-sans text-sm text-muted-foreground">
           Open to Principal / Staff product design roles and design manager
-          roles.
+          roles. The timeline above can be read either way.
         </motion.p>
         <motion.p
           variants={fadeUp}

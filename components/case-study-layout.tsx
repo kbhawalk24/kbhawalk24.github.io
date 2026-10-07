@@ -126,16 +126,6 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           </h1>
           <p className="mt-5 max-w-[52ch] text-pretty font-heading text-xl leading-relaxed text-foreground/90 md:text-2xl">{page.claim}</p>
           <p className="mt-4 font-sans text-sm text-muted-foreground">{page.role}</p>
-          {page.status === 'coming-soon' && (
-            <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1">
-              <span className="inline-flex items-center rounded-full bg-card-soft px-3 py-1.5 label-micro text-foreground ring-1 ring-foreground/10">
-                Coming soon
-              </span>
-              <span className="font-sans text-sm text-muted-foreground">
-                The numbers are real; the write-up is in progress.
-              </span>
-            </p>
-          )}
         </Reveal>
 
         {/* Timeline strip — the shape of the whole story before you scroll */}

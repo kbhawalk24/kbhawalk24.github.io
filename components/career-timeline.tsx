@@ -3,25 +3,32 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { ROLES, TRACKS, type TimelineEntry, type Track } from '@/lib/timeline-data'
-import { isComingSoon } from '@/lib/site-content'
+import {
+  ROLES,
+  TRACKS,
+  type TimelineEntry,
+  type Track,
+} from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
 import { LENS_TRACKS, useLens, withLens } from '@/components/lens'
 import { EASE_OUT, Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
-// Experience: roles as rows separated by a hairline, the role facts on the
-// left. On the right, the role's highlights grouped under track headings,
-// one row per highlight in resume style: the headline as a bold lead-in
-// (linking to its chapter on the case-study page), the detail running on
-// in the same paragraph, the stat on the right. The case studies have
-// their own section above (components/case-study-index.tsx).
-//
-// Earlier layouts (a featured card plus carousel per role; badged blocks
-// per highlight) are kept in previous-experiments/.
+// The timeline is the index. Roles are not cards: each is a row on the page,
+// separated by a hairline, with the role facts on the left. Only the work
+// gets a card: on the right, the featured case study (image, metric pill,
+// white content panel) with the remaining highlights in a small carousel
+// under it. Cards are static; the featured card links out to the full
+// chapter on its case-study page (see lib/site-content.ts).
 
 const TRACK_ORDER: Track[] = ['management', 'strategy', 'ic']
+
+const DIAGONAL_STRIPES = {
+  backgroundImage:
+    'repeating-linear-gradient(45deg, var(--stripe-a) 0, var(--stripe-a) 10px, var(--stripe-b) 10px, var(--stripe-b) 20px)',
+}
 
 // Falls back to the plain company name if the logo image 404s (or none was
 // given), rather than letting a broken-image glyph render.
@@ -55,61 +62,197 @@ function CompanyMark({ logo, name }: { logo?: string; name: string }) {
   )
 }
 
-function HighlightRows({ entries }: { entries: TimelineEntry[] }) {
+function TrackBadge({ track }: { track: Track }) {
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center rounded-full px-2.5 py-1 label-micro',
+        trackStyles[track].badgeFlat,
+      )}
+    >
+      {TRACKS[track].label}
+    </span>
+  )
+}
+
+/** Featured card: image with the metric pill floating on it, then a white
+ *  content panel. Flat, 14px radius. Static: the only interaction is the
+ *  "Read the case study" link. */
+function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
   const { lens } = useLens()
-  const groups = TRACK_ORDER.map((track) => ({
-    track,
-    entries: entries.filter((e) => e.track === track),
-  })).filter((g) => g.entries.length > 0)
+  // The pill carries the headline stat only; the carousel shows the rest.
+  const headlineStat = entry.metrics?.[0]
+  const metricText = headlineStat ? `${headlineStat.value} · ${headlineStat.label}` : null
 
   return (
-    <div className="grid gap-8">
-      {groups.map(({ track, entries: group }) => (
-        <div key={track}>
-          <h4 className={cn('label-micro', trackStyles[track].accentText)}>{TRACKS[track].label}</h4>
-          <ul className="mt-2 divide-y divide-border border-t border-border">
-            {group.map((entry) => {
-              const stat = entry.metrics?.[0]
-              return (
-                <li
-                  key={entry.headline}
-                  className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
-                >
-                  <p className="max-w-[64ch] text-pretty font-sans text-[15px] leading-relaxed text-muted-foreground">
-                    <span className="font-heading text-base font-semibold text-foreground">
-                      {entry.href && !isComingSoon(entry.href) ? (
-                        <Link
-                          href={withLens(entry.href, lens)}
-                          className="transition-colors hover:text-accent-brand hover:underline"
-                        >
-                          {entry.headline}
-                        </Link>
-                      ) : (
-                        entry.headline
-                      )}
-                      .
-                    </span>{' '}
-                    {entry.detail}
-                  </p>
-                  {stat && (
-                    <p className="flex shrink-0 items-baseline gap-2 sm:flex-col sm:items-end sm:gap-0.5 sm:text-right">
-                      <span
-                        className={cn(
-                          'font-heading text-base font-semibold leading-tight tabular-nums',
-                          trackStyles[track].accentText,
-                        )}
-                      >
-                        {stat.value}
-                      </span>
-                      <span className="label-micro text-muted-foreground">{stat.label}</span>
-                    </p>
+    <motion.div layout className="relative overflow-hidden rounded-[14px] bg-card text-left shadow-soft">
+      <div className="relative aspect-[16/10] w-full" style={DIAGONAL_STRIPES}>
+        <span className="absolute right-4 top-4 rounded-[6px] bg-card px-2.5 py-1 font-mono text-xs text-muted-foreground">
+          laptop screen 16:10
+        </span>
+        {metricText && (
+          <span
+            className={cn(
+              'absolute bottom-5 left-5 right-5 rounded-[8px] px-4 py-2.5 font-heading text-base font-semibold tabular-nums text-white sm:right-auto',
+              trackStyles[entry.track].dot,
+            )}
+          >
+            {metricText}
+          </span>
+        )}
+      </div>
+
+      <div className="bg-card px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
+        <TrackBadge track={entry.track} />
+        <h4 className="mt-4 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight sm:text-2xl">
+          {entry.headline}
+        </h4>
+        <p className="mt-2 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
+          {entry.detail}
+        </p>
+
+        {entry.href && (
+          <div className="mt-5 border-t border-foreground/10 pt-4">
+            {/* Opens the real case-study page in a new tab — distinct from
+                the toggle above, which just peeks at it inline. */}
+            <Link
+              href={withLens(entry.href, lens)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                '-my-2 inline-flex min-h-11 items-center gap-2 py-2 font-sans text-base font-semibold transition-colors hover:underline',
+                trackStyles[entry.track].accentText,
+              )}
+            >
+              Read the case study <span aria-hidden="true">→</span>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </Link>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  )
+}
+
+/** A highlight in the carousel: flat, lighter grey, static. Copy takes the
+ *  full width; the stats sit in their own strip at the foot of the card, one
+ *  value + label per stat, so a two-stat entry reads as two stats and never
+ *  squeezes the text. */
+function CarouselEntryCard({ entry }: { entry: TimelineEntry }) {
+  const stats = entry.metrics ?? []
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: 0.2, ease: EASE_OUT }}
+      className="rounded-[14px] bg-card p-6 text-left shadow-soft sm:p-7"
+    >
+      <TrackBadge track={entry.track} />
+      <h4 className="mt-3 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight">
+        {entry.headline}
+      </h4>
+      <p className="mt-2 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
+        {entry.detail}
+      </p>
+
+      {stats.length > 0 && (
+        <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-3 border-t border-foreground/10 pt-4">
+          {stats.map((m) => (
+            <div key={m.label} className="flex flex-col-reverse">
+              <dt className="mt-1.5 label-micro text-muted-foreground">{m.label}</dt>
+              <dd
+                className={cn(
+                  'font-heading text-xl font-semibold leading-tight tabular-nums',
+                  trackStyles[entry.track].accentText,
+                )}
+              >
+                {m.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </motion.div>
+  )
+}
+
+function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
+  const [index, setIndex] = useState(0)
+  const safeIndex = Math.min(index, entries.length - 1)
+  const entry = entries[safeIndex]
+  const atStart = safeIndex === 0
+  const atEnd = safeIndex === entries.length - 1
+
+  const navButton =
+    'flex size-11 items-center justify-center rounded-full bg-card-soft text-foreground transition-colors hover:bg-stripe disabled:cursor-default disabled:opacity-40 disabled:hover:bg-card-soft'
+
+  return (
+    <div className="mt-5">
+      {entries.length > 1 && (
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+          {/* The row wraps: between sm and xl the dots, counter and arrows
+              together are wider than the card's right-hand column, and
+              without the wrap this pushed the page into a horizontal
+              scroll. Each dot also keeps a 44px hit box around a small
+              visual, which does not fit beside the arrows on a phone, so
+              the dots are sm+ only and the counter carries the position
+              below that. */}
+          <div aria-label="Featured highlights" className="hidden items-center sm:flex">
+            {entries.map((e, i) => (
+              <button
+                key={e.headline}
+                type="button"
+                onClick={() => setIndex(i)}
+                aria-label={`Show highlight ${i + 1} of ${entries.length}`}
+                aria-current={i === safeIndex}
+                className="group flex size-11 items-center justify-center rounded-full first:-ml-4"
+              >
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    'h-2 rounded-full transition-[width,background-color] duration-200',
+                    i === safeIndex
+                      ? 'w-7 bg-accent-brand'
+                      : 'w-2 bg-foreground/15 group-hover:bg-foreground/35',
                   )}
-                </li>
-              )
-            })}
-          </ul>
+                />
+              </button>
+            ))}
+          </div>
+          <p className="label-micro text-muted-foreground">
+            Featured highlights &middot;{' '}
+            <span className="tabular-nums">
+              {safeIndex + 1} / {entries.length}
+            </span>
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIndex(safeIndex - 1)}
+              disabled={atStart}
+              aria-label="Previous highlight"
+              className={navButton}
+            >
+              <ChevronLeft aria-hidden="true" strokeWidth={2} className="size-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setIndex(safeIndex + 1)}
+              disabled={atEnd}
+              aria-label="Next highlight"
+              className={navButton}
+            >
+              <ChevronRight aria-hidden="true" strokeWidth={2} className="size-4" />
+            </button>
+          </div>
         </div>
-      ))}
+      )}
+
+      <AnimatePresence mode="wait" initial={false}>
+        <CarouselEntryCard key={entry.headline} entry={entry} />
+      </AnimatePresence>
     </div>
   )
 }
@@ -119,16 +262,16 @@ export function CareerTimeline() {
   const [activeTrack, setActiveTrack] = useState<Track | null>(null)
 
   return (
-    <section id="experience" className="scroll-mt-28">
+    <section id="timeline" className="scroll-mt-28">
       <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28 lg:px-14">
         <Reveal className="mb-8">
           <h2 className="mb-6 font-heading text-3xl font-semibold tracking-tight md:text-4xl">
-            Experience
+            Career timeline
             <HeadingDot />
           </h2>
 
           <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
-            <div role="group" aria-label="Filter experience by type of work" className="flex flex-wrap items-center gap-2">
+            <div role="group" aria-label="Filter timeline by type of work" className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
                 onClick={() => setActiveTrack(null)}
@@ -183,13 +326,14 @@ export function CareerTimeline() {
             const filtered = activeTrack
               ? role.entries.filter((entry) => entry.track === activeTrack)
               : role.entries
-            // The lens, if a URL carries one, puts its tracks' entries first;
-            // nothing is removed.
+            // The lens promotes the first entry on its tracks to featured;
+            // nothing is removed, the rest keep their order in the carousel.
             const promoted = lens ? filtered.find((e) => LENS_TRACKS[lens].includes(e.track)) : undefined
             const visibleEntries = promoted
               ? [promoted, ...filtered.filter((e) => e !== promoted)]
               : filtered
             const isDimmed = activeTrack !== null && visibleEntries.length === 0
+            const [featured, ...rest] = visibleEntries
 
             return (
               <motion.li
@@ -221,9 +365,16 @@ export function CareerTimeline() {
                     <p className="font-sans text-sm text-muted-foreground">
                       No {TRACKS[activeTrack!].label.toLowerCase()} work in this role.
                     </p>
-                  ) : (
-                    visibleEntries.length > 0 && <HighlightRows entries={visibleEntries} />
-                  )}
+                  ) : featured ? (
+                    <>
+                      <p className="label-micro text-muted-foreground">Featured case study</p>
+                      <div className="mt-3">
+                        <FeaturedEntryCard entry={featured} />
+                      </div>
+
+                      {rest.length > 0 && <EntryCarousel entries={rest} />}
+                    </>
+                  ) : null}
                 </div>
               </motion.li>
             )
