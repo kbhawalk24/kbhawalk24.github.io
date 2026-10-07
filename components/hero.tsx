@@ -28,25 +28,48 @@ export const BIO_BLUR_RANGE = { start: 0.4, end: 0.52 }
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+  // The pinned stage is viewport-tall but the settled about block is not,
+  // so there is blank stage under the buttons at release. Measured once the
+  // about text has settled and taken off the section's bottom, so the next
+  // section tucks a fixed 48px under the buttons instead.
+  const [releaseOverlap, setReleaseOverlap] = useState(0)
   const reducedMotionPref = useReducedMotion()
   const reducedMotion = reducedMotionPref !== false
   const [viewportH, setViewportH] = useState(0)
+  const [viewportW, setViewportW] = useState(0)
 
   // Gates every viewportH/reducedMotion-dependent transform below so the
   // first client render matches SSR exactly (both render the "off" [0, 0]
   // range) — the real offsets only apply once mounted, avoiding a hydration
   // mismatch warning.
   const [mounted, setMounted] = useState(false)
+  // The pin-and-crossfade only runs from `md` up. Below that the column is
+  // taller than the viewport (illustration stacked above the text), so a
+  // pinned stage would clip the about text; phones get a plain hero.
+  const [isDesktop, setIsDesktop] = useState(true)
 
   useLayoutEffect(() => {
     setViewportH(window.innerHeight)
-    const onResize = () => setViewportH(window.innerHeight)
+    setViewportW(window.innerWidth)
+    // jsdom has no matchMedia; treat that as desktop.
+    const mq = typeof window.matchMedia === 'function' ? window.matchMedia('(min-width: 768px)') : null
+    setIsDesktop(mq ? mq.matches : true)
+    const onResize = () => {
+      setViewportH(window.innerHeight)
+      setViewportW(window.innerWidth)
+      setIsDesktop(mq ? mq.matches : true)
+    }
     window.addEventListener('resize', onResize)
     setMounted(true)
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  const animationsEnabled = mounted && !reducedMotion
+  const animationsEnabled = mounted && !reducedMotion && isDesktop
+  // With no choreography (phones, reduced motion before the first scroll
+  // event) everything is simply visible.
+  const still = mounted && !animationsEnabled
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -57,7 +80,7 @@ export function Hero() {
   const nameY = useTransform(
     scrollYProgress,
     [0, 0.62],
-    animationsEnabled ? [viewportH * 0.12, 0] : [0, 0],
+    animationsEnabled ? [viewportH * 0.24, 0] : [0, 0],
   )
 
   // ── Name + tagline sit a little lower at rest, then settle into the same
@@ -65,15 +88,44 @@ export function Hero() {
   const nameTaglineY = useTransform(
     scrollYProgress,
     [0, 0.62],
-    animationsEnabled ? [viewportH * 0.12 + 40, 0] : [0, 0],
+    animationsEnabled ? [viewportH * 0.24 + 40, 0] : [0, 0],
   )
 
-  // ── Content holds its centered position, then rises out of view right
-  //    before the hero releases into the next section ─────────────────────
-  const contentExitY = useTransform(
+  // ── Content holds its centered position until the hero releases. (It used
+  //    to rise out early, which left a blank band between the buttons and
+  //    the next section.) ─────────────────────────────────────────────────
+  const contentExitY = useTransform(scrollYProgress, [0.78, 1], [0, 0])
+
+  // ── The name block is tall at rest, so the illustration (absolute, hanging
+  //    above it) has room and the title line clears it, then shrinks as the
+  //    illustration fades, so the about text fits under it in one screen ──
+  //    Driven through state in the scroll handler below, like the fades: a
+  //    useTransform here only recomputes when scroll moves, so a range set
+  //    after mount never reaches the element at rest.
+  const nameBlockRest = isDesktop ? viewportH * 0.48 : 0
+  const [nameBlockMinH, setNameBlockMinH] = useState<number | null>(null)
+  useLayoutEffect(() => {
+    if (mounted) setNameBlockMinH(nameBlockRest)
+  }, [mounted, nameBlockRest])
+
+  // Measured after the settled block height has committed (a measurement
+  // inside the scroll handler sees the previous frame's layout).
+  const settled = animationsEnabled && nameBlockMinH !== null && nameBlockMinH <= viewportH * 0.14 + 0.5
+  useLayoutEffect(() => {
+    if (!settled || !stageRef.current || !ctaRef.current) return
+    const leftover =
+      stageRef.current.getBoundingClientRect().bottom - ctaRef.current.getBoundingClientRect().bottom
+    const next = Math.max(0, Math.round(leftover - 48))
+    setReleaseOverlap((prev) => (Math.abs(prev - next) > 1 ? next : prev))
+  }, [settled, viewportH, viewportW])
+
+  // ── The name is display-sized at rest (the class clamp, here in px) and
+  //    settles to a heading as the about text arrives ───────────────────────
+  const nameRestPx = Math.min(108, Math.max(52, viewportW * 0.075))
+  const nameSize = useTransform(
     scrollYProgress,
-    [0.78, 1],
-    animationsEnabled ? [0, -viewportH * 0.22] : [0, 0],
+    [0, 0.62],
+    animationsEnabled ? [nameRestPx, 60] : [nameRestPx, nameRestPx],
   )
 
   // Opacity/blur are driven through plain React state (not a raw MotionValue
@@ -88,6 +140,9 @@ export function Hero() {
   })
 
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    if (animationsEnabled) {
+      setNameBlockMinH(mapClamp(v, 0, 0.62, viewportH * 0.48, viewportH * 0.14))
+    }
     setFade({
       illustrationOpacity: mapClamp(v, ILLUSTRATION_FADE_RANGE.start, ILLUSTRATION_FADE_RANGE.end, 1, 0),
       illustrationBlurPx: mapClamp(v, ILLUSTRATION_BLUR_RANGE.start, ILLUSTRATION_BLUR_RANGE.end, 0, 16),
@@ -100,27 +155,32 @@ export function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-[200vh] overflow-clip"
+      className="relative overflow-clip md:min-h-[200vh]"
+      style={animationsEnabled && releaseOverlap ? { marginBottom: -releaseOverlap } : undefined}
     >
-      <div className="sticky top-0 flex min-h-dvh overflow-hidden">
-        <div className="relative mx-auto flex min-h-dvh w-full max-w-6xl flex-col items-start px-6 py-8 md:px-10 lg:px-14">
+      <div ref={stageRef} className="flex md:sticky md:top-0 md:min-h-dvh md:overflow-hidden">
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start px-6 py-8 md:min-h-dvh md:px-10 lg:px-14">
 
           {/* Content column */}
           <motion.div
             style={{ y: contentExitY }}
-            className="relative z-20 flex min-h-dvh w-full flex-col items-start justify-center pt-[14vh]"
+            className="relative z-20 flex w-full flex-col items-start justify-center pt-24 md:min-h-dvh md:pt-[2vh]"
           >
 
             {/* Name (lower-left) + illustration (upper-right) — a diagonal
                 composition; the illustration fades out via scroll (state
                 above) right as the bio below finishes fading in. */}
-            <div className="relative flex min-h-[48vh] w-full flex-col items-start justify-between gap-10 md:block">
+            <div
+              style={nameBlockMinH === null ? undefined : { minHeight: nameBlockMinH }}
+              className="relative flex w-full flex-col items-start justify-between gap-10 md:block md:min-h-[48vh]"
+            >
               <div
-                style={{
-                  opacity: fade.illustrationOpacity,
-                  filter: `blur(${fade.illustrationBlurPx}px)`,
-                }}
-                className="w-full max-w-md shrink-0 md:absolute md:-top-64 md:right-0 md:w-96 md:max-w-none lg:w-[28rem] xl:w-[32rem]"
+                style={
+                  still
+                    ? undefined
+                    : { opacity: fade.illustrationOpacity, filter: `blur(${fade.illustrationBlurPx}px)` }
+                }
+                className="w-full max-w-md shrink-0 md:absolute md:-top-64 md:right-0 md:w-96 md:max-w-none lg:w-[28rem] xl:w-[30rem]"
               >
                 <motion.div
                   style={{ y: nameY }}
@@ -141,7 +201,7 @@ export function Hero() {
 
               <div className="w-full shrink-0 md:absolute md:-bottom-8 md:left-0 md:w-auto">
                 <motion.h1
-                  style={{ y: nameTaglineY }}
+                  style={animationsEnabled ? { y: nameTaglineY, fontSize: nameSize } : { y: nameTaglineY }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT }}
@@ -158,68 +218,80 @@ export function Hero() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT }}
-                  className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground md:text-xl"
+                  className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground"
                 >
-                  <span>Product Design Manager / Principal Designer for Data Platform at</span>
-                  <Image
-                    src="/images/intuit-logo.jpg"
-                    alt="Intuit"
-                    width={160}
-                    height={90}
-                    className="h-7 w-auto md:h-9"
-                  />
+                  <span>
+                    Product Design Manager / Principal Designer for Data Platform at{' '}
+                    <span translate="no" className="font-semibold">
+                      Intuit
+                    </span>
+                  </span>
                 </motion.div>
               </div>
             </div>
 
-            {/* Bio — blurs in as scroll progresses */}
+            {/* About: blurs in as scroll progresses. Two paragraphs of prose
+                and the expertise line, then a hairline, then the ask with the
+                buttons on its right. */}
             <div
-              style={{ opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-14 w-full text-left"
+              style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
+              className="mt-12 w-full text-left"
             >
-              <p className="max-w-[52ch] text-pretty font-sans text-lg leading-relaxed text-foreground md:text-xl">
-                <span className="font-semibold text-foreground">
-                  Design leader for enterprise data: ten years shipping the
-                  work, two years leading the team that ships it, still in the
-                  codebase.
-                </span>{' '}
-                For the past 5&nbsp;years, I have led design for{' '}
-                <span translate="no">Intuit</span>&rsquo;s data
-                platform, scaling it from a localized discovery tool into
-                company-wide infrastructure that{' '}
-                <span className="font-semibold">6,000+</span>{' '}
-                people now use monthly to find, access, govern, move, and act
-                on data. Before this, I was a lead designer at{' '}
-                <span translate="no">605</span>, shipping 3
-                analytics products that contributed to{' '}
-                <span className="font-semibold">$20M+</span> in
-                revenue, following my early career as a Software Developer at{' '}
-                <span translate="no">TIBCO</span>.
+              <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
+                I&rsquo;m a design manager for data and AI tools. At{' '}
+                <span translate="no">Intuit</span> I led design for the data platform for two
+                years, owning <span className="mark">data discovery</span> and{' '}
+                <span className="mark">the platform&rsquo;s design strategy</span> myself. The
+                team covered the rest: data access and fine-grained access control, governance,
+                lineage, observability, pipeline authoring, behavioral analytics, and the clean
+                data and data maturity program. Before <span translate="no">Intuit</span> I was
+                at <span translate="no">605</span>, a TV advertising analytics company, where I
+                designed three products that generated more than $20M in revenue. I was a
+                software engineer before I became a designer. I spent three years at{' '}
+                <span translate="no">TIBCO</span> writing back-end Java for its enterprise
+                integration platform.
               </p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <MagneticWrap className="inline-block">
+
+              <div className="mt-10 border-t border-border pt-10">
+                <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
+                  I&rsquo;m looking for my next role in the Bay Area, either as a principal
+                  designer or leading a design team, at a company building AI, data, or
+                  developer tools.
+                </p>
+                <div ref={ctaRef} className="mt-8 flex flex-wrap items-center gap-3">
+                  <MagneticWrap className="inline-block">
+                    <a
+                      href="/kanchi-bhawalkar-resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-3 rounded-full bg-primary py-1.5 pl-6 pr-1.5 text-sm font-medium text-primary-foreground shadow-cta transition-[box-shadow,transform] hover:shadow-cta-hover active:scale-[0.98]"
+                    >
+                      Resume
+                      <span className="sr-only"> (opens in a new tab)</span>
+                      <span
+                        aria-hidden="true"
+                        className="flex size-8 items-center justify-center rounded-full bg-primary-foreground/15 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      >
+                        ↗
+                      </span>
+                    </a>
+                  </MagneticWrap>
                   <a
-                    href="/kanchi-bhawalkar-resume.pdf"
+                    href="#timeline"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25"
+                  >
+                    Work <span aria-hidden="true">↓</span>
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/kanchib"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3 rounded-full bg-primary py-1.5 pl-6 pr-1.5 text-sm font-medium text-primary-foreground shadow-cta transition-[box-shadow,transform] hover:shadow-cta-hover active:scale-[0.98]"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25"
                   >
-                    Resume
+                    LinkedIn <span aria-hidden="true">↗</span>
                     <span className="sr-only"> (opens in a new tab)</span>
-                    <span
-                      aria-hidden="true"
-                      className="flex size-8 items-center justify-center rounded-full bg-primary-foreground/15 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    >
-                      ↗
-                    </span>
                   </a>
-                </MagneticWrap>
-                <a
-                  href="#timeline"
-                  className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25"
-                >
-                  Work <span aria-hidden="true">↓</span>
-                </a>
+                </div>
               </div>
             </div>
 
