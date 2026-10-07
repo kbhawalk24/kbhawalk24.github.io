@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { fireEvent, render, screen, within } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import Page from '@/app/page'
 import { PAGES, isComingSoon } from '@/lib/site-content'
 import { ROLES, TRACKS } from '@/lib/timeline-data'
@@ -47,17 +47,6 @@ describe('home page', () => {
       expect(within(row).getByText(e.detail, { exact: false })).toBeTruthy()
       if (e.metrics?.[0]) expect(within(row).getByText(e.metrics[0].value)).toBeTruthy()
     })
-  })
-
-  it('offers two card styles and keeps the four studies in both', () => {
-    render(<Page />)
-    const group = screen.getByRole('group', { name: 'Case study card style' })
-    fireEvent.click(within(group).getByRole('button', { name: 'Card style 2' }))
-    const index = document.getElementById('case-studies') as HTMLElement
-    PAGES.forEach((p) => expect(within(index).getByRole('heading', { name: p.title, level: 3 })).toBeTruthy())
-    expect(window.localStorage.getItem('cards')).toBe('2')
-    fireEvent.click(within(group).getByRole('button', { name: 'Card style 1' }))
-    expect(window.localStorage.getItem('cards')).toBe('1')
   })
 
   it('header links go to the case studies, experience, resume, and contact', () => {

@@ -20,6 +20,14 @@ URL `?layout=` and localStorage). C won and is now the only layout.
 - `page.tsx`: `HomeBody` picking the layout.
 - `home-layout.test.tsx`: tests for the switch and the three layouts.
 
+## Case-study card, style 2 (removed 2026-10-06)
+
+`case-study-index-two-styles.tsx` is the index with a 1 / 2 switch in the
+section header. Style 2 puts the claim and stats on top and the cover in a
+browser frame at the full card width, bleeding off the card's bottom edge,
+built for a large screenshot or a short muted loop. Style 1 shipped; bring
+style 2 back once covers exist (2300×1150 WebP or 1080p MP4 with a poster).
+
 ## Hero variants
 
 - `hero-one-beat.tsx`: the hero without scroll choreography (name, scope
