@@ -189,6 +189,18 @@
      micro     .label-micro
    Body copy is Mulish; measure capped at ~62ch. */
 
+/* Highlighter emphasis for inline text: a tint behind the words instead
+   of a weight change. `box-decoration-break: clone` keeps the tint's padding
+   and radius on every line a phrase wraps across. */
+.mark {
+  background: var(--wash-bloom);
+  border-radius: 3px;
+  padding: 0.08em 0.3em;
+  margin: 0 -0.1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 /* Motion's `reducedMotion="user"` only silences Motion-driven animation.
    Plain CSS transitions (hover states, underline sweeps, etc.) need their
    own gate, applied once here instead of a `duration-0` override per class. */
