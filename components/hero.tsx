@@ -244,8 +244,10 @@ export function Hero() {
                 <span className="mark">
                   data discovery, governance, lineage, observability,
                 </span>{' '}
-                and <span className="mark">pipeline authoring</span>.
-                Before <span translate="no">Intuit</span> I was at{' '}
+                and <span className="mark">pipeline authoring</span>. Within that I owned data
+                discovery myself, along with data access and its fine-grained access control,
+                behavior understanding, and the clean data and data maturity initiative. Before{' '}
+                <span translate="no">Intuit</span> I was at{' '}
                 <span translate="no">605</span>, a TV advertising analytics company, where I
                 designed three products that generated more than $20M in revenue. I was a
                 software engineer before I became a designer. I spent three years at{' '}
