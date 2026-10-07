@@ -238,17 +238,14 @@ export function Hero() {
               className="mt-12 w-full text-left"
             >
               <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
-                I&rsquo;m a design manager who works on data and AI tools. For the last two
-                years I led the design team for <span translate="no">Intuit</span>&rsquo;s
-                data platform, across{' '}
-                <span className="mark">
-                  data discovery, governance, lineage, observability,
-                </span>{' '}
-                and <span className="mark">pipeline authoring</span>. Within that I owned data
-                discovery myself, along with data access and its fine-grained access control,
-                behavior understanding, and the clean data and data maturity initiative. Before{' '}
-                <span translate="no">Intuit</span> I was at{' '}
-                <span translate="no">605</span>, a TV advertising analytics company, where I
+                I&rsquo;m a design manager for data and AI tools. At{' '}
+                <span translate="no">Intuit</span> I led design for the data platform for two
+                years, owning <span className="mark">data discovery</span> and{' '}
+                <span className="mark">the platform&rsquo;s design strategy</span> myself. The
+                team covered the rest: data access and fine-grained access control, governance,
+                lineage, observability, pipeline authoring, behavioral analytics, and the clean
+                data and data maturity program. Before <span translate="no">Intuit</span> I was
+                at <span translate="no">605</span>, a TV advertising analytics company, where I
                 designed three products that generated more than $20M in revenue. I was a
                 software engineer before I became a designer. I spent three years at{' '}
                 <span translate="no">TIBCO</span> writing back-end Java for its enterprise
