@@ -89,14 +89,21 @@ function NavLink({
   external?: boolean
   children: React.ReactNode
 }) {
+  const className =
+    'inline-flex min-h-9 items-center rounded-full px-3 font-sans text-sm text-muted-foreground transition-colors hover:text-foreground'
+  // A file or an outside site gets a plain anchor; <Link> would try to
+  // prefetch it as a route.
+  if (external) {
+    return (
+      <a href={href} {...externalProps(true)} className={className}>
+        {children}
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>
+    )
+  }
   return (
-    <Link
-      href={href}
-      {...externalProps(external)}
-      className="inline-flex min-h-9 items-center rounded-full px-3 font-sans text-sm text-muted-foreground transition-colors hover:text-foreground"
-    >
+    <Link href={href} className={className}>
       {children}
-      {external && <span className="sr-only"> (opens in a new tab)</span>}
     </Link>
   )
 }
@@ -204,15 +211,19 @@ function MenuItem({
   onClick: () => void
   children: React.ReactNode
 }) {
+  const className =
+    'block rounded-[10px] px-3 py-2 font-sans text-sm text-foreground transition-colors hover:bg-card-soft'
+  if (external) {
+    return (
+      <a href={href} {...externalProps(true)} onClick={onClick} className={className}>
+        {children}
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>
+    )
+  }
   return (
-    <Link
-      href={href}
-      {...externalProps(external)}
-      onClick={onClick}
-      className="block rounded-[10px] px-3 py-2 font-sans text-sm text-foreground transition-colors hover:bg-card-soft"
-    >
+    <Link href={href} onClick={onClick} className={className}>
       {children}
-      {external && <span className="sr-only"> (opens in a new tab)</span>}
     </Link>
   )
 }
