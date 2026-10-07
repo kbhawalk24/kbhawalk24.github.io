@@ -254,8 +254,8 @@ export function Hero() {
               </p>
               <p className="mt-6 text-pretty font-sans text-lg leading-[1.6] text-foreground">
                 <span className="mark">
-                  Expertise in agentic AI experience design, data visualization, and design
-                strategy for complex data environments.
+                  Skills: agentic AI experience design, data visualization, and design strategy
+                  for complex data environments.
                 </span>
               </p>
 
