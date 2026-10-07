@@ -220,14 +220,12 @@ export function Hero() {
                   transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT }}
                   className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground"
                 >
-                  <span>Product Design Manager / Principal Designer for Data Platform at</span>
-                  <Image
-                    src="/images/intuit-logo.jpg"
-                    alt="Intuit"
-                    width={160}
-                    height={90}
-                    className="h-7 w-auto mix-blend-multiply md:h-9"
-                  />
+                  <span>
+                    Product Design Manager / Principal Designer for Data Platform at{' '}
+                    <span translate="no" className="font-semibold">
+                      Intuit
+                    </span>
+                  </span>
                 </motion.div>
               </div>
             </div>
@@ -260,7 +258,7 @@ export function Hero() {
               </p>
 
               <div className="mt-10 border-t border-border pt-10">
-                <p className="text-balance font-sans text-lg leading-[1.6] text-foreground">
+                <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
                   I&rsquo;m looking for my next role in the Bay Area, either as a principal
                   designer or leading a design team, at a company building AI, data, or
                   developer tools.

@@ -64,7 +64,6 @@ export const ROLES: TimelineRole[] = [
     startYear: '2024',
     title: 'Product Design Manager',
     company: 'Intuit',
-    companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
       'I ran design for Intuit’s data platform and managed the designers on it. The platform covers data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring.',
@@ -140,7 +139,6 @@ export const ROLES: TimelineRole[] = [
     startYear: '2024',
     title: 'Principal Product Designer',
     company: 'Intuit',
-    companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
       'Hands-on again for a stretch. I owned search, discoverability, and data trust across the platform, and ran the research that set the next year’s roadmap.',
@@ -197,7 +195,6 @@ export const ROLES: TimelineRole[] = [
     startYear: '2021',
     title: 'Senior Product Designer',
     company: 'Intuit',
-    companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
       'Founding designer of Intuit’s internal data catalog. When I joined it listed tables and columns; by the end of this role it was where the company went to find its data.',
