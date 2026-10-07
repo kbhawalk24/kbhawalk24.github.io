@@ -75,8 +75,8 @@ function TrackBadge({ track }: { track: Track }) {
   )
 }
 
-/** Featured card: image with the metric pill floating on it, then a white
- *  content panel. Flat, 14px radius. Static: the only interaction is the
+/** Featured card: image with the metric pill floating on it beside a white
+ *  content panel (stacked on phones). Flat, 14px radius. Static: the only interaction is the
  *  "Read the case study" link. */
 function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
   const { lens } = useLens()
@@ -85,10 +85,15 @@ function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
   const metricText = headlineStat ? `${headlineStat.value} · ${headlineStat.label}` : null
 
   return (
-    <motion.div layout className="relative overflow-hidden rounded-[14px] bg-card text-left shadow-soft">
-      <div className="relative aspect-[16/10] w-full" style={DIAGONAL_STRIPES}>
+    <motion.div
+      layout
+      className="relative overflow-hidden rounded-[14px] bg-card text-left shadow-soft md:grid md:grid-cols-[5fr_7fr]"
+    >
+      {/* Landscape card: the image sits beside the text from md up, so the
+          card is ~300px tall instead of ~700px. On phones it stacks. */}
+      <div className="relative aspect-[16/10] w-full md:aspect-auto md:min-h-full" style={DIAGONAL_STRIPES}>
         <span className="absolute right-4 top-4 rounded-[6px] bg-card px-2.5 py-1 font-mono text-xs text-muted-foreground">
-          laptop screen 16:10
+          screenshot
         </span>
         {metricText && (
           <span
