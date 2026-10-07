@@ -60,11 +60,14 @@ describe('home page', () => {
     expect(window.localStorage.getItem('cards')).toBe('1')
   })
 
-  it('header links go to the case studies, experience, and contact', () => {
+  it('header links go to the case studies, experience, resume, and contact', () => {
     render(<Page />)
     expect(screen.getByRole('link', { name: 'Case studies' }).getAttribute('href')).toBe('#case-studies')
     expect(screen.getByRole('link', { name: 'Experience' }).getAttribute('href')).toBe('#experience')
     expect(screen.getByRole('link', { name: 'Contact' }).getAttribute('href')).toBe('#contact')
+    const resume = screen.getAllByRole('link', { name: /^resume/i }).find((l) => l.closest('nav'))!
+    expect(resume.getAttribute('href')).toBe('/kanchi-bhawalkar-resume.pdf')
+    expect(resume.getAttribute('target')).toBe('_blank')
     expect(screen.queryByRole('group', { name: 'Home page layout' })).toBeNull()
     expect(screen.queryByRole('group', { name: 'Show the work for' })).toBeNull()
   })

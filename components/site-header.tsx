@@ -28,9 +28,10 @@ export function SiteHeader({
   const { lens } = useLens()
   const home = onHome ? '' : '/'
 
-  const links = [
+  const links: NavItem[] = [
     { label: 'Case studies', href: `${home}#case-studies` },
     { label: 'Experience', href: `${home}#experience` },
+    { label: 'Resume', href: '/kanchi-bhawalkar-resume.pdf', external: true },
     { label: 'Contact', href: `${home}#contact` },
   ]
   const chapterItems = chapters.map((c) => ({ label: c.title, href: `#${c.id}` }))
@@ -54,7 +55,7 @@ export function SiteHeader({
 
         <div className="hidden items-center sm:flex">
           {links.map((l) => (
-            <NavLink key={l.label} href={withLens(l.href, lens)}>
+            <NavLink key={l.label} href={l.external ? l.href : withLens(l.href, lens)} external={l.external}>
               {l.label}
             </NavLink>
           ))}
@@ -74,13 +75,28 @@ export function SiteHeader({
   )
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+type NavItem = { label: string; href: string; external?: boolean }
+
+const externalProps = (external?: boolean) =>
+  external ? { target: '_blank', rel: 'noopener noreferrer' } : {}
+
+function NavLink({
+  href,
+  external,
+  children,
+}: {
+  href: string
+  external?: boolean
+  children: React.ReactNode
+}) {
   return (
     <Link
       href={href}
+      {...externalProps(external)}
       className="inline-flex min-h-9 items-center rounded-full px-3 font-sans text-sm text-muted-foreground transition-colors hover:text-foreground"
     >
       {children}
+      {external && <span className="sr-only"> (opens in a new tab)</span>}
     </Link>
   )
 }
@@ -91,7 +107,7 @@ function NavMenu({
   groupLabel,
   group = [],
 }: {
-  items: { label: string; href: string }[]
+  items: NavItem[]
   label?: string
   groupLabel?: string
   group?: { label: string; href: string }[]
@@ -146,7 +162,11 @@ function NavMenu({
           >
             {items.map((l) => (
               <li key={l.href}>
-                <MenuItem href={withLens(l.href, lens)} onClick={() => setOpen(false)}>
+                <MenuItem
+                  href={l.external ? l.href : withLens(l.href, lens)}
+                  external={l.external}
+                  onClick={() => setOpen(false)}
+                >
                   {l.label}
                 </MenuItem>
               </li>
@@ -175,20 +195,24 @@ function NavMenu({
 
 function MenuItem({
   href,
+  external,
   onClick,
   children,
 }: {
   href: string
+  external?: boolean
   onClick: () => void
   children: React.ReactNode
 }) {
   return (
     <Link
       href={href}
+      {...externalProps(external)}
       onClick={onClick}
       className="block rounded-[10px] px-3 py-2 font-sans text-sm text-foreground transition-colors hover:bg-card-soft"
     >
       {children}
+      {external && <span className="sr-only"> (opens in a new tab)</span>}
     </Link>
   )
 }
