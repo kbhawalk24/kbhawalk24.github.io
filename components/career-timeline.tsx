@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import {
   ROLES,
   TRACKS,
+  type RoleCaseStudy,
   type TimelineEntry,
   type Track,
 } from '@/lib/timeline-data'
@@ -22,6 +23,10 @@ import { HeadingDot } from '@/components/heading-dot'
 // white content panel) with the remaining highlights in a small carousel
 // under it. Cards are static; the featured card links out to the full
 // chapter on its case-study page (see lib/site-content.ts).
+//
+// A role with a `caseStudy` shows that in the featured slot instead. While
+// the case studies are being written the card is a placeholder (title and
+// "Coming soon", no numbers, no link) and every entry sits in the carousel.
 
 const DIAGONAL_STRIPES = {
   backgroundImage:
@@ -129,6 +134,27 @@ function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
         )}
       </div>
     </motion.div>
+  )
+}
+
+/** Stand-in for a case study that is not published yet: the title and a
+ *  "Coming soon" label. It makes no claims and links nowhere. */
+function CaseStudyPlaceholderCard({ caseStudy }: { caseStudy: RoleCaseStudy }) {
+  return (
+    <div className="relative overflow-hidden rounded-[14px] bg-card text-left shadow-soft">
+      <div aria-hidden="true" className="aspect-[16/5] w-full" style={DIAGONAL_STRIPES} />
+      <div className="bg-card px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
+        <h4 className="text-pretty font-heading text-xl font-semibold leading-snug tracking-tight sm:text-2xl">
+          {caseStudy.title}
+        </h4>
+        <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="inline-flex items-center rounded-full bg-card-soft px-3 py-1.5 label-micro text-foreground ring-1 ring-foreground/10">
+            Coming soon
+          </span>
+          <span className="font-sans text-sm text-muted-foreground">The write-up is in progress.</span>
+        </p>
+      </div>
+    </div>
   )
 }
 
@@ -283,7 +309,10 @@ export function CareerTimeline() {
             const visibleEntries = promoted
               ? [promoted, ...filtered.filter((e) => e !== promoted)]
               : filtered
-            const [featured, ...rest] = visibleEntries
+            // A case study takes the featured slot; without one, the first
+            // entry does.
+            const featured = role.caseStudy ? undefined : visibleEntries[0]
+            const rest = role.caseStudy ? visibleEntries : visibleEntries.slice(1)
 
             return (
               <motion.li
@@ -310,11 +339,15 @@ export function CareerTimeline() {
                 </div>
 
                 <div className="mt-8 min-w-0 sm:mt-0">
-                  {featured ? (
+                  {role.caseStudy || featured ? (
                     <>
                       <p className="label-micro text-muted-foreground">Featured case study</p>
                       <div className="mt-3">
-                        <FeaturedEntryCard entry={featured} />
+                        {role.caseStudy ? (
+                          <CaseStudyPlaceholderCard caseStudy={role.caseStudy} />
+                        ) : (
+                          featured && <FeaturedEntryCard entry={featured} />
+                        )}
                       </div>
 
                       {rest.length > 0 && <EntryCarousel entries={rest} />}

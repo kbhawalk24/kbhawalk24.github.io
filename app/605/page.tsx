@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import { CaseStudyLayout } from '@/components/case-study-layout'
-import { SIX_O_FIVE } from '@/lib/site-content'
+import { CaseStudyPlaceholder } from '@/components/case-study-placeholder'
 
-export const metadata: Metadata = { title: 'The tools I built at 605 | Kanchi Bhawalkar' }
+export const metadata: Metadata = { title: 'Work at 605 | Kanchi Bhawalkar' }
 
 export default function Page() {
-  return <CaseStudyLayout page={SIX_O_FIVE} />
+  return <CaseStudyPlaceholder roleId="605" />
 }

@@ -39,6 +39,14 @@ export interface TimelineEntry {
   href?: string
 }
 
+/** The case study told under a role. Its page lives at `href`. While the
+ *  write-up is in progress the home card and the page are both placeholders:
+ *  a title and "Coming soon", with no numbers and no link between them. */
+export interface RoleCaseStudy {
+  title: string
+  href: string
+}
+
 export interface TimelineRole {
   id: string
   period: string
@@ -49,6 +57,9 @@ export interface TimelineRole {
   companyLogo?: string
   location: string
   summary: string
+  /** Shown in the role's "Featured case study" slot. Roles without one
+   *  feature their first entry there instead. */
+  caseStudy?: RoleCaseStudy
   entries: TimelineEntry[]
 }
 
@@ -68,6 +79,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Led UX strategy and a team of three product designers for Intuit’s enterprise data platform: data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring. The platform supports ~550 engineers and 16 product managers.',
+    caseStudy: { title: 'My team’s work', href: '/leadership' },
     entries: [
       {
         track: 'management',
@@ -144,6 +156,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Principal-level IC owning search, discoverability, and data trust across the platform, plus the research that set the next year’s roadmap.',
+    caseStudy: { title: 'The evolution of data search', href: '/work/finding-data' },
     entries: [
       {
         track: 'ic',
@@ -201,6 +214,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Founding designer of Intuit’s internal data catalog, which grew from tables and columns into the company’s system of record for data.',
+    caseStudy: { title: 'Building the data platform', href: '/work/trusting-data' },
     entries: [
       {
         track: 'ic',
@@ -250,6 +264,7 @@ export const ROLES: TimelineRole[] = [
     location: 'New York, NY',
     summary:
       'Lead designer for TV ad-analytics products, taking three data products from concept to commercial launch.',
+    caseStudy: { title: 'Work at 605', href: '/605' },
     entries: [
       {
         track: 'ic',

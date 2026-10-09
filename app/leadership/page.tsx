@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import { CaseStudyLayout } from '@/components/case-study-layout'
-import { LEADERSHIP } from '@/lib/site-content'
+import { CaseStudyPlaceholder } from '@/components/case-study-placeholder'
 
-export const metadata: Metadata = { title: 'How I lead | Kanchi Bhawalkar' }
+export const metadata: Metadata = { title: 'My team’s work | Kanchi Bhawalkar' }
 
 export default function Page() {
-  return <CaseStudyLayout page={LEADERSHIP} />
+  return <CaseStudyPlaceholder roleId="intuit-manager" />
 }
