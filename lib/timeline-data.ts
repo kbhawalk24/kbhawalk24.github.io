@@ -78,43 +78,41 @@ export const ROLES: TimelineRole[] = [
     companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
-      'Led UX strategy and a team of three product designers for Intuit’s enterprise data platform: data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring. The platform supports ~550 engineers and 16 product managers.',
+      'Led UX strategy and a team of product designers for Intuit’s enterprise data platform: data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring. The data design group worked with 550 engineers and 16 product managers.',
     caseStudy: { title: 'My team’s work', href: '/leadership' },
     entries: [
       {
         track: 'management',
         headline: 'Scaled the platform into company-wide infrastructure',
         detail:
-          'From a single-team discovery tool to the default way Intuit finds, trusts, and gets data. The team shipped 24 launches in the final twelve months.',
+          'From a single-team discovery tool to the default way Intuit finds, trusts, and gets data.',
         metrics: [
-          { value: '~2,700 → 6,000+', label: 'Monthly users' },
+          { value: '2,664 → 6,000+', label: 'Monthly users, Jul 2024 → Mar 2026' },
         ],        href: '/leadership#shipped',
       },
       {
         track: 'management',
-        headline: 'Access from weeks to minutes',
+        headline: 'My team redesigned how people get access to data',
         detail:
-          'Directed the redesign of data-access workflows: provisioning 9 → 3 days, most routine requests auto-approved, restricted-data denials down 85%.',
+          'Tables and encrypted columns in one request: 9 days to 3 days (Aug 2025). Real-time streams: 2–3 weeks to 3 days, with 61% of requests approved automatically (Mar 2025). Ineligible denials for restricted tax data down 85%.',
         metrics: [
-          { value: '~4,000 hrs', label: 'Saved per year' },
+          { value: '9 → 3 days', label: 'Tables and encrypted columns, Aug 2025' },
         ],        href: '/work/trusting-data#access',
       },
       {
         track: 'management',
-        headline: 'Promoted all three direct reports',
+        headline: 'Promoted every direct report',
         detail:
-          'Wrote the promotion-case framework they used; backed a team-led design sign-off practice that engineering adopted.',
-        metrics: [
-          { value: '3 of 3', label: 'Direct reports promoted' },
-        ],        href: '/leadership#people',
+          'Wrote the promotion-case framework each of them used, and backed a design sign-off before release that became the team’s practice.',
+        href: '/leadership#people',
       },
       {
         track: 'strategy',
-        headline: 'Data maturity standards across the platform',
+        headline: 'Built the tooling behind Intuit’s clean-data standard',
         detail:
-          'Quality scorecards, a company-wide maturity dashboard, and self-service certification of trusted data.',
+          'The platform organization defined the standard. Quality scorecards, a company-wide maturity dashboard, and self-service certification of trusted data.',
         metrics: [
-          { value: '0 incidents', label: 'Marketing data, 2025 peak' },
+          { value: 'Under 1% → 80%', label: 'Clean data, public figure, Dec 2025' },
         ],        href: '/work/trusting-data#maturity',
       },
       {
@@ -130,9 +128,9 @@ export const ROLES: TimelineRole[] = [
         track: 'ic',
         headline: 'Designed how the data agent answers',
         detail:
-          'Wrote the agent’s rules, designed its responses, and worked on trust in what it returns, then shipped merged production pull requests myself.',
+          'Wrote the interaction model for the agent: structured answers that show their sources, not open chat. Tested its answers against real user questions, refined its rules, and drove adoption inside Cursor and Claude.',
         metrics: [
-          { value: '11% → 81%', label: 'Precision in 3 months' },
+          { value: '711', label: 'Active users, Mar 2026' },
         ],        href: '/work/finding-data#agent',
       },
       {
@@ -173,17 +171,16 @@ export const ROLES: TimelineRole[] = [
         detail:
           '20 in-context user visits across business units and a cross-functional ideation workshop; the group product lead called it “a major contributor to our FY25 roadmap.”',
         metrics: [
-          { value: '1 in 5', label: 'Searches for unfamiliar data' },
+          { value: '20', label: 'In-context user visits' },
         ],        href: '/work/finding-data#search-2',
       },
       {
         track: 'ic',
         headline: 'Designed search rebuilt on meaning',
         detail:
-          'The semantic search and facet model that launched as Search 2.0 in March 2025, across every data type on the platform.',
+          'Designed semantic search for tables and for the Data Map. Table search launched Nov 14, 2024. I designed the first version of Data Map search; a designer on my team took it to launch on Mar 26, 2025.',
         metrics: [
-          { value: '81% → 89%', label: 'Search precision' },
-          { value: '51s → 2s', label: 'Query latency' },
+          { value: '81.31% → 89.24%', label: 'First result correct, Mar 2025 launch' },
         ],        href: '/work/finding-data#search-2',
       },
       {
@@ -192,7 +189,7 @@ export const ROLES: TimelineRole[] = [
         detail:
           'Re-architected the catalog for the new data-product model; ~2,000 previously siloed tables became findable.',
         metrics: [
-          { value: '+42%', label: '1,886 → 2,664 monthly users' },
+          { value: '+42%', label: 'Platform monthly users, FY24: 1,886 → 2,664' },
         ],        href: '/work/trusting-data#maturity',
       },
       {
@@ -229,7 +226,7 @@ export const ROLES: TimelineRole[] = [
         track: 'ic',
         headline: 'Designed the Data Map',
         detail:
-          'Organized the catalog by what the data is about, with every physical copy (batch, real-time, marketing) under one entry. No other catalog had done it.',
+          'Organized the catalog by what the data is about, with every physical copy (batch and real-time) under one entry. No catalog we evaluated offered this.',
         metrics: [
           { value: '~20', label: 'In-context user sessions' },
         ],        href: '/work/finding-data#data-map',
@@ -248,7 +245,7 @@ export const ROLES: TimelineRole[] = [
         track: 'ic',
         headline: 'Built the first data lineage UI in 4 weeks',
         detail:
-          'Impact graphs across ~30K tables and ~7K pipelines; ~500 monthly users in the first year.',
+          'Impact graphs across ~30K tables and ~7K pipelines; 450–500 monthly users in the first year.',
         metrics: [
           { value: '~30K', label: 'Tables visualized' },
         ],        href: '/work/trusting-data#lineage',
