@@ -44,14 +44,6 @@ describe('case study placeholders', () => {
     }
   })
 
-  it('still features the first entry of a role that has no case study', () => {
-    render(<CareerTimeline />)
-    const role = ROLES.find((r) => !r.caseStudy)!
-    const row = document.getElementById(role.id) as HTMLElement
-    expect(within(row).getByRole('heading', { name: role.entries[0].headline, level: 4 })).toBeTruthy()
-    expect(within(row).queryByText('Coming soon')).toBeNull()
-  })
-
   it.each(WITH_CASE_STUDY.map((r) => [r.id, r] as const))(
     'renders the %s page as a title, "Coming soon" and a way back',
     (_id, role) => {
