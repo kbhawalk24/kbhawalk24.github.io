@@ -64,7 +64,7 @@ export function ContactFooter() {
           variants={fadeUp}
           className="mt-10 font-sans text-xs text-muted-foreground"
         >
-          <span translate="no">Kanchi Bhawalkar</span> · Sunnyvale, California
+          <span translate="no">Kanchi Bhawalkar</span> · San Francisco Bay Area
         </motion.p>
       </motion.div>
     </footer>
