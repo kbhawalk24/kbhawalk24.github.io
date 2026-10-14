@@ -7,6 +7,7 @@ import { LensProvider } from '@/components/lens'
 import { Hero } from '@/components/hero'
 import { CareerTimeline } from '@/components/career-timeline'
 import { ContactFooter } from '@/components/contact-footer'
+import { CursorButterfly } from '@/components/cursor-butterfly'
 
 export default function Page() {
   return (
@@ -19,6 +20,7 @@ export default function Page() {
         <CareerTimeline />
       </main>
       <ContactFooter />
+      <CursorButterfly />
       </LensProvider>
     </MotionConfig>
   )
