@@ -14,15 +14,16 @@ import {
 // A small butterfly on the home page. Left alone, it flies loops around the
 // hero illustration (the element marked data-butterfly-home) and now and
 // then perches on it with its wings still. When the cursor moves it breaks
-// off and trails the pointer with a little lag; once the cursor has been
-// still for a moment it flies back to the illustration. If the illustration
-// is scrolled away or faded out, it loops near the top-right of the screen
+// off and trails the pointer with a little lag. If the illustration is
+// scrolled away or faded out, it loops near the top-right of the screen
 // instead.
 //
-// Perch for long enough and a shark swims in from the nearer edge and eats
-// it; a new butterfly turns up a few seconds later. Move the mouse while the
-// shark is on its way and the butterfly escapes to the cursor, so the shark
-// snaps at nothing and swims off.
+// Once the cursor stops, the butterfly settles where it is and a shark swims
+// in from the nearer edge and eats it; a new butterfly turns up at the
+// illustration a few seconds later. Move the mouse while the shark is on its
+// way and the butterfly escapes to the cursor, so the shark snaps at nothing
+// and swims off. A butterfly that perches on the illustration by itself can
+// also draw the shark, now and then.
 //
 // Decorative only: aria-hidden, no pointer events, absent for readers who
 // prefer reduced motion. Remove <CursorButterfly /> from app/page.tsx to
@@ -189,6 +190,19 @@ export function CursorButterfly() {
     y.jump(start.cy - 40)
     wander()
 
+    // The cursor has stopped: the butterfly settles where it is, wings still,
+    // and the shark comes for it. If the shark is still busy from the last
+    // attack, check back shortly.
+    const settle = () => {
+      if (eatenRef.current) return
+      setRest(true)
+      if (sharkPhaseRef.current !== 'away') {
+        idleTimer.current = window.setTimeout(settle, 800)
+        return
+      }
+      sharkTimer.current = window.setTimeout(sendShark, SHARK_DELAY_MS)
+    }
+
     const onMove = (e: PointerEvent) => {
       if (e.pointerType !== 'mouse' || eatenRef.current) return
       clearWander()
@@ -196,7 +210,8 @@ export function CursorButterfly() {
       // Sit just above and behind the cursor rather than under it.
       goTo(e.clientX + 18, e.clientY - 22)
       if (idleTimer.current) window.clearTimeout(idleTimer.current)
-      idleTimer.current = window.setTimeout(wander, IDLE_MS)
+      if (sharkTimer.current) window.clearTimeout(sharkTimer.current)
+      idleTimer.current = window.setTimeout(settle, IDLE_MS)
     }
     window.addEventListener('pointermove', onMove, { passive: true })
 
