@@ -196,6 +196,13 @@ function CaseStudyPage({ page }: { page: PortfolioPage }) {
           </Reveal>
         )}
 
+        {page.credits && (
+          <Reveal as="section" className="border-t border-border py-10">
+            <p className="label-micro text-muted-foreground">Credits</p>
+            <p className="mt-3 max-w-[60ch] text-pretty text-sm leading-relaxed text-muted-foreground">{page.credits}</p>
+          </Reveal>
+        )}
+
         {next && (
           <Reveal as="section" className="border-t border-border pt-10">
             <Link

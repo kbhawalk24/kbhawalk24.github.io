@@ -101,9 +101,9 @@ export const ROLES: TimelineRole[] = [
       },
       {
         track: 'management',
-        headline: 'Promoted every direct report',
+        headline: 'One Senior promotion, two more cases approved',
         detail:
-          'Wrote the promotion-case framework each of them used, and backed a design sign-off before release that became the team’s practice.',
+          'Secured one Senior promotion in Jan 2026 and had two additional promotion cases approved before my role ended. Wrote the promotion-case framework each of them used, and backed a design sign-off before release that became the team’s practice.',
         href: '/leadership#people',
       },
       {
@@ -154,7 +154,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Principal-level IC owning search, discoverability, and data trust across the platform, plus the research that set the next year’s roadmap.',
-    caseStudy: { title: 'The evolution of data search', href: '/work/finding-data' },
+    caseStudy: { title: 'Finding data', href: '/work/finding-data' },
     entries: [
       {
         track: 'ic',
@@ -191,13 +191,6 @@ export const ROLES: TimelineRole[] = [
         metrics: [
           { value: '+42%', label: 'Platform monthly users, FY24: 1,886 → 2,664' },
         ],        href: '/work/trusting-data#maturity',
-      },
-      {
-        track: 'management',
-        headline: 'Co-led intern hiring and mentorship',
-        detail:
-          'Sourced 50+ candidates, managed a design intern who later became a direct report.',
-        href: '/leadership#people',
       },
     ],
   },
@@ -250,24 +243,31 @@ export const ROLES: TimelineRole[] = [
           { value: '~30K', label: 'Tables visualized' },
         ],        href: '/work/trusting-data#lineage',
       },
+      {
+        track: 'management',
+        headline: 'Mentored a summer intern who joined the team',
+        detail:
+          'Managed a summer 2023 design intern who converted to full-time and later joined my team.',
+        href: '/leadership#people',
+      },
     ],
   },
   {
     id: '605',
     period: 'Oct 2017 - Jun 2021',
     startYear: '2017',
-    title: 'Lead Product Designer',
+    title: 'Product Designer (First Design Hire)',
     company: '605',
     location: 'New York, NY',
     summary:
-      'Lead designer for TV ad-analytics products, taking three data products from concept to commercial launch.',
+      'First product designer at 605, taking three TV ad-analytics products from concept to commercial launch.',
     caseStudy: { title: 'Work at 605', href: '/605' },
     entries: [
       {
         track: 'ic',
         headline: 'Designed 605 Impact',
         detail:
-          'A first-of-its-kind platform measuring TV advertising’s effect on consumer behavior; 32 statistical reports of 500+ rows condensed into a two-screen report.',
+          'A platform measuring TV advertising’s effect on consumer behavior. Collapsed 32 separate reports into a two-page interactive view and replaced a chart type that caused around 8 bugs.',
         metrics: [
           { value: '$20M+', label: 'Revenue across three products' },
         ],        href: '/605#impact',
@@ -275,17 +275,18 @@ export const ROLES: TimelineRole[] = [
       {
         track: 'ic',
         headline: 'Shipped 605 Indxr',
-        detail: 'Audience targeting that cut report generation from 15 days to 2 hours.',
+        detail: 'Audience targeting that replaced manual ranking pulls, which took one day to two weeks.',
         metrics: [
-          { value: '15 days → 2 hrs', label: 'Report generation' },
+          { value: '1 day - 2 wks', label: 'Manual ranking pulls replaced' },
         ],        href: '/605#indxr',
       },
       {
         track: 'ic',
         headline: 'Redesigned 605 Platform',
-        detail: 'Self-serve analytics; halved report-building time.',
+        detail:
+          'Self-serve analytics, shipped in two months to meet a client deadline. Client pitches on it booked $2M in additional revenue.',
         metrics: [
-          { value: '−50%', label: 'Report-building time' },
+          { value: '3-4 min → 1-1.5 min', label: 'Report render time' },
         ],        href: '/605#platform',
       },
       {

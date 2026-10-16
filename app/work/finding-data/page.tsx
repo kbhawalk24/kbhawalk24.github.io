@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
-import { CaseStudyPlaceholder } from '@/components/case-study-placeholder'
+import { CaseStudyLayout } from '@/components/case-study-layout'
+import { FINDING_DATA } from '@/lib/site-content'
 
-export const metadata: Metadata = { title: 'The evolution of data search | Kanchi Bhawalkar' }
+export const metadata: Metadata = {
+  title: 'Finding data | Kanchi Bhawalkar',
+  description: FINDING_DATA.claim,
+}
 
 export default function Page() {
-  return <CaseStudyPlaceholder roleId="intuit-principal" />
+  return <CaseStudyLayout page={FINDING_DATA} />
 }

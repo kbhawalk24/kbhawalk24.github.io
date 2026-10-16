@@ -59,6 +59,8 @@ export interface PortfolioPage {
   metrics: { value: string; label: string }[]
   chapters: Chapter[]
   reflection?: string[]
+  /** Who did what, in one paragraph. */
+  credits?: string
 }
 
 // ───────────────────────────────────────────────────────────────────────────
@@ -71,128 +73,132 @@ export const FINDING_DATA: PortfolioPage = {
   eyebrow: 'Case study 01 · Intuit, 2021-2026',
   title: 'Finding data',
   claim:
-    'One question, designed five times over five years, each time closer to how people really behave: how does someone find data they can actually use?',
+    'How people at Intuit search for and trust data, designed through five versions: a keyword catalog, a map of data organized by business meaning, a plain-language assistant, a rebuilt semantic search, and an agent inside the coding tools engineers already use.',
   period: '2021 - 2026',
-  role: 'Founding designer → design lead → manager, still hands-on',
+  role: 'Lead designer for the data catalog (2021-2024); product design manager, still designing (2024-2026)',
   insight:
-    'Research before the search redesign showed that people look for new data only about one time in five. Four times in five, they are going back to something they already know. Search was never the whole job.',
+    'Of 666 questions sent to the company’s data help channel in one year, 43% were people trying to locate the right data, and 73% were resolved only because a specific person knew the answer.',
   metrics: [
-    { value: '~45 days → seconds', label: 'Time to find, access, and explore data (2021 → 2026)' },
-    { value: '68% → 96%', label: 'Top-5 search click-through (2022 → 2023)' },
-    { value: '11% → 81%', label: 'Agent search precision in 3 months (2025-26)' },
-    { value: '45 min → 4 min', label: 'Time to insight via the agent' },
+    { value: '68% → 96%', label: 'Searches with a click in the top five results (Apr 2022 → Apr 2023)' },
+    { value: '81.31% → 89.24%', label: 'Searches where the first result was the right one (Mar 2025)' },
+    { value: '45 min → 4 min', label: 'From a question to an answer with the agent (2026)' },
+    { value: '711', label: 'Active agent users, Mar 2026' },
   ],
   chapters: [
     {
       id: 'catalog',
-      title: 'A catalog that could replace the one we paid for',
-      period: '2021 - 2022',
+      title: 'A catalog people would use instead of the one we paid for',
+      period: '2021 - 2023',
       role: 'IC',
       body: [
-        'When I joined, the internal catalog was bare-bones: tables from the data lake, their columns, and not much else. The mandate was to make it good enough to retire the third-party catalog the company was paying for.',
-        'I designed what a catalog needs before anyone will trust it (trust flags, documentation, query information, ownership) and widened what it covered: feature sets, real-time topics, data warehouses.',
+        'When I joined in June 2021, the internal catalog covered data-lake tables and their columns and little else, and the company was paying for a commercial catalog alongside it. Both returned bare table names without the information needed to tell whether a dataset was live or stale. One person found two customer tables with nearly identical names and had to ask in the help channel which one to trust, because one of them had not been refreshed in over a year.',
+        'The mandate was to retire the commercial catalog. People would not switch to an internal tool that returned a table name and nothing to judge it by. I designed the home page, search and filtering, and browsing by data warehouse, and added what a person needs to decide on a result: trust flags, documentation, ownership, and the SQL behind a view. In 2023 I added usage statistics and column popularity.',
+        'The commercial catalog was retired in fiscal 2023. Top-five click-through rose from 68% to 96% between April 2022 and April 2023, the satisfaction score rose from 26 to 31, and after documentation launched, 41% fewer users said data was poorly documented.',
+        'What stayed unsolved: search still returned physical tables. The same data existed as a batch table, a real-time stream, and a marketing copy, and nothing connected them. I had also planned a formal usability study and did not run it, testing each feature with users as it shipped instead.',
       ],
       metrics: [
-        { value: '68% → 96%', label: 'Top-5 click-through' },
+        { value: '68% → 96%', label: 'Top-five click-through' },
+        { value: '26 → 31', label: 'Satisfaction score (NPS)' },
         { value: '−41%', label: '“Poorly documented” complaints' },
-        { value: '26 → 31', label: 'NPS' },
       ],
-      visuals: [{ caption: 'The catalog when I joined vs. a year later (table detail page with trust flags, documentation, queries).' }],
-      draft: true,
+      visuals: [
+        { caption: 'The 2021-2023 catalog: search results and the table detail view with trust flags, documentation status, ownership, SQL view preview, and column popularity.' },
+        { caption: 'Before: two near-identical customer tables in the legacy search results, with nothing to tell them apart.' },
+      ],
     },
     {
       id: 'data-map',
-      title: 'The Data Map',
-      period: '2022',
+      title: 'Organize by what the data is about: the Data Map',
+      period: '2022 - 2023',
       role: 'IC',
       body: [
-        'Every other catalog organized data by where it was stored. The Data Map organized it by the thing the data was about, and hung every physical copy under one entry: batch, real-time, marketing. Nobody had to wonder whether a real-time version of a dataset existed.',
-        'It took about twenty user sessions and a redesign of the home page, browsing, search, and results to get there.',
+        'The company was reorganizing its data by business domain, and the catalog had to let people find data by meaning rather than by storage engine. Three terms matter here. A table is one physical dataset. A data product is a business concept, such as a customer, with an owner and a description; every physical copy of it sits beneath it: the batch table, the real-time stream, the marketing copy. A facet is a property of search results that narrows them, such as owner or freshness.',
+        'I designed browsing, search, and detail pages for the Data Map: one entry per data product, with every physical copy listed beneath it. It took several rounds of feedback with around 20 users and a rework of the home page, browsing, search, results, and detail pages. In 2023 I added one consolidated view of every location where a piece of data is hosted, and filters for real-time versus batch. No catalog we evaluated organized data this way.',
+        'What stayed unsolved: people still had to know the right words. Search matched keywords only.',
       ],
       decision: {
-        title: 'Organize by meaning, not by storage location',
+        title: 'Organize results by business meaning, not by where the data is stored',
         detail:
-          'The alternative, a flat list of physical tables with better filters, was faster to ship and what every competitor did. [DRAFT: what pushed you to the harder option, and what it cost.]',
+          'The simpler path was a flat list of physical tables with storage-engine filters. Nesting physical copies beneath a logical data product meant re-architecting the browse, search, and entity pages. I took that path because it matches how people think about the data they need.',
       },
-      visuals: [{ caption: 'The Data Map view: one entity, every source and sink beneath it.' }],
-      draft: true,
+      visuals: [
+        { caption: 'The Data Map search and entity view: one data product with its batch table, real-time stream, and marketing copies nested beneath it.' },
+        { caption: 'The 2023 consolidated view of every location where a piece of data is hosted.' },
+      ],
     },
     {
       id: 'copilot',
-      title: 'Asking in plain language',
+      title: 'Ask in plain language: Data Copilot',
       period: '2023 - 2024',
       role: 'IC',
       body: [
-        'Data Copilot was the first time anyone at Intuit could ask a question of data in plain language. As sole design lead I consolidated sixteen hackathon teams’ explorations into one chat-based experience and shipped it in four months.',
-        'It reached 500+ monthly users, doubled how fast analysts wrote SQL, was presented by the CTO at Investor Day, and won the org’s innovation award. Then it fizzled. [DRAFT: why, and what that taught you about where the interface should live.]',
+        'Generative AI arrived, and 16 hackathon teams each built a separate conversational experiment on top of catalog metadata. As sole design lead, I consolidated the work of 16 teams and 58 collaborators into one chat-based flow with four capabilities: finding tables, writing SQL, sample insights, and translating SQL. It shipped in four months.',
+        'Analysts wrote SQL twice as fast (2.2x for single-table queries). More than 500 people used it each month. Intuit’s CTO presented it on stage at Investor Day 2023, and it won the organization’s innovation award.',
+        'What stayed unsolved: usage did not hold after 2024. People had to leave their coding tools and notebooks for a standalone web chat window, and freeform chat answers lacked the structured provenance needed to verify and trust unfamiliar tables.',
       ],
       metrics: [
         { value: '4 months', label: 'From 16 explorations to one shipped product' },
-        { value: '2×', label: 'Faster SQL writing' },
+        { value: '2×', label: 'Faster SQL writing for analysts' },
         { value: '500+', label: 'Monthly users' },
       ],
-      visuals: [{ caption: 'One of the four 2023 prototype recordings (natural-language search).', kind: 'video' }],
-      draft: true,
+      visuals: [{ caption: 'The plain-language assistant: table discovery and SQL generation in one chat flow.', kind: 'video' }],
     },
     {
       id: 'search-2',
-      title: 'Search rebuilt on meaning',
+      title: 'Research first, then rebuild search',
       period: '2024 - 2025',
       role: 'Both',
       body: [
-        'Twenty in-context user visits and a cross-functional ideation workshop set the next year’s roadmap; the group product lead called the research “a major contributor” to it. The search redesign was the first thing it authorized.',
-        'Search 2.0 shipped in March 2025: semantic search across every data type on the platform. I owned the design; the engineering and model team delivered the gains.',
+        'Cutting the time it took to discover data was a company goal. A data scientist told us, “Data discovery is the longest part of a new project.” In spring 2024 I interviewed 20 catalog users across business units while they did their own work, brought engineers along to watch, and ran a workshop with the whole team. The group product manager called it “a major contributor to our FY25 roadmap.”',
+        'Four things the research changed. People know the object type up front, whether they want a table or a stream, with the exception of marketing managers and machine-learning engineers who move data between systems. Analysts trust engineering-owned, curated tables over the rest, and are frustrated when they cannot map a raw table to its curated equivalent. Machine-learning engineers need to learn quickly that data does not exist, or that a real-time source does. And people look for new data roughly one time in five; four times in five, they return to data they already know.',
+        'Five decisions followed. One tab per type of data (Tables, Data Map, Real-Time Streams, Feature Sets, Dashboards, Marketing Attributes) replaced the old two-mode split that mixed every asset type together. One rule for filters and facets: a filter is the kind of object and never changes; a facet is a property of the results and changes with the query, with four facet behaviors defined by how many values a facet has and whether they nest. A limit of five lines of information per result, each either operational (freshness, quality) or social (how many people query it). Nested browsing inside a facet came out of the first release, sort order was deferred, and the choice between user tags and collections was left open, which set up Collections for 2025. And when two of the first three reviewers said AI-generated descriptions were not trustworthy, we stopped showing unverified ones and prioritized human editing controls.',
+        'Table search launched on November 14, 2024, with keyword precision up 12.5% and semantic precision up 58%. I designed the first version of search across the Data Map; after I became a manager, a designer on my team carried it to launch on March 26, 2025, covering 10,000 data products and 460,000 attributes. The first result was the right one 89.24% of the time, up from 81.31%, and 99 in 100 searches finished within 1.93 seconds, down from 50.59. Engineers and the search-model team delivered the precision and speed; design defined what was searchable and how a person judges a result.',
+        'What stayed unsolved: exact-name search fell short after the semantic rebuild. The top-five click rate dipped from 96% to 94% in July 2025 and stood at 95% in January 2026.',
       ],
       decision: {
-        title: 'Search as a foundation, not a feature',
+        title: 'One tab per type of data',
         detail:
-          'Scoped from the start to cover tables, real-time topics, and marketing attributes rather than one data type. [DRAFT: the facet-selection model and what you gave up to keep it simple.]',
+          'The Data Map had argued for organizing by business meaning, and the 2024 research showed people usually know which physical type they need. One tab per asset type lets a person scope by type when they know it, or browse the Data Map tab when they are searching by business concept. The rejected option was keeping the two-mode split with better filters.',
       },
       metrics: [
-        { value: '81% → 89%', label: 'Precision' },
-        { value: '51s → 2s', label: 'Worst-case latency' },
+        { value: '+12.5% / +58%', label: 'Keyword / semantic precision, table search (Nov 2024)' },
+        { value: '81.31% → 89.24%', label: 'First result correct, Data Map search (Mar 2025)' },
+        { value: '50.59s → 1.93s', label: 'Response time, 99th percentile' },
       ],
       visuals: [
-        { caption: 'Facet selection: the core search interaction (Figma).' },
-        { caption: 'Before / after search results.' },
+        { caption: 'Search results before and after the rebuild.' },
+        { caption: 'The four facet behaviors and the five-line result card, with the rejected nested-facet browsing option.' },
       ],
-      draft: true,
-    },
-    {
-      id: 'collections',
-      title: 'Collections',
-      period: '2025',
-      role: 'Both',
-      body: [
-        'If people return to familiar data four times out of five, the catalog should make the familiar effortless. I pushed for Collections as design strategy, against resistance, and architected it; a designer on my team designed it.',
-      ],
-      metrics: [{ value: '41% → 61%', label: 'Session conversion' }],
-      visuals: [{ caption: 'A collection: the handful of tables a team actually uses, shareable.' }],
-      draft: true,
     },
     {
       id: 'agent',
-      title: 'The catalog inside the coding agent',
+      title: 'Familiar data, then the agent in Cursor and Claude',
       period: '2025 - 2026',
-      role: 'IC',
+      role: 'Both',
       body: [
-        'Instead of building a better chat, we moved discovery to where people already were: their coding agent. I wrote the agent’s rules, designed its responses, and worked on making its answers trustworthy: the same problem as trust flags in 2021, five years on.',
-        'Collections became the agent’s context: with a team’s familiar tables in scope, accuracy passed 99%. I also worked directly in the codebase, writing the rules governing what AI agents may change, and merged production pull requests.',
+        'Research showed people mostly return to data they already know, and the standalone assistant had faded. I argued for Collections, a person’s saved working set of data, as design strategy despite initial criticism from engineering. Designers on my team designed and shipped it on August 7, 2025. Our engineering manager wrote that it “would not have happened if not for Kanchi’s persistence and design sponsorship.”',
+        'Rather than building a better web chat window, we moved the catalog into the coding tools people already used, Cursor and Claude, through MCP servers. I wrote the specification for how the agent answers three kinds of requests. Looking up a known table: return the name, description, whether it belongs to a data product and how mature that product is, when it was last refreshed, its owner and top users, what depends on it, and whether the person has access. Choosing a table for a use case: return five candidates, each with the specific reason it matches. Asking a question that needs a value: if one column answers it, show the column and a query; if the answer needs several tables, state which tables and columns the agent plans to join and why, check that they exist, check access, then run the query or hand it over.',
+        'Four working rules: check the person’s Collections before searching the wider lake; never invent a table name; never show a query that has not been run; always ask before running anything.',
+        'I recruited the first users, tested the agent’s answers against real questions, and refined the rules. A designer on my team built the response patterns that shipped and benchmarked their precision, and engineers built the servers. By March 11, 2026, the agent had 711 active users and 56,560 tool calls in 90 days. In an observed-task study, the time from a question to an answer fell from 45 minutes to 4 minutes.',
+        'What stayed unsolved: the agent lived in coding tools, not yet inside the web catalog itself. As of March 2026, a designer on my team was leading the work to bring it there.',
       ],
       metrics: [
-        { value: '11% → 81%', label: 'Precision in 3 months' },
-        { value: '711', label: 'Users in the first months' },
-        { value: '56K', label: 'Tool calls' },
-        { value: '45 → 4 min', label: 'Time to insight' },
+        { value: '711', label: 'Active users, Mar 2026' },
+        { value: '56,560', label: 'Tool calls in 90 days' },
+        { value: '45 min → 4 min', label: 'From a question to an answer, observed-task study' },
       ],
       visuals: [
-        { caption: 'The agent answering a data question inside Cursor.', kind: 'video' },
-        { caption: 'An excerpt of the rules file (redacted).' },
+        { caption: 'The agent answering inside Cursor and Claude.', kind: 'video' },
+        { caption: 'An excerpt of the answer specification for the three request types, beside the Collections UI.' },
       ],
-      draft: true,
     },
   ],
-  reflection: ['[DRAFT: two or three honest sentences. Candidate: what you would have done with Data Copilot in 2023 knowing agents would end up in the IDE.]'],
+  reflection: [
+    'Protect exact-name search during semantic rebuilds. When we tuned the rebuilt search for semantic matching, exact table-name lookup regressed and top-five click-through dipped from 96% to 94%. I would isolate exact-string lookup as a separate fast path from day one.',
+    'Run formal usability baselines early and bind research directly to specs. Skipping a formal usability study in 2022, and watching four research readouts fail to change engineering direction in 2025, pushed me to stop treating research as a slide deck. I wrote the agent’s operational rules myself and fought to make Collections its context layer.',
+  ],
+  credits:
+    'I was the designer for versions one to three and for the research and first design of version four, and the manager and strategy lead for version five. I worked with product managers, search and platform engineers, and the search-model team. Designers on my team took search across the Data Map from my first version to launch, designed Collections, and built and benchmarked the agent’s response patterns.',
 }
 
 // ───────────────────────────────────────────────────────────────────────────
@@ -320,7 +326,7 @@ export const LEADERSHIP: PortfolioPage = {
   metrics: [
     { value: '1 : 85', label: 'Designers to engineers' },
     { value: '24', label: 'Launches in 12 months' },
-    { value: '3 of 3', label: 'Direct reports promoted' },
+    { value: '1 + 2', label: 'Senior promotion secured; two more cases approved' },
     { value: '$4.5M', label: 'Direct savings, 2025' },
   ],
   chapters: [
@@ -353,7 +359,7 @@ export const LEADERSHIP: PortfolioPage = {
       period: '2024 - 2026',
       role: 'Team',
       body: [
-        'All three direct reports were promoted: one in the January cycle, two approved before I left and confirmed after. I wrote the promotion-case framework they used.',
+        'Secured one Senior promotion in January 2026 and had two additional promotion cases approved before my role ended. I wrote the promotion-case framework they used.',
         'What I watch for is what a team does on its own: one designer started a design sign-off practice that the engineering org adopted; another’s AI-generated launch videos became the format other teams copied; a third stepped in and filled the gap when I moved onto the agent work. [DRAFT: one sentence on what that says about how you manage.]',
       ],
       visuals: [{ caption: 'The 6-slide promotion framework (sanitized).' }],
@@ -394,16 +400,16 @@ export const SIX_O_FIVE: PortfolioPage = {
   slug: '605',
   href: '/605',
   kind: 'overview',
-  eyebrow: '605 · Lead Product Designer, 2017-2021',
+  eyebrow: '605 · Product Designer (first design hire), 2017-2021',
   title: 'The tools I built at 605',
   claim:
     'Three analytics products for TV advertising, from concept to market, that generated $20M+ in revenue, and where the data-visualization craft comes from.',
   period: '2017 - 2021',
-  role: 'Lead Product Designer',
+  role: 'Product Designer, first design hire',
   metrics: [
     { value: '$20M+', label: 'Revenue from products shipped' },
     { value: '3', label: 'Products, concept to launch' },
-    { value: '15 days → 2 h', label: 'Audience report generation' },
+    { value: '3-4 min → 1-1.5 min', label: 'Report render time in 605 Platform' },
   ],
   chapters: [
     {
@@ -411,7 +417,7 @@ export const SIX_O_FIVE: PortfolioPage = {
       title: '605 Impact',
       period: '2018 - 2020',
       role: 'IC',
-      body: ['A first-of-its-kind platform measuring TV advertising’s effect on consumer behavior. Condensed 32 statistical reports of 500+ rows each into a two-screen interactive report.'],
+      body: ['A platform measuring TV advertising’s effect on consumer behavior. Collapsed 32 separate reports into a two-page interactive view and replaced a chart type that caused around 8 bugs.'],
       visuals: [{ caption: '605 Impact: the two-screen report.' }],
       draft: true,
     },
@@ -420,7 +426,7 @@ export const SIX_O_FIVE: PortfolioPage = {
       title: '605 Indxr',
       period: '2019 - 2020',
       role: 'IC',
-      body: ['An audience-targeting platform that cut report generation from 15 days to 2 hours, designed to be dataset-agnostic.'],
+      body: ['An audience-targeting platform that replaced manual ranking pulls which took one day to two weeks, designed to be dataset-agnostic.'],
       visuals: [{ caption: '605 Indxr.' }],
       draft: true,
     },
@@ -429,7 +435,7 @@ export const SIX_O_FIVE: PortfolioPage = {
       title: '605 Platform',
       period: '2017 - 2019',
       role: 'IC',
-      body: ['Redesign of the self-serve analytics tool; halved report-building time.'],
+      body: ['Redesign of the self-serve analytics tool, shipped in two months to meet a client deadline. Render time fell from 3-4 minutes to 1-1.5 minutes, and client pitches on it booked $2M in additional revenue.'],
       visuals: [{ caption: '605 Platform before / after.' }],
       draft: true,
     },
