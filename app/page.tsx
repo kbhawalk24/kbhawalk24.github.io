@@ -8,7 +8,6 @@ import { Hero } from '@/components/hero'
 import { CaseStudyIndex } from '@/components/case-study-index'
 import { CareerTimeline } from '@/components/career-timeline'
 import { ContactFooter } from '@/components/contact-footer'
-import { CursorButterfly } from '@/components/cursor-butterfly'
 
 export default function Page() {
   return (
@@ -22,7 +21,6 @@ export default function Page() {
         <CareerTimeline />
       </main>
       <ContactFooter />
-      <CursorButterfly />
       </LensProvider>
     </MotionConfig>
   )

@@ -3,14 +3,19 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
-import { ROLES } from '@/lib/timeline-data'
+import { ROLES, TRACKS, type Track } from '@/lib/timeline-data'
+import { trackStyles } from '@/lib/track-styles'
 import { EASE_OUT, Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
 // The career timeline: each role is a row on the page, separated by a
 // hairline, with the role facts on the left and every highlight of the
-// role written out as a plain list on the right. No cards, no links: the
+// role written out on the right. No links from here: the
 // case studies live in the Work section above (components/case-study-index.tsx).
+// Within a role the highlights are grouped by track (management, strategy,
+// IC craft) as white cards, two across, with the stat in the track colour.
+
+const TRACK_ORDER: Track[] = ['management', 'strategy', 'ic']
 
 // Falls back to the plain company name if the logo image 404s (or none was
 // given), rather than letting a broken-image glyph render.
@@ -83,30 +88,47 @@ export function CareerTimeline() {
                   </p>
                 </div>
 
-                <div className="mt-8 min-w-0 sm:mt-0">
-                  <p className="label-micro text-muted-foreground">Highlights</p>
-                  <ul className="mt-3 divide-y divide-border">
-                    {role.entries.map((entry) => (
-                      <li key={entry.headline} className="py-5 first:pt-0 last:pb-0">
-                        <h4 className="text-pretty font-heading text-lg font-semibold leading-snug tracking-tight">
-                          {entry.headline}
-                        </h4>
-                        <p className="mt-1.5 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
-                          {entry.detail}
+                <div className="mt-8 min-w-0 grid gap-8 sm:mt-0">
+                  {TRACK_ORDER.map((track) => {
+                    const entries = role.entries.filter((e) => e.track === track)
+                    if (entries.length === 0) return null
+                    return (
+                      <div key={track}>
+                        <p className={cn('label-micro', trackStyles[track].accentText)}>
+                          {TRACKS[track].label} highlights
                         </p>
-                        {entry.metrics && entry.metrics.length > 0 && (
-                          <p className="mt-2 font-sans text-sm leading-relaxed text-muted-foreground">
-                            {entry.metrics.map((m, i) => (
-                              <span key={m.label}>
-                                {i > 0 && ' · '}
-                                <span className="font-semibold tabular-nums text-foreground">{m.value}</span> {m.label}
-                              </span>
-                            ))}
-                          </p>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
+                        <ul className="mt-3 grid gap-4 md:grid-cols-2">
+                          {entries.map((entry) => (
+                            <li key={entry.headline} className="rounded-[14px] bg-card p-5 shadow-soft sm:p-6">
+                              <h4 className="text-pretty font-heading text-lg font-semibold leading-snug tracking-tight">
+                                {entry.headline}
+                              </h4>
+                              <p className="mt-1.5 text-pretty font-sans text-base leading-relaxed text-muted-foreground">
+                                {entry.detail}
+                              </p>
+                              {entry.metrics && entry.metrics.length > 0 && (
+                                <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-3 border-t border-foreground/10 pt-4">
+                                  {entry.metrics.map((m) => (
+                                    <div key={m.label} className="flex flex-col-reverse">
+                                      <dt className="mt-1.5 label-micro text-muted-foreground">{m.label}</dt>
+                                      <dd
+                                        className={cn(
+                                          'font-heading text-xl font-semibold leading-tight tabular-nums',
+                                          trackStyles[track].accentText,
+                                        )}
+                                      >
+                                        {m.value}
+                                      </dd>
+                                    </div>
+                                  ))}
+                                </dl>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                  })}
                 </div>
               </motion.li>
             )

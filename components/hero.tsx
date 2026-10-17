@@ -175,7 +175,6 @@ export function Hero() {
               className="relative flex w-full flex-col items-start justify-between gap-10 md:block md:min-h-[48vh]"
             >
               <div
-                data-butterfly-home
                 style={
                   still
                     ? undefined
