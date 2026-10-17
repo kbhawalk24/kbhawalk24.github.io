@@ -3,10 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useInView, useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/utils'
-import { Reveal } from '@/components/motion-primitives'
 
-// "By the numbers": six stat tiles under the hero's about text, each with a
-// small chart that plays when the strip scrolls into view and replays when
+// "By the numbers": six stat tiles beside the hero's about text, each with
+// a small chart that plays when the grid scrolls into view and replays when
 // a tile is hovered or clicked. Every figure is sourced in the tile's
 // title. Reduced motion shows the finished frames.
 
@@ -26,6 +25,22 @@ interface Tile {
 }
 
 const TILES: Tile[] = [
+  {
+    id: 'clicks',
+    value: 96,
+    format: (n) => `${Math.round(n)}%`,
+    label: 'of searches get a click in the top five, from 68%',
+    source: 'FY23 year-end review (Apr 2022 → Apr 2023)',
+    chart: { kind: 'waffle', before: 68, after: 96 },
+  },
+  {
+    id: 'clean',
+    value: 80,
+    format: (n) => `${Math.round(n)}%`,
+    label: 'of the data estate is clean, from under 1%',
+    source: 'Public figure, Dec 2025',
+    chart: { kind: 'waffle', before: 1, after: 80 },
+  },
   {
     id: 'discover',
     value: 9.4,
@@ -56,22 +71,6 @@ const TILES: Tile[] = [
         { label: 'Mar 2026', value: 6673 },
       ],
     },
-  },
-  {
-    id: 'clicks',
-    value: 96,
-    format: (n) => `${Math.round(n)}%`,
-    label: 'of searches get a click in the top five, from 68%',
-    source: 'FY23 year-end review (Apr 2022 → Apr 2023)',
-    chart: { kind: 'waffle', before: 68, after: 96 },
-  },
-  {
-    id: 'clean',
-    value: 80,
-    format: (n) => `${Math.round(n)}%`,
-    label: 'of the data estate is clean, from under 1%',
-    source: 'Public figure, Dec 2025',
-    chart: { kind: 'waffle', before: 1, after: 80 },
   },
   {
     id: 'ratio',
@@ -121,7 +120,7 @@ function Bar({ chart, p }: { chart: Extract<Chart, { kind: 'bar' }>; p: number }
   // Shrinks from full with a little overshoot, then settles.
   const width = Math.max(1.5, 100 - (100 - target) * easeOutBack(p))
   return (
-    <div className="relative mt-4 h-2.5 rounded-r-[4px] bg-accent-brand/10" aria-hidden="true">
+    <div className="relative mt-3 h-2 rounded-r-[4px] bg-accent-brand/10" aria-hidden="true">
       <div className="absolute inset-y-0 left-0 rounded-r-[4px] bg-accent-brand" style={{ width: `${width}%` }} />
     </div>
   )
@@ -136,7 +135,7 @@ function Spark({ chart, p }: { chart: Extract<Chart, { kind: 'spark' }>; p: numb
   const d = chart.points.map((pt, i) => `${i ? 'L' : 'M'}${xs(i)} ${ys(pt.value)}`).join(' ')
   const drawn = easeOutExpo(p)
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="mt-3 h-12 w-full overflow-visible" aria-hidden="true">
+    <svg viewBox={`0 0 ${W} ${H}`} className="mt-3 h-10 w-full overflow-visible" aria-hidden="true">
       <path
         d={d}
         pathLength={1}
@@ -184,7 +183,7 @@ function Waffle({ chart, p }: { chart: Extract<Chart, { kind: 'waffle' }>; p: nu
   const n = Math.round(order.length * easeOutExpo(p))
   const lit = new Set(order.slice(0, n))
   return (
-    <div className="mt-3 grid grid-cols-10 gap-[3px]" aria-hidden="true">
+    <div className="mt-3 grid max-w-[96px] grid-cols-10 gap-[2px]" aria-hidden="true">
       {Array.from({ length: 100 }, (_, k) => (
         <i
           key={k}
@@ -238,12 +237,12 @@ function StatTile({ tile, play, index, instant }: { tile: Tile; play: number; in
       onPointerEnter={replay}
       onClick={replay}
       onFocus={replay}
-      className="group flex min-w-0 cursor-default flex-col rounded-[14px] bg-card p-5 shadow-soft transition-transform duration-300 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline-2 focus-visible:outline-accent-brand"
+      className="group flex min-w-0 cursor-default flex-col rounded-[14px] bg-card p-4 shadow-soft transition-transform duration-300 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline-2 focus-visible:outline-accent-brand"
     >
-      <p className="font-heading text-[28px] font-semibold leading-none tracking-tight">
+      <p className="font-heading text-[22px] font-semibold leading-none tracking-tight">
         {tile.format(p >= 1 ? tile.value : shown)}
       </p>
-      <p className="mt-2 text-pretty font-sans text-sm leading-snug text-muted-foreground">{tile.label}</p>
+      <p className="mt-1.5 text-pretty font-sans text-xs leading-snug text-muted-foreground">{tile.label}</p>
       {/* Charts sit at the foot of the tile so the row reads as one baseline. */}
       <div className="mt-auto">
         {tile.chart.kind === 'bar' && <Bar chart={tile.chart} p={p} />}
@@ -256,37 +255,38 @@ function StatTile({ tile, play, index, instant }: { tile: Tile; play: number; in
   )
 }
 
-export function NumbersStrip() {
+/** The six tiles as a two-column grid with its label, for placing beside
+ *  the about paragraph in the hero. Plays when it scrolls into view and on
+ *  "Play again". */
+export function NumbersGrid({ className }: { className?: string }) {
   const reduced = useReducedMotion() ?? false
-  const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { amount: 0.35 })
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { amount: 0.3 })
   const [play, setPlay] = useState(0)
 
-  // Plays each time the strip comes back into view, so scrolling past and
+  // Plays each time the grid comes back into view, so scrolling past and
   // returning replays it.
   useEffect(() => {
     if (inView) setPlay((n) => n + 1)
   }, [inView])
 
   return (
-    <section ref={ref} id="numbers" className="relative z-10 scroll-mt-28">
-      <div className="mx-auto max-w-6xl px-6 pt-10 md:px-10 md:pt-14 lg:px-14">
-        <Reveal className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-          <p className="label-micro text-muted-foreground">By the numbers · each one plays as you scroll</p>
-          <button
-            type="button"
-            onClick={() => setPlay((n) => n + 1)}
-            className="label-micro text-accent-brand underline-offset-4 hover:underline"
-          >
-            Play again
-          </button>
-        </Reveal>
-        <ol className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-          {TILES.map((tile, i) => (
-            <StatTile key={tile.id} tile={tile} play={play} index={i} instant={reduced} />
-          ))}
-        </ol>
+    <div ref={ref} id="numbers" className={cn('scroll-mt-28', className)}>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+        <p className="label-micro text-muted-foreground">By the numbers</p>
+        <button
+          type="button"
+          onClick={() => setPlay((n) => n + 1)}
+          className="label-micro text-accent-brand underline-offset-4 hover:underline"
+        >
+          Play again
+        </button>
       </div>
-    </section>
+      <ol className="mt-3 grid grid-cols-2 gap-3">
+        {TILES.map((tile, i) => (
+          <StatTile key={tile.id} tile={tile} play={play} index={i} instant={reduced} />
+        ))}
+      </ol>
+    </div>
   )
 }

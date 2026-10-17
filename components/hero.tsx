@@ -12,6 +12,7 @@ import {
 } from 'motion/react'
 
 import { EASE_OUT, MagneticWrap } from '@/components/motion-primitives'
+import { NumbersGrid } from '@/components/numbers-strip'
 
 export function mapClamp(v: number, inMin: number, inMax: number, outMin: number, outMax: number) {
   const t = Math.min(1, Math.max(0, (v - inMin) / (inMax - inMin)))
@@ -230,13 +231,14 @@ export function Hero() {
               </div>
             </div>
 
-            {/* About: blurs in as scroll progresses. Two paragraphs of prose
-                and the expertise line, then a hairline, then the ask with the
-                buttons on its right. */}
+            {/* About: blurs in as scroll progresses. The paragraph, a hairline,
+                and the ask with its buttons on the left; the six number tiles
+                on the right. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-12 w-full text-left"
+              className="mt-12 w-full text-left md:grid md:grid-cols-[7fr_5fr] md:items-start md:gap-10 lg:gap-14"
             >
+             <div>
               <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
                 I&rsquo;m a design manager for data and AI tools. At{' '}
                 <span translate="no">Intuit</span> I led design for the data platform for two
@@ -293,6 +295,11 @@ export function Hero() {
                   </a>
                 </div>
               </div>
+             </div>
+
+              {/* The numbers, beside the paragraph on wide screens and under
+                  the buttons on phones. */}
+              <NumbersGrid className="mt-10 md:mt-0" />
             </div>
 
           </motion.div>
