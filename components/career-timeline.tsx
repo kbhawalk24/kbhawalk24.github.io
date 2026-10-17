@@ -1,25 +1,16 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { AnimatePresence, motion } from 'motion/react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
-import {
-  ROLES,
-  TRACKS,
-  type TimelineEntry,
-  type Track,
-} from '@/lib/timeline-data'
-import { trackStyles } from '@/lib/track-styles'
-import { LENS_TRACKS, useLens, withLens } from '@/components/lens'
+import { ROLES } from '@/lib/timeline-data'
 import { EASE_OUT, Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
 // The career timeline: each role is a row on the page, separated by a
-// hairline, with the role facts and a link to its case study on the left
-// and its highlights in a small carousel on the right. The case studies
-// themselves live in the Work section above (components/case-study-index.tsx).
+// hairline, with the role facts on the left and every highlight of the
+// role written out as a plain list on the right. No cards, no links: the
+// case studies live in the Work section above (components/case-study-index.tsx).
 
 // Falls back to the plain company name if the logo image 404s (or none was
 // given), rather than letting a broken-image glyph render.
@@ -53,150 +44,8 @@ function CompanyMark({ logo, name }: { logo?: string; name: string }) {
   )
 }
 
-function TrackBadge({ track }: { track: Track }) {
-  return (
-    <span
-      className={cn(
-        'inline-flex items-center rounded-full px-2.5 py-1 label-micro',
-        trackStyles[track].badgeFlat,
-      )}
-    >
-      {TRACKS[track].label}
-    </span>
-  )
-}
-
-/** A highlight in the carousel: flat, lighter grey, static. Copy takes the
- *  full width; the stats sit in their own strip at the foot of the card, one
- *  value + label per stat, so a two-stat entry reads as two stats and never
- *  squeezes the text. */
-function CarouselEntryCard({ entry }: { entry: TimelineEntry }) {
-  const stats = entry.metrics ?? []
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.2, ease: EASE_OUT }}
-      className="rounded-[14px] bg-card p-6 text-left shadow-soft sm:p-7"
-    >
-      <h4 className="text-pretty font-heading text-xl font-semibold leading-snug tracking-tight">
-        {entry.headline}
-      </h4>
-      <p className="mt-2 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
-        {entry.detail}
-      </p>
-
-      {/* Footer: stats on the left, track badge bottom-right. Moving the
-          badge down here saves a line above the headline. */}
-      <div className="mt-5 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 border-t border-foreground/10 pt-4">
-        {stats.length > 0 && (
-          <dl className="flex flex-wrap gap-x-8 gap-y-3">
-            {stats.map((m) => (
-              <div key={m.label} className="flex flex-col-reverse">
-                <dt className="mt-1.5 label-micro text-muted-foreground">{m.label}</dt>
-                <dd
-                  className={cn(
-                    'font-heading text-xl font-semibold leading-tight tabular-nums',
-                    trackStyles[entry.track].accentText,
-                  )}
-                >
-                  {m.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        )}
-        <div className="ml-auto">
-          <TrackBadge track={entry.track} />
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-function EntryCarousel({ entries }: { entries: TimelineEntry[] }) {
-  const [index, setIndex] = useState(0)
-  const safeIndex = Math.min(index, entries.length - 1)
-  const entry = entries[safeIndex]
-  const atStart = safeIndex === 0
-  const atEnd = safeIndex === entries.length - 1
-
-  const navButton =
-    'flex size-11 items-center justify-center rounded-full bg-card-soft text-foreground transition-colors hover:bg-stripe disabled:cursor-default disabled:opacity-40 disabled:hover:bg-card-soft'
-
-  return (
-    <div className="mt-5">
-      {entries.length > 1 && (
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-          {/* The row wraps: between sm and xl the dots, counter and arrows
-              together are wider than the card's right-hand column, and
-              without the wrap this pushed the page into a horizontal
-              scroll. Each dot also keeps a 44px hit box around a small
-              visual, which does not fit beside the arrows on a phone, so
-              the dots are sm+ only and the counter carries the position
-              below that. */}
-          <div aria-label="Featured highlights" className="hidden items-center sm:flex">
-            {entries.map((e, i) => (
-              <button
-                key={e.headline}
-                type="button"
-                onClick={() => setIndex(i)}
-                aria-label={`Show highlight ${i + 1} of ${entries.length}`}
-                aria-current={i === safeIndex}
-                className="group flex size-11 items-center justify-center rounded-full first:-ml-4"
-              >
-                <span
-                  aria-hidden="true"
-                  className={cn(
-                    'h-2 rounded-full transition-[width,background-color] duration-200',
-                    i === safeIndex
-                      ? 'w-7 bg-accent-brand'
-                      : 'w-2 bg-foreground/15 group-hover:bg-foreground/35',
-                  )}
-                />
-              </button>
-            ))}
-          </div>
-          <p className="label-micro text-muted-foreground">
-            Featured highlights &middot;{' '}
-            <span className="tabular-nums">
-              {safeIndex + 1} / {entries.length}
-            </span>
-          </p>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setIndex(safeIndex - 1)}
-              disabled={atStart}
-              aria-label="Previous highlight"
-              className={navButton}
-            >
-              <ChevronLeft aria-hidden="true" strokeWidth={2} className="size-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setIndex(safeIndex + 1)}
-              disabled={atEnd}
-              aria-label="Next highlight"
-              className={navButton}
-            >
-              <ChevronRight aria-hidden="true" strokeWidth={2} className="size-4" />
-            </button>
-          </div>
-        </div>
-      )}
-
-      <AnimatePresence mode="wait" initial={false}>
-        <CarouselEntryCard key={entry.headline} entry={entry} />
-      </AnimatePresence>
-    </div>
-  )
-}
 
 export function CareerTimeline() {
-  const { lens } = useLens()
 
   return (
     <section id="timeline" className="scroll-mt-28">
@@ -210,13 +59,6 @@ export function CareerTimeline() {
 
         <ol className="divide-y divide-border">
           {ROLES.map((role) => {
-            // The lens promotes the first entry on its tracks to the front;
-            // nothing is removed, the rest keep their order in the carousel.
-            const promoted = lens ? role.entries.find((e) => LENS_TRACKS[lens].includes(e.track)) : undefined
-            const entries = promoted
-              ? [promoted, ...role.entries.filter((e) => e !== promoted)]
-              : role.entries
-
             return (
               <motion.li
                 key={role.id}
@@ -239,18 +81,32 @@ export function CareerTimeline() {
                   <p className="mt-4 max-w-[42ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
                     {role.summary}
                   </p>
-                  {role.caseStudy && (
-                    <Link
-                      href={withLens(role.caseStudy.href, lens)}
-                      className="mt-4 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-foreground underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground"
-                    >
-                      Case study: {role.caseStudy.title} <span aria-hidden="true">→</span>
-                    </Link>
-                  )}
                 </div>
 
                 <div className="mt-8 min-w-0 sm:mt-0">
-                  <EntryCarousel entries={entries} />
+                  <p className="label-micro text-muted-foreground">Highlights</p>
+                  <ul className="mt-3 divide-y divide-border">
+                    {role.entries.map((entry) => (
+                      <li key={entry.headline} className="py-5 first:pt-0 last:pb-0">
+                        <h4 className="text-pretty font-heading text-lg font-semibold leading-snug tracking-tight">
+                          {entry.headline}
+                        </h4>
+                        <p className="mt-1.5 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
+                          {entry.detail}
+                        </p>
+                        {entry.metrics && entry.metrics.length > 0 && (
+                          <p className="mt-2 font-sans text-sm leading-relaxed text-muted-foreground">
+                            {entry.metrics.map((m, i) => (
+                              <span key={m.label}>
+                                {i > 0 && ' · '}
+                                <span className="font-semibold tabular-nums text-foreground">{m.value}</span> {m.label}
+                              </span>
+                            ))}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </motion.li>
             )

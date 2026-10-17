@@ -6,9 +6,10 @@ import { CareerTimeline } from './career-timeline'
 import { ROLES } from '@/lib/timeline-data'
 import { PAGES } from '@/lib/site-content'
 
-// The case studies live in the Work section; each role on the timeline
-// only links to its own. While a write-up is in progress its Work card
-// says "Coming soon" without linking, and its URL shows a placeholder.
+// The case studies live in the Work section; the timeline is plain text
+// with every highlight written out and nothing to click. While a write-up
+// is in progress its Work card says "Coming soon" without linking, and its
+// URL shows a placeholder.
 
 const WITH_CASE_STUDY = ROLES.filter((r) => r.caseStudy)
 const COMING_SOON = PAGES.filter((p) => p.status === 'coming-soon')
@@ -27,14 +28,12 @@ describe('case study placeholders', () => {
     })
   })
 
-  it('links each timeline role to its case study, and nothing else there carries a case-study card', () => {
+  it('keeps the timeline to plain text: no links and no "Coming soon" in any role row', () => {
     render(<CareerTimeline />)
-    for (const role of WITH_CASE_STUDY) {
+    for (const role of ROLES) {
       const row = document.getElementById(role.id) as HTMLElement
-      const link = within(row).getByRole('link', { name: new RegExp(`Case study: ${role.caseStudy!.title}`) })
-      expect(link.getAttribute('href')).toBe(role.caseStudy!.href)
+      expect(within(row).queryAllByRole('link')).toEqual([])
       expect(within(row).queryByText('Coming soon')).toBeNull()
-      expect(within(row).queryByRole('link', { name: /read the case study/i })).toBeNull()
     }
   })
 
@@ -54,12 +53,14 @@ describe('case study placeholders', () => {
     }
   })
 
-  it('keeps every highlight of the role in the carousel', () => {
+  it('lists every highlight of every role, written out', () => {
     render(<CareerTimeline />)
-    for (const role of WITH_CASE_STUDY) {
+    for (const role of ROLES) {
       const row = document.getElementById(role.id) as HTMLElement
-      expect(within(row).getByRole('heading', { name: role.entries[0].headline, level: 4 })).toBeTruthy()
-      expect(within(row).getByText(new RegExp(`1 / ${role.entries.length}$`))).toBeTruthy()
+      for (const entry of role.entries) {
+        expect(within(row).getByRole('heading', { name: entry.headline, level: 4 })).toBeTruthy()
+        expect(within(row).getByText(entry.detail)).toBeTruthy()
+      }
     }
   })
 
