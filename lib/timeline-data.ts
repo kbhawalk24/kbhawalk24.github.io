@@ -79,7 +79,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Led UX strategy and a team of product designers for Intuit’s enterprise data platform: data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring. The data design group worked with 550 engineers and 16 product managers.',
-    caseStudy: { title: 'My team’s work', href: '/leadership' },
+    caseStudy: { title: 'Scaling platform design at a 1:85 ratio', href: '/leadership' },
     entries: [
       {
         track: 'management',
@@ -204,7 +204,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Founding designer of Intuit’s internal data catalog, which grew from tables and columns into the company’s system of record for data.',
-    caseStudy: { title: 'Building the data platform', href: '/work/trusting-data' },
+    caseStudy: { title: 'Founding designer of Intuit’s data catalog', href: '/work/trusting-data' },
     entries: [
       {
         track: 'ic',
@@ -261,7 +261,7 @@ export const ROLES: TimelineRole[] = [
     location: 'New York, NY',
     summary:
       'First product designer at 605, taking three TV ad-analytics products from concept to commercial launch.',
-    caseStudy: { title: 'Work at 605', href: '/605' },
+    caseStudy: { title: 'Three analytics products for TV advertising', href: '/605' },
     entries: [
       {
         track: 'ic',

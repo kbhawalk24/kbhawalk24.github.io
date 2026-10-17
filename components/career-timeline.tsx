@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils'
 import {
   ROLES,
   TRACKS,
-  type RoleCaseStudy,
   type TimelineEntry,
   type Track,
 } from '@/lib/timeline-data'
@@ -17,21 +16,10 @@ import { LENS_TRACKS, useLens, withLens } from '@/components/lens'
 import { EASE_OUT, Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
-// The timeline is the index. Roles are not cards: each is a row on the page,
-// separated by a hairline, with the role facts on the left. Only the work
-// gets a card: on the right, the featured case study (image, metric pill,
-// white content panel) with the remaining highlights in a small carousel
-// under it. Cards are static; the featured card links out to the full
-// chapter on its case-study page (see lib/site-content.ts).
-//
-// A role with a `caseStudy` shows that in the featured slot instead. While
-// the case studies are being written the card is a placeholder (title and
-// "Coming soon", no numbers, no link) and every entry sits in the carousel.
-
-const DIAGONAL_STRIPES = {
-  backgroundImage:
-    'repeating-linear-gradient(45deg, var(--stripe-a) 0, var(--stripe-a) 10px, var(--stripe-b) 10px, var(--stripe-b) 20px)',
-}
+// The career timeline: each role is a row on the page, separated by a
+// hairline, with the role facts and a link to its case study on the left
+// and its highlights in a small carousel on the right. The case studies
+// themselves live in the Work section above (components/case-study-index.tsx).
 
 // Falls back to the plain company name if the logo image 404s (or none was
 // given), rather than letting a broken-image glyph render.
@@ -75,86 +63,6 @@ function TrackBadge({ track }: { track: Track }) {
     >
       {TRACKS[track].label}
     </span>
-  )
-}
-
-/** Featured card: image with the metric pill floating on it, then a white
- *  content panel. Flat, 14px radius. Static: the only interaction is the
- *  "Read the case study" link. */
-function FeaturedEntryCard({ entry }: { entry: TimelineEntry }) {
-  const { lens } = useLens()
-  // The pill carries the headline stat only; the carousel shows the rest.
-  const headlineStat = entry.metrics?.[0]
-  const metricText = headlineStat ? `${headlineStat.value} · ${headlineStat.label}` : null
-
-  return (
-    <motion.div layout className="relative overflow-hidden rounded-[14px] bg-card text-left shadow-soft">
-      <div className="relative aspect-[16/10] w-full" style={DIAGONAL_STRIPES}>
-        <span className="absolute right-4 top-4 rounded-[6px] bg-card px-2.5 py-1 font-mono text-xs text-muted-foreground">
-          laptop screen 16:10
-        </span>
-        {metricText && (
-          <span
-            className={cn(
-              'absolute bottom-5 left-5 right-5 rounded-[8px] px-4 py-2.5 font-heading text-base font-semibold tabular-nums text-white sm:right-auto',
-              trackStyles[entry.track].dot,
-            )}
-          >
-            {metricText}
-          </span>
-        )}
-      </div>
-
-      <div className="bg-card px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
-        <TrackBadge track={entry.track} />
-        <h4 className="mt-4 text-pretty font-heading text-xl font-semibold leading-snug tracking-tight sm:text-2xl">
-          {entry.headline}
-        </h4>
-        <p className="mt-2 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
-          {entry.detail}
-        </p>
-
-        {entry.href && (
-          <div className="mt-5 border-t border-foreground/10 pt-4">
-            {/* Opens the real case-study page in a new tab — distinct from
-                the toggle above, which just peeks at it inline. */}
-            <Link
-              href={withLens(entry.href, lens)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                '-my-2 inline-flex min-h-11 items-center gap-2 py-2 font-sans text-base font-semibold transition-colors hover:underline',
-                trackStyles[entry.track].accentText,
-              )}
-            >
-              Read the case study <span aria-hidden="true">→</span>
-              <span className="sr-only"> (opens in a new tab)</span>
-            </Link>
-          </div>
-        )}
-      </div>
-    </motion.div>
-  )
-}
-
-/** Stand-in for a case study that is not published yet: the title and a
- *  "Coming soon" label. It makes no claims and links nowhere. */
-function CaseStudyPlaceholderCard({ caseStudy }: { caseStudy: RoleCaseStudy }) {
-  return (
-    <div className="relative overflow-hidden rounded-[14px] bg-card text-left shadow-soft">
-      <div aria-hidden="true" className="aspect-[16/5] w-full" style={DIAGONAL_STRIPES} />
-      <div className="bg-card px-6 pb-6 pt-6 sm:px-8 sm:pb-7 sm:pt-7">
-        <h4 className="text-pretty font-heading text-xl font-semibold leading-snug tracking-tight sm:text-2xl">
-          {caseStudy.title}
-        </h4>
-        <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="inline-flex items-center rounded-full bg-card-soft px-3 py-1.5 label-micro text-foreground ring-1 ring-foreground/10">
-            Coming soon
-          </span>
-          <span className="font-sans text-sm text-muted-foreground">The write-up is in progress.</span>
-        </p>
-      </div>
-    </div>
   )
 }
 
@@ -295,24 +203,19 @@ export function CareerTimeline() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28 lg:px-14">
         <Reveal className="mb-8">
           <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
-            Work highlights
+            Career timeline
             <HeadingDot />
           </h2>
         </Reveal>
 
         <ol className="divide-y divide-border">
           {ROLES.map((role) => {
-            const filtered = role.entries
-            // The lens promotes the first entry on its tracks to featured;
+            // The lens promotes the first entry on its tracks to the front;
             // nothing is removed, the rest keep their order in the carousel.
-            const promoted = lens ? filtered.find((e) => LENS_TRACKS[lens].includes(e.track)) : undefined
-            const visibleEntries = promoted
-              ? [promoted, ...filtered.filter((e) => e !== promoted)]
-              : filtered
-            // A case study takes the featured slot; without one, the first
-            // entry does.
-            const featured = role.caseStudy ? undefined : visibleEntries[0]
-            const rest = role.caseStudy ? visibleEntries : visibleEntries.slice(1)
+            const promoted = lens ? role.entries.find((e) => LENS_TRACKS[lens].includes(e.track)) : undefined
+            const entries = promoted
+              ? [promoted, ...role.entries.filter((e) => e !== promoted)]
+              : role.entries
 
             return (
               <motion.li
@@ -336,23 +239,18 @@ export function CareerTimeline() {
                   <p className="mt-4 max-w-[42ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
                     {role.summary}
                   </p>
+                  {role.caseStudy && (
+                    <Link
+                      href={withLens(role.caseStudy.href, lens)}
+                      className="mt-4 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-foreground underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground"
+                    >
+                      Case study: {role.caseStudy.title} <span aria-hidden="true">→</span>
+                    </Link>
+                  )}
                 </div>
 
                 <div className="mt-8 min-w-0 sm:mt-0">
-                  {role.caseStudy || featured ? (
-                    <>
-                      <p className="label-micro text-muted-foreground">Featured case study</p>
-                      <div className="mt-3">
-                        {role.caseStudy ? (
-                          <CaseStudyPlaceholderCard caseStudy={role.caseStudy} />
-                        ) : (
-                          featured && <FeaturedEntryCard entry={featured} />
-                        )}
-                      </div>
-
-                      {rest.length > 0 && <EntryCarousel entries={rest} />}
-                    </>
-                  ) : null}
+                  <EntryCarousel entries={entries} />
                 </div>
               </motion.li>
             )

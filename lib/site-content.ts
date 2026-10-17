@@ -56,6 +56,14 @@ export interface PortfolioPage {
   role: string
   /** The insight that organizes the page, shown near the top. */
   insight?: string
+  /** Role and years, for the card on the home page: "Product Design Manager · 2024-2026". */
+  roleTag: string
+  /** One line of verified outcomes for the card, items separated by " · ". */
+  outcome: string
+  /** The card's cover once a real screenshot or video exists. */
+  cover?: Visual & { poster?: string }
+  /** Set while the write-up is still in progress; the card says so instead of linking. */
+  status?: 'coming-soon'
   metrics: { value: string; label: string }[]
   chapters: Chapter[]
   reflection?: string[]
@@ -76,6 +84,9 @@ export const FINDING_DATA: PortfolioPage = {
     'How people at Intuit search for and trust data, designed through five versions: a keyword catalog, a map of data organized by business meaning, a plain-language assistant, a rebuilt semantic search, and an agent inside the coding tools engineers already use.',
   period: '2021 - 2026',
   role: 'Lead designer for the data catalog (2021-2024); product design manager, still designing (2024-2026)',
+  roleTag: 'Principal IC and strategy lead · 2021-2026',
+  outcome:
+    '68% → 96% top-five click-through (2023) · 81.31% → 89.24% first-result precision (2025) · 45 min → 4 min from a question to an answer with the agent (2026)',
   insight:
     'Of 666 questions sent to the company’s data help channel in one year, 43% were people trying to locate the right data, and 73% were resolved only because a specific person knew the answer.',
   metrics: [
@@ -209,16 +220,20 @@ export const TRUSTING_DATA: PortfolioPage = {
   href: '/work/trusting-data',
   kind: 'case-study',
   eyebrow: 'Case study 02 · Intuit, 2021-2026',
-  title: 'Trusting data, and getting it',
+  title: 'Founding designer of Intuit’s data catalog',
   claim:
-    'Finding data is useless if you can’t trust it or can’t get it. This is the other half of the 45-days-to-seconds story, and the half where I moved from doing the work to leading the team that did it.',
+    'From a list of tables to the platform where people find data, judge it, get access to it, and start using it.',
   period: '2021 - 2026',
-  role: 'IC → manager of three designers',
+  role: 'Founding designer of the catalog: Senior, then Principal Product Designer (2021-2024); kept designing parts of it as a manager until 2026',
+  roleTag: 'Founding and principal IC · 2021-2026',
+  outcome:
+    'Commercial catalog retired in FY23 · Time to discover and access data cut 20 days → 9.4 hours · Self-service onboarding 1-2 weeks → under 24 hours · 6,673 monthly users (Mar 2026)',
+  status: 'coming-soon',
   metrics: [
-    { value: '0', label: 'Marketing-data incidents at the 2025 tax peak' },
-    { value: '9 → 3 days', label: 'Access provisioning' },
-    { value: '~4 h → minutes', label: 'Incident investigation with lineage' },
-    { value: '1,000+', label: 'Monthly lineage users' },
+    { value: '20 days → 9.4 hrs', label: 'Time to discover and access data (2023 → 2025, public figure)' },
+    { value: '1-2 wks → <24 hrs', label: 'Self-service marketing data onboarding' },
+    { value: '~30K', label: 'Tables in the first lineage graph, built in four weeks' },
+    { value: '6,673', label: 'Monthly users, Mar 2026' },
   ],
   chapters: [
     {
@@ -317,17 +332,21 @@ export const LEADERSHIP: PortfolioPage = {
   slug: 'leadership',
   href: '/leadership',
   kind: 'leadership',
-  eyebrow: 'Intuit · Product Design Manager, 2024-2026',
-  title: 'How I lead',
+  eyebrow: 'Case study 03 · Intuit, 2024-2026',
+  title: 'Scaling platform design at a 1:85 ratio',
   claim:
-    'Three designers, about 550 engineers, sixteen product managers: one designer for every 85 engineers, and 24 launches in twelve months.',
+    'Leading the designers behind Intuit’s data platform: one designer for every 85 engineers, across nine product areas.',
   period: '2024 - 2026',
-  role: 'Manager of three, still hands-on',
+  role: 'Product Design Manager, still hands-on',
+  roleTag: 'Product Design Manager · 2024-2026',
+  outcome:
+    'Clean data grew from under 1% to 80% of the estate, with 0 serious TY25 tax-season incidents, down from 17 · Stream access 2-3 weeks → 3 days · Incident investigations ~4 hours → minutes',
+  status: 'coming-soon',
   metrics: [
     { value: '1 : 85', label: 'Designers to engineers' },
-    { value: '24', label: 'Launches in 12 months' },
+    { value: '<1% → 80%', label: 'Clean data across the estate (public figure, Dec 2025)' },
+    { value: '17 → 0', label: 'Serious tax-season incidents, TY25' },
     { value: '1 + 2', label: 'Senior promotion secured; two more cases approved' },
-    { value: '$4.5M', label: 'Direct savings, 2025' },
   ],
   chapters: [
     {
@@ -400,14 +419,18 @@ export const SIX_O_FIVE: PortfolioPage = {
   slug: '605',
   href: '/605',
   kind: 'overview',
-  eyebrow: '605 · Product Designer (first design hire), 2017-2021',
-  title: 'The tools I built at 605',
+  eyebrow: 'Case study 04 · 605, 2017-2021',
+  title: 'Three analytics products for TV advertising',
   claim:
-    'Three analytics products for TV advertising, from concept to market, that generated $20M+ in revenue, and where the data-visualization craft comes from.',
+    'The first product designer at 605, taking three products from concept to commercial launch. This is where the data-visualization craft comes from.',
   period: '2017 - 2021',
   role: 'Product Designer, first design hire',
+  roleTag: 'First product designer · 2017-2021',
+  outcome:
+    'Render time cut 3-4 min → 1-1.5 min to hit a two-month client deadline · $2M in additional booked revenue from client pitches, $20M-30M+ across the launched suite',
+  status: 'coming-soon',
   metrics: [
-    { value: '$20M+', label: 'Revenue from products shipped' },
+    { value: '$20M-30M+', label: 'Revenue across the launched suite' },
     { value: '3', label: 'Products, concept to launch' },
     { value: '3-4 min → 1-1.5 min', label: 'Report render time in 605 Platform' },
   ],
