@@ -8,6 +8,7 @@ import {
   BAND,
   FOCUS,
   INITIATIVES,
+  INITIATIVES_LEGEND,
   INVOLVEMENT_LABEL,
   STAGES,
   type InitiativeId,
@@ -17,9 +18,8 @@ import {
 // The lifecycle band in the hero (data in lib/capability-map.ts), in three
 // layouts that share the data, for review:
 //   8 (default)  stage four as a large card, the other six narrow
-//   ?map=3       a row of chevrons, a pipeline left to right
 //   ?map=4       a subway map: one line, seven stations, two branch lines
-// Under 8 and 3 the two initiatives are rails aligned to the stage columns.
+// Under 8 the two initiatives are rails aligned to the stage columns.
 // Identity is never colour alone: a legend names the tints, the two rails
 // differ in shape, and every stage carries its words. The switch comes out
 // once a layout is chosen.
@@ -35,12 +35,6 @@ const DOT: Record<Involvement, string> = {
   management: 'bg-track-management',
   strategy: 'bg-track-strategy',
   none: 'ring-1 ring-inset ring-foreground/25',
-}
-const SOLID: Record<Involvement, string> = {
-  ic: 'bg-track-ic text-track-ic-foreground',
-  management: 'bg-track-management text-track-management-foreground',
-  strategy: 'bg-track-strategy text-track-strategy-foreground',
-  none: 'bg-foreground/10 text-foreground',
 }
 
 function Header() {
@@ -67,6 +61,13 @@ function Legend() {
           {INVOLVEMENT_LABEL[m]}
         </li>
       ))}
+      <li className="flex items-center gap-1.5 label-micro text-muted-foreground">
+        <span aria-hidden="true" className="flex items-center gap-0.5">
+          <span className="size-2 rounded-full bg-track-strategy" />
+          <span className="size-2 rounded-[2px] bg-track-strategy" />
+        </span>
+        {INITIATIVES_LEGEND}
+      </li>
     </ul>
   )
 }
@@ -143,7 +144,13 @@ function StageCards() {
           return (
             <li
               key={s.n}
-              className={cn('rounded-[10px] px-3 py-2.5', FILL[s.mine], big && 'col-span-2 md:col-span-1 md:row-start-1 md:py-3')}
+              className={cn(
+                'rounded-[10px] px-3 py-2.5',
+                FILL[s.mine],
+                // The big card is pinned to its own column so the others
+                // flow around it in stage order: 1 2 3 [4] 5 6 7.
+                big && 'col-span-2 md:col-span-1 md:col-start-4 md:row-start-1 md:py-3',
+              )}
             >
               <p className="label-micro text-muted-foreground">
                 {big ? FOCUS.eyebrow : s.n}
@@ -152,42 +159,22 @@ function StageCards() {
               <p className={cn('mt-1 font-sans font-semibold leading-tight text-foreground', big ? 'text-[15px]' : 'text-[13px]')}>
                 {big ? s.name : s.short}
               </p>
-              <p className={cn('mt-1 font-sans text-[11px] leading-snug', big ? trackStyles.ic.accentText : 'text-muted-foreground')}>
-                {big ? FOCUS.owned : s.tail}
-              </p>
+              {!big && <p className="font-sans text-[11px] leading-snug text-muted-foreground">{s.tail}</p>}
+              {s.products && (
+                <p
+                  className={cn(
+                    'mt-2 font-sans text-[11px] leading-snug',
+                    s.mine === 'ic' ? trackStyles.ic.accentText : trackStyles.management.accentText,
+                  )}
+                >
+                  {s.products}
+                </p>
+              )}
             </li>
           )
         })}
       </ol>
       <Rails cols={COLS_8} />
-    </>
-  )
-}
-
-/* ── 03: chevron flow ──────────────────────────────────────────────────── */
-
-const COLS_3 = 'grid-cols-4 md:grid-cols-7'
-const CHEVRON = {
-  clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%, 10px 50%)',
-}
-
-function Chevrons() {
-  return (
-    <>
-      <ol className={cn('mt-3 grid gap-x-1 gap-y-1.5', COLS_3)}>
-        {STAGES.map((s) => (
-          <li key={s.n} className={cn('px-4 py-2 text-center', SOLID[s.mine])} style={CHEVRON}>
-            <p className="font-sans text-[12px] font-semibold leading-tight">
-              {s.short}
-              <span className="sr-only">{` ${s.tail}, ${INVOLVEMENT_LABEL[s.mine]}`}</span>
-            </p>
-            <p aria-hidden="true" className="font-sans text-[10px] leading-tight opacity-80">
-              {s.tail}
-            </p>
-          </li>
-        ))}
-      </ol>
-      <Rails cols={COLS_3} />
     </>
   )
 }
@@ -201,42 +188,66 @@ const STROKE: Record<Involvement, string> = {
   none: 'var(--stripe-b)',
 }
 
+/** Wraps a station's product list into short lines (about 17 characters)
+ *  so neighbouring stations never collide; at most four lines. */
+function rows(text?: string): string[] {
+  if (!text) return []
+  const out: string[] = []
+  let line = ''
+  for (const word of text.replace(/ · /g, ', ').split(' ')) {
+    if (line && (line + ' ' + word).length > 17) {
+      out.push(line)
+      line = word
+    } else {
+      line = line ? `${line} ${word}` : word
+    }
+  }
+  if (line) out.push(line)
+  return out.slice(0, 4)
+}
+
 function Subway() {
-  const xs = [40, 140, 240, 330, 440, 540, 640]
-  const y = 80
-  const clean = STAGES.map((s, i) => (s.initiatives.includes('clean') ? xs[i] : null))
-  const access = STAGES.map((s, i) => (s.initiatives.includes('access') ? xs[i] : null))
+  const xs = [52, 148, 244, 340, 436, 532, 628]
+  const main = 78
+  const access = 56
+  const clean = 100
+  const first = (id: InitiativeId) => STAGES.findIndex((s) => s.initiatives.includes(id))
+  const last = (id: InitiativeId) => STAGES.length - 1 - [...STAGES].reverse().findIndex((s) => s.initiatives.includes(id))
   return (
     <div className="mt-2 overflow-x-auto">
       <svg
-        viewBox="0 0 680 170"
+        viewBox="0 0 680 190"
         className="block h-auto w-full min-w-[640px]"
         role="img"
-        aria-label="Seven stations on one line, from produce to consume. The clean-data standard line runs under stages one to seven and stops at one, four, six and seven. The fine-grained access control line runs above stages four to seven and stops at four, five and seven."
+        aria-label="Seven stations on one line, from produce to consume, with the products at each. The fine-grained access control line runs above all seven stations. The clean-data standard line runs below and stops at produce, discover, test and consume."
       >
-        <line x1={xs[0]} y1={y} x2={xs[6]} y2={y} stroke="var(--stripe-b)" strokeWidth="4" strokeLinecap="round" />
-        <path d={`M${xs[0]} 112H318Q330 112 330 100V${y}`} fill="none" stroke="var(--track-strategy)" strokeWidth="3" strokeLinecap="round" />
-        <path d={`M330 ${y}V100Q330 112 342 112H${xs[6]}`} fill="none" stroke="var(--track-strategy)" strokeWidth="3" strokeLinecap="round" />
-        <path d={`M330 ${y}V60Q330 48 342 48H${xs[6]}`} fill="none" stroke="var(--track-strategy)" strokeOpacity="0.55" strokeWidth="3" strokeLinecap="round" />
+        <line x1={xs[0]} y1={main} x2={xs[6]} y2={main} stroke="var(--stripe-b)" strokeWidth="4" strokeLinecap="round" />
+        <line x1={xs[first('access')]} y1={access} x2={xs[last('access')]} y2={access} stroke="var(--track-strategy)" strokeOpacity="0.55" strokeWidth="3" strokeLinecap="round" />
+        <line x1={xs[first('clean')]} y1={clean} x2={xs[last('clean')]} y2={clean} stroke="var(--track-strategy)" strokeWidth="3" strokeLinecap="round" />
         {STAGES.map((s, i) => (
-          <g key={s.n}>
-            <circle cx={xs[i]} cy={y} r={s.mine === 'ic' ? 9 : 7} fill="var(--card)" stroke={STROKE[s.mine]} strokeWidth={s.mine === 'ic' ? 3 : 2.5} />
-            <text x={xs[i]} y={28} textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--foreground)" fontFamily="var(--font-sans)">
+          <g key={s.n} fontFamily="var(--font-sans)">
+            <text x={xs[i]} y={22} textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--foreground)">
               {s.short}
             </text>
-            <text x={xs[i]} y={41} textAnchor="middle" fontSize="10" fill="var(--muted-foreground)" fontFamily="var(--font-sans)">
+            <text x={xs[i]} y={35} textAnchor="middle" fontSize="10" fill="var(--muted-foreground)">
               {s.tail}
             </text>
+            {s.initiatives.includes('access') && <rect x={xs[i] - 4} y={access - 4} width="8" height="8" rx="1.5" fill="var(--track-strategy)" />}
+            <circle cx={xs[i]} cy={main} r={s.mine === 'ic' ? 9 : 7} fill="var(--card)" stroke={STROKE[s.mine]} strokeWidth={s.mine === 'ic' ? 3 : 2.5} />
+            {s.initiatives.includes('clean') && <circle cx={xs[i]} cy={clean} r="4" fill="var(--track-strategy)" />}
+            {rows(s.productsShort ?? s.products).map((row, r) => (
+              <text key={r} x={xs[i]} y={122 + r * 11} textAnchor="middle" fontSize="9.5" fill={s.mine === 'ic' ? 'var(--track-ic)' : 'var(--track-management)'}>
+                {row}
+              </text>
+            ))}
           </g>
         ))}
-        {clean.map((x, i) => x !== null && i !== 3 && <circle key={`c${i}`} cx={x} cy={112} r="4" fill="var(--track-strategy)" />)}
-        {access.map((x, i) => x !== null && i !== 3 && <rect key={`a${i}`} x={x - 4} y={44} width="8" height="8" rx="1.5" fill="var(--track-strategy)" />)}
-        <text x={xs[0]} y={136} fontSize="11" fill="var(--track-strategy)" fontFamily="var(--font-mono)">
-          Clean-data standard
-        </text>
-        <text x={xs[6]} y={160} textAnchor="end" fontSize="11" fill="var(--track-strategy)" fontFamily="var(--font-mono)">
-          Fine-grained access control
-        </text>
+        <g fontFamily="var(--font-mono)" fontSize="10" fill="var(--track-strategy)">
+          <rect x={xs[0] - 4} y={162} width="8" height="8" rx="1.5" />
+          <text x={xs[0] + 10} y={170}>Fine-grained access control, across every stage · strategy mine</text>
+          <circle cx={xs[0]} cy={184} r="4" />
+          <text x={xs[0] + 10} y={188}>Clean-data standard · strategy mine</text>
+        </g>
       </svg>
     </div>
   )
@@ -244,7 +255,7 @@ function Subway() {
 
 /* ── the hero slot ─────────────────────────────────────────────────────── */
 
-type Variant = '3' | '4' | '8'
+type Variant = '4' | '8'
 
 export function CapabilityMap({ className }: { className?: string }) {
   const [variant, setVariant] = useState<Variant>('8')
@@ -252,7 +263,7 @@ export function CapabilityMap({ className }: { className?: string }) {
     try {
       const v = new URLSearchParams(window.location.search).get('map')
       // eslint-disable-next-line react-hooks/set-state-in-effect -- read once from the URL after mount
-      if (v === '3' || v === '4') setVariant(v)
+      if (v === '4') setVariant(v)
     } catch {
       /* keep the default */
     }
@@ -264,7 +275,6 @@ export function CapabilityMap({ className }: { className?: string }) {
         <Legend />
       </div>
       {variant === '8' && <StageCards />}
-      {variant === '3' && <Chevrons />}
       {variant === '4' && <Subway />}
     </section>
   )
