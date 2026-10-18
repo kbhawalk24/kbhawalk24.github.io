@@ -172,7 +172,7 @@ function Artboard({ T }: { T: number }) {
           >
             <div className="mb-1 font-heading text-[22px] font-extrabold leading-[1.2]">
               <span className="mr-2 font-mono text-[16px] font-normal text-muted-foreground">{s.n}</span>
-              {s.name}
+              {s.wheelName}
             </div>
             {s.products.length === 0 && <div className="text-[17px] leading-[1.3] text-muted-foreground">{s.what}</div>}
             {s.products.map((pr, k) => {
@@ -270,7 +270,7 @@ export function LifecycleWheel({ className, fallback }: { className?: string; fa
         <ul>
           {STAGES.map((s, i) => (
             <li key={s.n}>
-              Stage {s.n}, {s.name}: {owner(i) === 0 ? 'designed hands-on, 2021 to 2024, then led' : owner(i) === 1 ? 'led as design manager, 2024 to 2026' : 'outside design’s scope'}.
+              Stage {s.n}, {s.wheelName}: {owner(i) === 0 ? 'designed hands-on, 2021 to 2024, then led' : owner(i) === 1 ? 'led as design manager, 2024 to 2026' : 'outside design’s scope'}.
               {s.products.length > 0 ? ` Products: ${s.products.join(', ')}.` : ''} Strategy set across every stage: the clean-data standard and fine-grained access control.
             </li>
           ))}

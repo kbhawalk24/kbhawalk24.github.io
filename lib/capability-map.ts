@@ -13,6 +13,8 @@ export type InitiativeId = 'clean' | 'access'
 export interface Stage {
   n: number
   name: string
+  /** The handoff's fuller name for the wheel, with the object spelled out. */
+  wheelName: string
   /** One line on what the stage covers, in plain words. */
   what: string
   mine: Involvement
@@ -39,6 +41,7 @@ export const STAGES: Stage[] = [
   {
     n: 1,
     name: 'Produce & instrument',
+    wheelName: 'Produce & instrument data',
     what: 'Create data products, score and certify them, author the Data Map, instrument events',
     mine: 'management',
     products: ['Data product scoring and certification', 'Authoring tool for the Data Map', 'Guided onboarding for source data'],
@@ -47,6 +50,7 @@ export const STAGES: Stage[] = [
   {
     n: 2,
     name: 'Move & ingest',
+    wheelName: 'Move & ingest data',
     what: 'Bring batch and real-time data into the lake',
     mine: 'management',
     products: ['Batch ingestion', 'Real-time stream materialization'],
@@ -55,6 +59,7 @@ export const STAGES: Stage[] = [
   {
     n: 3,
     name: 'Store & persist',
+    wheelName: 'Store & persist data',
     what: 'Entity storage, managed databases, the event bus',
     mine: 'none',
     products: [],
@@ -63,6 +68,7 @@ export const STAGES: Stage[] = [
   {
     n: 4,
     name: 'Discover & access',
+    wheelName: 'Discover & access data',
     what: 'Find data, trace it, request and provision access, the agent in coding tools',
     mine: 'ic',
     products: [
@@ -79,6 +85,7 @@ export const STAGES: Stage[] = [
   {
     n: 5,
     name: 'Process & derive',
+    wheelName: 'Process & derive data',
     what: 'Build pipelines and derived tables',
     mine: 'management',
     products: ['Pipeline authoring, batch and stream'],
@@ -87,6 +94,7 @@ export const STAGES: Stage[] = [
   {
     n: 6,
     name: 'Test & ensure quality',
+    wheelName: 'Test & ensure data quality',
     what: 'Quality checks, reliability, monitoring',
     mine: 'management',
     products: ['Data quality checks', 'Data reliability and monitoring'],
@@ -95,6 +103,7 @@ export const STAGES: Stage[] = [
   {
     n: 7,
     name: 'Consume & activate',
+    wheelName: 'Consume & activate data',
     what: 'Push clean data to marketing and business intelligence',
     mine: 'ic',
     products: ['Self-service marketing data onboarding', 'Business intelligence dashboards'],
