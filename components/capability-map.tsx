@@ -131,9 +131,9 @@ function CardsAndMatrix({ className }: { className?: string }) {
   const show = reduce || inView
   return (
     <section className={className} aria-label="What I led design and strategy for, at a glance">
-      <h2 className="text-balance font-heading text-lg font-semibold leading-tight tracking-tight text-foreground md:text-xl">
+      <p className="text-balance font-heading text-lg font-semibold leading-tight tracking-tight text-foreground md:text-xl">
         {BAND.heading}
-      </h2>
+      </p>
       <p className="mt-1.5 max-w-[70ch] font-sans text-xs leading-relaxed text-muted-foreground">{BAND.sub}</p>
 
       <motion.ol

@@ -10,6 +10,8 @@ import { WorkArcs } from '@/components/work-arcs'
 import { HowILead } from '@/components/how-i-lead'
 import { CareerTimeline } from '@/components/career-timeline'
 import { ContactFooter } from '@/components/contact-footer'
+import { Reveal } from '@/components/motion-primitives'
+import { HeadingDot } from '@/components/heading-dot'
 
 export default function Page() {
   return (
@@ -21,9 +23,15 @@ export default function Page() {
         <Hero />
         {/* What the work entails, at a glance: the lifecycle wheel from 1024px
             up, the cards and matrix below that. */}
-        <div id="at-a-glance" className="relative z-10 mx-auto max-w-6xl scroll-mt-28 px-6 pt-16 md:px-10 md:pt-24 lg:px-14">
+        <section id="at-a-glance" aria-labelledby="at-a-glance-heading" className="relative z-10 mx-auto max-w-6xl scroll-mt-28 px-6 pt-16 md:px-10 md:pt-24 lg:px-14">
+          <Reveal className="mb-8">
+            <h2 id="at-a-glance-heading" className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
+              Work done in the last five years, at a glance
+              <HeadingDot />
+            </h2>
+          </Reveal>
           <CapabilityMap />
-        </div>
+        </section>
         <WorkArcs />
         <HowILead />
         <CareerTimeline />
