@@ -12,7 +12,7 @@ import {
 } from 'motion/react'
 
 import { EASE_OUT, MagneticWrap } from '@/components/motion-primitives'
-import { DomainMap } from '@/components/domain-map'
+import { CapabilityMap } from '@/components/capability-map'
 
 export function mapClamp(v: number, inMin: number, inMax: number, outMin: number, outMax: number) {
   const t = Math.min(1, Math.max(0, (v - inMin) / (inMax - inMin)))
@@ -232,8 +232,8 @@ export function Hero() {
             </div>
 
             {/* About: blurs in as scroll progresses. The paragraph, a hairline,
-                and the ask with its buttons on the left; the domain map on
-                the right. */}
+                and the ask with its buttons on the left; the capability map
+                on the right. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
               className="mt-12 w-full text-left md:grid md:grid-cols-[7fr_5fr] md:items-start md:gap-10 lg:gap-14"
@@ -297,9 +297,9 @@ export function Hero() {
               </div>
              </div>
 
-              {/* The domain map, beside the paragraph on wide screens and
-                  under the buttons on phones. */}
-              <DomainMap className="mt-10 md:mt-0" />
+              {/* The capability map, beside the paragraph on wide screens
+                  and under the buttons on phones. */}
+              <CapabilityMap className="mt-10 md:mt-0" />
             </div>
 
           </motion.div>
