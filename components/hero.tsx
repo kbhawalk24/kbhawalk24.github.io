@@ -12,7 +12,6 @@ import {
 } from 'motion/react'
 
 import { EASE_OUT, MagneticWrap } from '@/components/motion-primitives'
-import { CapabilityMap } from '@/components/capability-map'
 
 export function mapClamp(v: number, inMin: number, inMax: number, outMin: number, outMax: number) {
   const t = Math.min(1, Math.max(0, (v - inMin) / (inMax - inMin)))
@@ -232,7 +231,7 @@ export function Hero() {
             </div>
 
             {/* About: blurs in as scroll progresses. The paragraph, a hairline,
-                the lifecycle band, then the ask with its buttons. */}
+                and the ask with its buttons. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
               className="mt-12 w-full text-left md:mt-16"
@@ -253,9 +252,7 @@ export function Hero() {
                 integration platform.
               </p>
 
-              <CapabilityMap className="mt-10" />
-
-              <div className="mt-12">
+              <div className="mt-10 border-t border-border pt-10">
                 <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
                   I&rsquo;m looking for my next role in the Bay Area, either as a principal
                   designer or leading a design team, at a company building AI, data, or
