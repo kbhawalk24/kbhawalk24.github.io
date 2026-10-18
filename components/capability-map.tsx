@@ -9,7 +9,7 @@ import {
   BAND,
   FOCUS,
   INITIATIVES,
-  INITIATIVES_LEGEND,
+  INITIATIVES_LABEL,
   INVOLVEMENT_LABEL,
   STAGES,
   type InitiativeId,
@@ -64,13 +64,15 @@ function Mark({ shape, className }: { shape: 'circle' | 'square'; className?: st
 
 function Header() {
   return (
-    <header className="flex items-center gap-2.5">
-      <span className={cn('inline-flex size-8 items-center justify-center rounded-full', trackStyles.strategy.badgeFlat)}>
+    <header className="flex items-start gap-3">
+      <span className={cn('mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full', trackStyles.strategy.badgeFlat)}>
         <Compass className="size-4" aria-hidden="true" />
       </span>
       <div>
-        <p className="label-micro text-foreground">{BAND.heading}</p>
-        <p className="font-sans text-xs text-muted-foreground">{BAND.sub}</p>
+        <p className="text-balance font-heading text-lg font-semibold leading-tight tracking-tight text-foreground">
+          {BAND.heading}
+        </p>
+        <p className="mt-1 font-sans text-xs text-muted-foreground">{BAND.sub}</p>
       </div>
     </header>
   )
@@ -86,13 +88,6 @@ function Legend() {
           {INVOLVEMENT_LABEL[m]}
         </li>
       ))}
-      <li className="flex items-center gap-1.5 label-micro text-muted-foreground">
-        <span className="flex items-center gap-0.5">
-          <Mark shape="circle" />
-          <Mark shape="square" />
-        </span>
-        {INITIATIVES_LEGEND}
-      </li>
     </ul>
   )
 }
@@ -174,9 +169,7 @@ export function CapabilityMap({ className }: { className?: string }) {
       {/* The platform frame: one tinted surface around the seven stages,
           captioned so the diagram reads as one data platform. */}
       <div className="mt-4 rounded-[14px] bg-card/60 p-3 md:p-4">
-        <p className="label-micro text-muted-foreground">{BAND.frame}</p>
-
-        <ol className={cn('mt-2.5 grid gap-2', COLS)}>
+        <ol className={cn('grid gap-2', COLS)}>
           {STAGES.map((s, i) => {
             const big = i === FOCUS.index
             const touched = active !== null && s.initiatives.includes(active)
@@ -203,8 +196,8 @@ export function CapabilityMap({ className }: { className?: string }) {
                   )}
                 >
                   <p className="label-micro text-muted-foreground">
-                    {big ? FOCUS.eyebrow : s.n}
-                    {!big && <span className="sr-only">, {INVOLVEMENT_LABEL[s.mine]}</span>}
+                    {s.n}
+                    <span className="sr-only">, {INVOLVEMENT_LABEL[s.mine]}</span>
                   </p>
                   <p
                     className={cn(
@@ -233,7 +226,8 @@ export function CapabilityMap({ className }: { className?: string }) {
           })}
         </ol>
 
-        <div className="mt-4 hidden gap-2.5 md:grid">
+        <div className="mt-5 hidden gap-2.5 md:grid">
+          <p className="label-micro text-foreground">{INITIATIVES_LABEL}</p>
           {INITIATIVES.map((i) => (
             <Rail key={i.id} id={i.id} active={active} onToggle={toggle} />
           ))}
@@ -242,7 +236,9 @@ export function CapabilityMap({ className }: { className?: string }) {
 
       {/* The toggles live in the rails, which phones do not show; give
           phones the same two toggles as a row of chips. */}
-      <div className="mt-3 flex flex-wrap gap-2 md:hidden">
+      <div className="mt-3 md:hidden">
+        <p className="mb-2 label-micro text-foreground">{INITIATIVES_LABEL}</p>
+        <div className="flex flex-wrap gap-2">
         {INITIATIVES.map((i) => {
           const on = active === i.id
           return (
@@ -262,6 +258,7 @@ export function CapabilityMap({ className }: { className?: string }) {
             </button>
           )
         })}
+        </div>
       </div>
     </section>
   )

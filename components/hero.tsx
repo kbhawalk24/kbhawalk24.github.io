@@ -255,7 +255,7 @@ export function Hero() {
 
               <CapabilityMap className="mt-10" />
 
-              <div className="mt-10 border-t border-border pt-10">
+              <div className="mt-12">
                 <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
                   I&rsquo;m looking for my next role in the Bay Area, either as a principal
                   designer or leading a design team, at a company building AI, data, or

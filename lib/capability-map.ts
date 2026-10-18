@@ -48,22 +48,17 @@ export const STAGES: Stage[] = [
 ]
 
 /** The stage I designed myself for five years, shown large in layout 08. */
-export const FOCUS = {
-  index: 3,
-  eyebrow: '4 · designed myself, then led',
-}
+export const FOCUS = { index: 3 }
 
 export const INITIATIVES: Initiative[] = [
   { id: 'clean', label: 'Clean-data standard', shape: 'circle' },
   { id: 'access', label: 'Fine-grained access control', shape: 'square' },
 ]
 
-/** Legend line for the initiatives: both were mine to set the strategy for. */
-export const INITIATIVES_LEGEND = 'drove the strategy, across stages'
+/** The one line above the rails. */
+export const INITIATIVES_LABEL = 'Cross-cutting initiatives I set the strategy for'
 
 export const BAND = {
-  heading: 'Led design and strategy for',
-  sub: 'Intuit’s data platform, end to end · 2021–2026',
-  /** The caption on the frame around the seven stages. */
-  frame: 'Data platform · the seven stages of the data lifecycle',
+  heading: 'Led design and strategy for Intuit’s data platform, end to end',
+  sub: '2021–2026 · the seven stages of the data lifecycle',
 }
