@@ -50,7 +50,10 @@ const PRODUCTS: Record<Involvement, string> = {
   none: 'text-muted-foreground',
 }
 
-const COLS = 'grid-cols-2 md:grid-cols-[repeat(3,minmax(0,1fr))_minmax(0,2.4fr)_repeat(3,minmax(0,1fr))]'
+// Three tiers: two columns on phones, three equal columns from tablet up
+// with the big card on its own row, and from 1280px the single row of
+// seven with the big card twice as wide and the rails under it.
+const COLS = 'grid-cols-2 md:grid-cols-3 xl:grid-cols-[repeat(3,minmax(0,1fr))_minmax(0,2fr)_repeat(3,minmax(0,1fr))]'
 const EASE_OUT_QUART: [number, number, number, number] = [0.25, 1, 0.5, 1]
 
 function Mark({ shape, className }: { shape: 'circle' | 'square'; className?: string }) {
@@ -181,7 +184,7 @@ export function CapabilityMap({ className }: { className?: string }) {
                 whileInView={{ opacity: 1, transform: 'translateY(0px)' }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.24, ease: EASE_OUT_QUART, delay: reduce ? 0 : i * 0.04 }}
-                className={cn('flex', big && 'col-span-2 md:col-span-1 md:col-start-4 md:row-start-1')}
+                className={cn('flex', big && 'col-span-2 md:col-span-3 xl:col-span-1 xl:col-start-4 xl:row-start-1')}
               >
                 {/* The entrance animates the list item; the card itself
                     carries the tint, the hover lift and the toggle's dim,
@@ -191,7 +194,7 @@ export function CapabilityMap({ className }: { className?: string }) {
                     'flex w-full flex-col rounded-[12px] px-3.5 py-3 transition-[opacity,transform,box-shadow] duration-150 ease-out',
                     'motion-safe:hover:-translate-y-0.5 hover:shadow-soft',
                     FILL[s.mine],
-                    big && 'md:py-3.5',
+                    big && 'xl:py-3.5',
                     dimmed && 'opacity-40',
                   )}
                 >
@@ -202,7 +205,7 @@ export function CapabilityMap({ className }: { className?: string }) {
                   <p
                     className={cn(
                       'mt-1.5 text-balance font-heading font-semibold leading-tight tracking-tight text-foreground',
-                      big ? 'text-lg md:text-xl' : 'text-[15px]',
+                      big ? 'text-lg' : 'text-[15px]',
                     )}
                   >
                     {s.name}
@@ -215,10 +218,10 @@ export function CapabilityMap({ className }: { className?: string }) {
                       ))}
                     </ul>
                   )}
-                  {/* Phones have no rails under the grid, so each card shows
-                      the marks of the initiatives that touched it. */}
+                  {/* Below the seven-column tier there are no rails, so each
+                      card shows the marks of the initiatives that touched it. */}
                   {s.initiatives.length > 0 && (
-                    <p className="mt-auto flex items-center gap-1 pt-2 md:hidden" aria-label="Initiatives that touched this stage">
+                    <p className="mt-auto flex items-center gap-1 pt-2 xl:hidden" aria-label="Initiatives that touched this stage">
                       {s.initiatives.map((id) => (
                         <Mark key={id} shape={INITIATIVES.find((x) => x.id === id)!.shape} />
                       ))}
@@ -230,7 +233,7 @@ export function CapabilityMap({ className }: { className?: string }) {
           })}
         </ol>
 
-        <div className="mt-5 hidden gap-2.5 md:grid">
+        <div className="mt-5 hidden gap-2.5 xl:grid">
           <p className="label-micro text-foreground">{INITIATIVES_LABEL}</p>
           {INITIATIVES.map((i) => (
             <Rail key={i.id} id={i.id} active={active} onToggle={toggle} />
@@ -238,9 +241,9 @@ export function CapabilityMap({ className }: { className?: string }) {
         </div>
       </div>
 
-      {/* The toggles live in the rails, which phones do not show; give
-          phones the same two toggles as a row of chips. */}
-      <div className="mt-3 md:hidden">
+      {/* The toggles live in the rails, which only the widest tier shows;
+          everything narrower gets the same two toggles as chips. */}
+      <div className="mt-3 xl:hidden">
         <p className="mb-2 label-micro text-foreground">{INITIATIVES_LABEL}</p>
         <div className="flex flex-wrap gap-2">
         {INITIATIVES.map((i) => {

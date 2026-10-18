@@ -235,10 +235,10 @@ export function Hero() {
                 the lifecycle band, then the ask with its buttons. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-12 w-full max-w-4xl text-left"
+              className="mt-12 w-full text-left"
             >
              <div>
-              <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
+              <p className="max-w-4xl text-pretty font-sans text-lg leading-[1.6] text-foreground">
                 I&rsquo;m a design manager for data and AI tools. At{' '}
                 <span translate="no">Intuit</span> I led design for the data platform for two
                 years, owning <span className="mark">data discovery</span> and{' '}
@@ -255,7 +255,7 @@ export function Hero() {
 
               <CapabilityMap className="mt-10" />
 
-              <div className="mt-12">
+              <div className="mt-12 max-w-4xl">
                 <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
                   I&rsquo;m looking for my next role in the Bay Area, either as a principal
                   designer or leading a design team, at a company building AI, data, or
