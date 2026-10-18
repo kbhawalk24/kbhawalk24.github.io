@@ -20,8 +20,6 @@ export interface Stage {
   mine: Involvement
   /** The products in this stage that were mine or my team's, plain names. */
   products?: string
-  /** A shorter list for the subway's narrow station labels. */
-  productsShort?: string
   initiatives: InitiativeId[]
 }
 
@@ -40,13 +38,13 @@ export const INVOLVEMENT_LABEL: Record<Involvement, string> = {
 }
 
 export const STAGES: Stage[] = [
-  { n: 1, short: 'Produce', tail: '& instrument', name: 'Produce & instrument', what: 'Create, score and certify data products; author the Data Map', mine: 'management', products: 'Data product scoring & certification · Data Map authoring', productsShort: 'Scoring & certification, Data Map authoring', initiatives: ['clean', 'access'] },
+  { n: 1, short: 'Produce', tail: '& instrument', name: 'Produce & instrument', what: 'Create, score and certify data products; author the Data Map', mine: 'management', products: 'Data product scoring & certification · Data Map authoring', initiatives: ['clean', 'access'] },
   { n: 2, short: 'Move', tail: '& ingest', name: 'Move & ingest', what: 'Batch and real-time data into the lake', mine: 'management', products: 'Batch & real-time ingestion', initiatives: ['access'] },
   { n: 3, short: 'Store', tail: '& persist', name: 'Store & persist', what: 'Storage, managed databases, the event bus', mine: 'none', initiatives: ['access'] },
-  { n: 4, short: 'Discover', tail: '& access', name: 'Discover & access', what: 'Find data, trace it, get access, the agent in coding tools', mine: 'ic', products: 'Catalog & search · Data Map · plain-language assistant · lineage · access requests · Collections · the agent in Cursor & Claude', productsShort: 'Catalog, search, Data Map, lineage, access, the agent', initiatives: ['clean', 'access'] },
+  { n: 4, short: 'Discover', tail: '& access', name: 'Discover & access', what: 'Find data, trace it, get access, the agent in coding tools', mine: 'ic', products: 'Catalog & search · Data Map · plain-language assistant · lineage · access requests · Collections · the agent in Cursor & Claude', initiatives: ['clean', 'access'] },
   { n: 5, short: 'Process', tail: '& derive', name: 'Process & derive', what: 'Pipelines and derived tables', mine: 'management', products: 'Pipeline authoring', initiatives: ['access'] },
   { n: 6, short: 'Test', tail: '& quality', name: 'Test & ensure quality', what: 'Quality checks, reliability, monitoring', mine: 'management', products: 'Data quality · observability', initiatives: ['clean', 'access'] },
-  { n: 7, short: 'Consume', tail: '& activate', name: 'Consume & activate', what: 'Clean data to marketing and BI', mine: 'ic', products: 'Self-service marketing data onboarding · BI', productsShort: 'Marketing data onboarding, BI', initiatives: ['clean', 'access'] },
+  { n: 7, short: 'Consume', tail: '& activate', name: 'Consume & activate', what: 'Clean data to marketing and BI', mine: 'ic', products: 'Self-service marketing data onboarding · BI', initiatives: ['clean', 'access'] },
 ]
 
 /** The stage I designed myself for five years, shown large in layout 08. */
@@ -66,4 +64,6 @@ export const INITIATIVES_LEGEND = 'drove the strategy, across stages'
 export const BAND = {
   heading: 'Led design and strategy for',
   sub: 'Intuit’s data platform, end to end · 2021–2026',
+  /** The caption on the frame around the seven stages. */
+  frame: 'Data platform · the seven stages of the data lifecycle',
 }
