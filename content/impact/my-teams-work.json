@@ -1,0 +1,15 @@
+{
+  "id": "tw-impact",
+  "heading": "What changed in the two years I led the team.",
+  "summary": "Access to real-time data fell from 2–3 weeks to 3 days, decryption access from 9 days to 3 days, internal approvals from 24 hours to near-instant, time to discover data from 14.2 hours to 9.4 hours, search session conversion rose from 41% to 61%, peak-season P0/P1 incidents fell from 17 to 0, and clean data grew from under 1% to 80% of the estate.",
+  "source": "Launch posts of Mar 24, Aug 22 and Sep 18, 2025 and the internal roadmap. The incident and clean-data results are shared by many teams.",
+  "rows": [
+    { "label": "Access to real-time data", "date": "Mar 2025", "before": { "value": "2–3 weeks", "low": 14, "high": 21 }, "after": { "value": "3 days", "low": 3, "high": 3 }, "unit": "days", "max": 21 },
+    { "label": "Decryption access", "date": "Aug 2025", "before": { "value": "9 days", "low": 9, "high": 9 }, "after": { "value": "3 days", "low": 3, "high": 3 }, "unit": "days", "max": 9 },
+    { "label": "Internal approvals", "date": "Sep 2025", "before": { "value": "24 hours", "low": 24, "high": 24 }, "after": { "value": "near-instant", "low": 0, "high": 0 }, "unit": "hours", "max": 24 },
+    { "label": "Time to discover data", "date": "Aug 2024 → Jul 2025", "before": { "value": "14.2 hours", "low": 14.2, "high": 14.2 }, "after": { "value": "9.4 hours", "low": 9.4, "high": 9.4 }, "unit": "hours", "max": 14.2 },
+    { "label": "Search session conversion", "date": "Aug 2024 → Jul 2025", "before": { "value": "41%", "low": 41, "high": 41 }, "after": { "value": "61%", "low": 61, "high": 61 }, "unit": "%", "max": 100, "upIsGood": true }
+  ],
+  "incidents": { "label": "Peak-season P0/P1 data incidents", "date": "Tax year 2025", "before": "17", "after": "0", "count": 17, "shared": true },
+  "clean": { "label": "Of the data estate meeting the clean-data standard", "date": "Dec 2025", "before": "<1%", "after": "80%", "beforePct": 1, "afterPct": 80, "shared": true }
+}

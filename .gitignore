@@ -31,3 +31,6 @@ public/images/SKELETON-README.md.zip
 public/images/individual_svgs.zip
 public/portfolio_eye_tracking.html
 public/images/Screenshot*.png
+
+# Image staging (never committed; see BRIEF.md section 5)
+_staging/

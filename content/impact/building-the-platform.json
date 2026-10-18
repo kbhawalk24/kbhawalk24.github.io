@@ -1,0 +1,25 @@
+{
+  "id": "bp-impact",
+  "heading": "From 45 days to under 4 minutes.",
+  "summary": "Time to find, get access to and use data fell from about 45 days in 2021 (my own measure) to 20 days in 2023, 14.2 hours in August 2024, 9.4 hours in July 2025, and 4 minutes with the agent in March 2026; monthly users grew from 1,886 to 2,664 to 6,673.",
+  "source": "Dates and sources per point; the 2021 baseline is my own measure.",
+  "ladder": {
+    "axisLabel": "log scale",
+    "units": ["days", "hours", "minutes"],
+    "points": [
+      { "value": "45 days", "minutes": 64800, "date": "2021", "tag": "own measure" },
+      { "value": "20 days", "minutes": 28800, "date": "2023", "tag": "public" },
+      { "value": "14.2 hours", "minutes": 852, "date": "Aug 2024", "tag": "platform" },
+      { "value": "9.4 hours", "minutes": 564, "date": "Jul 2025", "tag": "platform" },
+      { "value": "4 minutes", "minutes": 4, "date": "Mar 2026", "tag": "agent study" }
+    ]
+  },
+  "users": {
+    "label": "Monthly users",
+    "points": [
+      { "value": "1,886", "n": 1886, "date": "FY24 start" },
+      { "value": "2,664", "n": 2664, "date": "Jul 2024" },
+      { "value": "6,673", "n": 6673, "date": "Mar 2026" }
+    ]
+  }
+}

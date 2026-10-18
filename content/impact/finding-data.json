@@ -1,0 +1,17 @@
+{
+  "id": "fd-impact",
+  "heading": "From 45 minutes to 4 minutes.",
+  "summary": "In an observed-task study in March 2026, the time from a question to an answer fell from 45 minutes to 4 minutes with the agent; earlier, top-five click-through rose from 68% to 96% and first-result precision from 81.31% to 89.24%.",
+  "source": "Observed-task study of the agent, March 2026. Earlier figures from year-end reviews and launch posts.",
+  "bars": {
+    "unit": "min",
+    "axis": ["0", "15", "30", "45"],
+    "before": { "value": "45 min", "minutes": 45, "label": "Before the agent" },
+    "after": { "value": "4 min", "minutes": 4, "label": "With the agent" }
+  },
+  "tiles": [
+    { "label": "Searches with a click in the top five", "from": "68%", "to": "96%", "date": "Apr 2022 → Apr 2023" },
+    { "label": "Searches where the first result was right", "from": "81.31%", "to": "89.24%", "date": "Mar 2025" },
+    { "label": "Active agent users", "from": "0", "to": "711", "date": "Mar 2026", "fromHidden": true }
+  ]
+}

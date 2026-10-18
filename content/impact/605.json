@@ -1,0 +1,24 @@
+{
+  "id": "s6-impact",
+  "heading": "Thirty-two reports became two pages. Fifteen audiences became five.",
+  "summary": "On 605 Impact, 32 separate reports collapsed into 2 pages; on 605 Platform, chart render time fell from 3–4 minutes to 1–1.5 minutes, and a comparison that took 30 minutes for two audiences and two metrics, or 1–2 hours for five audiences and four metrics, became one report.",
+  "source": "April 2021 deck; timings from user walkthroughs.",
+  "reports": { "label": "605 Impact reports", "before": "32", "after": "2", "count": 32, "keep": 2 },
+  "render": {
+    "label": "Chart render time",
+    "unit": "min",
+    "max": 4,
+    "before": { "value": "3–4 minutes", "low": 3, "high": 4 },
+    "after": { "value": "1–1.5 minutes", "low": 1, "high": 1.5 }
+  },
+  "workaround": {
+    "label": "Time to compare audiences",
+    "unit": "min",
+    "max": 120,
+    "steps": [
+      { "value": "30 minutes", "low": 30, "high": 30, "label": "two audiences, two metrics, by hand" },
+      { "value": "1–2 hours", "low": 60, "high": 120, "label": "five audiences, four metrics, by hand" },
+      { "value": "one report", "low": 1, "high": 1.5, "label": "shipped design: one report, renders in 1–1.5 minutes" }
+    ]
+  }
+}
