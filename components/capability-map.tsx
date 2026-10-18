@@ -1,14 +1,15 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'motion/react'
 import { LifecycleWheel } from '@/components/lifecycle-wheel'
 import { cn } from '@/lib/utils'
 import { BAND, MATRIX_ROWS, STAGES, type Stage } from '@/lib/capability-map'
 import type { Track } from '@/lib/timeline-data'
 
-// The lifecycle section in the hero (data in lib/capability-map.ts).
-// Two parts, kept apart on purpose: the seven stages as a plain table of
+// The lifecycle section's narrow form (data in lib/capability-map.ts),
+// rendered below 1024px where the wheel has no room. Two parts, kept
+// apart on purpose: the seven stages as a plain table of
 // cards (number, name, what it covers, products), and under them a matrix
 // of four yes-or-no rows (designed myself, owned as manager, the two
 // initiatives) with one encoding only, a filled cell. Ownership lives in
@@ -153,19 +154,8 @@ function CardsAndMatrix({ className }: { className?: string }) {
   )
 }
 
-/** The hero slot. `?viz=wheel` shows the lifecycle wheel (wheel/README.md)
- *  as the alternative, with the cards and matrix as its narrow fallback;
- *  the cards and matrix are the default. Remove the switch once chosen. */
+/** The hero slot: the lifecycle wheel (wheel/README.md), with the cards
+ *  and matrix as its fallback below 1024px. */
 export function CapabilityMap({ className }: { className?: string }) {
-  const [wheel, setWheel] = useState(false)
-  useEffect(() => {
-    try {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- read once from the URL after mount
-      if (new URLSearchParams(window.location.search).get('viz') === 'wheel') setWheel(true)
-    } catch {
-      /* keep the default */
-    }
-  }, [])
-  if (wheel) return <LifecycleWheel className={className} fallback={<CardsAndMatrix className={className} />} />
-  return <CardsAndMatrix className={className} />
+  return <LifecycleWheel className={className} fallback={<CardsAndMatrix className={className} />} />
 }
