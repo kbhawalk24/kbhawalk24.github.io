@@ -12,14 +12,12 @@ export type InitiativeId = 'clean' | 'access'
 
 export interface Stage {
   n: number
-  /** Short name for tight layouts, and the tail that completes it. */
-  short: string
-  tail: string
   name: string
+  /** One line on what the stage covers, in plain words. */
   what: string
   mine: Involvement
-  /** The products in this stage that were mine or my team's, plain names. */
-  products?: string
+  /** The products in this stage, spelled out; no internal names or short forms. */
+  products: string[]
   initiatives: InitiativeId[]
 }
 
@@ -38,13 +36,70 @@ export const INVOLVEMENT_LABEL: Record<Involvement, string> = {
 }
 
 export const STAGES: Stage[] = [
-  { n: 1, short: 'Produce', tail: '& instrument', name: 'Produce & instrument', what: 'Create, score and certify data products; author the Data Map', mine: 'management', products: 'Data product scoring & certification · Data Map authoring', initiatives: ['clean', 'access'] },
-  { n: 2, short: 'Move', tail: '& ingest', name: 'Move & ingest', what: 'Batch and real-time data into the lake', mine: 'management', products: 'Batch & real-time ingestion', initiatives: ['access'] },
-  { n: 3, short: 'Store', tail: '& persist', name: 'Store & persist', what: 'Storage, managed databases, the event bus', mine: 'none', initiatives: ['access'] },
-  { n: 4, short: 'Discover', tail: '& access', name: 'Discover & access', what: 'Find data, trace it, get access, the agent in coding tools', mine: 'ic', products: 'Catalog & search · Data Map · plain-language assistant · lineage · access requests · Collections · the agent in Cursor & Claude', initiatives: ['clean', 'access'] },
-  { n: 5, short: 'Process', tail: '& derive', name: 'Process & derive', what: 'Pipelines and derived tables', mine: 'management', products: 'Pipeline authoring', initiatives: ['access'] },
-  { n: 6, short: 'Test', tail: '& quality', name: 'Test & ensure quality', what: 'Quality checks, reliability, monitoring', mine: 'management', products: 'Data quality · observability', initiatives: ['clean', 'access'] },
-  { n: 7, short: 'Consume', tail: '& activate', name: 'Consume & activate', what: 'Clean data to marketing and BI', mine: 'ic', products: 'Self-service marketing data onboarding · BI', initiatives: ['clean', 'access'] },
+  {
+    n: 1,
+    name: 'Produce & instrument',
+    what: 'Create data products, score and certify them, author the Data Map, instrument events',
+    mine: 'management',
+    products: ['Data product scoring and certification', 'Authoring tool for the Data Map', 'Guided onboarding for source data'],
+    initiatives: ['clean', 'access'],
+  },
+  {
+    n: 2,
+    name: 'Move & ingest',
+    what: 'Bring batch and real-time data into the lake',
+    mine: 'management',
+    products: ['Batch ingestion', 'Real-time stream materialization'],
+    initiatives: ['access'],
+  },
+  {
+    n: 3,
+    name: 'Store & persist',
+    what: 'Entity storage, managed databases, the event bus',
+    mine: 'none',
+    products: [],
+    initiatives: ['access'],
+  },
+  {
+    n: 4,
+    name: 'Discover & access',
+    what: 'Find data, trace it, request and provision access, the agent in coding tools',
+    mine: 'ic',
+    products: [
+      'Catalog and search',
+      'Data Map',
+      'Plain-language assistant',
+      'Lineage',
+      'Access requests and control',
+      'Collections',
+      'The agent in Cursor and Claude',
+    ],
+    initiatives: ['clean', 'access'],
+  },
+  {
+    n: 5,
+    name: 'Process & derive',
+    what: 'Build pipelines and derived tables',
+    mine: 'management',
+    products: ['Pipeline authoring, batch and stream'],
+    initiatives: ['access'],
+  },
+  {
+    n: 6,
+    name: 'Test & ensure quality',
+    what: 'Quality checks, reliability, monitoring',
+    mine: 'management',
+    products: ['Data quality checks', 'Data reliability and monitoring'],
+    initiatives: ['clean', 'access'],
+  },
+  {
+    n: 7,
+    name: 'Consume & activate',
+    what: 'Push clean data to marketing and business intelligence',
+    mine: 'ic',
+    products: ['Self-service marketing data onboarding', 'Business intelligence dashboards'],
+    initiatives: ['clean', 'access'],
+  },
 ]
 
 /** The stage I designed myself for five years, shown large in layout 08. */

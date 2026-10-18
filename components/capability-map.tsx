@@ -201,15 +201,19 @@ export function CapabilityMap({ className }: { className?: string }) {
                   </p>
                   <p
                     className={cn(
-                      'mt-1.5 font-heading font-semibold leading-tight tracking-tight text-foreground',
+                      'mt-1.5 text-balance font-heading font-semibold leading-tight tracking-tight text-foreground',
                       big ? 'text-lg md:text-xl' : 'text-[15px]',
                     )}
                   >
-                    {big ? s.name : s.short}
+                    {s.name}
                   </p>
-                  {!big && <p className="font-sans text-xs leading-snug text-muted-foreground">{s.tail}</p>}
-                  {s.products && (
-                    <p className={cn('mt-2 font-sans text-xs leading-snug', PRODUCTS[s.mine])}>{s.products}</p>
+                  <p className="mt-1 font-sans text-xs leading-snug text-muted-foreground">{s.what}</p>
+                  {s.products.length > 0 && (
+                    <ul className={cn('mt-2.5 grid gap-1 font-sans text-xs leading-snug', PRODUCTS[s.mine])}>
+                      {s.products.map((pr) => (
+                        <li key={pr}>{pr}</li>
+                      ))}
+                    </ul>
                   )}
                   {/* Phones have no rails under the grid, so each card shows
                       the marks of the initiatives that touched it. */}
