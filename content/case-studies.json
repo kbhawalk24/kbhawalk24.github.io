@@ -4,7 +4,12 @@
     "href": "/work/finding-data",
     "title": "Finding data: three decisions in five years of search",
     "roleTag": "Principal → Manager",
+    "line": "I designed how people at Intuit search for data, from a keyword catalog in 2021 to an agent inside the coding tools engineers use in 2026.",
     "figure": "First result correct 81.31% → 89.24% (2025); question to answer 45 min → 4 min with the agent (2026)",
+    "stats": [
+      { "value": "81.31% → 89.24%", "label": "First result correct, 2025" },
+      { "value": "45 min → 4 min", "label": "Question to answer with the agent, 2026" }
+    ],
     "status": "password"
   },
   {
@@ -12,7 +17,12 @@
     "href": "/work/building-the-platform",
     "title": "Founding designer of Intuit's data catalog: from a list of tables to a platform",
     "roleTag": "Senior → Principal",
+    "line": "I designed the catalog that replaced a commercial product, then the parts that turned it into the place where people judge data, trace it and get it.",
     "figure": "Top-five click-through 68% → 96% (2022–23); onboarding 1–2 weeks → under 24 hours (2024)",
+    "stats": [
+      { "value": "68% → 96%", "label": "Top-five click-through, 2022–23" },
+      { "value": "1–2 weeks → under 24 hours", "label": "Onboarding, 2024" }
+    ],
     "status": "password"
   },
   {
@@ -20,7 +30,13 @@
     "href": "/work/my-teams-work",
     "title": "Leading the designers behind Intuit's data platform",
     "roleTag": "Manager",
+    "line": "The designers on my team shipped the work on this page. I set the strategy, built the shared research base, and kept designing.",
     "figure": "Access wait 2–3 weeks → 3 days; decryption 9 → 3 days; approvals 24 h → near-instant (2025)",
+    "stats": [
+      { "value": "2–3 weeks → 3 days", "label": "Access wait, 2025" },
+      { "value": "9 → 3 days", "label": "Decryption, 2025" },
+      { "value": "24 h → near-instant", "label": "Approvals, 2025" }
+    ],
     "status": "password"
   },
   {
@@ -28,7 +44,12 @@
     "href": "/work/605",
     "title": "605: three analytics products for TV advertising",
     "roleTag": "First product designer",
+    "line": "I led design for three products from first concept to launch.",
     "figure": "Three products shipped; $2M in added booked revenue from the redesign (2021)",
+    "stats": [
+      { "value": "Three products", "label": "Shipped" },
+      { "value": "$2M", "label": "Added booked revenue from the redesign, 2021" }
+    ],
     "status": "password"
   }
 ]

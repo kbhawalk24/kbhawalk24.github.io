@@ -1,0 +1,33 @@
+{
+  "_about": "The four homepage tiles from BRIEF.md 3.1.B. `value` is the text shown; `n` with `prefix`/`suffix` is how the count-up renders the number while it moves. Every value is in content/numbers.json.",
+  "tiles": [
+    {
+      "id": "time-to-data",
+      "before": { "value": "45 days", "n": 45, "suffix": " days" },
+      "after": { "value": "under 4 min", "n": 4, "prefix": "under ", "suffix": " min" },
+      "caption": "Time to find, get access to and use data, 2021 → 2026",
+      "note": "2021 baseline is my own measure; 2026 figure from an observed-task study of the agent"
+    },
+    {
+      "id": "monthly-users",
+      "before": { "value": "2,664", "n": 2664 },
+      "after": { "value": "6,673", "n": 6673 },
+      "caption": "Monthly users of the platform, Jul 2024 → Mar 2026",
+      "note": "Platform figure across my time as manager"
+    },
+    {
+      "id": "incidents",
+      "before": { "value": "17", "n": 17 },
+      "after": { "value": "0", "n": 0 },
+      "caption": "Peak-season P0/P1 data incidents, tax year 2025",
+      "note": "Result shared by many teams; my team built the tooling"
+    },
+    {
+      "id": "clean-data",
+      "before": { "value": "<1%", "n": 1, "prefix": "<", "suffix": "%" },
+      "after": { "value": "80%", "n": 80, "suffix": "%" },
+      "caption": "Of the data estate meeting the clean-data standard",
+      "note": "Public figure, AWS re:Invent 2025"
+    }
+  ]
+}

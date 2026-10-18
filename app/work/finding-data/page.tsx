@@ -1,12 +1,17 @@
 import type { Metadata } from 'next'
-import { CaseStudyLayout } from '@/components/case-study-layout'
-import { FINDING_DATA } from '@/lib/site-content'
+import { SiteShell } from '@/components/site-shell'
+import { CaseStudyPage } from '@/components/case-study-page'
+import { FINDING_DATA } from '@/content/work/finding-data'
 
 export const metadata: Metadata = {
-  title: 'Finding data | Kanchi Bhawalkar',
-  description: FINDING_DATA.claim,
+  title: FINDING_DATA.title,
+  description: FINDING_DATA.summary.what,
 }
 
 export default function Page() {
-  return <CaseStudyLayout page={FINDING_DATA} />
+  return (
+    <SiteShell>
+      <CaseStudyPage study={FINDING_DATA} />
+    </SiteShell>
+  )
 }

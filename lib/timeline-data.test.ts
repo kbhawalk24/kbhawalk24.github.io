@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { ROLES, STATS, TRACKS } from './timeline-data'
-import { PAGES } from './site-content'
+import { ROLES, TRACKS } from './timeline-data'
+import { ROUTES } from './routes'
+import { CASE_STUDIES } from '@/content/work'
 
 describe('timeline data integrity', () => {
   it('gives every role at least one entry', () => {
@@ -25,64 +26,34 @@ describe('timeline data integrity', () => {
     expect(duplicates).toEqual([])
   })
 
-  it('points every entry href at a real page and chapter anchor', () => {
-    const anchors = new Set(
-      PAGES.flatMap((page) => [page.href, ...page.chapters.map((c) => `${page.href}#${c.id}`)]),
-    )
-    const broken = ROLES.flatMap((role) =>
-      role.entries
-        .filter((entry) => entry.href && !anchors.has(entry.href))
-        .map((entry) => `${entry.headline} → ${entry.href}`),
-    )
+  it('points every href at a real route and section id', () => {
+    const anchors = new Set<string>(ROUTES)
+    for (const study of CASE_STUDIES) {
+      const ids = [
+        'summary',
+        'impact',
+        'outcomes',
+        'differently',
+        'credits',
+        study.primer?.id,
+        study.problem?.id,
+        ...study.decisions.map((s) => s.id),
+        ...(study.sections ?? []).map((s) => s.id),
+      ].filter(Boolean)
+      for (const id of ids) anchors.add(`${study.href}#${id}`)
+    }
+    const hrefs = ROLES.flatMap((role) => [
+      ...(role.caseStudy ? [role.caseStudy.href] : []),
+      ...role.entries.flatMap((e) => (e.href ? [e.href] : [])),
+    ])
+    const broken = hrefs.filter((h) => !anchors.has(h))
     expect(broken).toEqual([])
   })
-})
 
-describe('page content integrity', () => {
-  it('gives every page a unique slug and at least one chapter', () => {
-    const slugs = PAGES.map((p) => p.slug)
-    expect(new Set(slugs).size, 'duplicate slugs').toBe(slugs.length)
-    for (const page of PAGES) {
-      expect(page.chapters.length, `${page.slug} has no chapters`).toBeGreaterThan(0)
-    }
-  })
-
-  it('gives every chapter a unique id within its page', () => {
-    for (const page of PAGES) {
-      const ids = page.chapters.map((c) => c.id)
-      expect(new Set(ids).size, `${page.slug} has duplicate chapter ids`).toBe(ids.length)
-    }
-  })
-
-  it('gives every chapter body text', () => {
-    for (const page of PAGES) {
-      for (const chapter of page.chapters) {
-        expect(chapter.body.length, `${page.slug}/${chapter.id}`).toBeGreaterThan(0)
-      }
-    }
-  })
-
-  // Fails loudly once drafting is done: flip a chapter's `draft` to false only
-  // when its [DRAFT: …] placeholders are gone.
-  it('keeps the draft flag honest — no unflagged [DRAFT: …] placeholders', () => {
-    const lying = PAGES.flatMap((page) =>
-      page.chapters
-        .filter(
-          (c) =>
-            !c.draft &&
-            [...c.body, c.decision?.detail ?? ''].some((t) => t.includes('[DRAFT')),
-        )
-        .map((c) => `${page.slug}/${c.id}`),
-    )
-    expect(lying).toEqual([])
-  })
-})
-
-describe('STATS', () => {
-  it('has a label for every stat', () => {
-    for (const stat of STATS) {
-      expect(stat.label.length).toBeGreaterThan(0)
-      expect(stat.value.length).toBeGreaterThan(0)
+  it('carries none of the strings the brief removes', () => {
+    const text = JSON.stringify(ROLES)
+    for (const banned of ['~', 'three designers', '24 launches', '11%', 'Data Copilot', '$20M', 'Sunnyvale', 'engineers and', 'team of']) {
+      expect(text, `found "${banned}"`).not.toContain(banned)
     }
   })
 })

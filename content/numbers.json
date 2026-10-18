@@ -1,99 +1,756 @@
 {
   "_about": "Every figure that appears on the site. Seeded from the four Outcome tables and the homepage tables in BRIEF.md, plus the timeline entries. scripts/check-content.mjs fails the build if a page shows a number that is not here, or if an impact animation moves to a value that is not here. 'allow' lists numeric tokens that are names, not figures.",
-  "allow": ["605", "3x", "P0", "P1", "2.0", "re:Invent 2025", "FY22", "FY23", "FY24", "FY25", "FY26", "FY27", "Q3", "Q4"],
+  "allow": [
+    "605",
+    "3x",
+    "P0",
+    "P1",
+    "2.0",
+    "re:Invent 2025",
+    "FY22",
+    "FY23",
+    "FY24",
+    "FY25",
+    "FY26",
+    "FY27",
+    "Q3",
+    "Q4"
+  ],
   "figures": [
-    { "figure": "45 days → under 4 min", "date": "2021 → 2026", "source": "2021 baseline is my own measure; 2026 figure from an observed-task study of the agent", "whose": "Mine / shared", "page": "/" },
-    { "figure": "2,664 → 6,673", "date": "Jul 2024 → Mar 2026", "source": "Platform figure across my time as manager", "whose": "Platform", "page": "/" },
-    { "figure": "17 → 0", "date": "Tax year 2025", "source": "Result shared by many teams; my team built the tooling", "whose": "Many teams", "page": "/" },
-    { "figure": "<1% → 80%", "date": "Dec 2025", "source": "Public figure, AWS re:Invent 2025", "whose": "Many teams", "page": "/" },
-    { "figure": "81.31% → 89.24%", "date": "2025", "source": "Launch post", "whose": "Engineering delivered; first design mine", "page": "/" },
-    { "figure": "45 min → 4 min", "date": "2026", "source": "Observed-task study", "whose": "Shared", "page": "/" },
-    { "figure": "68% → 96%", "date": "2022–23", "source": "FY23 year-end review", "whose": "Mine", "page": "/" },
-    { "figure": "1–2 weeks → under 24 hours", "date": "2024", "source": "Launch post", "whose": "Mine", "page": "/" },
-    { "figure": "2–3 weeks → 3 days", "date": "2025", "source": "Launch post", "whose": "Team", "page": "/" },
-    { "figure": "9 → 3 days", "date": "2025", "source": "Launch post", "whose": "Team", "page": "/" },
-    { "figure": "24 h → near-instant", "date": "2025", "source": "Launch post", "whose": "Team", "page": "/" },
-    { "figure": "Three products shipped; $2M", "date": "2021", "source": "April 2021 deck", "whose": "Mine", "page": "/" },
-
-    { "figure": "14.2 hours → 9.4 hours", "date": "Aug 2024 → Jul 2025", "source": "Internal roadmap", "whose": "Platform", "page": "/about" },
-    { "figure": "41% → 61%", "date": "Aug 2024 → Jul 2025", "source": "Internal roadmap", "whose": "Team", "page": "/about" },
-    { "figure": "711 active users; 56,560 tool calls in 90 days", "date": "Mar 2026", "source": "Launch post, Mar 16, 2026", "whose": "Shared", "page": "/about" },
-    { "figure": "5,000 tables in a week, 200+ hours saved", "date": "Aug 2025", "source": "Launch post", "whose": "One customer", "page": "/about" },
-    { "figure": "19 marketing data incidents", "date": "Tax year 2025", "source": "FY26 mid-year review", "whose": "Team", "page": "/about" },
-    { "figure": "8 targeted surveys and 11 help channels", "date": "2025", "source": "Team research deck, Q3 FY26", "whose": "Team", "page": "/about" },
-    { "figure": "as much as 90%", "date": "FY26 first half", "source": "FY26 mid-year review", "whose": "Team", "page": "/about" },
-    { "figure": "June 2021; August 2024; 2017–2021; 2017; 2012", "date": "", "source": "Resume", "whose": "Mine", "page": "/about" },
-    { "figure": "three analytics products", "date": "2017–2021", "source": "Resume", "whose": "Mine", "page": "/about" },
-
-    { "figure": "320,000 tables", "date": "Dec 2025", "source": "Public: AWS re:Invent 2025", "whose": "Scale", "page": "/work/finding-data" },
-    { "figure": "666 questions; 43%; 73.0%", "date": "One year, analysis dated Aug 2025", "source": "Help-channel question analysis", "whose": "Research", "page": "/work/finding-data" },
-    { "figure": "68% → 96%", "date": "Apr 2022 → Apr 2023", "source": "FY23 year-end review", "whose": "Mine", "page": "/work/finding-data" },
-    { "figure": "Around 20 users", "date": "FY22", "source": "FY22 year-end review", "whose": "Mine", "page": "/work/finding-data" },
-    { "figure": "20 interviews; one of 20 used AI search; about six tools; one time in five", "date": "Spring 2024", "source": "My July 2024 research readout; own research", "whose": "Mine", "page": "/work/finding-data" },
-    { "figure": "16 teams, 58 collaborators, 4 months, 500+ a month, Investor Day 2023", "date": "FY24", "source": "FY24 year-end review", "whose": "Mine", "page": "/work/finding-data" },
-    { "figure": "81.31% → 89.24%", "date": "Mar 26, 2025", "source": "Launch post", "whose": "Engineering delivered; first design mine; a designer on my team took it to launch", "page": "/work/finding-data" },
-    { "figure": "Collections, Aug 7, 2025; the quote", "date": "2025", "source": "Launch post; written feedback", "whose": "Team; quote is the engineering manager's", "page": "/work/finding-data" },
-    { "figure": "711 users; 56,560 tool calls; 45 → 4 minutes", "date": "As of Mar 11, 2026", "source": "Launch post, Mar 16, 2026; FY27 strategy readout", "whose": "Shared", "page": "/work/finding-data" },
-    { "figure": "0, 15, 30, 45 min", "date": "2026", "source": "Axis of the impact visualization", "whose": "", "page": "/work/finding-data" },
-
-    { "figure": "45 days", "date": "2021", "source": "Own measure", "whose": "Mine", "page": "/work/building-the-platform" },
-    { "figure": "Commercial catalog retired", "date": "FY23", "source": "FY23 year-end review", "whose": "Team", "page": "/work/building-the-platform" },
-    { "figure": "1,886 → 2,664 monthly users", "date": "FY24", "source": "FY24 year-end review", "whose": "Platform", "page": "/work/building-the-platform" },
-    { "figure": "6,673 users in the month", "date": "Mar 2026", "source": "Analytics dashboard, captured May 22, 2026", "whose": "Platform", "page": "/work/building-the-platform" },
-    { "figure": "20 days → 14.2 hours → 9.4 hours", "date": "2023 → 2025", "source": "Public: AWS re:Invent 2025; internal roadmap", "whose": "Platform", "page": "/work/building-the-platform" },
-    { "figure": "About 30,000 tables, 7,000 pipelines", "date": "Dec 6, 2023", "source": "Launch post", "whose": "Lineage", "page": "/work/building-the-platform" },
-    { "figure": "Four weeks; 450–500 monthly users", "date": "By Jul 2024", "source": "FY24 year-end review", "whose": "Mine", "page": "/work/building-the-platform" },
-    { "figure": "1,600 new third-level data products; three to four tools", "date": "FY24", "source": "FY24 year-end review", "whose": "Mine, catalog side", "page": "/work/building-the-platform" },
-    { "figure": "One to two weeks; 7 days of campaign delay in FY23", "date": "Feb 2024", "source": "Onboarding workshop deck", "whose": "Problem statement", "page": "/work/building-the-platform" },
-    { "figure": "One to two weeks → under 24 hours", "date": "Oct 16, 2024", "source": "Launch post; FY25 year-end review", "whose": "Design: mine", "page": "/work/building-the-platform" },
-    { "figure": "4 minutes", "date": "Mar 2026", "source": "Observed-task study of the agent", "whose": "Shared", "page": "/work/building-the-platform" },
-
-    { "figure": "One designer for every 85 engineers", "date": "Apr 2026", "source": "Design group overview", "whose": "Whole data design group", "page": "/work/my-teams-work" },
-    { "figure": "15 visits, 8 surveys, 11 channels", "date": "2025", "source": "Team research deck, Q3 FY26", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "25% reduction in time to resolve manual requests", "date": "Dec 2024, announced Jan 14, 2025", "source": "Launch post", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "2–3 weeks → 3 days; 61% auto-approved", "date": "Mar 24, 2025", "source": "Launch post", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "85% of ineligible denials eliminated", "date": "May 2025", "source": "FY25 reviews", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "9 days → 3 days; two flows into one", "date": "Aug 22, 2025", "source": "Launch post; design group overview", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "5,000 tables in a week; 200+ hours", "date": "Aug 28, 2025", "source": "Launch post", "whose": "One customer", "page": "/work/my-teams-work" },
-    { "figure": "24 hours → near-instant", "date": "Sep 18, 2025", "source": "Launch post", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "7 concepts in about 5 days; 8 sessions", "date": "FY25 Q4", "source": "Roadmap tracker", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "About 4 hours → minutes; 19 incidents", "date": "Tax year 2025", "source": "FY26 mid-year review; report's assessment", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "Certification workflows launched", "date": "Nov 5, 2025", "source": "Three launch posts", "whose": "Group", "page": "/work/my-teams-work" },
-    { "figure": "Clean data under 1% → 80%", "date": "Dec 2025", "source": "Public: AWS re:Invent 2025", "whose": "Many teams", "page": "/work/my-teams-work" },
-    { "figure": "Peak-season P0/P1 incidents 17 → 0", "date": "Tax year 2025", "source": "Roadmap decks; FY27 strategy readout", "whose": "Many teams", "page": "/work/my-teams-work" },
-    { "figure": "First result correct 99.99%", "date": "Jun 15 and Aug 12, 2025", "source": "Launch posts", "whose": "Team; engineering delivered", "page": "/work/my-teams-work" },
-    { "figure": "Development time cut by as much as 90% on some features", "date": "FY26 first half", "source": "FY26 mid-year review", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "One promotion; two cases approved", "date": "2026", "source": "Promotion records; own knowledge", "whose": "Me as manager", "page": "/work/my-teams-work" },
-    { "figure": "14.2 hours → 9.4 hours; 41% → 61%", "date": "Aug 2024 → Jul 2025", "source": "Internal roadmap", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "May 15, 2025; June 15, 2025; August 12, 2025; August 7, 2025", "date": "2025", "source": "Launch posts", "whose": "Team", "page": "/work/my-teams-work" },
-    { "figure": "six-slide framework", "date": "2025", "source": "Own documents", "whose": "Mine", "page": "/work/my-teams-work" },
-
-    { "figure": "30 minutes; 10+ minutes per addition; 1–2 hours", "date": "2021", "source": "April 2021 deck", "whose": "Observed in user walkthroughs", "page": "/work/605" },
-    { "figure": "4 users; 5 reports", "date": "2021", "source": "April 2021 deck", "whose": "", "page": "/work/605" },
-    { "figure": "3–4 minutes to render; 4 months", "date": "2021", "source": "April 2021 deck", "whose": "", "page": "/work/605" },
-    { "figure": "2–5 audiences in 9 of 10; 15 in 1", "date": "2021", "source": "April 2021 deck", "whose": "", "page": "/work/605" },
-    { "figure": "1–1.5 minutes; 2 months", "date": "2021", "source": "March and April 2021 decks", "whose": "", "page": "/work/605" },
-    { "figure": "$2M additional booked revenue", "date": "Since March 2021", "source": "April 2021 deck", "whose": "", "page": "/work/605" },
-    { "figure": "Over $20M booked revenue; three network clients", "date": "April 2021", "source": "April 2021 deck", "whose": "Platform product only", "page": "/work/605" },
-    { "figure": "5 networks; over 50% of session time", "date": "Feb 2019", "source": "Indxr write-up", "whose": "", "page": "/work/605" },
-    { "figure": "About 12 attributes, not 200", "date": "2019", "source": "Indxr write-up", "whose": "", "page": "/work/605" },
-    { "figure": "1 day to 2 weeks", "date": "2019", "source": "Indxr write-up", "whose": "", "page": "/work/605" },
-    { "figure": "32 reports into 2 pages; 2020", "date": "2020", "source": "April 2021 deck", "whose": "", "page": "/work/605" },
-    { "figure": "About 8 bugs; around 2 days each", "date": "", "source": "Case study deck", "whose": "", "page": "/work/605" },
-    { "figure": "About 20 engineers, 5 product managers; 2 products at once; 2 designers", "date": "", "source": "Both decks", "whose": "", "page": "/work/605" },
-    { "figure": "100 households", "date": "2019", "source": "Indxr write-up", "whose": "Privacy rule", "page": "/work/605" },
-    { "figure": "two audiences and two metrics; five audiences and four metrics; 2 audiences; 5 audiences; 15 audiences", "date": "2021", "source": "April 2021 deck", "whose": "", "page": "/work/605" },
-
-    { "figure": "61% of requests approved automatically; 85% of ineligible denials", "date": "2025", "source": "Launch posts", "whose": "Team", "page": "/timeline" },
-    { "figure": "20 in-context user visits", "date": "2024", "source": "July 2024 research readout", "whose": "Mine", "page": "/timeline" },
-    { "figure": "1,600 data products newly certified", "date": "FY24", "source": "FY24 year-end review", "whose": "Mine", "page": "/timeline" },
-    { "figure": "450 to 500 monthly users", "date": "Jul 2024", "source": "FY24 year-end review", "whose": "Mine", "page": "/timeline" },
-    { "figure": "32 separate reports; two-page; around 8 bugs", "date": "2020", "source": "April 2021 deck", "whose": "Mine", "page": "/timeline" },
-    { "figure": "1 day to 2 weeks", "date": "2019", "source": "Indxr write-up", "whose": "Mine", "page": "/timeline" },
-    { "figure": "3 to 4 minutes to 1 to 1.5 minutes; two months", "date": "2021", "source": "April 2021 deck", "whose": "Mine", "page": "/timeline" },
-    { "figure": "16 hackathon teams; 58 collaborators; four months; 500 people", "date": "FY24", "source": "FY24 year-end review", "whose": "Mine", "page": "/timeline" },
-    { "figure": "Investor Day 2023", "date": "2023", "source": "FY24 year-end review", "whose": "Mine", "page": "/timeline" },
-    { "figure": "summer 2023 design intern", "date": "2023", "source": "Reviews", "whose": "Mine", "page": "/timeline" },
-    { "figure": "MS Information (HCI), University of Michigan, 2017; BE Computer Engineering, University of Pune, 2012", "date": "", "source": "Resume", "whose": "Mine", "page": "/timeline" }
+    {
+      "figure": "45 days → under 4 min",
+      "date": "2021 → 2026",
+      "source": "2021 baseline is my own measure; 2026 figure from an observed-task study of the agent",
+      "whose": "Mine / shared",
+      "page": "/"
+    },
+    {
+      "figure": "2,664 → 6,673",
+      "date": "Jul 2024 → Mar 2026",
+      "source": "Platform figure across my time as manager",
+      "whose": "Platform",
+      "page": "/"
+    },
+    {
+      "figure": "17 → 0",
+      "date": "Tax year 2025",
+      "source": "Result shared by many teams; my team built the tooling",
+      "whose": "Many teams",
+      "page": "/"
+    },
+    {
+      "figure": "<1% → 80%",
+      "date": "Dec 2025",
+      "source": "Public figure, AWS re:Invent 2025",
+      "whose": "Many teams",
+      "page": "/"
+    },
+    {
+      "figure": "81.31% → 89.24%",
+      "date": "2025",
+      "source": "Launch post",
+      "whose": "Engineering delivered; first design mine",
+      "page": "/"
+    },
+    {
+      "figure": "45 min → 4 min",
+      "date": "2026",
+      "source": "Observed-task study",
+      "whose": "Shared",
+      "page": "/"
+    },
+    {
+      "figure": "68% → 96%",
+      "date": "2022–23",
+      "source": "FY23 year-end review",
+      "whose": "Mine",
+      "page": "/"
+    },
+    {
+      "figure": "1–2 weeks → under 24 hours",
+      "date": "2024",
+      "source": "Launch post",
+      "whose": "Mine",
+      "page": "/"
+    },
+    {
+      "figure": "2–3 weeks → 3 days",
+      "date": "2025",
+      "source": "Launch post",
+      "whose": "Team",
+      "page": "/"
+    },
+    {
+      "figure": "9 → 3 days",
+      "date": "2025",
+      "source": "Launch post",
+      "whose": "Team",
+      "page": "/"
+    },
+    {
+      "figure": "24 h → near-instant",
+      "date": "2025",
+      "source": "Launch post",
+      "whose": "Team",
+      "page": "/"
+    },
+    {
+      "figure": "Three products shipped; $2M",
+      "date": "2021",
+      "source": "April 2021 deck",
+      "whose": "Mine",
+      "page": "/"
+    },
+    {
+      "figure": "14.2 hours → 9.4 hours",
+      "date": "Aug 2024 → Jul 2025",
+      "source": "Internal roadmap",
+      "whose": "Platform",
+      "page": "/about"
+    },
+    {
+      "figure": "41% → 61%",
+      "date": "Aug 2024 → Jul 2025",
+      "source": "Internal roadmap",
+      "whose": "Team",
+      "page": "/about"
+    },
+    {
+      "figure": "711 active users; 56,560 tool calls in 90 days",
+      "date": "Mar 2026",
+      "source": "Launch post, Mar 16, 2026",
+      "whose": "Shared",
+      "page": "/about"
+    },
+    {
+      "figure": "5,000 tables in a week, 200+ hours saved",
+      "date": "Aug 2025",
+      "source": "Launch post",
+      "whose": "One customer",
+      "page": "/about"
+    },
+    {
+      "figure": "19 marketing data incidents",
+      "date": "Tax year 2025",
+      "source": "FY26 mid-year review",
+      "whose": "Team",
+      "page": "/about"
+    },
+    {
+      "figure": "8 targeted surveys and 11 help channels",
+      "date": "2025",
+      "source": "Team research deck, Q3 FY26",
+      "whose": "Team",
+      "page": "/about"
+    },
+    {
+      "figure": "as much as 90%",
+      "date": "FY26 first half",
+      "source": "FY26 mid-year review",
+      "whose": "Team",
+      "page": "/about"
+    },
+    {
+      "figure": "June 2021; August 2024; 2017–2021; 2017; 2012",
+      "date": "",
+      "source": "Resume",
+      "whose": "Mine",
+      "page": "/about"
+    },
+    {
+      "figure": "three analytics products",
+      "date": "2017–2021",
+      "source": "Resume",
+      "whose": "Mine",
+      "page": "/about"
+    },
+    {
+      "figure": "320,000 tables",
+      "date": "Dec 2025",
+      "source": "Public: AWS re:Invent 2025",
+      "whose": "Scale",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "666 questions; 43%; 73.0%",
+      "date": "One year, analysis dated Aug 2025",
+      "source": "Help-channel question analysis",
+      "whose": "Research",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "68% → 96%",
+      "date": "Apr 2022 → Apr 2023",
+      "source": "FY23 year-end review",
+      "whose": "Mine",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "Around 20 users",
+      "date": "FY22",
+      "source": "FY22 year-end review",
+      "whose": "Mine",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "20 interviews; one of 20 used AI search; about six tools; one time in five",
+      "date": "Spring 2024",
+      "source": "My July 2024 research readout; own research",
+      "whose": "Mine",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "16 teams, 58 collaborators, 4 months, 500+ a month, Investor Day 2023",
+      "date": "FY24",
+      "source": "FY24 year-end review",
+      "whose": "Mine",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "81.31% → 89.24%",
+      "date": "Mar 26, 2025",
+      "source": "Launch post",
+      "whose": "Engineering delivered; first design mine; a designer on my team took it to launch",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "Collections, Aug 7, 2025; the quote",
+      "date": "2025",
+      "source": "Launch post; written feedback",
+      "whose": "Team; quote is the engineering manager's",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "711 users; 56,560 tool calls; 45 → 4 minutes",
+      "date": "As of Mar 11, 2026",
+      "source": "Launch post, Mar 16, 2026; FY27 strategy readout",
+      "whose": "Shared",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "0, 15, 30, 45 min",
+      "date": "2026",
+      "source": "Axis of the impact visualization",
+      "whose": "",
+      "page": "/work/finding-data"
+    },
+    {
+      "figure": "45 days",
+      "date": "2021",
+      "source": "Own measure",
+      "whose": "Mine",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "Commercial catalog retired",
+      "date": "FY23",
+      "source": "FY23 year-end review",
+      "whose": "Team",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "1,886 → 2,664 monthly users",
+      "date": "FY24",
+      "source": "FY24 year-end review",
+      "whose": "Platform",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "6,673 users in the month",
+      "date": "Mar 2026",
+      "source": "Analytics dashboard, captured May 22, 2026",
+      "whose": "Platform",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "20 days → 14.2 hours → 9.4 hours",
+      "date": "2023 → 2025",
+      "source": "Public: AWS re:Invent 2025; internal roadmap",
+      "whose": "Platform",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "About 30,000 tables, 7,000 pipelines",
+      "date": "Dec 6, 2023",
+      "source": "Launch post",
+      "whose": "Lineage",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "Four weeks; 450–500 monthly users",
+      "date": "By Jul 2024",
+      "source": "FY24 year-end review",
+      "whose": "Mine",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "1,600 new third-level data products; three to four tools",
+      "date": "FY24",
+      "source": "FY24 year-end review",
+      "whose": "Mine, catalog side",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "One to two weeks; 7 days of campaign delay in FY23",
+      "date": "Feb 2024",
+      "source": "Onboarding workshop deck",
+      "whose": "Problem statement",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "One to two weeks → under 24 hours",
+      "date": "Oct 16, 2024",
+      "source": "Launch post; FY25 year-end review",
+      "whose": "Design: mine",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "4 minutes",
+      "date": "Mar 2026",
+      "source": "Observed-task study of the agent",
+      "whose": "Shared",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "One designer for every 85 engineers",
+      "date": "Apr 2026",
+      "source": "Design group overview",
+      "whose": "Whole data design group",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "15 visits, 8 surveys, 11 channels",
+      "date": "2025",
+      "source": "Team research deck, Q3 FY26",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "25% reduction in time to resolve manual requests",
+      "date": "Dec 2024, announced Jan 14, 2025",
+      "source": "Launch post",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "2–3 weeks → 3 days; 61% auto-approved",
+      "date": "Mar 24, 2025",
+      "source": "Launch post",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "85% of ineligible denials eliminated",
+      "date": "May 2025",
+      "source": "FY25 reviews",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "9 days → 3 days; two flows into one",
+      "date": "Aug 22, 2025",
+      "source": "Launch post; design group overview",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "5,000 tables in a week; 200+ hours",
+      "date": "Aug 28, 2025",
+      "source": "Launch post",
+      "whose": "One customer",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "24 hours → near-instant",
+      "date": "Sep 18, 2025",
+      "source": "Launch post",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "7 concepts in about 5 days; 8 sessions",
+      "date": "FY25 Q4",
+      "source": "Roadmap tracker",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "About 4 hours → minutes; 19 incidents",
+      "date": "Tax year 2025",
+      "source": "FY26 mid-year review; report's assessment",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "Certification workflows launched",
+      "date": "Nov 5, 2025",
+      "source": "Three launch posts",
+      "whose": "Group",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "Clean data under 1% → 80%",
+      "date": "Dec 2025",
+      "source": "Public: AWS re:Invent 2025",
+      "whose": "Many teams",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "Peak-season P0/P1 incidents 17 → 0",
+      "date": "Tax year 2025",
+      "source": "Roadmap decks; FY27 strategy readout",
+      "whose": "Many teams",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "First result correct 99.99%",
+      "date": "Jun 15 and Aug 12, 2025",
+      "source": "Launch posts",
+      "whose": "Team; engineering delivered",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "Development time cut by as much as 90% on some features",
+      "date": "FY26 first half",
+      "source": "FY26 mid-year review",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "One promotion; two cases approved",
+      "date": "2026",
+      "source": "Promotion records; own knowledge",
+      "whose": "Me as manager",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "14.2 hours → 9.4 hours; 41% → 61%",
+      "date": "Aug 2024 → Jul 2025",
+      "source": "Internal roadmap",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "May 15, 2025; June 15, 2025; August 12, 2025; August 7, 2025",
+      "date": "2025",
+      "source": "Launch posts",
+      "whose": "Team",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "six-slide framework",
+      "date": "2025",
+      "source": "Own documents",
+      "whose": "Mine",
+      "page": "/work/my-teams-work"
+    },
+    {
+      "figure": "30 minutes; 10+ minutes per addition; 1–2 hours",
+      "date": "2021",
+      "source": "April 2021 deck",
+      "whose": "Observed in user walkthroughs",
+      "page": "/work/605"
+    },
+    {
+      "figure": "4 users; 5 reports",
+      "date": "2021",
+      "source": "April 2021 deck",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "3–4 minutes to render; 4 months",
+      "date": "2021",
+      "source": "April 2021 deck",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "2–5 audiences in 9 of 10; 15 in 1",
+      "date": "2021",
+      "source": "April 2021 deck",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "1–1.5 minutes; 2 months",
+      "date": "2021",
+      "source": "March and April 2021 decks",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "$2M additional booked revenue",
+      "date": "Since March 2021",
+      "source": "April 2021 deck",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "Over $20M booked revenue; three network clients",
+      "date": "April 2021",
+      "source": "April 2021 deck",
+      "whose": "Platform product only",
+      "page": "/work/605"
+    },
+    {
+      "figure": "5 networks; over 50% of session time",
+      "date": "Feb 2019",
+      "source": "Indxr write-up",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "About 12 attributes, not 200",
+      "date": "2019",
+      "source": "Indxr write-up",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "1 day to 2 weeks",
+      "date": "2019",
+      "source": "Indxr write-up",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "32 reports into 2 pages; 2020",
+      "date": "2020",
+      "source": "April 2021 deck",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "About 8 bugs; around 2 days each",
+      "date": "",
+      "source": "Case study deck",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "About 20 engineers, 5 product managers; 2 products at once; 2 designers",
+      "date": "",
+      "source": "Both decks",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "100 households",
+      "date": "2019",
+      "source": "Indxr write-up",
+      "whose": "Privacy rule",
+      "page": "/work/605"
+    },
+    {
+      "figure": "two audiences and two metrics; five audiences and four metrics; 2 audiences; 5 audiences; 15 audiences",
+      "date": "2021",
+      "source": "April 2021 deck",
+      "whose": "",
+      "page": "/work/605"
+    },
+    {
+      "figure": "61% of requests approved automatically; 85% of ineligible denials",
+      "date": "2025",
+      "source": "Launch posts",
+      "whose": "Team",
+      "page": "/timeline"
+    },
+    {
+      "figure": "20 in-context user visits",
+      "date": "2024",
+      "source": "July 2024 research readout",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "1,600 data products newly certified",
+      "date": "FY24",
+      "source": "FY24 year-end review",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "450 to 500 monthly users",
+      "date": "Jul 2024",
+      "source": "FY24 year-end review",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "32 separate reports; two-page; around 8 bugs",
+      "date": "2020",
+      "source": "April 2021 deck",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "1 day to 2 weeks",
+      "date": "2019",
+      "source": "Indxr write-up",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "3 to 4 minutes to 1 to 1.5 minutes; two months",
+      "date": "2021",
+      "source": "April 2021 deck",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "16 hackathon teams; 58 collaborators; four months; 500 people",
+      "date": "FY24",
+      "source": "FY24 year-end review",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "Investor Day 2023",
+      "date": "2023",
+      "source": "FY24 year-end review",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "summer 2023 design intern",
+      "date": "2023",
+      "source": "Reviews",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "MS Information (HCI), University of Michigan, 2017; BE Computer Engineering, University of Pune, 2012",
+      "date": "",
+      "source": "Resume",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "2–3 weeks → 3 days; 9 days → 3 days; 24 hours → near-instant",
+      "date": "2025",
+      "source": "Launch posts",
+      "whose": "Team",
+      "page": "/about"
+    },
+    {
+      "figure": "<1% → 80%",
+      "date": "Nov 2025",
+      "source": "Public: AWS re:Invent 2025",
+      "whose": "Many teams",
+      "page": "/about"
+    },
+    {
+      "figure": "17 → 0",
+      "date": "Tax year 2025",
+      "source": "Roadmap decks; FY27 strategy readout",
+      "whose": "Many teams",
+      "page": "/about"
+    },
+    {
+      "figure": "81.31% → 89.24%; 45 min → 4 min",
+      "date": "2025; 2026",
+      "source": "The case study list; homepage figures",
+      "whose": "Mine / shared",
+      "page": "/about"
+    },
+    {
+      "figure": "68% → 96%; 1–2 weeks → under 24 hours",
+      "date": "2022–23; 2024",
+      "source": "The case study list; homepage figures",
+      "whose": "Mine",
+      "page": "/about"
+    },
+    {
+      "figure": "2–3 weeks → 3 days; 9 → 3 days; 24 h → near-instant; Three products shipped; $2M",
+      "date": "2025; 2021",
+      "source": "The case study list; homepage figures",
+      "whose": "Team; mine",
+      "page": "/about"
+    },
+    {
+      "figure": "2,664 → 6,673",
+      "date": "Jul 2024 → Mar 2026",
+      "source": "FY24 year-end review; analytics dashboard",
+      "whose": "Platform",
+      "page": "/timeline"
+    },
+    {
+      "figure": "9 days to 3 days; 2–3 weeks to 3 days",
+      "date": "Aug 2025; Mar 2025",
+      "source": "Launch posts",
+      "whose": "Team",
+      "page": "/timeline"
+    },
+    {
+      "figure": "Under 1% → 80%",
+      "date": "Dec 2025",
+      "source": "Public: AWS re:Invent 2025",
+      "whose": "Many teams",
+      "page": "/timeline"
+    },
+    {
+      "figure": "45 min → 4 min; 711",
+      "date": "Mar 2026",
+      "source": "Observed-task study; launch post, Mar 16, 2026",
+      "whose": "Shared",
+      "page": "/timeline"
+    },
+    {
+      "figure": "1–2 weeks → under 24 hours",
+      "date": "Oct 2024",
+      "source": "Launch post; FY25 year-end review",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "81.31% → 89.24%",
+      "date": "Mar 2025",
+      "source": "Launch post",
+      "whose": "Engineering delivered; first design mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "1,886 → 2,664",
+      "date": "FY24",
+      "source": "FY24 year-end review",
+      "whose": "Platform",
+      "page": "/timeline"
+    },
+    {
+      "figure": "68% → 96%",
+      "date": "Apr 2022 → Apr 2023",
+      "source": "FY23 year-end review",
+      "whose": "Mine",
+      "page": "/timeline"
+    },
+    {
+      "figure": "About 30,000 tables, 7,000 pipelines",
+      "date": "Dec 2023",
+      "source": "Launch post",
+      "whose": "Lineage",
+      "page": "/timeline"
+    },
+    {
+      "figure": "68% → 96%",
+      "date": "Apr 2022 → Apr 2023",
+      "source": "FY23 year-end review",
+      "whose": "Mine",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "sections 1 to 3",
+      "date": "",
+      "source": "Credits; the numbered decision headings",
+      "whose": "",
+      "page": "/work/building-the-platform"
+    },
+    {
+      "figure": "56,560 tool calls in 90 days",
+      "date": "As of Mar 11, 2026",
+      "source": "Launch post, Mar 16, 2026",
+      "whose": "Shared",
+      "page": "/work/finding-data"
+    }
   ]
 }

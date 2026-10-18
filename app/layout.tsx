@@ -1,11 +1,10 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { IBM_Plex_Mono, League_Spartan, Mulish } from 'next/font/google'
+import { SITE } from '@/lib/routes'
 import './globals.css'
 
 // League Spartan carries display and headings, Mulish carries body. Plex
-// Mono is loaded only for the small uppercase labels (`.label-micro`), the
-// one element borrowed from the Claude Design reference deck.
+// Mono is loaded only for the small uppercase labels (`.label-micro`).
 const mulish = Mulish({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
@@ -23,10 +22,18 @@ const plexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Kanchi Bhawalkar, Product Design Leader',
-  description:
-    'Design leader with 12+ years across enterprise data platforms and agentic AI tooling. A career timeline of design management, design strategy, and hands-on IC craft.',
-
+  title: {
+    default: 'Kanchi Bhawalkar, Product Design Manager',
+    template: '%s | Kanchi Bhawalkar',
+  },
+  description: SITE.positioning,
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon-light-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/apple-icon.png',
+  },
 }
 
 export const viewport: Viewport = {
@@ -45,11 +52,8 @@ export default function RootLayout({
       className={`bg-background ${mulish.variable} ${leagueSpartan.variable} ${plexMono.variable}`}
     >
       <body className="antialiased">
-        {/* The wash, locked to the viewport. The ground itself carries a
-            faint violet base (--background) and this fixed layer adds the
-            bloom on top, so the gradient reads the same on every screen
-            instead of scrolling away with the hero. Inert and behind all
-            content; nothing animates, so it costs one paint. */}
+        {/* The wash, locked to the viewport: a white ground with two soft
+            violet blooms. Inert and behind all content. */}
         <div
           aria-hidden="true"
           className="pointer-events-none fixed inset-0 -z-10"
@@ -59,7 +63,6 @@ export default function RootLayout({
           }}
         />
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )

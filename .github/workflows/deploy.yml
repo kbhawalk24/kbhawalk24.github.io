@@ -33,6 +33,10 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build
+        # The four /work pages are encrypted at build time with this
+        # password (scripts/encrypt-work.mjs). The build fails without it.
+        env:
+          PORTFOLIO_PASSWORD: ${{ secrets.PORTFOLIO_PASSWORD }}
         run: pnpm build
 
       - uses: actions/upload-pages-artifact@v3
