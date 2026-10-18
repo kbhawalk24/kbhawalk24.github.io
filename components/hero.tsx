@@ -232,11 +232,10 @@ export function Hero() {
             </div>
 
             {/* About: blurs in as scroll progresses. The paragraph, a hairline,
-                and the ask with its buttons on the left; the capability map
-                on the right. */}
+                the lifecycle band, then the ask with its buttons. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-12 w-full text-left md:grid md:grid-cols-[7fr_5fr] md:items-start md:gap-10 lg:gap-14"
+              className="mt-12 w-full max-w-4xl text-left"
             >
              <div>
               <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
@@ -253,6 +252,8 @@ export function Hero() {
                 <span translate="no">TIBCO</span> writing back-end Java for its enterprise
                 integration platform.
               </p>
+
+              <CapabilityMap className="mt-10" />
 
               <div className="mt-10 border-t border-border pt-10">
                 <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
@@ -296,10 +297,6 @@ export function Hero() {
                 </div>
               </div>
              </div>
-
-              {/* The capability map, beside the paragraph on wide screens
-                  and under the buttons on phones. */}
-              <CapabilityMap className="mt-10 md:mt-0" />
             </div>
 
           </motion.div>
