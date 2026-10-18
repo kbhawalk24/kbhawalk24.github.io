@@ -12,7 +12,7 @@ import {
 } from 'motion/react'
 
 import { EASE_OUT, MagneticWrap } from '@/components/motion-primitives'
-import { NumbersGrid } from '@/components/numbers-strip'
+import { HERO } from '@/lib/home-content'
 
 export function mapClamp(v: number, inMin: number, inMax: number, outMin: number, outMax: number) {
   const t = Math.min(1, Math.max(0, (v - inMin) / (inMax - inMin)))
@@ -221,46 +221,43 @@ export function Hero() {
                   transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT }}
                   className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground"
                 >
-                  <span>
-                    Product Design Manager / Principal Designer for Data Platform at{' '}
-                    <span translate="no" className="font-semibold">
-                      Intuit
-                    </span>
+                  <span>{HERO.title}</span>
+                  <span className="basis-full font-sans text-sm text-muted-foreground">
+                    {HERO.location} ·{' '}
+                    <a href={`mailto:${HERO.email}`} className="hover:underline">
+                      {HERO.email}
+                    </a>{' '}
+                    ·{' '}
+                    <a href={HERO.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      {HERO.linkedin}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
                   </span>
                 </motion.div>
               </div>
             </div>
 
-            {/* About: blurs in as scroll progresses. The paragraph, a hairline,
-                and the ask with its buttons on the left; the six number tiles
-                on the right. */}
+            {/* About: blurs in as scroll progresses. The positioning paragraph,
+                the two role bullets, a hairline, then the buttons. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-12 w-full text-left md:grid md:grid-cols-[7fr_5fr] md:items-start md:gap-10 lg:gap-14"
+              className="mt-12 w-full max-w-3xl text-left"
             >
              <div>
-              <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
-                I&rsquo;m a design manager for data and AI tools. At{' '}
-                <span translate="no">Intuit</span> I led design for the data platform for two
-                years, owning <span className="mark">data discovery</span> and{' '}
-                <span className="mark">the platform&rsquo;s design strategy</span> myself. The
-                team covered the rest: data access and fine-grained access control, governance,
-                lineage, observability, pipeline authoring, behavioral analytics, and the clean
-                data and data maturity program. Before <span translate="no">Intuit</span> I was
-                at <span translate="no">605</span>, a TV advertising analytics company, where I
-                designed three products that generated more than $20M in revenue. I was a
-                software engineer before I became a designer. I spent three years at{' '}
-                <span translate="no">TIBCO</span> writing back-end Java for its enterprise
-                integration platform.
-              </p>
+              <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">{HERO.paragraph}</p>
+              <ul className="mt-6 space-y-4">
+                {HERO.bullets.map((b) => (
+                  <li key={b.org} className="text-pretty font-sans text-base leading-[1.6] text-foreground">
+                    <span translate="no" className="font-semibold">
+                      {b.org}
+                    </span>{' '}
+                    <span className="text-muted-foreground">({b.period})</span>: {b.text}
+                  </li>
+                ))}
+              </ul>
 
               <div className="mt-10 border-t border-border pt-10">
-                <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
-                  I&rsquo;m looking for my next role in the Bay Area, either as a principal
-                  designer or leading a design team, at a company building AI, data, or
-                  developer tools.
-                </p>
-                <div ref={ctaRef} className="mt-8 flex flex-wrap items-center gap-3">
+                <div ref={ctaRef} className="flex flex-wrap items-center gap-3">
                   <MagneticWrap className="inline-block">
                     <a
                       href="/kanchi-bhawalkar-resume.pdf"
@@ -296,10 +293,6 @@ export function Hero() {
                 </div>
               </div>
              </div>
-
-              {/* The numbers, beside the paragraph on wide screens and under
-                  the buttons on phones. */}
-              <NumbersGrid className="mt-10 md:mt-0" />
             </div>
 
           </motion.div>

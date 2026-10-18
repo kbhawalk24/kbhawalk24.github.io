@@ -5,7 +5,8 @@ import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
 import { LensProvider } from '@/components/lens'
 import { Hero } from '@/components/hero'
-import { CaseStudyIndex } from '@/components/case-study-index'
+import { WorkArcs } from '@/components/work-arcs'
+import { HowILead } from '@/components/how-i-lead'
 import { CareerTimeline } from '@/components/career-timeline'
 import { ContactFooter } from '@/components/contact-footer'
 
@@ -17,7 +18,8 @@ export default function Page() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <CaseStudyIndex />
+        <WorkArcs />
+        <HowILead />
         <CareerTimeline />
       </main>
       <ContactFooter />
