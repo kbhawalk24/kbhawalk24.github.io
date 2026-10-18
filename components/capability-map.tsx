@@ -1,170 +1,167 @@
 'use client'
 
-import { useLayoutEffect, useRef, useState } from 'react'
-import { Info } from 'lucide-react'
+import { Compass, Tv } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { trackStyles } from '@/lib/track-styles'
-import { BRANCHES, type Branch, type Leaf, type LeafGroup } from '@/lib/capability-map'
-import type { Track } from '@/lib/timeline-data'
+import {
+  BEFORE,
+  INITIATIVES,
+  INVOLVEMENT_LABEL,
+  STAGES,
+  type InitiativeId,
+  type Involvement,
+  type Stage,
+} from '@/lib/capability-map'
 
-// The capability map beside the hero's about text: three branches on the
-// left (Where, Craft, How I manage), their leaves on the right. One curve
-// runs from each branch to each of its groups; inside a group the leaves
-// hang off a thin vertical spine with short ticks, so the picture stays
-// calm however many leaves a group has. Curves are measured after layout,
-// so they follow the text wherever it wraps. Identity is never colour
-// alone: every group has a caption and every leaf an icon and a label.
+// The map beside the hero's about text (data in lib/capability-map.ts).
+// Section one: "Led design and strategy for", the seven lifecycle stages
+// in order, a marker per stage for how it was mine, and two rails on the
+// right for the horizontal initiatives, each rail a line through the span
+// it covered with a mark at every stage it touched. Section two: 605.
+// Identity is never colour alone: markers are explained in a legend, the
+// two rails differ in shape, and every row carries its words.
 
-const STROKE: Record<Track, string> = {
-  ic: 'var(--track-ic)',
-  strategy: 'var(--track-strategy)',
-  management: 'var(--track-management)',
+const DOT: Record<Involvement, string> = {
+  ic: 'bg-track-ic',
+  management: 'bg-track-management',
+  strategy: 'bg-track-strategy',
+  none: 'ring-1 ring-inset ring-foreground/25',
 }
 
-interface Edge {
-  from: string
-  to: string
-  tone: Track
-}
-interface Curve {
-  d: string
-  tone: Track
+/** First and last stage index each rail spans. */
+function span(id: InitiativeId) {
+  const idx = STAGES.map((s, i) => (s.initiatives.includes(id) ? i : -1)).filter((i) => i >= 0)
+  return { from: idx[0], to: idx[idx.length - 1] }
 }
 
-/** One cubic curve per edge, from the right edge of `from` to the left
- *  edge of `to`, in the container's coordinate space. Redrawn on resize. */
-function useCurves(ref: React.RefObject<HTMLDivElement | null>, edges: Edge[]) {
-  const [curves, setCurves] = useState<Curve[]>([])
-  useLayoutEffect(() => {
-    const root = ref.current
-    if (!root) return
-    let frame = 0
-    const draw = () => {
-      const box = root.getBoundingClientRect()
-      const next: Curve[] = []
-      for (const e of edges) {
-        const a = root.querySelector<HTMLElement>(`[data-anchor="${e.from}"]`)
-        const b = root.querySelector<HTMLElement>(`[data-anchor="${e.to}"]`)
-        if (!a || !b) continue
-        const ra = a.getBoundingClientRect()
-        const rb = b.getBoundingClientRect()
-        if (ra.width === 0 || rb.width === 0) continue
-        const x1 = ra.right - box.left + 6
-        const y1 = ra.top + ra.height / 2 - box.top
-        const x2 = rb.left - box.left - 2
-        const y2 = rb.top + rb.height / 2 - box.top
-        const mx = x1 + (x2 - x1) * 0.55
-        next.push({ d: `M${x1} ${y1}C${mx} ${y1},${mx} ${y2},${x2} ${y2}`, tone: e.tone })
-      }
-      setCurves(next)
-    }
-    const schedule = () => {
-      cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(draw)
-    }
-    schedule()
-    const ro = new ResizeObserver(schedule)
-    ro.observe(root)
-    window.addEventListener('resize', schedule)
-    return () => {
-      cancelAnimationFrame(frame)
-      ro.disconnect()
-      window.removeEventListener('resize', schedule)
-    }
-  }, [ref, edges])
-  return curves
-}
-
-function groupId(branch: string, g: number) {
-  return `group-${branch}-${g}`
-}
-
-const EDGES: Edge[] = BRANCHES.flatMap((b) =>
-  b.groups.map((g, gi) => ({ from: `trunk-${b.id}`, to: groupId(b.id, gi), tone: g.tone })),
-)
-
-function LeafRow({ leaf, tone, id }: { leaf: Leaf; tone: Track; id: string }) {
-  const Icon = leaf.icon
-  const text = 'font-sans text-[13px] leading-snug text-foreground'
+function Rail({ id, stageIndex }: { id: InitiativeId; stageIndex: number }) {
+  const init = INITIATIVES.find((i) => i.id === id)!
+  const { from, to } = span(id)
+  const stage = STAGES[stageIndex]
+  const inSpan = stageIndex >= from && stageIndex <= to
+  const touched = stage.initiatives.includes(id)
   return (
-    <li className="group relative flex items-center gap-2.5 py-1 before:absolute before:-left-4 before:top-1/2 before:h-px before:w-3 before:bg-current/40">
-      <Icon className={cn('size-3.5 shrink-0', trackStyles[tone].accentText)} aria-hidden="true" />
-      {leaf.detail ? (
-        <>
-          <button
-            type="button"
-            aria-describedby={`${id}-detail`}
-            className={cn(
-              text,
-              'inline-flex items-center gap-1.5 rounded-sm text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40',
-            )}
-          >
-            {leaf.label}
-            <Info className="size-3 text-muted-foreground transition-colors group-hover:text-foreground" aria-hidden="true" />
-            <span className="sr-only"> (hover or focus for the full list)</span>
-          </button>
-          <div
-            id={`${id}-detail`}
-            role="tooltip"
-            className="pointer-events-none absolute left-6 top-full z-20 mt-1 w-64 max-w-[80vw] rounded-[10px] bg-primary px-3 py-2 font-sans text-xs leading-relaxed text-primary-foreground opacity-0 shadow-soft transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
-          >
-            {leaf.detail}
-          </div>
-        </>
-      ) : (
-        <span className={text}>{leaf.label}</span>
+    <span className="relative flex h-full w-3.5 items-center justify-center self-stretch">
+      {inSpan && (
+        <span
+          aria-hidden="true"
+          className={cn(
+            'absolute left-1/2 w-px -translate-x-1/2 bg-track-strategy/40',
+            stageIndex === from ? 'top-1/2' : 'top-0',
+            stageIndex === to ? 'bottom-1/2' : 'bottom-0',
+          )}
+        />
       )}
+      {touched && (
+        <span
+          className={cn('relative size-2 bg-track-strategy', init.shape === 'circle' ? 'rounded-full' : 'rounded-[2px]')}
+        >
+          <span className="sr-only">{init.label}</span>
+        </span>
+      )}
+    </span>
+  )
+}
+
+function StageRow({ stage, index }: { stage: Stage; index: number }) {
+  return (
+    <li className="grid grid-cols-[minmax(0,1fr)_0.875rem_0.875rem] items-stretch gap-x-2">
+      <div className="flex items-start gap-2.5 py-1.5">
+        <span className="label-micro w-3 shrink-0 pt-[3px] tabular-nums text-muted-foreground">{stage.n}</span>
+        <span aria-hidden="true" className={cn('mt-[5px] size-2.5 shrink-0 rounded-full', DOT[stage.mine])} />
+        <span className="min-w-0">
+          <span className="block font-sans text-[13px] font-semibold leading-snug text-foreground">
+            {stage.name}
+            <span className="sr-only">, {INVOLVEMENT_LABEL[stage.mine]}</span>
+          </span>
+          <span className="block font-sans text-[11px] leading-snug text-muted-foreground">{stage.what}</span>
+        </span>
+      </div>
+      <Rail id="clean" stageIndex={index} />
+      <Rail id="access" stageIndex={index} />
     </li>
   )
 }
 
-function Group({ branch, group, index }: { branch: Branch; group: LeafGroup; index: number }) {
-  const style = trackStyles[group.tone]
+function Legend() {
+  const items: Involvement[] = ['ic', 'management', 'none']
   return (
-    <div data-anchor={groupId(branch.id, index)}>
-      {group.caption && <p className={cn('mb-1.5 label-micro', style.accentText)}>{group.caption}</p>}
-      {/* The spine: the list carries the track colour so the border and the
-          ticks (currentColor) match the curve that reaches it. */}
-      <ul className={cn('ml-1.5 grid border-l border-current/40 pl-4', style.accentText)}>
-        {group.leaves.map((leaf, i) => (
-          <LeafRow key={leaf.label} leaf={leaf} tone={group.tone} id={`${groupId(branch.id, index)}-${i}`} />
-        ))}
-      </ul>
-    </div>
+    <ul className="flex flex-wrap gap-x-3 gap-y-1" aria-label="How each stage was mine">
+      {items.map((m) => (
+        <li key={m} className="flex items-center gap-1.5 label-micro text-muted-foreground">
+          <span aria-hidden="true" className={cn('size-2 rounded-full', DOT[m])} />
+          {INVOLVEMENT_LABEL[m]}
+        </li>
+      ))}
+    </ul>
   )
 }
 
-/** The hero slot: the mind map. */
+/** The hero slot. */
 export function CapabilityMap({ className }: { className?: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const curves = useCurves(ref, EDGES)
   return (
-    <div ref={ref} className={cn('relative', className)} aria-label="What I can do, at a glance">
-      <svg aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full overflow-visible">
-        {curves.map((c, i) => (
-          <path key={i} d={c.d} fill="none" stroke={STROKE[c.tone]} strokeWidth="1.25" strokeOpacity="0.6" />
-        ))}
-      </svg>
-      <ol className="relative grid gap-10">
-        {BRANCHES.map((b) => {
-          const Icon = b.icon
-          return (
-            <li key={b.id} className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-center gap-x-7">
-              <div data-anchor={`trunk-${b.id}`} className="flex flex-col items-center gap-2 text-center">
-                <span className={cn('inline-flex size-9 items-center justify-center rounded-full', trackStyles[b.tone].badgeFlat)}>
-                  <Icon className="size-4" aria-hidden="true" />
-                </span>
-                <span className="label-micro text-foreground">{b.label}</span>
-              </div>
-              <div className="grid gap-5">
-                {b.groups.map((g, gi) => (
-                  <Group key={gi} branch={b} group={g} index={gi} />
-                ))}
-              </div>
-            </li>
-          )
-        })}
-      </ol>
+    <div className={cn('grid gap-7', className)} aria-label="What I led design and strategy for, at a glance">
+      <section aria-labelledby="led-heading">
+        <header className="flex items-center gap-2.5">
+          <span className={cn('inline-flex size-8 items-center justify-center rounded-full', trackStyles.strategy.badgeFlat)}>
+            <Compass className="size-4" aria-hidden="true" />
+          </span>
+          <div>
+            <p id="led-heading" className="label-micro text-foreground">
+              Led design and strategy for
+            </p>
+            <p className="font-sans text-xs text-muted-foreground">Intuit’s data platform, end to end · 2021–2026</p>
+          </div>
+        </header>
+        <div className="mt-3">
+          <Legend />
+        </div>
+        <ol className="mt-2 grid">
+          {STAGES.map((s, i) => (
+            <StageRow key={s.n} stage={s} index={i} />
+          ))}
+        </ol>
+        <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 label-micro text-muted-foreground">
+          <span className="text-foreground">Across stages, strategy mine</span>
+          {INITIATIVES.map((i) => (
+            <span key={i.id} className="flex items-center gap-1.5">
+              <span
+                aria-hidden="true"
+                className={cn('size-2 bg-track-strategy', i.shape === 'circle' ? 'rounded-full' : 'rounded-[2px]')}
+              />
+              {i.label}
+            </span>
+          ))}
+        </p>
+      </section>
+
+      <section aria-labelledby="before-heading">
+        <header className="flex items-center gap-2.5">
+          <span className={cn('inline-flex size-8 items-center justify-center rounded-full', trackStyles.ic.badgeFlat)}>
+            <Tv className="size-4" aria-hidden="true" />
+          </span>
+          <div>
+            <p id="before-heading" className="label-micro text-foreground">
+              {BEFORE.caption}
+            </p>
+            <p className="font-sans text-xs text-muted-foreground">{BEFORE.line}</p>
+          </div>
+        </header>
+        <ul className={cn('ml-4 mt-3 grid border-l border-current/40 pl-4', trackStyles.ic.accentText)}>
+          {BEFORE.products.map((p) => {
+            const Icon = p.icon
+            return (
+              <li
+                key={p.name}
+                className="relative flex items-center gap-2.5 py-1 before:absolute before:-left-4 before:top-1/2 before:h-px before:w-3 before:bg-current/40"
+              >
+                <Icon className="size-3.5 shrink-0" aria-hidden="true" />
+                <span className="font-sans text-[13px] leading-snug text-foreground">{p.name}</span>
+              </li>
+            )
+          })}
+        </ul>
+      </section>
     </div>
   )
 }

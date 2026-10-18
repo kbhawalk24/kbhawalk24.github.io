@@ -1,89 +1,110 @@
 import type { LucideIcon } from 'lucide-react'
-import { Bot, Building2, Compass, KeyRound, Layers, Map, MessageSquare, Network, Search, ShieldCheck } from 'lucide-react'
+import { Crosshair, LayoutDashboard, TrendingUp } from 'lucide-react'
 import type { Track } from '@/lib/timeline-data'
 
-// The capability map beside the hero's about text: two branches a reader
-// can scan in a few seconds. What I owned across Intuit's data platform, in
-// two layers (designed myself, then owned as the design manager), and the
-// design strategy I set. Tones reuse the timeline's track colours:
-// ic = designed myself, management = owned as manager, strategy = strategy.
+// The map beside the hero's about text. Section one: the end-to-end data
+// lifecycle at Intuit, seven stages, each marked by how it was mine
+// (designed myself, owned as the design manager, or outside design's
+// scope), with two horizontal initiatives I set the strategy for drawn as
+// rails down the side at the stages they touched. Section two: 605.
+// Stage names and descriptions are plain words; internal tool names stay
+// off the site.
 
-export interface Leaf {
+export type Involvement = Track | 'none'
+
+export interface Stage {
+  n: number
+  name: string
+  what: string
+  mine: Involvement
+  /** Which horizontal initiatives touched this stage. */
+  initiatives: InitiativeId[]
+}
+
+export type InitiativeId = 'clean' | 'access'
+
+export interface Initiative {
+  id: InitiativeId
   label: string
-  icon: LucideIcon
-  /** The full list behind a summarised leaf, shown on hover and focus. */
-  detail?: string
+  /** Rail shape, so the two rails differ by more than colour. */
+  shape: 'circle' | 'square'
 }
 
-export interface LeafGroup {
-  caption?: string
-  tone: Track
-  leaves: Leaf[]
+export const INVOLVEMENT_LABEL: Record<Involvement, string> = {
+  ic: 'designed myself',
+  management: 'owned as design manager',
+  strategy: 'set the strategy',
+  none: 'outside design’s scope',
 }
 
-export interface Branch {
-  id: string
-  label: string
-  icon: LucideIcon
-  tone: Track
-  groups: LeafGroup[]
-}
-
-export const BRANCHES: Branch[] = [
+export const STAGES: Stage[] = [
   {
-    id: 'owned',
-    label: 'Owned',
-    icon: Building2,
-    tone: 'ic',
-    groups: [
-      {
-        caption: 'Designed myself · Intuit, 2021–2024',
-        tone: 'ic',
-        leaves: [
-          { label: 'Catalog, search, Data Map', icon: Search },
-          { label: 'Plain-language assistant', icon: MessageSquare },
-          { label: 'Lineage, self-service onboarding', icon: Network },
-        ],
-      },
-      {
-        caption: 'Owned as design manager · 2024–2026',
-        tone: 'management',
-        leaves: [
-          {
-            label: 'Discovery, Collections, the agent',
-            icon: Bot,
-            detail: 'Search and the Data Map, Collections, the plain-language assistant, and the agent in Cursor and Claude.',
-          },
-          {
-            label: 'Access, lineage, observability',
-            icon: KeyRound,
-            detail: 'Access requests and fine-grained access control, governance, lineage, and monitoring of data health.',
-          },
-          {
-            label: 'Clean data, pipelines, analytics',
-            icon: ShieldCheck,
-            detail: 'The clean-data and data maturity program, pipeline authoring, and behavioral analytics.',
-          },
-        ],
-      },
-    ],
+    n: 1,
+    name: 'Produce & instrument',
+    what: 'Creating data products, scoring and certifying them, authoring the Data Map',
+    mine: 'management',
+    initiatives: ['clean'],
   },
   {
-    id: 'strategy',
-    label: 'Strategy focus',
-    icon: Compass,
-    tone: 'strategy',
-    groups: [
-      {
-        caption: 'The bets I set for the platform',
-        tone: 'strategy',
-        leaves: [
-          { label: 'Discovery inside the coding tools, not a chat window', icon: Bot },
-          { label: 'Collections as the agent’s context layer', icon: Layers },
-          { label: 'Data organized by business meaning', icon: Map },
-          { label: 'Certification that looks the same everywhere', icon: ShieldCheck },
-        ],
-      },
-    ],
+    n: 2,
+    name: 'Move & ingest',
+    what: 'Batch and real-time data into the lake',
+    mine: 'management',
+    initiatives: [],
+  },
+  {
+    n: 3,
+    name: 'Store & persist',
+    what: 'Entity storage, managed databases, the event bus',
+    mine: 'none',
+    initiatives: [],
+  },
+  {
+    n: 4,
+    name: 'Discover & access',
+    what: 'Finding data, tracing it, requesting access, the agent in coding tools',
+    mine: 'ic',
+    initiatives: ['clean', 'access'],
+  },
+  {
+    n: 5,
+    name: 'Process & derive',
+    what: 'Pipelines and derived tables',
+    mine: 'management',
+    initiatives: ['access'],
+  },
+  {
+    n: 6,
+    name: 'Test & ensure quality',
+    what: 'Quality checks, reliability, monitoring',
+    mine: 'management',
+    initiatives: ['clean'],
+  },
+  {
+    n: 7,
+    name: 'Consume & activate',
+    what: 'Clean data to marketing and BI; self-service onboarding',
+    mine: 'ic',
+    initiatives: ['clean', 'access'],
   },
 ]
+
+export const INITIATIVES: Initiative[] = [
+  { id: 'clean', label: 'Clean-data standard', shape: 'circle' },
+  { id: 'access', label: 'Fine-grained access control', shape: 'square' },
+]
+
+export interface Product {
+  name: string
+  icon: LucideIcon
+}
+
+export const BEFORE = {
+  caption: 'Before Intuit · 605, 2017–2021',
+  line: 'First product designer. Three TV advertising analytics products, concept to launch.',
+  products: [
+    { name: 'Platform', icon: LayoutDashboard },
+    { name: 'Indxr', icon: Crosshair },
+    { name: 'Impact', icon: TrendingUp },
+  ] as Product[],
+}
