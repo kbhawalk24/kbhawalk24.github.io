@@ -47,6 +47,8 @@ export interface WorkCard {
   line?: string
   stats: CardStat[]
   status: 'coming-soon' | 'live'
+  /** The page, once it exists. */
+  href?: string
 }
 
 export interface Arc {
@@ -75,7 +77,8 @@ export const ARCS: Arc[] = [
           { value: '45 min → 4 min', label: 'Time to insight' },
           { value: '711', label: 'Active users · 56,560 tool calls' },
         ],
-        status: 'coming-soon',
+        status: 'live',
+        href: '/work/agentic-discovery',
       },
       {
         slug: 'search-2',

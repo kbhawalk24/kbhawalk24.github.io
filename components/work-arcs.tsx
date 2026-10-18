@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
@@ -7,7 +8,7 @@ import { HeadingDot } from '@/components/heading-dot'
 // Selected work: three strategic arcs, each with a thesis sentence and its
 // cards. Card format, stacked: cover placeholder on top, role tag, title,
 // an optional line, the outcome as one or two stats, then the status chip.
-// A card links only once its page exists.
+// A card links only once its page exists (status 'live' with an href).
 
 const DIAGONAL_STRIPES = {
   backgroundImage:
@@ -36,7 +37,15 @@ function Status({ card }: { card: WorkCard }) {
       </p>
     )
   }
-  return null
+  if (!card.href) return null
+  return (
+    <Link
+      href={card.href}
+      className="mt-5 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline"
+    >
+      Read the case study <span aria-hidden="true">→</span>
+    </Link>
+  )
 }
 
 function Card({ card }: { card: WorkCard }) {
