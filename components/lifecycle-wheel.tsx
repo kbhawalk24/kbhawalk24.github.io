@@ -55,7 +55,7 @@ const INITIATIVES = [
   { name: 'Clean-data standard', s: CUES.Strategy + 1.4 },
   { name: 'Fine-grained access control', s: CUES.Strategy + 1.7 },
 ]
-const TITLE_A = 'Led design and strategy for Intuit’s data platform'
+const TITLE_A = 'Led design and strategy for Intuit’s data platform'  // text alternative only
 const TITLE_B = 'Designed it. Led it. Set the strategy.'
 
 const CX = 760
@@ -102,8 +102,6 @@ function useScale(ref: React.RefObject<HTMLDivElement | null>) {
 /** The artboard at time T. Pure of time: everything derives from T. */
 function Artboard({ T }: { T: number }) {
   const fade = 1 - enter(T, TOTAL - 0.9, 0.8)
-  const aIn = enter(T, 0.2, 0.8)
-  const aOut = enter(T, CUES.Summary + 0.2, 0.5)
   const bIn = enter(T, CUES.Summary + 0.6, 0.8)
   const summary = enter(T, CUES.Summary + 0.2, 0.6)
   const wheelIn = (i: number) => enter(T, CUES.Lifecycle + i * 0.2, 0.6)
@@ -112,9 +110,8 @@ function Artboard({ T }: { T: number }) {
 
   return (
     <div className="absolute inset-0 overflow-hidden font-sans text-foreground" style={{ opacity: fade }} aria-hidden="true">
-      <div className={title} style={{ opacity: aIn * (1 - aOut), transform: `translateY(${(1 - aIn) * 18}px)` }}>
-        {TITLE_A}
-      </div>
+      {/* No opening title: the section heading outside the artboard names
+          the piece. The summary line is the only title moment. */}
       <div className={title} style={{ opacity: bIn, transform: `translateY(${(1 - bIn) * 18}px)` }}>
         {TITLE_B}
       </div>
