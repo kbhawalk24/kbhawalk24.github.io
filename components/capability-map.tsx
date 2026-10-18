@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'motion/react'
+import { LifecycleWheel } from '@/components/lifecycle-wheel'
 import { cn } from '@/lib/utils'
 import { BAND, MATRIX_ROWS, STAGES, type Stage } from '@/lib/capability-map'
 import type { Track } from '@/lib/timeline-data'
@@ -119,8 +120,8 @@ function MatrixNarrow() {
   )
 }
 
-/** The hero slot. */
-export function CapabilityMap({ className }: { className?: string }) {
+/** The cards and the matrix. */
+function CardsAndMatrix({ className }: { className?: string }) {
   const reduce = useReducedMotion()
   // Driven by `animate` from an in-view flag rather than `whileInView`, so
   // the variant label reliably propagates to the staggered children.
@@ -150,4 +151,21 @@ export function CapabilityMap({ className }: { className?: string }) {
       <MatrixNarrow />
     </section>
   )
+}
+
+/** The hero slot. `?viz=wheel` shows the lifecycle wheel (wheel/README.md)
+ *  as the alternative, with the cards and matrix as its narrow fallback;
+ *  the cards and matrix are the default. Remove the switch once chosen. */
+export function CapabilityMap({ className }: { className?: string }) {
+  const [wheel, setWheel] = useState(false)
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- read once from the URL after mount
+      if (new URLSearchParams(window.location.search).get('viz') === 'wheel') setWheel(true)
+    } catch {
+      /* keep the default */
+    }
+  }, [])
+  if (wheel) return <LifecycleWheel className={className} fallback={<CardsAndMatrix className={className} />} />
+  return <CardsAndMatrix className={className} />
 }
