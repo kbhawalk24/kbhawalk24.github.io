@@ -12,7 +12,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
       { label: '0-to-1 Catalog & Data Map' },
-      { label: 'Search 2.0 & Data Collections' },
+      { label: 'Search 2.0 & Data Collections', href: '/work/search-2' },
       { label: 'Agent in Cursor & Claude' },
     ],
     current: 2,
@@ -92,6 +92,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   next: {
     text: 'The agent only answers well because the search underneath it returns the right table first. Next: how the Search 2.0 rebuild took first-result precision from 81.31% to 89.24% and left the door open for Collections.',
     label: 'Search 2.0 & Data Collections',
+    href: '/work/search-2',
   },
   credits:
     'Strategy and the answer specification are mine. Response patterns: a designer on my team. Servers and search models: engineering.',
