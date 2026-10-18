@@ -1,28 +1,12 @@
 import type { LucideIcon } from 'lucide-react'
-import {
-  Activity,
-  ArrowUpRight,
-  Bot,
-  Building2,
-  ChartColumn,
-  Compass,
-  DatabaseZap,
-  KeyRound,
-  Map,
-  Network,
-  PenTool,
-  Search,
-  ShieldCheck,
-  Tv,
-  Users,
-} from 'lucide-react'
+import { Bot, Building2, Compass, KeyRound, Layers, Map, MessageSquare, Network, Search, ShieldCheck } from 'lucide-react'
 import type { Track } from '@/lib/timeline-data'
 
-// The capability map beside the hero's about text: three branches a reader
-// can scan in a few seconds. Where the work was (Intuit in two layers, then
-// 605), what I am good at as a designer, and how I manage. Tones reuse the
-// timeline's track colours: ic = designed myself, management = owned as the
-// design manager (my team designed), strategy = craft.
+// The capability map beside the hero's about text: two branches a reader
+// can scan in a few seconds. What I owned across Intuit's data platform, in
+// two layers (designed myself, then owned as the design manager), and the
+// design strategy I set. Tones reuse the timeline's track colours:
+// ic = designed myself, management = owned as manager, strategy = strategy.
 
 export interface Leaf {
   label: string
@@ -47,8 +31,8 @@ export interface Branch {
 
 export const BRANCHES: Branch[] = [
   {
-    id: 'where',
-    label: 'Where',
+    id: 'owned',
+    label: 'Owned',
     icon: Building2,
     tone: 'ic',
     groups: [
@@ -57,8 +41,8 @@ export const BRANCHES: Branch[] = [
         tone: 'ic',
         leaves: [
           { label: 'Catalog, search, Data Map', icon: Search },
-          { label: 'Assistant, lineage, onboarding', icon: Network },
-          { label: 'Platform design strategy', icon: Compass },
+          { label: 'Plain-language assistant', icon: MessageSquare },
+          { label: 'Lineage, self-service onboarding', icon: Network },
         ],
       },
       {
@@ -82,40 +66,22 @@ export const BRANCHES: Branch[] = [
           },
         ],
       },
-      {
-        caption: 'Before · 605, 2017–2021',
-        tone: 'ic',
-        leaves: [{ label: 'TV and ad analytics products', icon: Tv }],
-      },
     ],
   },
   {
-    id: 'craft',
-    label: 'Craft',
-    icon: PenTool,
+    id: 'strategy',
+    label: 'Strategy focus',
+    icon: Compass,
     tone: 'strategy',
     groups: [
       {
+        caption: 'The bets I set for the platform',
         tone: 'strategy',
         leaves: [
-          { label: 'Search and discovery over very large data', icon: DatabaseZap },
-          { label: 'Rules for how AI agents answer and earn trust', icon: Bot },
-          { label: 'Data visualization under hard constraints', icon: ChartColumn },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'manage',
-    label: 'How I manage',
-    icon: Users,
-    tone: 'management',
-    groups: [
-      {
-        tone: 'management',
-        leaves: [
-          { label: 'Upstream, where problems get defined', icon: ArrowUpRight },
-          { label: 'Player-coach on the hardest piece', icon: Activity },
+          { label: 'Discovery inside the coding tools, not a chat window', icon: Bot },
+          { label: 'Collections as the agent’s context layer', icon: Layers },
+          { label: 'Data organized by business meaning', icon: Map },
+          { label: 'Certification that looks the same everywhere', icon: ShieldCheck },
         ],
       },
     ],
