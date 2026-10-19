@@ -79,6 +79,9 @@ export interface Video {
   at: string
   /** The transcript, where one exists. */
   transcript?: string
+  /** YouTube id and the second to start at, for the embed. */
+  youtube: string
+  start?: number
 }
 
 export const VIDEOS: Video[] = [
@@ -89,6 +92,8 @@ export const VIDEOS: Video[] = [
     note: 'The plain-language assistant, Data Copilot, demonstrated to investors: my hands-on design work as an individual contributor. The CTO described it as “AI-assisted data analysis to facilitate quick data discovery, query generation, and query translation,” with data scientists and analysts working up to 2x faster.',
     href: 'https://youtu.be/kfpmtVe2OFY?t=2505',
     at: 'from 41:45',
+    youtube: 'kfpmtVe2OFY',
+    start: 2505,
     transcript: 'https://stockanalysis.com/stocks/intu/transcripts/92755-investor-day-2023/',
   },
   {
@@ -98,6 +103,7 @@ export const VIDEOS: Video[] = [
     note: 'The catalog on stage: 320,000 tables, clean data from under 1% to 80% of the estate, time to discover data from 20 days to 9.4 hours.',
     href: 'https://www.youtube.com/watch?v=L_Q7LPB5HcA',
     at: 'Intuit’s segment',
+    youtube: 'L_Q7LPB5HcA',
   },
 ]
 

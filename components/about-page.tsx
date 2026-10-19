@@ -22,6 +22,7 @@ import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
 import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
+import { VideoEmbed } from '@/components/video-embed'
 
 // The About page (copy in lib/about.ts): About me, How I manage, How I
 // work with AI, the two public videos, and the list of case study pages.
@@ -106,25 +107,28 @@ export function AboutPage() {
           </Section>
 
           <Section id="in-public" title="In public">
-            <ul className="mt-6 grid gap-4">
+            <ul className="mt-6 grid gap-6">
               {VIDEOS.map((v) => (
                 <li key={v.href} className="rounded-[14px] bg-card p-5 shadow-soft">
-                  <p className="label-micro text-muted-foreground">
+                  <VideoEmbed id={v.youtube} start={v.start} title={v.title} />
+                  <p className="mt-4 label-micro text-muted-foreground">
                     {v.when} · {v.at}
                   </p>
-                  <a href={v.href} {...ext} className="mt-2 inline-flex items-start gap-1.5 font-heading text-lg font-semibold leading-tight tracking-tight text-foreground hover:underline">
-                    {v.title}
-                    <ArrowUpRight className="mt-1 size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
+                  <h3 className="mt-2 font-heading text-lg font-semibold leading-tight tracking-tight text-foreground">{v.title}</h3>
                   <p className="mt-1 font-sans text-sm text-muted-foreground">{v.who}</p>
                   <p className="mt-2 max-w-2xl text-pretty font-sans text-sm leading-relaxed text-foreground/90">{v.note}</p>
-                  {v.transcript && (
-                    <a href={v.transcript} {...ext} className="mt-2 inline-flex items-center gap-1 font-sans text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
-                      Transcript
+                  <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-sans text-xs text-muted-foreground">
+                    <a href={v.href} {...ext} className="inline-flex items-center gap-1 underline-offset-4 hover:text-foreground hover:underline">
+                      Watch on YouTube <ArrowUpRight className="size-3" aria-hidden="true" />
                       <span className="sr-only"> (opens in a new tab)</span>
                     </a>
-                  )}
+                    {v.transcript && (
+                      <a href={v.transcript} {...ext} className="inline-flex items-center gap-1 underline-offset-4 hover:text-foreground hover:underline">
+                        Transcript <ArrowUpRight className="size-3" aria-hidden="true" />
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </a>
+                    )}
+                  </p>
                 </li>
               ))}
             </ul>
