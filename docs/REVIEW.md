@@ -24,6 +24,10 @@ You approved the copy for pages 1, 2 and 3 and the 2026 closing paragraph. Pages
 - **Catalog (5).** The help-channel anecdote about two near-identical customer tables comes from the old content file; the brief struck other claims from that file, so confirm this one is true. The 2025 finding that map search is adopted less than table search is on the page on purpose, as honesty.
 - **605 (6).** "About 20 engineers and 5 product managers" is in the brief's own 605 appendix, so it stays; say so if you want headcount off this page too. The "three rules" for charts are my paraphrase of the deck's "that changed three things"; check the deck's list matches: five audiences per chart, colour means audience only, two metrics only with one audience.
 
+## Visuals, added 19 October
+
+Every case study page has a `visuals` list in its `lib/pages/<slug>.ts`. The 605 page has six real images from `_staging/605`. The other five show hatched "Image to come" slots: the captions describe the intended image and are provisional, and each entry's `todo` names the source file to export. Replace a slot by dropping the file in `public/work/<slug>/` and setting `src`, `width` and `height`.
+
 ## About page, two phrases of mine
 
 In "How I work with AI": "twenty transcripts become one set of findings in a day instead of a week" and "a place to visit, not a place to work". Keep, change or cut.

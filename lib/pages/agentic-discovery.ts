@@ -22,6 +22,36 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     { value: '711', label: 'Active users' },
     { value: '56,560', label: 'Tool calls in 90 days' },
   ],
+  visuals: [
+    {
+      id: 'agent-in-cursor',
+      kind: 'video',
+      alt: 'A screen recording of the agent answering a multi-table question inside Cursor, calling the platform’s search, lineage and access tools in turn.',
+      caption: 'The agent answering a multi-table question inside Cursor, with the platform’s search, lineage and access as its tools.',
+      todo: 'A 10 to 20 second muted clip from DDE-Cursor-Claude.mp4 or 3x-DDE-Agent-Demo.mp4, no names in the chat pane, under 8 MB.',
+    },
+    {
+      id: 'tool-order',
+      after: 'rules',
+      alt: 'A diagram of the tools the agent was given and the order it uses them in.',
+      caption: 'The tool set the agent was given, and the order it reaches for them.',
+      todo: 'Draw from the specification; no product screenshot needed.',
+    },
+    {
+      id: 'spec-excerpt',
+      after: 'trade-offs',
+      alt: 'An excerpt of the specification for one tool: the inputs the agent sees and what it is not allowed to do.',
+      caption: 'One tool’s specification: the inputs the agent sees, and what it is not allowed to do.',
+      todo: 'Screenshot an excerpt of the spec; redact names.',
+    },
+    {
+      id: 'adoption',
+      after: 'multiplier',
+      alt: 'A chart of active users and tool calls by week over the first 90 days.',
+      caption: 'The first 90 days: active users and tool calls by week.',
+      todo: 'Chart from the same source as the 711 and 56,560 figures.',
+    },
+  ],
   sections: [
     {
       id: 'framing',

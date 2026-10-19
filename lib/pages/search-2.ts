@@ -22,6 +22,35 @@ export const SEARCH_2: ShortPage = {
     { value: '50.59 s → 1.93 s', label: 'For 99 in 100 searches' },
     { value: '10,000 · 460,000', label: 'Data products and attributes searchable' },
   ],
+  visuals: [
+    {
+      id: 'search-results',
+      alt: 'Search 2.0 results for a query, with six object-type tabs across the top and a list of result cards.',
+      caption: 'Search 2.0: six object-type tabs and the result list.',
+      todo: 'Frame from dde_search_v3.mp4 or export from Data Product V2.fig; no internal URLs in the address bar.',
+    },
+    {
+      id: 'result-card',
+      after: 'rules',
+      alt: 'One result card enlarged and annotated line by line.',
+      caption: 'The result card, annotated line by line.',
+      todo: 'Export the card from Data Product V2.fig and annotate.',
+    },
+    {
+      id: 'collections',
+      after: 'trade-offs',
+      alt: 'A Collection: a person’s saved working set of data products, with the people who share it.',
+      caption: 'Collections, a person’s saved working set of data, as shipped in August 2025.',
+      todo: 'Frame from the 8_04_25 Data Collections launch video or export from DDE - Data Collections.fig; remove names.',
+    },
+    {
+      id: 'before-after',
+      after: 'multiplier',
+      alt: 'The same query in the old search and in Search 2.0, side by side.',
+      caption: 'The same query before and after.',
+      todo: 'Two frames; the old search from a 2023 recording if one exists.',
+    },
+  ],
   sections: [
     {
       id: 'framing',

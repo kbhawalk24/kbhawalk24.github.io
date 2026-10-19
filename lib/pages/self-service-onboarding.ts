@@ -22,6 +22,35 @@ export const SELF_SERVICE_ONBOARDING: ShortPage = {
     { value: '7 days', label: 'of campaign delay on average in FY23, the problem' },
     { value: '1,600', label: 'data products newly certified and discoverable in FY24' },
   ],
+  visuals: [
+    {
+      id: 'three-iterations',
+      alt: 'Three iterations of the self-service onboarding flow side by side, from the first form to the shipped version.',
+      caption: 'Three iterations of the self-service onboarding flow, side by side.',
+      todo: 'Export from Onboarding attributes to C360 Q2 2024.fig and CDC 2.0.fig.',
+    },
+    {
+      id: 'human-in-the-loop',
+      after: 'rules',
+      alt: 'The review step where a person confirms or corrects AI-generated metadata before it is published.',
+      caption: 'Where the human stays in the automated flow: the review step for AI-generated metadata.',
+      todo: 'Export from Displaying ai generated metadata in DDE.fig.',
+    },
+    {
+      id: 'journey-map',
+      after: 'trade-offs',
+      alt: 'The journey map from the FY23 research, with the campaign delay marked.',
+      caption: 'The FY23 journey map, with the 7-day campaign delay marked.',
+      todo: 'Export from C360 - Self Serve onboarding.jam; redact names.',
+    },
+    {
+      id: 'certified-by-month',
+      after: 'multiplier',
+      alt: 'A chart of newly certified data products by month in FY24.',
+      caption: 'Newly certified data products by month, FY24.',
+      todo: 'Chart from the source of the 1,600 figure.',
+    },
+  ],
   sections: [
     {
       id: 'framing',

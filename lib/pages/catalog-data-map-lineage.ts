@@ -22,6 +22,35 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     { value: 'About 30,000 tables, 7,000 pipelines', label: 'in the first lineage graph' },
     { value: '4 weeks', label: 'from brief to lineage launch' },
   ],
+  visuals: [
+    {
+      id: 'object-model',
+      alt: 'The Data Product object model: a business concept with batch, stream and marketing copies of the same data beneath it.',
+      caption: 'The Data Product object model: batch, stream and marketing copies of the same data beneath one business concept.',
+      todo: 'Export from Data Product V2.fig.',
+    },
+    {
+      id: 'first-catalog',
+      after: 'rules',
+      alt: 'The first catalog in 2021: a table page with owner, schema and usage.',
+      caption: 'The first catalog, 2021: a table page with owner, schema and usage.',
+      todo: 'Export from DDE MVP.fig.',
+    },
+    {
+      id: 'data-map',
+      after: 'trade-offs',
+      alt: 'The Data Map: business concepts and the data products beneath them.',
+      caption: 'The Data Map: business concepts and the data products beneath them.',
+      todo: 'Export from DDE 2.0.fig.',
+    },
+    {
+      id: 'first-lineage',
+      after: 'multiplier',
+      alt: 'The first lineage graph: tables and pipelines connected upstream and downstream of a selected table.',
+      caption: 'The first lineage graph, launched 4 weeks after the brief: about 30,000 tables and 7,000 pipelines.',
+      todo: 'Export from Data Lineage.fig.',
+    },
+  ],
   sections: [
     {
       id: 'framing',

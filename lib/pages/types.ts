@@ -37,6 +37,24 @@ export interface PageSection {
   blocks: Block[]
 }
 
+export interface PageVisual {
+  id: string
+  /** Path under /public once the file exists, e.g. /work/605-tv-analytics/platform.png. Absent: a placeholder renders. */
+  src?: string
+  /** Intrinsic size, for layout before the file loads. Placeholders use 16:10. */
+  width?: number
+  height?: number
+  kind?: 'image' | 'video'
+  /** What a person who cannot see the image needs to know. */
+  alt: string
+  /** The one-sentence caption under the figure. */
+  caption: string
+  /** Where it sits: under the stats when absent, else after this section id. */
+  after?: string
+  /** For a placeholder: what to export and from where. Not rendered. */
+  todo?: string
+}
+
 export interface NextHandoff {
   /** Two sentences: what this work left open, and what the next page shows. */
   text: string
@@ -55,6 +73,8 @@ export interface ShortPage {
   description: string
   context: SystemContext
   stats: PageStat[]
+  /** Screens, diagrams, recordings; 4 to 6 per page, every one captioned. */
+  visuals?: PageVisual[]
   sections: PageSection[]
   next: NextHandoff
   credits: string

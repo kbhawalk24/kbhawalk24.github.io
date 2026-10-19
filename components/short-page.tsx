@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
-import type { Block, InlineLink, ShortPage, SystemContext } from '@/lib/pages/types'
+import type { Block, InlineLink, PageVisual, ShortPage, SystemContext } from '@/lib/pages/types'
 import { Reveal } from '@/components/motion-primitives'
 import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
@@ -146,6 +146,8 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
               ))}
             </ul>
 
+            <Visuals visuals={visualsAfter(page, undefined)} className="mt-8" />
+
             {page.sections.map((section) => (
               <Reveal key={section.id} as="section" className="border-t border-border py-10 md:py-12">
                 <div id={section.id} className="scroll-mt-28">
@@ -158,6 +160,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
                       <BlockView key={i} block={block} />
                     ))}
                   </div>
+                  <Visuals visuals={visualsAfter(page, section.id)} className="mt-8" />
                 </div>
               </Reveal>
             ))}
@@ -198,5 +201,74 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
         </main>
         <ContactFooter />
       </MotionConfig>
+  )
+}
+
+function visualsAfter(page: ShortPage, after: string | undefined) {
+  return (page.visuals ?? []).filter((v) => v.after === after)
+}
+
+// Diagonal hatching for a slot whose file has not landed yet.
+const STRIPES = {
+  backgroundImage:
+    'repeating-linear-gradient(135deg, transparent 0 10px, color-mix(in oklab, var(--foreground) 7%, transparent) 10px 11px)',
+}
+
+// Figures with captions. One visual spans the measure; two or more sit in a
+// two-column grid from 768px up, with the first spanning both columns when the
+// count is odd so nothing is left hanging.
+function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: string }) {
+  if (visuals.length === 0) return null
+  const odd = visuals.length % 2 === 1
+  return (
+    <ul className={cn('grid gap-5 md:grid-cols-2 md:gap-6', className)}>
+      {visuals.map((v, i) => (
+        <li key={v.id} className={cn((visuals.length === 1 || (odd && i === 0)) && 'md:col-span-2')}>
+          <figure className="rounded-[14px] bg-card p-2 shadow-soft">
+            {v.src ? (
+              v.kind === 'video' ? (
+                <video
+                  src={v.src}
+                  width={v.width}
+                  height={v.height}
+                  className="w-full rounded-[10px] bg-card-soft"
+                  controls
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={v.alt}
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={v.src}
+                  width={v.width}
+                  height={v.height}
+                  alt={v.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-auto w-full rounded-[10px] bg-card-soft"
+                />
+              )
+            ) : (
+              <div
+                role="img"
+                aria-label={`Image to come: ${v.alt}`}
+                className="flex aspect-[16/10] items-end rounded-[10px] bg-card-soft p-4"
+                style={STRIPES}
+              >
+                <span className="rounded-full bg-card px-3 py-1 label-micro text-muted-foreground shadow-soft">
+                  Image to come
+                </span>
+              </div>
+            )}
+            <figcaption className="px-2 pb-2 pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">
+              {v.caption}
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
   )
 }

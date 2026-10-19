@@ -22,6 +22,35 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
     { value: '17 → 0', label: 'Peak-season P0/P1 data incidents · shared' },
     { value: 'All', label: 'Designers who reported to me, promoted' },
   ],
+  visuals: [
+    {
+      id: 'intake-tracker',
+      alt: 'The team’s project tracker: every product team’s request in one list, with the designer, the stage and the load visible.',
+      caption: 'One way in and one list: the project tracker, with every designer’s load visible.',
+      todo: 'Screenshot data-understanding-tracker.html in _staging/my-teams-work; remove names and team names.',
+    },
+    {
+      id: 'research-base',
+      after: 'rules',
+      alt: 'A page from the 2025 research findings deck: the list of what to build next, ranked.',
+      caption: 'One research base: the 2025 findings from 15 visits, 8 surveys and 11 help channels, in the form the engineering manager took into roadmap decks.',
+      todo: 'Excerpt of the Q3 FY26 research findings deck; redact names.',
+    },
+    {
+      id: 'query-insights',
+      after: 'trade-offs',
+      alt: 'The query insights view: the queries other people run against a table.',
+      caption: 'Query insights, the view of the queries other people run against a table, one of the two features argued onto the roadmap.',
+      todo: 'Export from DDE Query Insights.fig.',
+    },
+    {
+      id: 'access-request',
+      after: 'multiplier',
+      alt: 'The access request flow: tables and encrypted columns requested together, with the approval status.',
+      caption: 'The access flow the team shipped: tables and encrypted columns in one request, 9 days to 3.',
+      todo: 'Export from DACM - My Requests.fig.',
+    },
+  ],
   sections: [
     {
       id: 'framing',
