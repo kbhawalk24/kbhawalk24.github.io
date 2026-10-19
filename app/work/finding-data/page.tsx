@@ -1,12 +1,6 @@
-import type { Metadata } from 'next'
-import { CaseStudyLayout } from '@/components/case-study-layout'
-import { FINDING_DATA } from '@/lib/site-content'
+import { Forward } from '@/components/forward'
 
-export const metadata: Metadata = {
-  title: 'Finding data | Kanchi Bhawalkar',
-  description: FINDING_DATA.claim,
-}
-
+/** The old page lived here; its content moved. */
 export default function Page() {
-  return <CaseStudyLayout page={FINDING_DATA} />
+  return <Forward to="/work/agentic-discovery" label="Agentic Discovery in Cursor & Claude" />
 }

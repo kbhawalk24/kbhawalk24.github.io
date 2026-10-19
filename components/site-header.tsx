@@ -6,29 +6,22 @@ import { AnimatePresence, motion } from 'motion/react'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { EASE_OUT } from '@/components/motion-primitives'
-import type { Chapter } from '@/lib/site-content'
-import { useLens, withLens } from '@/components/lens'
 
-/** Floating pill nav, on every page from load: Work / Timeline / Resume / LinkedIn /
- *  Contact. (The IC/Manager lens switch used to sit here; the lens still
- *  rides along in links if a URL carries it, but has no control.)
- *
- *  On a case study the pill also carries the chapter list, but only below
- *  `lg`, where the page has no room for the left-hand chapter rail. One
- *  floating object at every width: a second bar under this one collided
- *  with it. */
+/** Floating pill nav, on every page from load: Work / About / Timeline /
+ *  Resume / LinkedIn / Contact. A page can pass its own sections; they go
+ *  into the menu below `lg` and into the phone menu. */
 export function SiteHeader({
   onHome = true,
   chapters = [],
 }: {
   onHome?: boolean
-  chapters?: Chapter[]
+  chapters?: { id: string; title: string }[]
 }) {
-  const { lens } = useLens()
   const home = onHome ? '' : '/'
 
   const links: NavItem[] = [
     { label: 'Work', href: `${home}#work` },
+    { label: 'About', href: '/about' },
     { label: 'Timeline', href: `${home}#timeline` },
     { label: 'Resume', href: '/kanchi-bhawalkar-resume.pdf', external: true },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/kanchib', external: true },
@@ -46,7 +39,7 @@ export function SiteHeader({
         className="pointer-events-auto flex w-max max-w-full items-center gap-1 rounded-full bg-card/80 py-1.5 pl-4 pr-1.5 shadow-float ring-1 ring-foreground/[7%] backdrop-blur-xl sm:gap-2 sm:pl-5"
       >
         <Link
-          href={withLens('/', lens)}
+          href="/"
           translate="no"
           className="-my-2 mr-1 rounded-full py-2 font-sans text-sm font-semibold tracking-tight transition-colors hover:text-accent-brand"
         >
@@ -55,20 +48,20 @@ export function SiteHeader({
 
         <div className="hidden items-center sm:flex">
           {links.map((l) => (
-            <NavLink key={l.label} href={l.external ? l.href : withLens(l.href, lens)} external={l.external}>
+            <NavLink key={l.label} href={l.href} external={l.external}>
               {l.label}
             </NavLink>
           ))}
           {chapters.length > 0 && (
             <div className="lg:hidden">
-              <NavMenu label="Chapters" items={chapterItems} />
+              <NavMenu label="On this page" items={chapterItems} />
             </div>
           )}
         </div>
 
         {/* Phone: everything folds into one menu. */}
         <div className="sm:hidden">
-          <NavMenu items={links} groupLabel={chapters.length > 0 ? 'Chapters' : undefined} group={chapterItems} />
+          <NavMenu items={links} groupLabel={chapters.length > 0 ? 'On this page' : undefined} group={chapterItems} />
         </div>
       </motion.nav>
     </header>
@@ -119,7 +112,6 @@ function NavMenu({
   groupLabel?: string
   group?: { label: string; href: string }[]
 }) {
-  const { lens } = useLens()
   const [open, setOpen] = useState(false)
   const id = useId()
   const ref = useRef<HTMLDivElement>(null)
@@ -170,7 +162,7 @@ function NavMenu({
             {items.map((l) => (
               <li key={l.href}>
                 <MenuItem
-                  href={l.external ? l.href : withLens(l.href, lens)}
+                  href={l.href}
                   external={l.external}
                   onClick={() => setOpen(false)}
                 >

@@ -1,8 +1,6 @@
-import type { Metadata } from 'next'
-import { CaseStudyPlaceholder } from '@/components/case-study-placeholder'
+import { Forward } from '@/components/forward'
 
-export const metadata: Metadata = { title: 'My team’s work | Kanchi Bhawalkar' }
-
+/** The old page lived here; its content moved. */
 export default function Page() {
-  return <CaseStudyPlaceholder roleId="intuit-manager" />
+  return <Forward to="/#work" label="the work on the homepage" />
 }

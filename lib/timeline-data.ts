@@ -79,7 +79,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Led UX strategy and a team of product designers for Intuit’s enterprise data platform: data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring. The data design group worked with 550 engineers and 16 product managers.',
-    caseStudy: { title: 'Scaling platform design at a 1:85 ratio', href: '/leadership' },
+    caseStudy: { title: 'Scaling platform design at a 1:85 ratio', href: '/#work' },
     entries: [
       {
         track: 'management',
@@ -88,7 +88,7 @@ export const ROLES: TimelineRole[] = [
           'From a single-team discovery tool to the default way Intuit finds, trusts, and gets data.',
         metrics: [
           { value: '2,664 → 6,000+', label: 'Monthly users, Jul 2024 → Mar 2026' },
-        ],        href: '/leadership#shipped',
+        ],        href: '/#work',
       },
       {
         track: 'management',
@@ -97,14 +97,14 @@ export const ROLES: TimelineRole[] = [
           'Tables and encrypted columns in one request: 9 days to 3 days (Aug 2025). Real-time streams: 2–3 weeks to 3 days, with 61% of requests approved automatically (Mar 2025). Ineligible denials for restricted tax data down 85%.',
         metrics: [
           { value: '9 → 3 days', label: 'Tables and encrypted columns, Aug 2025' },
-        ],        href: '/work/trusting-data#access',
+        ],        href: '/#work',
       },
       {
         track: 'management',
         headline: 'One Senior promotion, two more cases approved',
         detail:
           'Secured one Senior promotion in Jan 2026 and had two additional promotion cases approved before my role ended. Wrote the promotion-case framework each of them used, and backed a design sign-off before release that became the team’s practice.',
-        href: '/leadership#people',
+        href: '/#work',
       },
       {
         track: 'strategy',
@@ -113,7 +113,7 @@ export const ROLES: TimelineRole[] = [
           'The platform organization defined the standard. Quality scorecards, a company-wide maturity dashboard, and self-service certification of trusted data.',
         metrics: [
           { value: 'Under 1% → 80%', label: 'Clean data, public figure, Dec 2025' },
-        ],        href: '/work/trusting-data#maturity',
+        ],        href: '/#work',
       },
       {
         track: 'strategy',
@@ -122,7 +122,7 @@ export const ROLES: TimelineRole[] = [
           'Architected the strategy to collapse the find → access → explore loop by putting the catalog inside Cursor and Claude instead of building a better chat.',
         metrics: [
           { value: '45 min → 4 min', label: 'Time to insight' },
-        ],        href: '/work/finding-data#agent',
+        ],        href: '/work/agentic-discovery',
       },
       {
         track: 'ic',
@@ -131,7 +131,7 @@ export const ROLES: TimelineRole[] = [
           'Wrote the interaction model for the agent: structured answers that show their sources, not open chat. Tested its answers against real user questions, refined its rules, and drove adoption inside Cursor and Claude.',
         metrics: [
           { value: '711', label: 'Active users, Mar 2026' },
-        ],        href: '/work/finding-data#agent',
+        ],        href: '/work/agentic-discovery',
       },
       {
         track: 'ic',
@@ -140,7 +140,7 @@ export const ROLES: TimelineRole[] = [
           'AI pre-fills the form and validates up front, so marketers integrate data pipelines in under a day instead of one to two weeks.',
         metrics: [
           { value: '1-2 weeks → <24 hrs', label: 'Pipeline onboarding' },
-        ],        href: '/work/trusting-data#access',
+        ],        href: '/#work',
       },
     ],
   },
@@ -154,7 +154,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Principal-level IC owning search, discoverability, and data trust across the platform, plus the research that set the next year’s roadmap.',
-    caseStudy: { title: 'Finding data', href: '/work/finding-data' },
+    caseStudy: { title: 'Finding data', href: '/work/search-2' },
     entries: [
       {
         track: 'ic',
@@ -163,7 +163,7 @@ export const ROLES: TimelineRole[] = [
           'AI-generated descriptions, maturity scorecards, and AI classification tags.',
         metrics: [
           { value: '7,000+', label: 'Trusted data products' },
-        ],        href: '/work/trusting-data#maturity',
+        ],        href: '/#work',
       },
       {
         track: 'strategy',
@@ -172,7 +172,7 @@ export const ROLES: TimelineRole[] = [
           '20 in-context user visits across business units and a cross-functional ideation workshop; the group product lead called it “a major contributor to our FY25 roadmap.”',
         metrics: [
           { value: '20', label: 'In-context user visits' },
-        ],        href: '/work/finding-data#search-2',
+        ],        href: '/work/search-2',
       },
       {
         track: 'ic',
@@ -181,7 +181,7 @@ export const ROLES: TimelineRole[] = [
           'Designed semantic search for tables and for the Data Map. Table search launched Nov 14, 2024. I designed the first version of Data Map search; a designer on my team took it to launch on Mar 26, 2025.',
         metrics: [
           { value: '81.31% → 89.24%', label: 'First result correct, Mar 2025 launch' },
-        ],        href: '/work/finding-data#search-2',
+        ],        href: '/work/search-2',
       },
       {
         track: 'ic',
@@ -190,7 +190,7 @@ export const ROLES: TimelineRole[] = [
           'Re-architected the catalog for the new data-product model; ~2,000 previously siloed tables became findable.',
         metrics: [
           { value: '+42%', label: 'Platform monthly users, FY24: 1,886 → 2,664' },
-        ],        href: '/work/trusting-data#maturity',
+        ],        href: '/#work',
       },
     ],
   },
@@ -204,7 +204,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Founding designer of Intuit’s internal data catalog, which grew from tables and columns into the company’s system of record for data.',
-    caseStudy: { title: 'Founding designer of Intuit’s data catalog', href: '/work/trusting-data' },
+    caseStudy: { title: 'Founding designer of Intuit’s data catalog', href: '/#work' },
     entries: [
       {
         track: 'ic',
@@ -213,7 +213,7 @@ export const ROLES: TimelineRole[] = [
           'Trust flags, documentation, query information, ownership, new sources: enough to retire the third-party catalog the company was paying for.',
         metrics: [
           { value: '68% → 96%', label: 'Top-5 click-through' },
-        ],        href: '/work/finding-data#catalog',
+        ],        href: '/#work',
       },
       {
         track: 'ic',
@@ -222,7 +222,7 @@ export const ROLES: TimelineRole[] = [
           'Organized the catalog by what the data is about, with every physical copy (batch and real-time) under one entry. No catalog we evaluated offered this.',
         metrics: [
           { value: '~20', label: 'In-context user sessions' },
-        ],        href: '/work/finding-data#data-map',
+        ],        href: '/#work',
       },
       {
         track: 'ic',
@@ -232,7 +232,7 @@ export const ROLES: TimelineRole[] = [
         metrics: [
           { value: '500+', label: 'Monthly users' },
           { value: '2×', label: 'Faster SQL authoring' },
-        ],        href: '/work/finding-data#copilot',
+        ],        href: '/work/agentic-discovery',
       },
       {
         track: 'ic',
@@ -241,14 +241,14 @@ export const ROLES: TimelineRole[] = [
           'Impact graphs across ~30K tables and ~7K pipelines; 450–500 monthly users in the first year.',
         metrics: [
           { value: '~30K', label: 'Tables visualized' },
-        ],        href: '/work/trusting-data#lineage',
+        ],        href: '/#work',
       },
       {
         track: 'management',
         headline: 'Mentored a summer intern who joined the team',
         detail:
           'Managed a summer 2023 design intern who converted to full-time and later joined my team.',
-        href: '/leadership#people',
+        href: '/#work',
       },
     ],
   },
@@ -261,7 +261,7 @@ export const ROLES: TimelineRole[] = [
     location: 'New York, NY',
     summary:
       'First product designer at 605, taking three TV ad-analytics products from concept to commercial launch.',
-    caseStudy: { title: 'Three analytics products for TV advertising', href: '/605' },
+    caseStudy: { title: 'Three analytics products for TV advertising', href: '/#work' },
     entries: [
       {
         track: 'ic',
@@ -270,7 +270,7 @@ export const ROLES: TimelineRole[] = [
           'A platform measuring TV advertising’s effect on consumer behavior. Collapsed 32 separate reports into a two-page interactive view and replaced a chart type that caused around 8 bugs.',
         metrics: [
           { value: '$20M+', label: 'Revenue across three products' },
-        ],        href: '/605#impact',
+        ],        href: '/#work',
       },
       {
         track: 'ic',
@@ -278,7 +278,7 @@ export const ROLES: TimelineRole[] = [
         detail: 'Audience targeting that replaced manual ranking pulls, which took one day to two weeks.',
         metrics: [
           { value: '1 day - 2 wks', label: 'Manual ranking pulls replaced' },
-        ],        href: '/605#indxr',
+        ],        href: '/#work',
       },
       {
         track: 'ic',
@@ -287,13 +287,13 @@ export const ROLES: TimelineRole[] = [
           'Self-serve analytics, shipped in two months to meet a client deadline. Client pitches on it booked $2M in additional revenue.',
         metrics: [
           { value: '3-4 min → 1-1.5 min', label: 'Report render time' },
-        ],        href: '/605#platform',
+        ],        href: '/#work',
       },
       {
         track: 'ic',
         headline: 'Built a data-visualization design system',
         detail: 'Accessible, built for multivariate charts, hand-coded where needed.',
-        href: '/605#design-system',
+        href: '/#work',
       },
     ],
   },

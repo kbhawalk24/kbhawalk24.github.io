@@ -3,7 +3,6 @@
 import { MotionConfig } from 'motion/react'
 import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
-import { LensProvider } from '@/components/lens'
 import { Hero } from '@/components/hero'
 import { CapabilityMap } from '@/components/capability-map'
 import { WorkArcs } from '@/components/work-arcs'
@@ -16,7 +15,6 @@ import { HeadingDot } from '@/components/heading-dot'
 export default function Page() {
   return (
     <MotionConfig reducedMotion="user">
-      <LensProvider>
       <SkipLink />
       <SiteHeader />
       <main id="main">
@@ -37,7 +35,6 @@ export default function Page() {
         <CareerTimeline />
       </main>
       <ContactFooter />
-      </LensProvider>
     </MotionConfig>
   )
 }
