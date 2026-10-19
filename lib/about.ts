@@ -46,6 +46,10 @@ export const HOW_I_MANAGE: Passage[] = [
     text: 'My designers told my manager what they valued: clarity when requirements were unclear, boundaries when work kept changing, and getting engineering leads and several product managers into one room to settle a decision.',
   },
   {
+    lead: 'Every direct report promoted.',
+    text: 'Every designer who reported to me at Intuit was promoted while on my team. A 2023 intern I had managed joined the team full-time.',
+  },
+  {
     lead: 'What did not work.',
     text: 'My manager’s 2025 review names four projects where we did the research, translated it into recommendations, and it changed neither the direction nor the execution. He asked me to work on one thing: influence. The following year a finding stayed on the table until it became a commitment, not a readout.',
   },

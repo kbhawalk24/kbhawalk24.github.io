@@ -106,23 +106,6 @@ export function CareerTimeline() {
                               <p className="mt-1.5 text-pretty font-sans text-base leading-relaxed text-muted-foreground">
                                 {entry.detail}
                               </p>
-                              {entry.metrics && entry.metrics.length > 0 && (
-                                <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-3 border-t border-foreground/10 pt-4">
-                                  {entry.metrics.map((m) => (
-                                    <div key={m.label} className="flex flex-col-reverse">
-                                      <dt className="mt-1.5 label-micro text-muted-foreground">{m.label}</dt>
-                                      <dd
-                                        className={cn(
-                                          'font-heading text-xl font-semibold leading-tight tabular-nums',
-                                          trackStyles[track].accentText,
-                                        )}
-                                      >
-                                        {m.value}
-                                      </dd>
-                                    </div>
-                                  ))}
-                                </dl>
-                              )}
                             </li>
                           ))}
                         </ul>

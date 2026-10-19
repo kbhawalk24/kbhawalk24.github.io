@@ -81,7 +81,7 @@ export const ARCS: Arc[] = [
         visualNote: 'An anonymized platform launch map beside the team project intake tracker.',
         stats: [
           { value: '<1% → 80%', label: 'Certified clean data across the estate' },
-          { value: '17 → 0', label: 'Serious TY25 tax-season incidents' },
+          { value: 'All', label: 'Direct reports promoted while on my team' },
         ],
         status: 'live',
         href: '/work/scaling-platform-design',

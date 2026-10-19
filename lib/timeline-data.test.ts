@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { ROLES, STATS, TRACKS } from './timeline-data'
+import { ROLES, TRACKS } from './timeline-data'
 
 describe('timeline data integrity', () => {
   it('gives every role at least one entry', () => {

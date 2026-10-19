@@ -31,3 +31,6 @@ public/images/SKELETON-README.md.zip
 public/images/individual_svgs.zip
 public/portfolio_eye_tracking.html
 public/images/Screenshot*.png
+
+# Raw exports for the case-study visuals; only checked crops go to public/work
+_staging/

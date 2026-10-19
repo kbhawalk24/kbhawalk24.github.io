@@ -20,6 +20,7 @@ Everything below is on `main`, committed, not pushed. Run `pnpm dev` and open ht
 You approved the copy for pages 1, 2 and 3 and the 2026 closing paragraph. Pages 4, 5 and 6 were built from the drafts without a review pass, so read those first.
 
 - **Onboarding (4).** Two phrases are mine, not from a source: "where does a person belong in an automated flow?" and "with the human kept exactly where the edge cases are". The "7 days" stat tile describes the problem, not a result; cut it if a problem number on a stat strip bothers you.
+- **Team page (3), changed 19 October.** Third stat tile and the last sentence of the multiplier section now say every designer who reported to you was promoted; the same line is in About under How I manage and on the homepage team card. Source: promotion records.
 - **Catalog (5).** The help-channel anecdote about two near-identical customer tables comes from the old content file; the brief struck other claims from that file, so confirm this one is true. The 2025 finding that map search is adopted less than table search is on the page on purpose, as honesty.
 - **605 (6).** "About 20 engineers and 5 product managers" is in the brief's own 605 appendix, so it stays; say so if you want headcount off this page too. The "three rules" for charts are my paraphrase of the deck's "that changed three things"; check the deck's list matches: five audiences per chart, colour means audience only, two metrics only with one audience.
 
@@ -28,6 +29,8 @@ You approved the copy for pages 1, 2 and 3 and the 2026 closing paragraph. Pages
 In "How I work with AI": "twenty transcripts become one set of findings in a day instead of a week" and "a place to visit, not a place to work". Keep, change or cut.
 
 ## Open decisions, none blocking
+
+The running list now lives in `docs/LATER.md`; the items below are kept as they stood on 19 October.
 
 - **Push.** Pushing `main` deploys to GitHub Pages. Nothing is pushed until you say "ship".
 - **Password protection.** The rebuild branch encrypted the work pages behind one password; `main` does not. Decide whether the six pages are public.

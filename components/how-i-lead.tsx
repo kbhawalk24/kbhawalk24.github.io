@@ -2,11 +2,14 @@
 
 import Link from 'next/link'
 import { HOW_I_LEAD } from '@/lib/home-content'
+import { VIDEOS } from '@/lib/about'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
+import { VideoEmbed } from '@/components/video-embed'
 
 // "How I lead" on the homepage is a pointer: the framing sentence and two
-// links into the About page, where the principles live in full.
+// links into the About page, where the principles live in full. Under it,
+// the two public talks, playable here, with the notes and transcripts on About.
 
 export function HowILead() {
   return (
@@ -31,6 +34,30 @@ export function HowILead() {
               </Link>
             ))}
           </div>
+        </Reveal>
+
+        <Reveal className="mt-14 md:mt-16">
+          <p className="label-micro text-muted-foreground">In public</p>
+          <ul className="mt-4 grid gap-6 md:grid-cols-2">
+            {VIDEOS.map((v) => (
+              <li key={v.youtube} className="rounded-[14px] bg-card p-5 shadow-soft">
+                <VideoEmbed id={v.youtube} start={v.start} title={v.title} />
+                <p className="mt-4 label-micro text-muted-foreground">
+                  {v.when} · {v.at}
+                </p>
+                <h3 className="mt-2 font-heading text-lg font-semibold leading-tight tracking-tight text-foreground">
+                  {v.title}
+                </h3>
+                <p className="mt-1 font-sans text-sm text-muted-foreground">{v.who}</p>
+              </li>
+            ))}
+          </ul>
+          <Link
+            href="/about#in-public"
+            className="mt-5 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline"
+          >
+            What each talk covers, with transcripts <span aria-hidden="true">→</span>
+          </Link>
         </Reveal>
       </div>
     </section>

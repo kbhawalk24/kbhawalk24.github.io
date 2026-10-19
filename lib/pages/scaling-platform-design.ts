@@ -20,7 +20,7 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
   stats: [
     { value: '<1% → 80%', label: 'Of the data estate meeting the clean-data standard · shared' },
     { value: '17 → 0', label: 'Peak-season P0/P1 data incidents · shared' },
-    { value: '2–3 weeks → 3 days', label: 'To get access to real-time data' },
+    { value: 'All', label: 'Designers who reported to me, promoted' },
   ],
   sections: [
     {
@@ -77,7 +77,7 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
         {
           type: 'p',
           text:
-            'The designers on my team shipped the results. Access to real-time data fell from 2–3 weeks to 3 days, decryption access from 9 days to 3, internal approvals from 24 hours to near-instant, time to discover data from 14.2 hours to 9.4, and search session conversion rose from 41% to 61%. Across the platform, peak-season P0 and P1 data incidents fell from 17 to 0 and clean data grew from under 1% to 80% of the estate, results many teams share. The team began practices of its own: a design sign-off before release, AI-made launch videos other teams copied, and coded prototypes that cut development time by as much as 90% on some features. A 2023 intern I had managed joined the team full-time; one designer was promoted to senior in 2026, and two more cases were approved before my role ended.',
+            'The designers on my team shipped the results. Access to real-time data fell from 2–3 weeks to 3 days, decryption access from 9 days to 3, internal approvals from 24 hours to near-instant, time to discover data from 14.2 hours to 9.4, and search session conversion rose from 41% to 61%. Across the platform, peak-season P0 and P1 data incidents fell from 17 to 0 and clean data grew from under 1% to 80% of the estate, results many teams share. The team began practices of its own: a design sign-off before release, AI-made launch videos other teams copied, and coded prototypes that cut development time by as much as 90% on some features. A 2023 intern I had managed joined the team full-time. Every designer who reported to me was promoted while on my team.',
         },
       ],
     },
