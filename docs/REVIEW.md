@@ -1,0 +1,42 @@
+# Review note, 19 October 2026
+
+Everything below is on `main`, committed, not pushed. Run `pnpm dev` and open http://localhost:3000, or read the pages in order from the homepage. Each item says what to look at and what I was unsure about. Nothing needs to be answered in one sitting.
+
+## What is live
+
+- Homepage: hero as before, the lifecycle wheel under "Work done in the last five years, at a glance", Selected work with six cards, a short "How I lead" pointer, the timeline, the footer.
+- About: `/about`, with About me, How I manage, How I work with AI, In public (the two videos), The work.
+- Six case study pages, in reading order:
+  1. `/work/agentic-discovery`
+  2. `/work/search-2`
+  3. `/work/scaling-platform-design`
+  4. `/work/self-service-onboarding`
+  5. `/work/catalog-data-map-lineage`
+  6. `/work/605-tv-analytics`
+- Old URLs forward: `/605`, `/leadership`, `/work/finding-data`, `/work/trusting-data`.
+
+## Pages you have not approved yet
+
+You approved the copy for pages 1, 2 and 3 and the 2026 closing paragraph. Pages 4, 5 and 6 were built from the drafts without a review pass, so read those first.
+
+- **Onboarding (4).** Two phrases are mine, not from a source: "where does a person belong in an automated flow?" and "with the human kept exactly where the edge cases are". The "7 days" stat tile describes the problem, not a result; cut it if a problem number on a stat strip bothers you.
+- **Catalog (5).** The help-channel anecdote about two near-identical customer tables comes from the old content file; the brief struck other claims from that file, so confirm this one is true. The 2025 finding that map search is adopted less than table search is on the page on purpose, as honesty.
+- **605 (6).** "About 20 engineers and 5 product managers" is in the brief's own 605 appendix, so it stays; say so if you want headcount off this page too. The "three rules" for charts are my paraphrase of the deck's "that changed three things"; check the deck's list matches: five audiences per chart, colour means audience only, two metrics only with one audience.
+
+## About page, two phrases of mine
+
+In "How I work with AI": "twenty transcripts become one set of findings in a day instead of a week" and "a place to visit, not a place to work". Keep, change or cut.
+
+## Open decisions, none blocking
+
+- **Push.** Pushing `main` deploys to GitHub Pages. Nothing is pushed until you say "ship".
+- **Password protection.** The rebuild branch encrypted the work pages behind one password; `main` does not. Decide whether the six pages are public.
+- **The wheel.** Loops at 28 seconds with the estate opener, the reach counter and the legend lines. The re:Invent segment link in About has no timestamp yet; send it when you find it.
+- **180 petabytes.** Public, from the same re:Invent talk; not added anywhere yet.
+- **The two readout figures.** "20 to 40% efficiency gains" and "19,200 access requests a month" are written up in the chat; not on any page.
+- **Timeline.** Still the old homepage section. Entries whose page exists link to it; the rest point at the work section.
+- **Colophon and pending passages.** The rebuild branch's "what I would do differently" passages (`content/drafts/pending.md` on that branch) are not on `main`; the short pages have no colophon line.
+
+## How to give feedback
+
+Paste a page's URL and the change, or edit the copy in `lib/pages/<slug>.ts` and `lib/about.ts` directly; every word on a page lives in one of those files.
