@@ -100,10 +100,11 @@ export const VIDEOS: Video[] = [
     title: 'AWS re:Invent 2025, INV201: Harnessing analytics for humans and AI',
     who: 'Intuit’s segment, a Distinguished Engineer',
     when: 'December 2025',
-    note: 'The catalog on stage: 320,000 tables, clean data from under 1% to 80% of the estate, time to discover data from 20 days to 9.4 hours.',
-    href: 'https://www.youtube.com/watch?v=L_Q7LPB5HcA',
-    at: 'Intuit’s segment',
+    note: 'Intuit’s data strategy, from a system of record to a system of intelligence: the catalog on stage, 320,000 tables, clean data from under 1% to 80% of the estate, time to discover data from 20 days to 9.4 hours. The segment runs to about 39:20.',
+    href: 'https://www.youtube.com/watch?v=L_Q7LPB5HcA&t=1430',
+    at: 'from 23:50, Intuit’s segment',
     youtube: 'L_Q7LPB5HcA',
+    start: 1430,
   },
 ]
 
