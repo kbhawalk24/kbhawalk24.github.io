@@ -93,7 +93,8 @@ export const ARCS: Arc[] = [
         roleTag: 'Principal IC',
         visualNote: 'Three onboarding flow iterations side by side.',
         stats: [{ value: '1–2 weeks → under 24 hours', label: 'Marketing data onboarding' }],
-        status: 'coming-soon',
+        status: 'live',
+        href: '/work/self-service-onboarding',
       },
       {
         slug: 'catalog-data-map-lineage',

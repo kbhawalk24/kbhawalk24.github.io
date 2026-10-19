@@ -12,7 +12,7 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
       { label: '0-to-1 Catalog, Data Map & Lineage' },
-      { label: 'Self-Service Onboarding & AI Trust' },
+      { label: 'Self-Service Onboarding & AI Trust', href: '/work/self-service-onboarding' },
       { label: 'Scaling the team at 1:85' },
     ],
     current: 2,
@@ -99,6 +99,7 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
   next: {
     text: 'The access and certification flows the team shipped reused a pattern I had designed myself a year earlier. Next: the self-service onboarding flow of 2023–24, and the human-in-the-loop rules that made AI-generated metadata trustworthy',
     label: 'Self-Service Onboarding & Human-in-the-Loop AI Trust',
+    href: '/work/self-service-onboarding',
   },
   credits:
     'The mechanisms, the strategy and the pushback are mine. The products on this page were designed by the designers on my team; the certification work was shared with designers elsewhere in the data design group. Engineers delivered everything that shipped.',
