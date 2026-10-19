@@ -29,8 +29,11 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       blocks: [
         {
           type: 'p',
-          text: 'In 2023 I was the sole design lead for a chat assistant inside the catalog. It shipped in four months and Intuit’s CTO presented it at Investor Day 2023, but usage did not hold after 2024. My 20 in-context visits that year showed why: only one person used the AI search at all, and when a first answer failed, people did not come back. They were already working in their editors. With 320,000 tables in the lake and 73.0% of 666 help-channel questions resolved only because someone knew the answer, the question was not a better chat window. It was where the catalog had to live.',
-          links: [{ text: 'Investor Day 2023', href: 'https://youtu.be/kfpmtVe2OFY?t=2505' }],
+          text: 'In 2023 I was the sole design lead for a chat assistant inside the catalog. It shipped in four months and Intuit’s CTO presented it at Investor Day 2023 as “AI-assisted data analysis to facilitate quick data discovery, query generation, and query translation,” with data scientists and analysts able to “discover data and conduct analytics” up to 2x faster. Usage did not hold after 2024. My 20 in-context visits that year showed why: only one person used the AI search at all, and when a first answer failed, people did not come back. They were already working in their editors. With 320,000 tables in the lake and 73.0% of 666 help-channel questions resolved only because someone knew the answer, the question was not a better chat window. It was where the catalog had to live.',
+          links: [
+            { text: 'Investor Day 2023', href: 'https://youtu.be/kfpmtVe2OFY?t=2505' },
+            { text: 'up to 2x faster', href: 'https://stockanalysis.com/stocks/intu/transcripts/92755-investor-day-2023/' },
+          ],
         },
       ],
     },
@@ -98,5 +101,5 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   credits:
     'Strategy and the answer specification are mine. Response patterns: a designer on my team. Servers and search models: engineering.',
   sources:
-    'Launch post, Mar 16, 2026; FY27 strategy readout; observed-task study, Mar 2026; help-channel analysis, Aug 2025; July 2024 research readout; AWS re:Invent 2025 for the table count.',
+    'Launch post, Mar 16, 2026; FY27 strategy readout; observed-task study, Mar 2026; help-channel analysis, Aug 2025; July 2024 research readout; Intuit Investor Day 2023 transcript for the CTO’s description and the 2x figure; AWS re:Invent 2025 for the table count.',
 }

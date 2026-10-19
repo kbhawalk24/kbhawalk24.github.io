@@ -77,6 +77,8 @@ export interface Video {
   note: string
   href: string
   at: string
+  /** The transcript, where one exists. */
+  transcript?: string
 }
 
 export const VIDEOS: Video[] = [
@@ -84,9 +86,10 @@ export const VIDEOS: Video[] = [
     title: 'Intuit Investor Day 2023',
     who: 'Intuit’s CTO on stage',
     when: 'September 2023',
-    note: 'The plain-language assistant, Data Copilot, demonstrated to investors. My hands-on design work as an individual contributor.',
+    note: 'The plain-language assistant, Data Copilot, demonstrated to investors: my hands-on design work as an individual contributor. The CTO described it as “AI-assisted data analysis to facilitate quick data discovery, query generation, and query translation,” with data scientists and analysts working up to 2x faster.',
     href: 'https://youtu.be/kfpmtVe2OFY?t=2505',
     at: 'from 41:45',
+    transcript: 'https://stockanalysis.com/stocks/intu/transcripts/92755-investor-day-2023/',
   },
   {
     title: 'AWS re:Invent 2025, INV201: Harnessing analytics for humans and AI',

@@ -139,6 +139,12 @@ export function AboutPage() {
                   </a>
                   <p className="mt-1 font-sans text-sm text-muted-foreground">{v.who}</p>
                   <p className="mt-2 max-w-2xl text-pretty font-sans text-sm leading-relaxed text-foreground/90">{v.note}</p>
+                  {v.transcript && (
+                    <a href={v.transcript} {...ext} className="mt-2 inline-flex items-center gap-1 font-sans text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                      Transcript
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
