@@ -79,7 +79,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Led UX strategy and a team of product designers for Intuit’s enterprise data platform: data discovery and search, access and governance, lineage, observability, data quality standards, and pipeline authoring. The data design group worked with 550 engineers and 16 product managers.',
-    caseStudy: { title: 'Scaling platform design at a 1:85 ratio', href: '/#work' },
+    caseStudy: { title: 'Scaling platform design at a 1:85 ratio', href: '/work/scaling-platform-design' },
     entries: [
       {
         track: 'management',

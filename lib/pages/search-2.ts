@@ -89,6 +89,7 @@ export const SEARCH_2: ShortPage = {
   next: {
     text: 'Search 2.0 and Collections were the last things I designed with my own hands before the work became the team’s. Next: how the designers I led carried the platform at one designer for every 85 engineers.',
     label: 'Scaling Platform Design at a 1:85 Ratio',
+    href: '/work/scaling-platform-design',
   },
   credits:
     'Research, the first design of search across the Data Map, and the Collections strategy are mine. Search to launch and Collections: designers on my team. Precision and speed: engineers and the search-model team.',

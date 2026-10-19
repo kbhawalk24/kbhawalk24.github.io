@@ -83,7 +83,8 @@ export const ARCS: Arc[] = [
           { value: '<1% → 80%', label: 'Certified clean data across the estate' },
           { value: '17 → 0', label: 'Serious TY25 tax-season incidents' },
         ],
-        status: 'coming-soon',
+        status: 'live',
+        href: '/work/scaling-platform-design',
       },
       {
         slug: 'self-service-onboarding',
