@@ -58,13 +58,13 @@ export const SIX_O_FIVE: ShortPage = {
       caption: 'An Indxr prototype iteration annotated with remarks from the five-network test sessions. The rules for the tool came from those sessions.',
     },
     {
-      id: 'indxr-ranker-and-creation',
-      src: '/work/605-tv-analytics/indxr-ranker-and-creation.png',
+      id: 'indxr-report-creation',
+      src: '/work/605-tv-analytics/indxr-report-creation.png',
       width: 2880,
-      height: 1530,
+      height: 3022,
       after: 'trade-offs',
-      alt: 'Two Indxr screens: a ranker report listing networks with rating and a colour-scaled index, and the report creation screen with attribute categories, a target size line and a demographic breakdown chart.',
-      caption: 'Indxr as shipped: the ranker report, and report creation with the attribute hierarchy, the target size and the demographic breakdown.',
+      alt: 'The Indxr report creation screen: a target definition search box, the attribute hierarchy in three columns with attribute details and data source, a target size line, and a demographic breakdown chart comparing the target with the national population.',
+      caption: 'Indxr as shipped: report creation with the attribute hierarchy, where the data comes from, the target size and the demographic breakdown.',
     },
     {
       id: 'impact-overview',
