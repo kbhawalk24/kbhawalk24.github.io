@@ -8,16 +8,9 @@ import { cn } from '@/lib/utils'
 import { EASE_OUT } from '@/components/motion-primitives'
 
 /** Floating pill nav, on every page from load: Work / About / Timeline /
- *  Resume / LinkedIn / Contact. A page can pass its own sections; they
- *  appear as an "On this page" menu at every width, and inside the phone
- *  menu. */
-export function SiteHeader({
-  onHome = true,
-  chapters = [],
-}: {
-  onHome?: boolean
-  chapters?: { id: string; title: string }[]
-}) {
+ *  Resume / LinkedIn / Contact. Section navigation lives on the page
+ *  itself (components/section-nav.tsx), not here. */
+export function SiteHeader({ onHome = true }: { onHome?: boolean }) {
   const home = onHome ? '' : '/'
 
   const links: NavItem[] = [
@@ -28,7 +21,6 @@ export function SiteHeader({
     { label: 'LinkedIn', href: 'https://linkedin.com/in/kanchib', external: true },
     { label: 'Contact', href: `${home}#contact` },
   ]
-  const chapterItems = chapters.map((c) => ({ label: c.title, href: `#${c.id}` }))
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4 md:top-6">
@@ -53,12 +45,11 @@ export function SiteHeader({
               {l.label}
             </NavLink>
           ))}
-          {chapters.length > 0 && <NavMenu label="On this page" items={chapterItems} />}
         </div>
 
         {/* Phone: everything folds into one menu. */}
         <div className="sm:hidden">
-          <NavMenu items={links} groupLabel={chapters.length > 0 ? 'On this page' : undefined} group={chapterItems} />
+          <NavMenu items={links} />
         </div>
       </motion.nav>
     </header>

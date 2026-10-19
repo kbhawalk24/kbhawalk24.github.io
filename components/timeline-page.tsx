@@ -8,6 +8,7 @@ import { CapabilityMap } from '@/components/capability-map'
 import { ContactFooter } from '@/components/contact-footer'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
+import { SectionNav } from '@/components/section-nav'
 
 // The timeline page: the career as a lineage graph, then what the Intuit
 // years covered, at a glance (the lifecycle wheel from 1024px up, the cards
@@ -22,8 +23,11 @@ export function TimelinePage() {
   return (
     <MotionConfig reducedMotion="user">
       <SkipLink />
-      <SiteHeader onHome={false} chapters={CHAPTERS} />
-      <main id="main" className="pb-20 pt-8 md:pt-12">
+      <SiteHeader onHome={false} />
+      <main id="main" className="pb-20 pt-32">
+        <div className="mx-auto max-w-6xl px-6 md:px-10 lg:px-14">
+          <SectionNav chapters={CHAPTERS} variant="row" />
+        </div>
         <CareerLineage heading="h1" />
         <section
           id="at-a-glance"

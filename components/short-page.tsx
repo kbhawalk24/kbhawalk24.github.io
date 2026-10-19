@@ -9,6 +9,7 @@ import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
 import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
+import { WithSectionNav } from '@/components/section-nav'
 
 // The short case study page. Top to bottom: role line, title, the System
 // Context Bar (what this is part of, and where in the sequence the reader
@@ -118,7 +119,8 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
         <SiteHeader onHome={false} />
 
         <main id="main" className="mx-auto max-w-6xl px-6 pb-20 pt-32 md:px-10 lg:px-14">
-          <article className="mx-auto max-w-3xl">
+          <WithSectionNav chapters={page.sections.map((s) => ({ id: s.id, title: s.heading }))}>
+          <article className="max-w-3xl">
             <header>
               <p className="label-micro text-accent-brand">
                 {page.roleTag} <span className="text-muted-foreground">· {page.period}</span>
@@ -198,6 +200,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
               </p>
             </footer>
           </article>
+          </WithSectionNav>
         </main>
         <ContactFooter />
       </MotionConfig>

@@ -21,11 +21,12 @@ import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
 import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
+import { WithSectionNav } from '@/components/section-nav'
 import { VideoEmbed } from '@/components/video-embed'
 
 // The About page (copy in lib/about.ts): About me, How I manage, How I
 // work with AI, the two public videos, and the list of case study pages.
-// The header's "On this page" menu carries the sections; there is no
+// The section nav beside the content carries the sections; there is no
 // second nav on the page.
 
 const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
@@ -61,9 +62,10 @@ export function AboutPage() {
   return (
     <MotionConfig reducedMotion="user">
       <SkipLink />
-      <SiteHeader onHome={false} chapters={ABOUT_SECTIONS} />
+      <SiteHeader onHome={false} />
       <main id="main" className="mx-auto max-w-6xl px-6 pb-20 pt-32 md:px-10 lg:px-14">
-        <article className="mx-auto max-w-3xl">
+        <WithSectionNav chapters={ABOUT_SECTIONS}>
+        <article className="max-w-3xl">
           <section id="about" className="scroll-mt-32">
             <h1 className="text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">About</h1>
             <p className="mt-6 text-pretty font-sans text-lg leading-[1.6] text-foreground">{ABOUT_PARAGRAPH}</p>
@@ -152,6 +154,7 @@ export function AboutPage() {
             </ul>
           </Section>
         </article>
+        </WithSectionNav>
       </main>
       <ContactFooter />
     </MotionConfig>

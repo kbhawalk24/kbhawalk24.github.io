@@ -100,7 +100,7 @@ export function CareerLineage({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
 
   return (
     <section id="timeline" className="relative z-10 scroll-mt-28">
-      <div className="mx-auto max-w-6xl px-6 pt-20 md:px-10 md:pt-28 lg:px-14">
+      <div className={cn('mx-auto max-w-6xl px-6 md:px-10 lg:px-14', heading === 'h1' ? 'pt-8 md:pt-10' : 'pt-20 md:pt-28')}>
         <Reveal className="max-w-3xl">
           <Heading
             className={cn(
