@@ -230,14 +230,29 @@ export function Hero() {
               </div>
             </div>
 
-            {/* The ask and its buttons, blurring in as scroll progresses. The
-                about paragraph lives on /about. */}
+            {/* About: blurs in as scroll progresses. The paragraph, a hairline,
+                and the ask with its buttons. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
               className="mt-12 w-full text-left md:mt-16"
             >
              <div>
-              <div>
+              <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
+                I&rsquo;m a design manager for data and AI tools. At{' '}
+                <span translate="no">Intuit</span> I led design for the data platform for two
+                years, owning <span className="mark">data discovery</span> and{' '}
+                <span className="mark">the platform&rsquo;s design strategy</span> myself. The
+                team covered the rest: data access and fine-grained access control, governance,
+                lineage, observability, pipeline authoring, behavioral analytics, and the clean
+                data and data maturity program. Before <span translate="no">Intuit</span> I was
+                at <span translate="no">605</span>, a TV advertising analytics company, where I
+                designed three products that generated more than $20M in revenue. I was a
+                software engineer before I became a designer. I spent three years at{' '}
+                <span translate="no">TIBCO</span> writing back-end Java for its enterprise
+                integration platform.
+              </p>
+
+              <div className="mt-10 border-t border-border pt-10">
                 <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground">
                   I&rsquo;m looking for my next role in the Bay Area, either as a principal
                   designer or leading a design team, at a company building AI, data, or
