@@ -1,35 +1,6 @@
-// Every word on the homepage, in one place. Step 1 of the incremental
-// rebuild: hero, the work grouped into three strategic arcs, and the
-// "How I lead" block. Card pages arrive in later steps; until a card's page
-// exists its status is 'coming-soon' and it does not link.
-
-export interface HeroBullet {
-  org: string
-  period: string
-  text: string
-}
-
-export const HERO = {
-  title: 'Principal Product Designer & Product Design Manager',
-  location: 'San Francisco Bay Area',
-  email: 'kbhawalk@gmail.com',
-  linkedin: 'linkedin.com/in/kanchib',
-  linkedinUrl: 'https://linkedin.com/in/kanchib',
-  paragraph:
-    'Design leader with 12+ years across advertising analytics and enterprise data platforms, and a former backend software engineer. Known for turning deep data infrastructure into workflows people trust, and for moving data tooling past standalone chatbots into structured agents that live where engineers already work.',
-  bullets: [
-    {
-      org: 'At Intuit',
-      period: '2021–2026',
-      text: 'Founding designer of the internal data catalog (Senior → Principal) and Product Design Manager leading design across nine platform areas at a 1:85 designer-to-engineer ratio. Grew monthly users from 2,664 to 6,673, cut public data discovery time from 20 days to 9.4 hours, and slashed question-to-answer time from 45 minutes to 4 minutes with our coding-tool agent.',
-    },
-    {
-      org: 'At 605 LLC',
-      period: '2017–2021',
-      text: 'First product designer. Led design from concept to launch across three TV analytics products generating $20M+ in booked revenue.',
-    },
-  ] as HeroBullet[],
-}
+// The homepage's words: the work grouped into three strategic arcs, and
+// the "How I lead" pointer. Card pages arrive step by step; until a card's
+// page exists its status is 'coming-soon' and it does not link.
 
 export interface CardStat {
   value: string
@@ -159,32 +130,12 @@ export const ARCS: Arc[] = [
   },
 ]
 
-export interface Habit {
-  title: string
-  body: string
-}
-
 export const HOW_I_LEAD = {
   heading: 'How I lead',
-  subtitle: 'Technical depth, upstream strategy, and high-leverage teams',
   framing:
-    'Operating in an enterprise data organization with one designer for every 85 engineers taught me that a manager cannot scale by reviewing screens or routing tickets. Four habits define how I lead:',
-  habits: [
-    {
-      title: 'I move upstream to problem definition before specifications exist.',
-      body: 'I shifted my calendar into early engineering and PM framing meetings, sponsoring unrequested bets like Data Collections and Query Insights onto the roadmap.',
-    },
-    {
-      title: 'I operate as a technical player-coach on core architecture.',
-      body: 'As a former backend software engineer, I stay hands-on where systems are most ambiguous: authoring the answer specification for our Cursor/Claude MCP agent, designing Search 2.0, and stepping in to design Datalake schema creation during staffing gaps.',
-    },
-    {
-      title: 'I absorb organizational thrash so my team can focus.',
-      body: 'I established a single intake tracker across 9 product areas, pushed back against splitting designers across unrelated domains, and pulled engineering leads and PMs into one room to settle decisions.',
-    },
-    {
-      title: 'I model AI-native workflows first instead of mandating them.',
-      body: 'I used coded prototypes (v0), AI research synthesis, and AI video walkthroughs in my own IC work first, inspiring every designer on my team to adopt them and invent new team practices (like coded prototyping that cut dev time by 90%).',
-    },
-  ] as Habit[],
+    'Operating in an enterprise data organization with one designer for every 85 engineers taught me that a manager cannot scale by reviewing screens or routing tickets. How I manage, and how I work with AI, are on the About page.',
+  links: [
+    { label: 'How I manage', href: '/about#how-i-manage' },
+    { label: 'How I work with AI', href: '/about#how-i-work-with-ai' },
+  ],
 }

@@ -3,13 +3,12 @@
 import Link from 'next/link'
 import { MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
-import type { Block, ShortPage, SystemContext } from '@/lib/pages/types'
+import type { Block, InlineLink, ShortPage, SystemContext } from '@/lib/pages/types'
 import { Reveal } from '@/components/motion-primitives'
 import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
 import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
-import { LensProvider } from '@/components/lens'
 
 // The short case study page. Top to bottom: role line, title, the System
 // Context Bar (what this is part of, and where in the sequence the reader
@@ -71,6 +70,28 @@ function ContextBar({ context }: { context: SystemContext }) {
   )
 }
 
+/** Text with its inline links, each phrase linked at its first occurrence
+ *  and opening in a new tab (they point at public videos and pages). */
+function Linked({ text, links }: { text: string; links?: InlineLink[] }) {
+  if (!links?.length) return <>{text}</>
+  const out: React.ReactNode[] = []
+  let rest = text
+  links.forEach((l, i) => {
+    const at = rest.indexOf(l.text)
+    if (at < 0) return
+    out.push(rest.slice(0, at))
+    out.push(
+      <a key={i} href={l.href} target="_blank" rel="noopener noreferrer" className="font-medium text-foreground underline decoration-foreground/40 underline-offset-[3px] hover:decoration-foreground">
+        {l.text}
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>,
+    )
+    rest = rest.slice(at + l.text.length)
+  })
+  out.push(rest)
+  return <>{out}</>
+}
+
 function BlockView({ block }: { block: Block }) {
   if (block.type === 'list') {
     return (
@@ -83,13 +104,16 @@ function BlockView({ block }: { block: Block }) {
       </ul>
     )
   }
-  return <p className="text-pretty leading-relaxed text-foreground/90">{block.text}</p>
+  return (
+    <p className="text-pretty leading-relaxed text-foreground/90">
+      <Linked text={block.text} links={block.links} />
+    </p>
+  )
 }
 
 export function ShortPageLayout({ page }: { page: ShortPage }) {
   return (
-    <LensProvider>
-      <MotionConfig reducedMotion="user">
+    <MotionConfig reducedMotion="user">
         <SkipLink />
         <SiteHeader onHome={false} />
 
@@ -174,6 +198,5 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
         </main>
         <ContactFooter />
       </MotionConfig>
-    </LensProvider>
   )
 }

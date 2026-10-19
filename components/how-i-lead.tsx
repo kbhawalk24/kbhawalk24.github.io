@@ -1,11 +1,12 @@
 'use client'
 
+import Link from 'next/link'
 import { HOW_I_LEAD } from '@/lib/home-content'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
-// "How I lead": the framing sentence and four numbered habits, two per row
-// on wide screens.
+// "How I lead" on the homepage is a pointer: the framing sentence and two
+// links into the About page, where the principles live in full.
 
 export function HowILead() {
   return (
@@ -16,22 +17,21 @@ export function HowILead() {
             {HOW_I_LEAD.heading}
             <HeadingDot />
           </h2>
-          <p className="mt-3 font-sans text-lg text-muted-foreground">{HOW_I_LEAD.subtitle}</p>
           <p className="mt-6 max-w-[62ch] text-pretty font-sans text-lg leading-[1.6] text-foreground">
             {HOW_I_LEAD.framing}
           </p>
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+            {HOW_I_LEAD.links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline"
+              >
+                {l.label} <span aria-hidden="true">→</span>
+              </Link>
+            ))}
+          </div>
         </Reveal>
-        <ol className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-2">
-          {HOW_I_LEAD.habits.map((habit, i) => (
-            <Reveal key={habit.title} as="li" delay={Math.min(i, 3) * 0.06} className="max-w-[62ch]">
-              <p className="label-micro text-accent-brand">{String(i + 1).padStart(2, '0')}</p>
-              <h3 className="mt-2 text-balance font-heading text-xl font-semibold leading-tight tracking-tight">
-                {habit.title}
-              </h3>
-              <p className="mt-2 text-pretty font-sans text-base leading-[1.6] text-foreground">{habit.body}</p>
-            </Reveal>
-          ))}
-        </ol>
       </div>
     </section>
   )

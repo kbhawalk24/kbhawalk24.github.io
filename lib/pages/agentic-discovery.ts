@@ -30,6 +30,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
         {
           type: 'p',
           text: 'In 2023 I was the sole design lead for a chat assistant inside the catalog. It shipped in four months and Intuit’s CTO presented it at Investor Day 2023, but usage did not hold after 2024. My 20 in-context visits that year showed why: only one person used the AI search at all, and when a first answer failed, people did not come back. They were already working in their editors. With 320,000 tables in the lake and 73.0% of 666 help-channel questions resolved only because someone knew the answer, the question was not a better chat window. It was where the catalog had to live.',
+          links: [{ text: 'Investor Day 2023', href: 'https://youtu.be/kfpmtVe2OFY?t=2505' }],
         },
       ],
     },

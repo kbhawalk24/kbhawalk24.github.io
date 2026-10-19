@@ -21,8 +21,14 @@ export interface SystemContext {
   current: number
 }
 
+export interface InlineLink {
+  /** The exact phrase in the text to link, first occurrence. */
+  text: string
+  href: string
+}
+
 export type Block =
-  | { type: 'p'; text: string }
+  | { type: 'p'; text: string; links?: InlineLink[] }
   | { type: 'list'; items: { lead: string; text: string }[] }
 
 export interface PageSection {
