@@ -7,7 +7,7 @@ import { Hero } from '@/components/hero'
 import { CapabilityMap } from '@/components/capability-map'
 import { WorkArcs } from '@/components/work-arcs'
 import { HowILead } from '@/components/how-i-lead'
-import { CareerTimeline } from '@/components/career-timeline'
+import { CareerLineage } from '@/components/career-lineage'
 import { ContactFooter } from '@/components/contact-footer'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
@@ -32,7 +32,7 @@ export default function Page() {
         </section>
         <WorkArcs />
         <HowILead />
-        <CareerTimeline />
+        <CareerLineage />
       </main>
       <ContactFooter />
     </MotionConfig>
