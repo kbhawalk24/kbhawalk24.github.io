@@ -8,8 +8,9 @@ import { cn } from '@/lib/utils'
 import { EASE_OUT } from '@/components/motion-primitives'
 
 /** Floating pill nav, on every page from load: Work / About / Timeline /
- *  Resume / LinkedIn / Contact. A page can pass its own sections; they go
- *  into the menu below `lg` and into the phone menu. */
+ *  Resume / LinkedIn / Contact. A page can pass its own sections; they
+ *  appear as an "On this page" menu at every width, and inside the phone
+ *  menu. */
 export function SiteHeader({
   onHome = true,
   chapters = [],
@@ -52,11 +53,7 @@ export function SiteHeader({
               {l.label}
             </NavLink>
           ))}
-          {chapters.length > 0 && (
-            <div className="lg:hidden">
-              <NavMenu label="On this page" items={chapterItems} />
-            </div>
-          )}
+          {chapters.length > 0 && <NavMenu label="On this page" items={chapterItems} />}
         </div>
 
         {/* Phone: everything folds into one menu. */}

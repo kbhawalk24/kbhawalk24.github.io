@@ -23,30 +23,12 @@ import { HeadingDot } from '@/components/heading-dot'
 import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
 
-// The About page (copy in lib/about.ts): a section menu, then About me,
-// How I manage, How I work with AI, the two public videos, and the list of
-// case study pages. The header carries the same sections in its phone menu.
+// The About page (copy in lib/about.ts): About me, How I manage, How I
+// work with AI, the two public videos, and the list of case study pages.
+// The header's "On this page" menu carries the sections; there is no
+// second nav on the page.
 
 const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
-
-function SectionMenu() {
-  return (
-    <nav aria-label="On this page" className="sticky top-20 z-20 -mx-2 mb-10 md:top-24">
-      <ul className="flex flex-wrap gap-1 rounded-full bg-card/80 p-1 shadow-soft backdrop-blur-xl md:inline-flex">
-        {ABOUT_SECTIONS.map((s) => (
-          <li key={s.id}>
-            <a
-              href={`#${s.id}`}
-              className="inline-flex min-h-9 items-center rounded-full px-3 font-sans text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {s.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )
-}
 
 function Passages({ items }: { items: Passage[] }) {
   return (
@@ -82,8 +64,6 @@ export function AboutPage() {
       <SiteHeader onHome={false} chapters={ABOUT_SECTIONS} />
       <main id="main" className="mx-auto max-w-6xl px-6 pb-20 pt-32 md:px-10 lg:px-14">
         <article className="mx-auto max-w-3xl">
-          <SectionMenu />
-
           <section id="about" className="scroll-mt-32">
             <h1 className="text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">About</h1>
             <p className="mt-6 max-w-[40ch] text-pretty font-sans text-xl leading-[1.5] text-foreground md:text-2xl">{POSITIONING}</p>
