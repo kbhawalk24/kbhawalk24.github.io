@@ -4,7 +4,8 @@ Everything below is on `main`, committed, not pushed. Run `pnpm dev` and open ht
 
 ## What is live
 
-- Homepage: hero as before, the lifecycle wheel under "Work done in the last five years, at a glance", Selected work with six cards, a short "How I lead" pointer, the timeline, the footer.
+- Homepage (simplified 19 October): the hero with the ask and the buttons, Selected work with six cards, the footer. The about paragraph moved to About.
+- Timeline: `/timeline`, the career as a lineage graph, with the lifecycle wheel under it.
 - About: `/about`, with About me, How I manage, How I work with AI, In public (the two videos), The work.
 - Six case study pages, in reading order:
   1. `/work/agentic-discovery`

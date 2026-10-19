@@ -26,6 +26,11 @@ Rule for adding to this list: one line, what it is, where it would go, what it n
 - A deeper artifact behind a gate, such as a deck for in-person walkthroughs (four of eight).
 - The "who is kanchi bhawalkar?" search-results conceit from the Claude Design A variant. Two conceits on one homepage compete; parked.
 
+## Removed from the landing page on 19 October
+
+- The "How I lead" pointer and the two talks. Both live on About (How I manage, How I work with AI, In public). The talks could come back to the landing page if the benchmark pattern (7 of 8 sites surface talks on the homepage) matters more than the simpler page.
+- The lifecycle wheel moved to `/timeline` under the lineage graph, as "Work done in the last five years, at a glance". Drop it from there if the page feels long.
+
 ## Hygiene
 
 - Forwarding pages (`/605`, `/leadership`, `/work/finding-data`, `/work/trusting-data`) carry the homepage title in the tab. Harmless; a `title` per forward would be tidier.

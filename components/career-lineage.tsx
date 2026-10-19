@@ -25,7 +25,8 @@ interface Edge {
 
 const WIDE = '(min-width: 1024px)'
 
-export function CareerLineage() {
+export function CareerLineage({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
+  const Heading = heading
   const [selectedId, setSelectedId] = useState(DEFAULT_NODE)
   const [wide, setWide] = useState(false)
   const [edges, setEdges] = useState<Edge[]>([])
@@ -101,10 +102,15 @@ export function CareerLineage() {
     <section id="timeline" className="relative z-10 scroll-mt-28">
       <div className="mx-auto max-w-6xl px-6 pt-20 md:px-10 md:pt-28 lg:px-14">
         <Reveal className="max-w-3xl">
-          <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
+          <Heading
+            className={cn(
+              'font-heading tracking-tight',
+              heading === 'h1' ? 'text-4xl font-extrabold md:text-5xl' : 'text-3xl font-semibold md:text-4xl',
+            )}
+          >
             Career timeline
             <HeadingDot />
-          </h2>
+          </Heading>
           <p className="mt-6 max-w-[62ch] text-pretty font-sans text-lg leading-[1.6] text-foreground">
             Drawn the way the platform draws data: upstream, transform, materialized, downstream. Select a node to
             inspect it.

@@ -102,7 +102,7 @@ export const NODES: LineageNode[] = [
       { value: '6,673', label: 'Monthly users by Mar 2026' },
       { value: '<1% → 80%', label: 'Of the data estate meeting the clean-data standard · shared' },
     ],
-    links: [{ label: 'What I owned, at a glance', href: '/#at-a-glance' }],
+    links: [{ label: 'What I owned, at a glance', href: '/timeline#at-a-glance' }],
   },
   {
     id: 'search',

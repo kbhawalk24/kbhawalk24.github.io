@@ -12,7 +12,6 @@ import {
   HOW_I_MANAGE_INTRO,
   HOW_I_WORK_WITH_AI,
   LINKS,
-  POSITIONING,
   VIDEOS,
   type Passage,
 } from '@/lib/about'
@@ -67,8 +66,7 @@ export function AboutPage() {
         <article className="mx-auto max-w-3xl">
           <section id="about" className="scroll-mt-32">
             <h1 className="text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">About</h1>
-            <p className="mt-6 max-w-[40ch] text-pretty font-sans text-xl leading-[1.5] text-foreground md:text-2xl">{POSITIONING}</p>
-            <p className="mt-6 max-w-2xl text-pretty leading-relaxed text-foreground/90">{ABOUT_PARAGRAPH}</p>
+            <p className="mt-6 text-pretty font-sans text-lg leading-[1.6] text-foreground">{ABOUT_PARAGRAPH}</p>
             <ul className="mt-6 grid gap-1 font-sans text-sm text-muted-foreground">
               {EDUCATION.map((e) => (
                 <li key={e}>{e}</li>

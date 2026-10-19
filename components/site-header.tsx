@@ -23,7 +23,7 @@ export function SiteHeader({
   const links: NavItem[] = [
     { label: 'Work', href: `${home}#work` },
     { label: 'About', href: '/about' },
-    { label: 'Timeline', href: `${home}#timeline` },
+    { label: 'Timeline', href: '/timeline' },
     { label: 'Resume', href: '/kanchi-bhawalkar-resume.pdf', external: true },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/kanchib', external: true },
     { label: 'Contact', href: `${home}#contact` },

@@ -27,7 +27,7 @@ describe('career lineage data', () => {
   it('links only to routes that exist', () => {
     const anchors = new Set([
       '/#work',
-      '/#at-a-glance',
+      '/timeline#at-a-glance',
       '/about',
       '/about#how-i-manage',
       '/work/agentic-discovery',

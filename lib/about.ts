@@ -7,7 +7,7 @@ export const POSITIONING =
   'Design manager and founding designer of an internal data platform used across Intuit, former software engineer, still designing.'
 
 export const ABOUT_PARAGRAPH =
-  'I was the founding designer of Intuit’s data catalog from June 2021, grew it into the data discovery platform, and became its design manager in August 2024. Before that I was the first product designer at 605 (2017–2021), where three analytics products shipped. I started as a software engineer.'
+  'I’m a design manager for data and AI tools. At Intuit I led design for the data platform for two years, owning data discovery and the platform’s design strategy myself. The team covered the rest: data access and fine-grained access control, governance, lineage, observability, pipeline authoring, behavioral analytics, and the clean data and data maturity program. Before Intuit I was at 605, a TV advertising analytics company, where I designed three products that generated more than $20M in revenue. I was a software engineer before I became a designer. I spent three years at TIBCO writing back-end Java for its enterprise integration platform.'
 
 export const EDUCATION = [
   'MS Information (HCI), University of Michigan, 2017',
