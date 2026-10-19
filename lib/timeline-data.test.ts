@@ -27,7 +27,7 @@ describe('timeline data integrity', () => {
   it('points every entry href at a route that exists', () => {
     // The short case study pages that exist, plus the homepage work section
     // for entries whose page is not built yet.
-    const anchors = new Set(['/#work', '/work/agentic-discovery', '/work/search-2', '/work/scaling-platform-design', '/work/self-service-onboarding'])
+    const anchors = new Set(['/#work', '/work/agentic-discovery', '/work/search-2', '/work/scaling-platform-design', '/work/self-service-onboarding', '/work/catalog-data-map-lineage', '/work/605-tv-analytics'])
     const broken = ROLES.flatMap((role) =>
       role.entries
         .filter((entry) => entry.href && !anchors.has(entry.href))

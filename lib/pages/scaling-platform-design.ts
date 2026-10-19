@@ -11,7 +11,7 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
-      { label: '0-to-1 Catalog, Data Map & Lineage' },
+      { label: '0-to-1 Catalog, Data Map & Lineage', href: '/work/catalog-data-map-lineage' },
       { label: 'Self-Service Onboarding & AI Trust', href: '/work/self-service-onboarding' },
       { label: 'Scaling the team at 1:85' },
     ],

@@ -204,7 +204,7 @@ export const ROLES: TimelineRole[] = [
     location: 'Mountain View, CA',
     summary:
       'Founding designer of Intuit’s internal data catalog, which grew from tables and columns into the company’s system of record for data.',
-    caseStudy: { title: 'Founding designer of Intuit’s data catalog', href: '/#work' },
+    caseStudy: { title: 'Founding designer of Intuit’s data catalog', href: '/work/catalog-data-map-lineage' },
     entries: [
       {
         track: 'ic',
@@ -261,7 +261,7 @@ export const ROLES: TimelineRole[] = [
     location: 'New York, NY',
     summary:
       'First product designer at 605, taking three TV ad-analytics products from concept to commercial launch.',
-    caseStudy: { title: 'Three analytics products for TV advertising', href: '/#work' },
+    caseStudy: { title: 'Three analytics products for TV advertising', href: '/work/605-tv-analytics' },
     entries: [
       {
         track: 'ic',

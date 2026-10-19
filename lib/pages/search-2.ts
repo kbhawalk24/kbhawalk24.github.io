@@ -11,7 +11,7 @@ export const SEARCH_2: ShortPage = {
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
-      { label: '0-to-1 Catalog & Data Map' },
+      { label: '0-to-1 Catalog & Data Map', href: '/work/catalog-data-map-lineage' },
       { label: 'Search 2.0 & Data Collections' },
       { label: 'Agent in Cursor & Claude', href: '/work/agentic-discovery' },
     ],

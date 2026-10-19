@@ -11,7 +11,7 @@ export const SELF_SERVICE_ONBOARDING: ShortPage = {
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
-      { label: '0-to-1 Catalog, Data Map & Lineage' },
+      { label: '0-to-1 Catalog, Data Map & Lineage', href: '/work/catalog-data-map-lineage' },
       { label: 'Self-Service Onboarding & AI Trust' },
       { label: 'Scaling the team at 1:85', href: '/work/scaling-platform-design' },
     ],
@@ -81,6 +81,7 @@ export const SELF_SERVICE_ONBOARDING: ShortPage = {
   next: {
     text: 'The owner, the scorecard and the request flow all hang off one idea, a data product with its physical copies beneath it. Next: the catalog itself, from a list of tables to the Data Map, and lineage in four weeks',
     label: '0-to-1 Catalog, Data Map & 4-Week Lineage',
+    href: '/work/catalog-data-map-lineage',
   },
   credits:
     'The designs are mine. The platform organization defined the clean-data standard; the access team owned permissions; engineers built everything that shipped.',
