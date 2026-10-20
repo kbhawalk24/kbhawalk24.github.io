@@ -8,11 +8,11 @@ describe('timeline data integrity', () => {
     }
   })
 
-  it('uses a valid, known track for every entry', () => {
-    const validTracks = Object.keys(TRACKS)
+  it('gives every entry a known track, or a tag when the role is outside design', () => {
     for (const role of ROLES) {
       for (const entry of role.entries) {
-        expect(validTracks, `${role.id}: "${entry.headline}"`).toContain(entry.track)
+        if (entry.track) expect(TRACKS[entry.track], `${entry.headline} has unknown track`).toBeDefined()
+        else expect(entry.tag, `${entry.headline} has neither track nor tag`).toBeTruthy()
       }
     }
   })
@@ -27,12 +27,24 @@ describe('timeline data integrity', () => {
   it('points every entry href at a route that exists', () => {
     // The short case study pages that exist, plus the homepage work section
     // for entries whose page is not built yet.
-    const anchors = new Set(['/#work', '/work/agentic-discovery', '/work/search-2', '/work/scaling-platform-design', '/work/self-service-onboarding', '/work/catalog-data-map-lineage', '/work/605-tv-analytics'])
+    const anchors = new Set(['/#work', '/about#in-public', '/work/agentic-discovery', '/work/search-2', '/work/scaling-platform-design', '/work/self-service-onboarding', '/work/catalog-data-map-lineage', '/work/605-tv-analytics'])
     const broken = ROLES.flatMap((role) =>
       role.entries
         .filter((entry) => entry.href && !anchors.has(entry.href))
         .map((entry) => `${entry.headline} → ${entry.href}`),
     )
     expect(broken).toEqual([])
+  })
+})
+
+describe('timeline impact discipline', () => {
+  it('gives every entry at most one impact figure and no em-dashes', () => {
+    for (const role of ROLES) {
+      for (const entry of role.entries) {
+        const text = JSON.stringify(entry)
+        expect(text.includes('\u2014'), `${entry.headline} has an em-dash`).toBe(false)
+        expect(Array.isArray((entry as unknown as { impact?: unknown }).impact)).toBe(false)
+      }
+    }
   })
 })

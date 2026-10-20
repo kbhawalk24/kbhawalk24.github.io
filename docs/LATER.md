@@ -6,7 +6,8 @@ Rule for adding to this list: one line, what it is, where it would go, what it n
 
 ## Decided for after the current steps
 
-- **Lineage graph in place of the career timeline.** The Claude Design "Landing B - Lineage v2" concept, rebuilt light, in the site's fonts, with exact figures and no team size. Nodes link to the six pages and About; the inspect panel opens beside the graph on desktop and below it on phones. Replaces the homepage timeline section; the nav's Timeline link keeps pointing there.
+- **Lineage graph, retired 19 October.** Built and then replaced by the plain-list timeline at the user's request; the component and data are in git at commit 7c3b588 if the idea comes back.
+- **Lineage graph in place of the career timeline (superseded).** The Claude Design "Landing B - Lineage v2" concept, rebuilt light, in the site's fonts, with exact figures and no team size. Nodes link to the six pages and About; the inspect panel opens beside the graph on desktop and below it on phones. Replaces the homepage timeline section; the nav's Timeline link keeps pointing there.
 - **Visual placeholders on the six pages.** A `visuals` slot on the page template under the stats, captioned, 4 to 6 per page, striped placeholder until the export lands in `_staging/<slug>/`. The 605 exports are already in `_staging/605/`.
 
 ## Open decisions (from the review note)
