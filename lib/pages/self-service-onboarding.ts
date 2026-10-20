@@ -7,7 +7,7 @@ export const SELF_SERVICE_ONBOARDING: ShortPage = {
   roleTag: 'Principal IC',
   period: '2023–2024',
   description:
-    'Two problems with the same shape: a request nobody could finish, and content nobody could trust.',
+    'How self-service onboarding took marketing data from one to two weeks to under 24 hours, and the human-in-the-loop rules that made AI-generated metadata trustworthy.',
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [

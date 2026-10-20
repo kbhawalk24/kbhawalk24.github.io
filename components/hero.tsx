@@ -208,7 +208,7 @@ export function Hero() {
                   translate="no"
                   className="text-left font-heading text-[clamp(3.25rem,7.5vw,6.75rem)] font-extrabold leading-[0.98] tracking-tight text-foreground"
                 >
-                  Kanchi
+                  Kanchi{' '}
                   <br />
                   Bhawalkar
                 </motion.h1>
@@ -221,10 +221,11 @@ export function Hero() {
                   className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground"
                 >
                   <span>
-                    Product Design Manager / Principal Designer for Data Platform at{' '}
+                    Product Design Manager and Principal Designer,{' '}
                     <span translate="no" className="font-semibold">
                       Intuit
-                    </span>
+                    </span>{' '}
+                    2021 to 2026
                   </span>
                 </motion.div>
               </div>
