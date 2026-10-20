@@ -260,7 +260,6 @@ export const ROLES: TimelineRole[] = [
     location: 'Pune, India',
     summary:
       'Java back-end developer on TIBCO’s enterprise integration platform, the engineering foundation behind a data-fluent design career.',
-    note: 'Dates from the 7 October timeline; to confirm.',
     entries: [
       {
         tag: 'Engineering',
