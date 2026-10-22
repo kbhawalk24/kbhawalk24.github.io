@@ -259,15 +259,4 @@ export const ROLES: TimelineRole[] = [
       },
     ],
   },
-  {
-    id: 'tibco',
-    period: 'Jul 2012 – Jun 2015',
-    startYear: '2012',
-    title: 'Software Developer',
-    company: 'TIBCO Software',
-    location: 'Pune, India',
-    summary:
-      'I wrote back-end Java for BusinessWorks, TIBCO’s enterprise integration platform, shipped integration features from customer requirements, and defined the MVP for its Expresso mobile product through competitive analysis and user research.',
-    entries: [],
-  },
 ]
