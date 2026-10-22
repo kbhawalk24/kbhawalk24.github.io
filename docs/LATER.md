@@ -30,7 +30,7 @@ Rule for adding to this list: one line, what it is, where it would go, what it n
 ## Removed from the landing page on 19 October
 
 - The "How I lead" pointer and the two talks. Both live on About (How I manage, How I work with AI, In public). The talks could come back to the landing page if the benchmark pattern (7 of 8 sites surface talks on the homepage) matters more than the simpler page.
-- The lifecycle wheel moved to `/timeline` under the lineage graph, as "Work done in the last five years, at a glance". Drop it from there if the page feels long.
+- The lifecycle wheel is no longer mounted anywhere (removed from `/timeline` on 21 October). `components/lifecycle-wheel.tsx` and `components/capability-map.tsx` stay in the tree with their data in `lib/capability-map.ts`; delete them or give the wheel a home.
 
 ## Hygiene
 

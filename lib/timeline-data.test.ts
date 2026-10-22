@@ -2,10 +2,11 @@ import { describe, expect, it } from 'vitest'
 import { ROLES, TRACKS } from './timeline-data'
 
 describe('timeline data integrity', () => {
-  it('gives every role at least one entry', () => {
+  it('gives every role a summary, and entries where it has track work', () => {
     for (const role of ROLES) {
-      expect(role.entries.length, `${role.id} has no entries`).toBeGreaterThan(0)
+      expect(role.summary.length, `${role.id} has no summary`).toBeGreaterThan(40)
     }
+    expect(ROLES.filter((r) => r.entries.length > 0).length).toBeGreaterThanOrEqual(4)
   })
 
   it('gives every entry a known track, or a tag when the role is outside design', () => {

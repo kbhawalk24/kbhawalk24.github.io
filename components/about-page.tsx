@@ -12,10 +12,9 @@ import {
   HOW_I_MANAGE_INTRO,
   HOW_I_WORK_WITH_AI,
   LINKS,
+  POSITIONING,
   VIDEOS,
-  type Passage,
 } from '@/lib/about'
-import { ARCS } from '@/lib/home-content'
 import { Reveal } from '@/components/motion-primitives'
 import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
@@ -25,18 +24,18 @@ import { WithSectionNav } from '@/components/section-nav'
 import { VideoEmbed } from '@/components/video-embed'
 
 // The About page (copy in lib/about.ts): About me, How I manage, How I
-// work with AI, the two public videos, and the list of case study pages.
+// work with AI, and the two public videos.
 // The section nav beside the content carries the sections; there is no
 // second nav on the page.
 
 const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
 
-function Passages({ items }: { items: Passage[] }) {
+function Paragraphs({ items }: { items: string[] }) {
   return (
     <div className="mt-6 grid max-w-2xl gap-6">
-      {items.map((p) => (
-        <p key={p.lead} className="text-pretty leading-relaxed text-foreground/90">
-          <span className="font-semibold text-foreground">{p.lead}</span> {p.text}
+      {items.map((text) => (
+        <p key={text.slice(0, 40)} className="text-pretty leading-relaxed text-foreground/90">
+          {text}
         </p>
       ))}
     </div>
@@ -58,7 +57,6 @@ function Section({ id, title, children, className }: { id: string; title: string
 }
 
 export function AboutPage() {
-  const cards = ARCS.flatMap((a) => a.cards)
   return (
     <MotionConfig reducedMotion="user">
       <SkipLink />
@@ -68,7 +66,8 @@ export function AboutPage() {
         <article className="max-w-3xl">
           <section id="about" className="scroll-mt-32">
             <h1 className="text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">About</h1>
-            <p className="mt-6 text-pretty font-sans text-lg leading-[1.6] text-foreground">{ABOUT_PARAGRAPH}</p>
+            <p className="mt-6 max-w-[40ch] text-pretty font-sans text-xl leading-[1.5] text-foreground md:text-2xl">{POSITIONING}</p>
+            <p className="mt-6 max-w-2xl text-pretty leading-relaxed text-foreground/90">{ABOUT_PARAGRAPH}</p>
             <ul className="mt-6 grid gap-1 font-sans text-sm text-muted-foreground">
               {EDUCATION.map((e) => (
                 <li key={e}>{e}</li>
@@ -99,15 +98,15 @@ export function AboutPage() {
 
           <Section id="how-i-manage" title="How I manage" className="mt-12">
             <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted-foreground">{HOW_I_MANAGE_INTRO}</p>
-            <Passages items={HOW_I_MANAGE} />
+            <Paragraphs items={HOW_I_MANAGE} />
           </Section>
 
           <Section id="how-i-work-with-ai" title="How I work with AI">
-            <Passages items={HOW_I_WORK_WITH_AI} />
+            <Paragraphs items={HOW_I_WORK_WITH_AI} />
           </Section>
 
           <Section id="in-public" title="In public">
-            <ul className="mt-6 grid gap-6">
+            <ul className="mt-6 grid gap-6 md:grid-cols-2">
               {VIDEOS.map((v) => (
                 <li key={v.href} className="rounded-[14px] bg-card p-5 shadow-soft">
                   <VideoEmbed id={v.youtube} start={v.start} title={v.title} />
@@ -134,25 +133,6 @@ export function AboutPage() {
             </ul>
           </Section>
 
-          <Section id="the-work" title="The work">
-            <ul className="mt-6 grid gap-2">
-              {cards.map((c) => (
-                <li key={c.slug} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-border py-3">
-                  {c.href ? (
-                    <Link href={c.href} className="font-sans text-base font-semibold text-foreground hover:underline">
-                      {c.title}
-                    </Link>
-                  ) : (
-                    <span className="font-sans text-base font-semibold text-foreground">{c.title}</span>
-                  )}
-                  <span className="font-sans text-sm text-muted-foreground">
-                    {c.stats[0].value}
-                    {!c.href && <span className="ml-2 label-micro">coming soon</span>}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </Section>
         </article>
         </WithSectionNav>
       </main>

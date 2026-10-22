@@ -5,7 +5,7 @@ Everything below is on `main`, committed, not pushed. Run `pnpm dev` and open ht
 ## What is live
 
 - Homepage (simplified 19 October): the hero with the about paragraph, the ask and the buttons, then Selected work with six cards and the footer. The same paragraph also opens About.
-- Timeline: `/timeline`, the career as a lineage graph, with the lifecycle wheel under it.
+- Timeline: `/timeline`, the career as a list of roles and highlights with track pills and one figure per highlight. No wheel.
 - About: `/about`, with About me, How I manage, How I work with AI, In public (the two videos), The work.
 - Six case study pages, in reading order:
   1. `/work/agentic-discovery`
@@ -29,9 +29,9 @@ You approved the copy for pages 1, 2 and 3 and the 2026 closing paragraph. Pages
 
 Every case study page has a `visuals` list in its `lib/pages/<slug>.ts`. The 605 page has six real images from `_staging/605`. The other five show hatched "Image to come" slots: the captions describe the intended image and are provisional, and each entry's `todo` names the source file to export. Replace a slot by dropping the file in `public/work/<slug>/` and setting `src`, `width` and `height`.
 
-## About page, two phrases of mine
+## About page, rewritten 21 October
 
-In "How I work with AI": "twenty transcripts become one set of findings in a day instead of a week" and "a place to visit, not a place to work". Keep, change or cut.
+How I manage and How I work with AI are prose paragraphs now, rewritten with the humanizer skill (blader/humanizer 3.1.0): no bold leads, no "X, not Y" contrasts, no one-line closers; every figure and quote kept. The phrase "a place to visit, not a place to work" now appears only on the agent page. "Twenty transcripts become one set of findings in a day instead of a week" is still mine to confirm. The opening is the positioning line plus the founding-designer paragraph again; the work list at the bottom is gone.
 
 ## Open decisions, none blocking
 

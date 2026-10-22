@@ -259,18 +259,7 @@ export const ROLES: TimelineRole[] = [
     company: 'TIBCO Software',
     location: 'Pune, India',
     summary:
-      'Java back-end developer on TIBCO’s enterprise integration platform, the engineering foundation behind a data-fluent design career.',
-    entries: [
-      {
-        tag: 'Engineering',
-        headline: 'Shipped enterprise integration enhancements',
-        detail: 'Translated customer requirements into shipped features.',
-      },
-      {
-        tag: 'Engineering',
-        headline: 'Defined the MVP for a mobile integration product',
-        detail: 'Through competitive analysis and user research.',
-      },
-    ],
+      'Java back-end developer on TIBCO’s enterprise integration platform. I shipped integration features from customer requirements and defined the MVP for a mobile integration product through competitive analysis and user research.',
+    entries: [],
   },
 ]

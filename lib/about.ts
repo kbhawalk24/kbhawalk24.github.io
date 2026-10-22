@@ -7,7 +7,7 @@ export const POSITIONING =
   'Design manager and founding designer of an internal data platform used across Intuit, former software engineer, still designing.'
 
 export const ABOUT_PARAGRAPH =
-  'I’m a design manager for data and AI tools. At Intuit I led design for the data platform for two years, owning data discovery and the platform’s design strategy myself. The team covered the rest: data access and fine-grained access control, governance, lineage, observability, pipeline authoring, behavioral analytics, and the clean data and data maturity program. Before Intuit I was at 605, a TV advertising analytics company, where I designed three products that generated more than $20M in revenue. I was a software engineer before I became a designer. I spent three years at TIBCO writing back-end Java for its enterprise integration platform.'
+  'I joined Intuit in June 2021 as the founding designer of its data catalog, grew it into the data discovery platform, and became its design manager in August 2024. Before that I was the first product designer at 605 (2017–2021), where three analytics products shipped. I started as a software engineer.'
 
 export const EDUCATION = [
   'MS Information (HCI), University of Michigan, 2017',
@@ -20,58 +20,20 @@ export const LINKS = {
   email: 'kbhawalk@gmail.com',
 }
 
-export interface Passage {
-  lead: string
-  text: string
-}
-
 export const HOW_I_MANAGE_INTRO =
-  'August 2024 – July 2026. One designer for every 85 engineers across the data design group. The designers on my team shipped the work; I set the strategy, built the shared research base, and kept designing.'
+  'From August 2024 to July 2026 I managed the designers for Intuit’s data platform, at one designer for every 85 engineers across the data design group. They shipped the work. I set the strategy and the shared research base, and I kept designing.'
 
-export const HOW_I_MANAGE: Passage[] = [
-  {
-    lead: 'Design at the point where the problem is defined.',
-    text: 'My first change as a manager was where I spent my time: in the meetings where a problem was framed, asking questions before a specification existed. I argued for two features the roadmap did not have, a view of the queries other people run against a table and a person’s saved working set of data, and my team designed both. The engineering manager wrote that they “would not have happened if not for Kanchi’s persistence and design sponsorship.”',
-  },
-  {
-    lead: 'One research base for every data designer.',
-    text: 'I had the designers pool their user visits, 8 targeted surveys and 11 help channels into one set of findings. It produced the list of what to build next, and my manager wrote that it showed in what was added to the roadmap.',
-  },
-  {
-    lead: 'One way in, one list.',
-    text: 'Requests for design came from many product teams. I set up a single intake process and one tracker of what each designer was working on, and pushed back when a designer was about to be spread across two products.',
-  },
-  {
-    lead: 'Decisions that get made.',
-    text: 'My designers told my manager what they valued: clarity when requirements were unclear, boundaries when work kept changing, and getting engineering leads and several product managers into one room to settle a decision.',
-  },
-  {
-    lead: 'Every direct report promoted.',
-    text: 'Every designer who reported to me at Intuit was promoted while on my team. A 2023 intern I had managed joined the team full-time.',
-  },
-  {
-    lead: 'What did not work.',
-    text: 'My manager’s 2025 review names four projects where we did the research, translated it into recommendations, and it changed neither the direction nor the execution. He asked me to work on one thing: influence. The following year a finding stayed on the table until it became a commitment, not a readout.',
-  },
+export const HOW_I_MANAGE: string[] = [
+  'My first change as a manager was where I spent my time. I went to the meetings where a problem was framed and asked questions before a specification existed. Two features the roadmap did not have came out of that, a view of the queries other people run against a table and a person’s saved working set of data, and my team designed both. The engineering manager wrote that they “would not have happened if not for Kanchi’s persistence and design sponsorship.”',
+  'Requests for design came from many product teams, so I set up a single intake process and one tracker of what each designer was working on, and I pushed back when a designer was about to be spread across two products. I also had the designers pool their user visits, 8 targeted surveys and 11 help channels into one set of findings. It produced the list of what to build next, and my manager wrote that it showed in what was added to the roadmap.',
+  'My designers told my manager what they valued from me: clarity when requirements were unclear, boundaries when work kept changing, and getting engineering leads and several product managers into one room to settle a decision. Every designer who reported to me at Intuit was promoted while on my team, and a 2023 intern I had managed joined the team full-time.',
+  'Not everything worked. My manager’s 2025 review names four projects where we did the research, translated it into recommendations, and it changed neither the direction nor the execution. He asked me to work on influence. The following year I kept a finding on the table until it became a commitment.',
 ]
 
-export const HOW_I_WORK_WITH_AI: Passage[] = [
-  {
-    lead: 'In my own work first.',
-    text: 'I used coded prototypes, AI research synthesis and AI-made videos in my own design work; my manager wrote that he then saw every designer on my team adopt them. One designer’s use of a prototyping tool with developers cut development time by as much as 90% on some features.',
-  },
-  {
-    lead: 'The tools, and where they sit.',
-    text: 'Coded prototypes in v0 and Figma Make, so a flow can be used before it is specified. Research synthesis in NotebookLM, so twenty transcripts become one set of findings in a day instead of a week. AI-made launch videos in place of recorded walkthroughs. And the codebase itself: for the agent in Cursor and Claude I wrote the rules it answers by, as text in the repository, not as a slide. The team’s standard became a working prototype before a spec.',
-  },
-  {
-    lead: 'Designing for agents, not only with them.',
-    text: 'In 2023 I consolidated 16 hackathon teams and 58 collaborators into one plain-language assistant inside the catalog. It shipped in four months and usage did not hold, because a chat window outside people’s tools is a place to visit, not a place to work. The agent that followed in 2025 lives inside the coding tools and answers under four rules: check the person’s own collections before the wider lake, never invent a table name, never show a query that has not been run, always ask before running anything.',
-  },
-  {
-    lead: 'What I believe after two years of it.',
-    text: 'Oversight is a new design problem: what was done, what is pending, what needs a person’s judgment. An agent answers the question you asked, and the interface has to handle not knowing what to ask. And high-stakes, multi-day, multi-actor work cannot live in a chat thread, because a thread is not audit evidence.',
-  },
+export const HOW_I_WORK_WITH_AI: string[] = [
+  'I used coded prototypes, AI research synthesis and AI-made videos in my own design work first, and my manager wrote that he then saw every designer on my team adopt them. One designer’s use of a prototyping tool with developers cut development time by as much as 90% on some features. The tools are coded prototypes in v0 and Figma Make, so a flow can be used before it is specified; research synthesis in NotebookLM, so twenty transcripts become one set of findings in a day instead of a week; and AI-made launch videos in place of recorded walkthroughs. For the agent in Cursor and Claude I wrote the rules it answers by as text in the repository, where it reads them. A working prototype before a spec became the team’s standard.',
+  'In 2023 I consolidated 16 hackathon teams and 58 collaborators into one plain-language assistant inside the catalog. It shipped in four months, and usage did not hold, because people had to leave their tools to visit it. The agent that followed in 2025 lives inside the coding tools and answers under four rules: it checks the person’s own collections before the wider lake, it never invents a table name or shows a query that has not been run, and it asks before running anything.',
+  'After two years of it I think oversight is the new design problem: what was done, what is pending, and what needs a person’s judgment. An agent answers the question you asked, so the interface has to handle not knowing what to ask. And work that is high stakes, runs over days and involves several people cannot live in a chat thread, because a thread cannot be audited.',
 ]
 
 export interface Video {
@@ -117,5 +79,4 @@ export const ABOUT_SECTIONS = [
   { id: 'how-i-manage', title: 'How I manage' },
   { id: 'how-i-work-with-ai', title: 'How I work with AI' },
   { id: 'in-public', title: 'In public' },
-  { id: 'the-work', title: 'The work' },
 ]

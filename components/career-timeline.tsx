@@ -139,6 +139,7 @@ export function CareerTimeline({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
                 </p>
               </div>
 
+              {role.entries.length > 0 && (
               <div className="mt-8 min-w-0 sm:mt-0">
                 <p className="label-micro text-muted-foreground">Highlights</p>
                 <ol className="mt-2">
@@ -147,6 +148,7 @@ export function CareerTimeline({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
                   ))}
                 </ol>
               </div>
+              )}
             </li>
           ))}
         </ol>
