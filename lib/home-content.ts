@@ -35,7 +35,7 @@ export const ARCS: Arc[] = [
     heading: 'Data discovery, from keywords to coding agents',
     period: '2021–2026',
     thesis:
-      'I led data discovery for five years across a data lake of 320,000 tables and the data products built on it, from keyword search to a chat assistant people did not come back to, and then to the catalog inside Cursor and Claude.',
+      'I led data discovery for five years across a data lake of 320,000 tables and the data products built on it, from keyword search to a plain-language assistant, and then to an agent inside Cursor and Claude.',
     cards: [
       {
         slug: 'agentic-discovery',
