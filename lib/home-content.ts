@@ -37,10 +37,10 @@ export interface Arc {
 }
 
 /** The three case studies on the homepage, in reading order. */
-export const FEATURED_SLUGS = ['agentic-discovery', 'scaling-platform-design', 'search-2', '605-tv-analytics'] as const
+export const FEATURED_SLUGS = ['agentic-discovery', 'scaling-platform-design', '605-tv-analytics'] as const
 
 /** The other pages: live and linked, not on the homepage grid. */
-export const MORE_SLUGS = ['catalog-data-map-lineage', 'self-service-onboarding'] as const
+export const MORE_SLUGS = ['search-2', 'catalog-data-map-lineage', 'self-service-onboarding'] as const
 
 export const ARCS: Arc[] = [
   {
