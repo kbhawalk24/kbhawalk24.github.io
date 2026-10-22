@@ -98,19 +98,6 @@ export function CareerTimeline({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
             Career timeline
             <HeadingDot />
           </Heading>
-          <p className="mt-6 text-pretty font-sans text-lg leading-[1.6] text-foreground">
-            Every role, with the work that mattered under it. Each highlight is tagged by the kind of work it was, and a
-            figure in the tag’s colour is a measured outcome.
-          </p>
-          <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1" aria-label="Legend">
-            {(['management', 'strategy', 'ic'] as const).map((t) => (
-              <li key={t} className="inline-flex items-center gap-2 label-micro text-muted-foreground">
-                <span aria-hidden="true" className={cn('size-2 rounded-full', trackStyles[t].dot)} />
-                {TRACKS[t].label}
-              </li>
-            ))}
-            <li className="label-micro text-muted-foreground">· shared = a result many teams share</li>
-          </ul>
         </Reveal>
 
         <ol className="mt-10 border-t border-border">
