@@ -128,7 +128,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
               <h1 className="mt-4 text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">
                 {page.title}
               </h1>
-              <p className="mt-4 max-w-[62ch] text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">
+              <p className="mt-4 text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">
                 {page.description}
               </p>
             </header>

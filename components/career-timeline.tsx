@@ -88,7 +88,7 @@ export function CareerTimeline({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
   return (
     <section id="timeline" className="relative z-10 scroll-mt-28">
       <div className={cn('mx-auto max-w-6xl px-6 md:px-10 lg:px-14', heading === 'h1' ? 'pt-8 md:pt-10' : 'pt-20 md:pt-28')}>
-        <Reveal className="max-w-3xl">
+        <Reveal>
           <Heading
             className={cn(
               'font-heading tracking-tight',
@@ -98,7 +98,7 @@ export function CareerTimeline({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
             Career timeline
             <HeadingDot />
           </Heading>
-          <p className="mt-6 max-w-[62ch] text-pretty font-sans text-lg leading-[1.6] text-foreground">
+          <p className="mt-6 text-pretty font-sans text-lg leading-[1.6] text-foreground">
             Every role, with the work that mattered under it. Each highlight is tagged by the kind of work it was, and a
             figure in the tag’s colour is a measured outcome.
           </p>

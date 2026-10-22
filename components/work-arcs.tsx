@@ -83,7 +83,7 @@ function Card({ card }: { card: WorkCard }) {
 function ArcSection({ arc, index }: { arc: Arc; index: number }) {
   return (
     <div className={index === 0 ? undefined : 'mt-16 md:mt-20'}>
-      <Reveal className="mb-8 max-w-3xl">
+      <Reveal className="mb-8">
         <p className="label-micro text-muted-foreground">
           Arc {index + 1} · {arc.period}
         </p>
@@ -91,7 +91,7 @@ function ArcSection({ arc, index }: { arc: Arc; index: number }) {
           {arc.heading}
         </h3>
         {arc.thesis && (
-          <p className="mt-4 max-w-[62ch] text-pretty font-sans text-lg leading-[1.6] text-foreground">
+          <p className="mt-4 text-pretty font-sans text-lg leading-[1.6] text-foreground">
             {arc.thesis}
           </p>
         )}
