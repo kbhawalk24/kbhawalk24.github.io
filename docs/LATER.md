@@ -15,7 +15,7 @@ Rule for adding to this list: one line, what it is, where it would go, what it n
 - **Push.** Nothing is pushed until the word is "ship".
 - **Password protection** of the six work pages. The rebuild branch had one password; `main` has none.
 - **The catalog card's "30K tables".** Rounded. Needs the exact figure from the lineage launch post or stays as "about 30,000".
-- **180 petabytes** (public, re:Invent 2025). Not placed anywhere.
+- **180 petabytes** (public, re:Invent 2025). Used in the first arc's thesis on the homepage since 21 October; the six pages' context bars still say 320,000 tables.
 - **The two FY27 readout figures** (20 to 40% efficiency gains; access requests 6,500 to 19,200 a month). Not on any page until approved.
 - **"What I would do differently" passages** from the rebuild branch (`content/drafts/pending.md` there). Not on `main`.
 - **Colophon line** on the short pages.
