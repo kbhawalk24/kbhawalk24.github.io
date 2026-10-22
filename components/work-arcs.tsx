@@ -2,16 +2,16 @@
 
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { FEATURED, MORE, type WorkCard } from '@/lib/home-content'
+import { ARCS, FEATURED_SLUGS, type Arc, type WorkCard } from '@/lib/home-content'
 import { TRACKS } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
-// Selected work: three case studies as cards, then a one-line list of the
-// other pages, which stay live. Card format, stacked: cover on top, a track
-// pill with the period, title, one line, one measured outcome in the track's
-// colour, then the link.
+// Selected work: three arcs, each with a heading and a thesis to ground the
+// reader, then the arc's featured case study as one full-width card (cover on
+// the left from 768px, text beside it), and the arc's other pages as one line
+// each. Every page stays live.
 
 const DIAGONAL_STRIPES = {
   backgroundImage:
@@ -23,7 +23,7 @@ function Cover({ card }: { card: WorkCard }) {
     <div
       role="img"
       aria-label={`Image to come: ${card.visualNote}`}
-      className="relative aspect-[16/10] w-full"
+      className="relative aspect-[16/10] w-full md:aspect-auto md:h-full md:min-h-[320px]"
       style={DIAGONAL_STRIPES}
     >
       <span className="absolute right-4 top-4 rounded-full bg-card px-3 py-1 label-micro text-muted-foreground shadow-soft">
@@ -58,21 +58,21 @@ function Status({ card }: { card: WorkCard }) {
 function Card({ card }: { card: WorkCard }) {
   const stat = card.stats[0]
   return (
-    <>
+    <div className="md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
       <Cover card={card} />
-      <div className="px-6 pb-6 pt-5 sm:px-7">
+      <div className="px-6 pb-6 pt-5 sm:px-7 md:flex md:flex-col md:justify-center md:py-7 lg:px-9">
         <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <span className={cn('inline-block rounded-full px-2.5 py-1 label-micro', trackStyles[card.track].badgeFlat)}>
             {TRACKS[card.track].label}
           </span>
           <span className="label-micro text-muted-foreground">{card.period}</span>
         </p>
-        <h4 className="mt-3 text-balance font-heading text-xl font-semibold leading-tight tracking-tight">
+        <h4 className="mt-3 text-balance font-heading text-2xl font-semibold leading-tight tracking-tight md:text-3xl">
           {card.title}
         </h4>
-        <p className="mt-2 text-pretty font-sans text-base leading-relaxed text-muted-foreground">{card.line}</p>
-        <p className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className={cn('font-heading text-2xl font-semibold leading-tight tracking-tight tabular-nums', trackStyles[card.track].accentText)}>
+        <p className="mt-3 text-pretty font-sans text-base leading-relaxed text-muted-foreground md:text-lg">{card.line}</p>
+        <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span className={cn('font-heading text-3xl font-semibold leading-tight tracking-tight tabular-nums', trackStyles[card.track].accentText)}>
             {stat.value}
           </span>
           <span className="label-micro text-muted-foreground">{stat.label}</span>
@@ -81,7 +81,63 @@ function Card({ card }: { card: WorkCard }) {
           <Status card={card} />
         </div>
       </div>
-    </>
+    </div>
+  )
+}
+
+function AlsoLine({ card }: { card: WorkCard }) {
+  return (
+    <li className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3">
+      <span className="flex flex-wrap items-baseline gap-x-3">
+        {card.href ? (
+          <Link href={card.href} className="font-sans text-base font-semibold text-foreground underline-offset-4 hover:underline">
+            {card.title}
+          </Link>
+        ) : (
+          <span className="font-sans text-base font-semibold text-foreground">{card.title}</span>
+        )}
+        <span className="label-micro text-muted-foreground">{card.period}</span>
+      </span>
+      <span className="font-sans text-sm text-muted-foreground">
+        <span className={cn('font-heading text-base font-semibold tabular-nums', trackStyles[card.track].accentText)}>{card.stats[0].value}</span>{' '}
+        {card.stats[0].label}
+      </span>
+    </li>
+  )
+}
+
+function ArcSection({ arc, index }: { arc: Arc; index: number }) {
+  const featured = arc.cards.filter((c) => (FEATURED_SLUGS as readonly string[]).includes(c.slug))
+  const rest = arc.cards.filter((c) => !(FEATURED_SLUGS as readonly string[]).includes(c.slug))
+  return (
+    <div className={index === 0 ? undefined : 'mt-16 md:mt-20'}>
+      <Reveal className="mb-8">
+        <p className="label-micro text-muted-foreground">
+          Arc {index + 1} · {arc.period}
+        </p>
+        <h3 className="mt-3 text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">{arc.heading}</h3>
+        {arc.thesis && <p className="mt-4 text-pretty font-sans text-lg leading-[1.6] text-foreground">{arc.thesis}</p>}
+      </Reveal>
+      {featured.length > 0 && (
+        <ol className="grid gap-6">
+          {featured.map((card, i) => (
+            <Reveal key={card.slug} as="li" delay={Math.min(i, 3) * 0.06} className="overflow-hidden rounded-[14px] bg-card shadow-soft">
+              <Card card={card} />
+            </Reveal>
+          ))}
+        </ol>
+      )}
+      {rest.length > 0 && (
+        <Reveal className={featured.length > 0 ? 'mt-6' : undefined}>
+          <p className="label-micro text-muted-foreground">{featured.length > 0 ? 'Also in this arc' : 'In this arc'}</p>
+          <ul className="mt-1 divide-y divide-border">
+            {rest.map((card) => (
+              <AlsoLine key={card.slug} card={card} />
+            ))}
+          </ul>
+        </Reveal>
+      )}
+    </div>
   )
 }
 
@@ -96,37 +152,9 @@ export function WorkArcs() {
             <HeadingDot />
           </h2>
         </Reveal>
-        <ol className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {FEATURED.map((card, i) => (
-            <Reveal key={card.slug} as="li" delay={Math.min(i, 3) * 0.06} className="overflow-hidden rounded-[14px] bg-card shadow-soft">
-              <Card card={card} />
-            </Reveal>
-          ))}
-        </ol>
-
-        <Reveal className="mt-14 md:mt-16">
-          <p className="label-micro text-muted-foreground">Also</p>
-          <ul className="mt-3 divide-y divide-border">
-            {MORE.map((card) => (
-              <li key={card.slug} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3">
-                <span className="flex flex-wrap items-baseline gap-x-3">
-                  {card.href ? (
-                    <Link href={card.href} className="font-sans text-base font-semibold text-foreground underline-offset-4 hover:underline">
-                      {card.title}
-                    </Link>
-                  ) : (
-                    <span className="font-sans text-base font-semibold text-foreground">{card.title}</span>
-                  )}
-                  <span className="label-micro text-muted-foreground">{card.period}</span>
-                </span>
-                <span className="font-sans text-sm text-muted-foreground">
-                  <span className={cn('font-heading text-base font-semibold tabular-nums', trackStyles[card.track].accentText)}>{card.stats[0].value}</span>{' '}
-                  {card.stats[0].label}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+        {ARCS.map((arc, i) => (
+          <ArcSection key={arc.id} arc={arc} index={i} />
+        ))}
       </div>
     </section>
   )
