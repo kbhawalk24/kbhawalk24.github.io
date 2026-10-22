@@ -106,7 +106,7 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
         {
           type: 'p',
           text:
-            'The designers on my team shipped the results. Access to real-time data fell from 2–3 weeks to 3 days, decryption access from 9 days to 3, internal approvals from 24 hours to near-instant, time to discover data from 14.2 hours to 9.4, and search session conversion rose from 41% to 61%. Across the platform, peak-season P0 and P1 data incidents fell from 17 to 0 and clean data grew from under 1% to 80% of the estate, results many teams share. The team began practices of its own: a design sign-off before release, AI-made launch videos other teams copied, and coded prototypes that cut development time by as much as 90% on some features. A 2023 intern I had managed joined the team full-time. Every designer who reported to me was promoted while on my team.',
+            'The designers on my team shipped the results. Access to real-time data fell from 2–3 weeks to 3 days, decryption access from 9 days to 3, internal approvals from 24 hours to near-instant, time to discover data from 14.2 hours to 9.4, and search session conversion rose from 41% to 61%. Column-level lineage cut incident investigations from about 4 hours to minutes and found the root cause of 19 marketing data incidents in one tax season. Across the platform, peak-season P0 and P1 data incidents fell from 17 to 0 and clean data grew from under 1% to 80% of the estate, results many teams share. The team began practices of its own: a design sign-off before release, AI-made launch videos other teams copied, and coded prototypes that cut development time by as much as 90% on some features. A 2023 intern I had managed joined the team full-time. I hired for the wider design team, and every designer who reported to me was promoted while on my team.',
         },
       ],
     },
@@ -133,5 +133,5 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
   credits:
     'The mechanisms, the strategy and the pushback are mine. The products on this page were designed by the designers on my team; the certification work was shared with designers elsewhere in the data design group. Engineers delivered everything that shipped.',
   sources:
-    'Launch posts of Jan 14, Mar 24, Aug 22 and Sep 18, 2025; team research deck, Q3 FY26; FY25 and FY26 reviews; roadmap decks and the FY27 strategy readout; AWS re:Invent 2025 for the public clean-data figure; promotion records. Intuit Investor Day 2026 transcript, Sep 17, 2026, for the closing quotes.',
+    'Launch posts of Jan 14, Mar 24, Aug 22 and Sep 18, 2025; team research deck, Q3 FY26; FY25 and FY26 reviews and the FY26 mid-year review; roadmap decks and the FY27 strategy readout; AWS re:Invent 2025 for the public clean-data figure; promotion records. Intuit Investor Day 2026 transcript, Sep 17, 2026, for the closing quotes.',
 }

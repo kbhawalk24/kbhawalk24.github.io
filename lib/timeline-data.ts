@@ -73,7 +73,7 @@ export const ROLES: TimelineRole[] = [
     companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
-      'I led UX strategy and the product designers for Intuit’s enterprise data platform, which covers data discovery and search, access and governance, lineage, observability, data quality standards and pipeline authoring.',
+      'I led UX strategy and the product designers for Intuit’s enterprise data platform, which covers discovery, access, lineage, observability, data quality certification, instrumentation and pipeline authoring.',
     entries: [
       {
         track: 'management',
@@ -86,7 +86,7 @@ export const ROLES: TimelineRole[] = [
         track: 'management',
         headline: 'Every designer who reported to me was promoted',
         detail:
-          'A 2023 intern I had managed joined the team full-time; the team began a design sign-off before release that engineering adopted.',
+          'I also hired for the wider design team. A 2023 intern I had managed joined the team full-time, and the team began a design sign-off before release that engineering adopted.',
         impact: { value: 'All', label: 'Direct reports promoted' },
         href: '/work/scaling-platform-design',
       },
@@ -96,6 +96,14 @@ export const ROLES: TimelineRole[] = [
         detail:
           'Tables and encrypted columns are requested together, real-time data arrives in 3 days instead of 2 to 3 weeks, and 61% of requests are approved automatically.',
         impact: { value: '9 → 3 days', label: 'Tables and encrypted columns, Aug 2025' },
+        href: '/work/scaling-platform-design',
+      },
+      {
+        track: 'management',
+        headline: 'My team designed column-level lineage for incident work',
+        detail:
+          'Investigating an incident fell from about 4 hours to minutes, and the lineage found the root cause of 19 marketing data incidents in one tax season.',
+        impact: { value: 'About 4 hours → minutes', label: 'To investigate a data incident, tax year 2025' },
         href: '/work/scaling-platform-design',
       },
       {
@@ -221,7 +229,7 @@ export const ROLES: TimelineRole[] = [
     company: '605',
     companyLogo: '/images/605logo.jpg',
     location: 'New York, NY',
-    summary: 'I was 605’s first product designer and took three TV ad-analytics products from concept to commercial launch.',
+    summary: 'I was 605’s first product designer, hired as Interaction Designer and Researcher, and took three TV ad-analytics products from concept to commercial launch.',
     entries: [
       {
         track: 'ic',
@@ -234,7 +242,7 @@ export const ROLES: TimelineRole[] = [
       {
         track: 'ic',
         headline: 'Designed 605 Impact',
-        detail: 'Impact measured TV advertising’s effect on consumer behavior.',
+        detail: 'Impact was the first product measuring whether TV ads changed viewing.',
         impact: { value: '32 → 2', label: 'Reports into pages, 2020' },
         href: '/work/605-tv-analytics',
       },
@@ -259,7 +267,7 @@ export const ROLES: TimelineRole[] = [
     company: 'TIBCO Software',
     location: 'Pune, India',
     summary:
-      'I wrote back-end Java for TIBCO’s enterprise integration platform, shipped integration features from customer requirements, and defined the MVP for a mobile integration product through competitive analysis and user research.',
+      'I wrote back-end Java for BusinessWorks, TIBCO’s enterprise integration platform, shipped integration features from customer requirements, and defined the MVP for its Expresso mobile product through competitive analysis and user research.',
     entries: [],
   },
 ]
