@@ -99,8 +99,8 @@ export function CareerTimeline({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
             <HeadingDot />
           </Heading>
           <p className="mt-6 max-w-[62ch] text-pretty font-sans text-lg leading-[1.6] text-foreground">
-            Every role, and under each the work that mattered, tagged by the kind of work it was. A figure in the
-            tag’s colour is a measured outcome.
+            Every role, with the work that mattered under it. Each highlight is tagged by the kind of work it was, and a
+            figure in the tag’s colour is a measured outcome.
           </p>
           <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1" aria-label="Legend">
             {(['management', 'strategy', 'ic'] as const).map((t) => (
