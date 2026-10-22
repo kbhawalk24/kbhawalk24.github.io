@@ -17,6 +17,12 @@ export const SEARCH_2: ShortPage = {
     ],
     current: 1,
   },
+  facts: [
+    { label: 'Duration', value: 'Spring 2024 to March 2025' },
+    { label: 'My role', value: 'Principal designer, then manager of the team that took it to launch' },
+    { label: 'Team', value: 'Designers on my team to launch; engineers and the search-model team' },
+    { label: 'Research', value: '20 catalog users interviewed while doing their own work, with engineers watching; a whole-team workshop' },
+  ],
   stats: [
     { value: '81.31% → 89.24%', label: 'First result correct' },
     { value: '50.59 s → 1.93 s', label: 'For 99 in 100 searches' },

@@ -4,7 +4,7 @@ Everything below is on `main`, committed, not pushed. Run `pnpm dev` and open ht
 
 ## What is live
 
-- Homepage (22 October): the hero, then Selected work as three cards (agent, team, Search 2.0) and an Also list linking the catalog, onboarding and 605 pages, which stay live. About has a Before Intuit section with three 605 images.
+- Homepage (22 October): the hero, then Selected work as three arcs, each with its thesis and full-width horizontal cards: the agent and Search 2.0 under arc one, the team page under arc two with the onboarding and catalog pages as one line each, and 605 under arc three with its real cover. Every case page has a facts block (duration, my role, team as roles, research) under the context bar. About has a Before Intuit section with three 605 images.
 - Timeline: `/timeline`, the career as a list of roles and highlights with track pills and one figure per highlight. No wheel.
 - About: `/about`, with About me, How I manage, How I work with AI, In public (the two videos), The work.
 - Six case study pages, in reading order:

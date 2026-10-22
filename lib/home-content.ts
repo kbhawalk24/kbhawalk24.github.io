@@ -17,6 +17,8 @@ export interface WorkCard {
   track: Track
   /** What the cover will show once it exists; read out for the placeholder. */
   visualNote: string
+  /** The cover image, once it exists. */
+  cover?: { src: string; alt: string }
   /** One line of plain text under the title. */
   line: string
   /** One measured outcome per card. */
@@ -35,10 +37,10 @@ export interface Arc {
 }
 
 /** The three case studies on the homepage, in reading order. */
-export const FEATURED_SLUGS = ['agentic-discovery', 'scaling-platform-design', 'search-2'] as const
+export const FEATURED_SLUGS = ['agentic-discovery', 'scaling-platform-design', 'search-2', '605-tv-analytics'] as const
 
 /** The other pages: live and linked, not on the homepage grid. */
-export const MORE_SLUGS = ['catalog-data-map-lineage', 'self-service-onboarding', '605-tv-analytics'] as const
+export const MORE_SLUGS = ['catalog-data-map-lineage', 'self-service-onboarding'] as const
 
 export const ARCS: Arc[] = [
   {
@@ -138,6 +140,10 @@ export const ARCS: Arc[] = [
         line:
           'Three TV advertising analytics products, from first concept to commercial launch.',
         visualNote: 'The 15-target chart beside the shipped 5-target comparison chart in 605 Platform.',
+        cover: {
+          src: '/work/605-tv-analytics/platform-campaign.png',
+          alt: 'The 605 Platform campaign dashboard with reach and frequency charts and ranked network tables',
+        },
         stats: [{ value: '$2M', label: 'Additional booked revenue from pitches on the new designs' }],
         status: 'live',
         href: '/work/605-tv-analytics',

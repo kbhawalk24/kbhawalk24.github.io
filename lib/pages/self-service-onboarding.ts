@@ -17,6 +17,12 @@ export const SELF_SERVICE_ONBOARDING: ShortPage = {
     ],
     current: 1,
   },
+  facts: [
+    { label: 'Duration', value: '2023 to 2024' },
+    { label: 'My role', value: 'Principal designer; the designs are mine' },
+    { label: 'Team', value: 'Engineers; the platform organization for the clean-data standard; the access team for permissions' },
+    { label: 'Research', value: 'Journey mapping with marketers and data owners; a 2024 study with reviewers of AI-generated descriptions' },
+  ],
   stats: [
     { value: '1–2 weeks → under 24 hours', label: 'to get marketing data onboarded' },
     { value: '7 days', label: 'of campaign delay on average in FY23, the problem' },

@@ -17,6 +17,12 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     ],
     current: 2,
   },
+  facts: [
+    { label: 'Duration', value: '2025 to March 2026' },
+    { label: 'My role', value: 'The strategy and the answer specification, as design manager' },
+    { label: 'Team', value: 'A designer on my team for response patterns; engineering for the servers and the search models' },
+    { label: 'Research', value: 'An observed-task study; a help-channel analysis of 666 questions; 20 in-context visits in 2023' },
+  ],
   stats: [
     { value: '45 min → 4 min', label: 'From a question to an answer' },
     { value: '711', label: 'Active users' },

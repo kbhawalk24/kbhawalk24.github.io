@@ -17,6 +17,12 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     ],
     current: 0,
   },
+  facts: [
+    { label: 'Duration', value: 'June 2021 to 2023' },
+    { label: 'My role', value: 'Founding designer; the designs are mine' },
+    { label: 'Team', value: 'Engineers built the catalog, the map and the lineage graph; a second designer joined lineage in 2024' },
+    { label: 'Research', value: 'Help-channel threads and in-context sessions with analysts and data scientists' },
+  ],
   stats: [
     { value: '68% → 96%', label: 'of searches with a click in the top five, Apr 2022 to Apr 2023' },
     { value: 'About 30,000 tables, 7,000 pipelines', label: 'in the first lineage graph' },

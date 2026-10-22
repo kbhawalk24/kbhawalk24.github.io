@@ -19,6 +19,14 @@ const DIAGONAL_STRIPES = {
 }
 
 function Cover({ card }: { card: WorkCard }) {
+  if (card.cover) {
+    return (
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-card-soft md:aspect-auto md:h-full md:min-h-[320px]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={card.cover.src} alt={card.cover.alt} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover object-left-top" />
+      </div>
+    )
+  }
   return (
     <div
       role="img"

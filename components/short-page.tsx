@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
-import type { Block, InlineLink, PageVisual, ShortPage, SystemContext } from '@/lib/pages/types'
+import type { Block, InlineLink, PageFact, PageVisual, ShortPage, SystemContext } from '@/lib/pages/types'
 import { Reveal } from '@/components/motion-primitives'
 import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
@@ -136,6 +136,8 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
             <div className="mt-8">
               <ContextBar context={page.context} />
             </div>
+
+            {page.facts && page.facts.length > 0 && <Facts facts={page.facts} />}
 
             <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
               {page.stats.map((s) => (
@@ -273,5 +275,20 @@ function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: st
         </li>
       ))}
     </ul>
+  )
+}
+
+// Duration, role, team and research: the facts a reader wants before the
+// story, in four short cells under the context bar.
+function Facts({ facts }: { facts: PageFact[] }) {
+  return (
+    <dl className="mt-6 grid gap-x-8 gap-y-5 border-t border-border pt-6 sm:grid-cols-2 lg:grid-cols-4">
+      {facts.map((f) => (
+        <div key={f.label}>
+          <dt className="label-micro text-muted-foreground">{f.label}</dt>
+          <dd className="mt-1.5 text-pretty font-sans text-base leading-relaxed text-foreground">{f.value}</dd>
+        </div>
+      ))}
+    </dl>
   )
 }

@@ -17,6 +17,12 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
     ],
     current: 2,
   },
+  facts: [
+    { label: 'Duration', value: 'August 2024 to July 2026' },
+    { label: 'My role', value: 'Design manager: the strategy, the research base, intake and decisions' },
+    { label: 'Team', value: 'The designers on my team; engineering; product managers across teams' },
+    { label: 'Research', value: '15 user visits, 8 surveys and 11 help channels pooled into one set of findings in 2025' },
+  ],
   stats: [
     { value: '<1% → 80%', label: 'Of the data estate meeting the clean-data standard · shared' },
     { value: '17 → 0', label: 'Peak-season P0/P1 data incidents · shared' },

@@ -37,6 +37,12 @@ export interface PageSection {
   blocks: Block[]
 }
 
+/** One cell of the facts block under the context bar. */
+export interface PageFact {
+  label: string
+  value: string
+}
+
 export interface PageVisual {
   id: string
   /** Path under /public once the file exists, e.g. /work/605-tv-analytics/platform.png. Absent: a placeholder renders. */
@@ -72,6 +78,8 @@ export interface ShortPage {
   /** Metadata description and the summary line under the title. */
   description: string
   context: SystemContext
+  /** Duration, role, team as roles, research. Four short cells. */
+  facts?: PageFact[]
   stats: PageStat[]
   /** Screens, diagrams, recordings; 4 to 6 per page, every one captioned. */
   visuals?: PageVisual[]

@@ -16,6 +16,12 @@ export const SIX_O_FIVE: ShortPage = {
     ],
     current: 0,
   },
+  facts: [
+    { label: 'Duration', value: 'October 2017 to June 2021' },
+    { label: 'My role', value: 'First product designer; the designs are mine' },
+    { label: 'Team', value: 'About 20 engineers and 5 product managers; two designers joined as the team grew' },
+    { label: 'Research', value: 'Interviews across client, agency and network teams; five networks tested the Indxr prototype' },
+  ],
   stats: [
     { value: '3–4 min → 1–1.5 min', label: 'to render a report' },
     { value: '$2M', label: 'in additional booked revenue from pitches that used the new designs, since March 2021' },
