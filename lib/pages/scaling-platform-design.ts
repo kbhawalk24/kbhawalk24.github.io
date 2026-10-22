@@ -98,11 +98,6 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
           text:
             'I argued for work the roadmap did not have. Two features got onto it and my team designed them: a view of the queries other people run against a table, and Collections, a person’s saved working set of data. The engineering manager wrote that they “would not have happened if not for Kanchi’s persistence and design sponsorship.” I pushed back when one designer was about to be spread across two unrelated products. And I set the design strategy for the clean-data standard, the same steps across every way data is produced and the same display of maturity for producers and consumers, coordinating designers on my team and beyond it.',
         },
-        {
-          type: 'p',
-          text:
-            'Not everything worked. My manager’s 2025 review names four projects where we did the research, translated it into recommendations, and it changed neither the direction nor the execution. He called it wasted effort and asked me to work on one thing: influence. The following year a finding stayed on the table until it became a commitment, not a readout.',
-        },
       ],
     },
     {
