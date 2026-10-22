@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import {
   ABOUT_PARAGRAPH,
   ABOUT_SECTIONS,
+  BEFORE_INTUIT,
   EDUCATION,
   HOW_I_MANAGE,
   HOW_I_MANAGE_INTRO,
@@ -133,6 +134,23 @@ export function AboutPage() {
             </ul>
           </Section>
 
+          <Section id="before-intuit" title="Before Intuit">
+            <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-foreground/90">{BEFORE_INTUIT.intro}</p>
+            <ul className="mt-6 grid gap-5 sm:grid-cols-3">
+              {BEFORE_INTUIT.images.map((img) => (
+                <li key={img.src}>
+                  <figure className="rounded-[14px] bg-card p-2 shadow-soft">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={img.src} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" className="aspect-[4/3] w-full rounded-[10px] bg-card-soft object-cover object-top" />
+                    <figcaption className="px-2 pb-2 pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">{img.caption}</figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+            <Link href={BEFORE_INTUIT.href} className="mt-5 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline">
+              The 605 case study <span aria-hidden="true">→</span>
+            </Link>
+          </Section>
         </article>
         </WithSectionNav>
       </main>

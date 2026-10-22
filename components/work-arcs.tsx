@@ -2,16 +2,16 @@
 
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
+import { FEATURED, MORE, type WorkCard } from '@/lib/home-content'
 import { TRACKS } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
-// Selected work: three strategic arcs, each with a thesis sentence and its
-// cards. Card format, stacked: cover on top, a track pill with the period,
-// title, one line, one measured outcome in the track's colour, then the link.
-// A card links only once its page exists (status 'live' with an href).
+// Selected work: three case studies as cards, then a one-line list of the
+// other pages, which stay live. Card format, stacked: cover on top, a track
+// pill with the period, title, one line, one measured outcome in the track's
+// colour, then the link.
 
 const DIAGONAL_STRIPES = {
   backgroundImage:
@@ -85,37 +85,6 @@ function Card({ card }: { card: WorkCard }) {
   )
 }
 
-function ArcSection({ arc, index }: { arc: Arc; index: number }) {
-  return (
-    <div className={index === 0 ? undefined : 'mt-16 md:mt-20'}>
-      <Reveal className="mb-8">
-        <p className="label-micro text-muted-foreground">
-          Arc {index + 1} · {arc.period}
-        </p>
-        <h3 className="mt-3 text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">
-          {arc.heading}
-        </h3>
-        {arc.thesis && (
-          <p className="mt-4 text-pretty font-sans text-lg leading-[1.6] text-foreground">
-            {arc.thesis}
-          </p>
-        )}
-      </Reveal>
-      <ol className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {arc.cards.map((card, i) => (
-          <Reveal
-            key={card.slug}
-            as="li"
-            delay={Math.min(i, 3) * 0.06}
-            className="overflow-hidden rounded-[14px] bg-card shadow-soft"
-          >
-            <Card card={card} />
-          </Reveal>
-        ))}
-      </ol>
-    </div>
-  )
-}
 
 export function WorkArcs() {
   return (
@@ -127,9 +96,37 @@ export function WorkArcs() {
             <HeadingDot />
           </h2>
         </Reveal>
-        {ARCS.map((arc, i) => (
-          <ArcSection key={arc.id} arc={arc} index={i} />
-        ))}
+        <ol className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {FEATURED.map((card, i) => (
+            <Reveal key={card.slug} as="li" delay={Math.min(i, 3) * 0.06} className="overflow-hidden rounded-[14px] bg-card shadow-soft">
+              <Card card={card} />
+            </Reveal>
+          ))}
+        </ol>
+
+        <Reveal className="mt-14 md:mt-16">
+          <p className="label-micro text-muted-foreground">Also</p>
+          <ul className="mt-3 divide-y divide-border">
+            {MORE.map((card) => (
+              <li key={card.slug} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3">
+                <span className="flex flex-wrap items-baseline gap-x-3">
+                  {card.href ? (
+                    <Link href={card.href} className="font-sans text-base font-semibold text-foreground underline-offset-4 hover:underline">
+                      {card.title}
+                    </Link>
+                  ) : (
+                    <span className="font-sans text-base font-semibold text-foreground">{card.title}</span>
+                  )}
+                  <span className="label-micro text-muted-foreground">{card.period}</span>
+                </span>
+                <span className="font-sans text-sm text-muted-foreground">
+                  <span className={cn('font-heading text-base font-semibold tabular-nums', trackStyles[card.track].accentText)}>{card.stats[0].value}</span>{' '}
+                  {card.stats[0].label}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   )

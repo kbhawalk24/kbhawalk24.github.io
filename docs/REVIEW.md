@@ -4,7 +4,7 @@ Everything below is on `main`, committed, not pushed. Run `pnpm dev` and open ht
 
 ## What is live
 
-- Homepage (simplified 19 October): the hero with the about paragraph, the ask and the buttons, then Selected work with six cards and the footer. The same paragraph also opens About.
+- Homepage (22 October): the hero, then Selected work as three cards (agent, team, Search 2.0) and an Also list linking the catalog, onboarding and 605 pages, which stay live. About has a Before Intuit section with three 605 images.
 - Timeline: `/timeline`, the career as a list of roles and highlights with track pills and one figure per highlight. No wheel.
 - About: `/about`, with About me, How I manage, How I work with AI, In public (the two videos), The work.
 - Six case study pages, in reading order:

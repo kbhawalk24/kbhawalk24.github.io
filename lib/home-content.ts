@@ -34,6 +34,12 @@ export interface Arc {
   cards: WorkCard[]
 }
 
+/** The three case studies on the homepage, in reading order. */
+export const FEATURED_SLUGS = ['agentic-discovery', 'scaling-platform-design', 'search-2'] as const
+
+/** The other pages: live and linked, not on the homepage grid. */
+export const MORE_SLUGS = ['catalog-data-map-lineage', 'self-service-onboarding', '605-tv-analytics'] as const
+
 export const ARCS: Arc[] = [
   {
     id: 'discovery',
@@ -140,3 +146,12 @@ export const ARCS: Arc[] = [
   },
 ]
 
+
+const ALL_CARDS = ARCS.flatMap((a) => a.cards)
+const bySlug = (slug: string) => {
+  const card = ALL_CARDS.find((c) => c.slug === slug)
+  if (!card) throw new Error(`No card for ${slug}`)
+  return card
+}
+export const FEATURED: WorkCard[] = FEATURED_SLUGS.map(bySlug)
+export const MORE: WorkCard[] = MORE_SLUGS.map(bySlug)

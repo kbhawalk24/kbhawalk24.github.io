@@ -79,4 +79,18 @@ export const ABOUT_SECTIONS = [
   { id: 'how-i-manage', title: 'How I manage' },
   { id: 'how-i-work-with-ai', title: 'How I work with AI' },
   { id: 'in-public', title: 'In public' },
+  { id: 'before-intuit', title: 'Before Intuit' },
 ]
+
+/** The 605 work, 2017 to 2021: the three images from its case study, so the
+ *  visual proof of the data visualization work sits on About as well. */
+export const BEFORE_INTUIT = {
+  intro:
+    'Before Intuit I was the first product designer at 605, a TV advertising analytics company, and took three products from first concept to commercial launch. The data visualization work is where the method came from: find the common case before designing to the limit, give colour one meaning, and show where the data came from.',
+  href: '/work/605-tv-analytics',
+  images: [
+    { src: '/work/605-tv-analytics/platform-campaign.png', width: 2880, height: 1770, alt: 'The 605 Platform campaign dashboard with reach and frequency charts and ranked network tables', caption: '605 Platform, the campaign view after the 2020 redesign.' },
+    { src: '/work/605-tv-analytics/impact-overview.png', width: 2880, height: 3022, alt: 'The Impact overview page with a summary table, delivery charts and conversion mosaics', caption: 'Impact: one overview page in place of 32 reports.' },
+    { src: '/work/605-tv-analytics/indxr-report-creation.png', width: 2880, height: 3022, alt: 'The Indxr report creation screen with the attribute hierarchy and a demographic breakdown chart', caption: 'Indxr: report creation with the attribute hierarchy.' },
+  ],
+}
