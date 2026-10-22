@@ -4,7 +4,7 @@ import { TimelinePage } from '@/components/timeline-page'
 export const metadata: Metadata = {
   title: 'Career timeline | Kanchi Bhawalkar',
   description:
-    'The career drawn as a lineage graph: TIBCO and 605 upstream, the founding years at Intuit, the data platform, and what it fed: Search 2.0, the agent and the team.',
+    'Every role, with the work that mattered under it: the data platform at Intuit as founding designer, principal and design manager, and three products at 605 before that.',
 }
 
 export default function Page() {

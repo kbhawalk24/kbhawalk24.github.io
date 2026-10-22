@@ -1,13 +1,16 @@
 'use client'
 
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
 import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
+import { TRACKS } from '@/lib/timeline-data'
+import { trackStyles } from '@/lib/track-styles'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
 // Selected work: three strategic arcs, each with a thesis sentence and its
-// cards. Card format, stacked: cover placeholder on top, role tag, title,
-// an optional line, the outcome as one or two stats, then the status chip.
+// cards. Card format, stacked: cover on top, a track pill with the period,
+// title, one line, one measured outcome in the track's colour, then the link.
 // A card links only once its page exists (status 'live' with an href).
 
 const DIAGONAL_STRIPES = {
@@ -19,10 +22,14 @@ function Cover({ card }: { card: WorkCard }) {
   return (
     <div
       role="img"
-      aria-label={`Placeholder: ${card.visualNote}`}
-      className="aspect-[16/10] w-full"
+      aria-label={`Image to come: ${card.visualNote}`}
+      className="relative aspect-[16/10] w-full"
       style={DIAGONAL_STRIPES}
-    />
+    >
+      <span className="absolute right-4 top-4 rounded-full bg-card px-3 py-1 label-micro text-muted-foreground shadow-soft">
+        Image to come
+      </span>
+    </div>
   )
 }
 
@@ -41,7 +48,7 @@ function Status({ card }: { card: WorkCard }) {
   return (
     <Link
       href={card.href}
-      className="mt-5 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline"
+      className="mt-2 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline"
     >
       Read the case study <span aria-hidden="true">→</span>
     </Link>
@@ -49,32 +56,30 @@ function Status({ card }: { card: WorkCard }) {
 }
 
 function Card({ card }: { card: WorkCard }) {
+  const stat = card.stats[0]
   return (
     <>
       <Cover card={card} />
-      <div className="px-6 pb-6 pt-6 sm:px-7">
-        <p className="label-micro text-accent-brand">
-          {card.roleTag} <span className="text-muted-foreground">· {card.period}</span>
+      <div className="px-6 pb-6 pt-5 sm:px-7">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className={cn('inline-block rounded-full px-2.5 py-1 label-micro', trackStyles[card.track].badgeFlat)}>
+            {TRACKS[card.track].label}
+          </span>
+          <span className="label-micro text-muted-foreground">{card.period}</span>
         </p>
         <h4 className="mt-3 text-balance font-heading text-xl font-semibold leading-tight tracking-tight">
           {card.title}
         </h4>
-        {card.line && (
-          <p className="mt-2 max-w-[62ch] text-pretty font-sans text-base leading-relaxed text-muted-foreground">
-            {card.line}
-          </p>
-        )}
-        <ul className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 border-t border-foreground/10 pt-4 sm:grid-cols-2">
-          {card.stats.map((s) => (
-            <li key={s.label}>
-              <p className="font-heading text-2xl font-semibold leading-tight tracking-tight tabular-nums text-accent-brand">
-                {s.value}
-              </p>
-              <p className="mt-1 label-micro text-muted-foreground">{s.label}</p>
-            </li>
-          ))}
-        </ul>
-        <Status card={card} />
+        <p className="mt-2 text-pretty font-sans text-base leading-relaxed text-muted-foreground">{card.line}</p>
+        <p className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span className={cn('font-heading text-2xl font-semibold leading-tight tracking-tight tabular-nums', trackStyles[card.track].accentText)}>
+            {stat.value}
+          </span>
+          <span className="label-micro text-muted-foreground">{stat.label}</span>
+        </p>
+        <div className="mt-5 border-t border-foreground/10 pt-1">
+          <Status card={card} />
+        </div>
       </div>
     </>
   )
