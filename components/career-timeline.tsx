@@ -107,7 +107,7 @@ export function CareerTimeline({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
               id={role.id}
               className="scroll-mt-28 border-b border-border py-12 sm:grid sm:grid-cols-[minmax(220px,300px)_1fr] sm:gap-10 md:py-14 lg:gap-14"
             >
-              <div>
+              <div className="sm:sticky sm:top-28 sm:self-start">
                 <p className="label-micro tabular-nums text-muted-foreground">
                   {role.period}
                   {role.note && (
