@@ -58,8 +58,8 @@ export const ARCS: Arc[] = [
           'An assistant that came before search was precise, the search rebuild that fixed it, and the agent inside Cursor and Claude.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         cover: {
-          src: '/work/agentic-discovery/thumb.jpg',
-          alt: 'The agent in Cursor showing the SQL query it wrote before running it',
+          src: '/work/agentic-discovery/copilot-ask.jpg',
+          alt: 'Data Copilot beside a table page, answering a question with a SQL query and an explanation',
         },
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
         status: 'live',
@@ -85,8 +85,8 @@ export const ARCS: Arc[] = [
           'Five years of building it one layer at a time: the Data Map, lineage in four weeks, AI-written metadata people could correct, and self-service onboarding.',
         visualNote: 'A data product page in the 2026 platform.',
         cover: {
-          src: '/work/catalog-data-map-lineage/data-product-2026.jpg',
-          alt: 'A data product page with its physical copies listed on the left and its owner, description and attributes on the right',
+          src: '/work/catalog-data-map-lineage/lineage-mvp-2023.jpg',
+          alt: 'The 2023 lineage design: a table with what feeds it and what depends on it',
         },
         stats: [{ value: '68% → 96%', label: 'Searches with a click in the top five' }],
         status: 'live',

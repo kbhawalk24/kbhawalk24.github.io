@@ -68,6 +68,8 @@ export interface PageVisual {
   alt: string
   /** The one-sentence caption under the figure. */
   caption: string
+  /** Span the full measure even when it shares a section with other visuals. */
+  full?: boolean
   /** Where it sits: under the stats when absent, else after this section id. */
   after?: string
   /** For a placeholder: what to export and from where. Not rendered. */

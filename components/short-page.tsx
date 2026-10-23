@@ -274,7 +274,7 @@ function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: st
   return (
     <ul className={cn('grid gap-5 md:grid-cols-2 md:gap-6', className)}>
       {visuals.map((v, i) => (
-        <li key={v.id} className={cn((visuals.length === 1 || (odd && i === 0)) && 'md:col-span-2')}>
+        <li key={v.id} className={cn((visuals.length === 1 || (odd && i === 0) || v.full) && 'md:col-span-2')}>
           <figure className="rounded-[14px] bg-card p-2 shadow-soft">
             {v.src ? (
               v.kind === 'video' ? (
