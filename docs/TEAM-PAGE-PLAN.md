@@ -6,11 +6,10 @@
 - Timeline: unchanged.
 - Nav: Work · Team · Timeline · Resume · LinkedIn.
 
-## Three IC case studies on the landing page
-- Agentic discovery in Cursor and Claude.
-- Search 2.0 and Data Collections.
-- Third: the catalog, decided 23 October. Framed as the most hands-on work, about five years, and the move from a catalog of tables to a platform. It absorbs the self-service onboarding page.
-- 605 leaves the landing cards; its page stays live and is linked from the timeline.
+## Three IC case studies on the landing page (decided 23 October)
+1. Finding data: from search to an agent. Search 2.0 folded in as the research chapter; leads with the agent and 45 min to 4 min. Structure: systematic problem solving.
+2. The catalog: from a list of tables to a platform. About five years, most hands-on; absorbs self-service onboarding. Structure: a build-up narrative, not a template.
+3. 605: three analytics products. Structure: breadth and scale of impact.
 
 ## Team page, in order
 1. Scope: what the team covered. The lifecycle wheel, plus "one designer for every 85 engineers" drawn as dots. (Recommended option B.)
