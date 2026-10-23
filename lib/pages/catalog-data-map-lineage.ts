@@ -52,8 +52,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     tint: TINTS.platform2026,
     width: 1600,
     height: 870,
-    alt: "A screen recording of the data discovery platform. It moves through a table's lineage graph, search results with a data maturity score breakdown, and a realtime data product with its owners and attributes.",
-    caption: "The platform in May 2026: a table's lineage, search with its maturity score, and a realtime data product. Sped up 2.6 times.",
+    alt: 'A screen recording of the data discovery platform: search results with a data maturity score breakdown, then a realtime data product page with its tables, owners and attributes.',
+    caption: 'The platform in May 2026: search with the maturity score on every result, then a data product with its copies and attributes. Sped up 2 times.',
   },
   visuals: [
     {

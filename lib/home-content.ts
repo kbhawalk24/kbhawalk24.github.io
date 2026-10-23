@@ -97,7 +97,7 @@ export const ARCS: Arc[] = [
           tint: TINTS.platform2026,
           width: 1600,
           height: 870,
-          alt: 'The data discovery platform: a table’s lineage graph, search with a maturity score, and a realtime data product',
+          alt: 'The data discovery platform: search with a maturity score, then a realtime data product page',
         },
         stats: [{ value: '68% → 96%', label: 'Searches with a click in the top five' }],
         status: 'live',
