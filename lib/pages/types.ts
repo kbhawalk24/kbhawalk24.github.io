@@ -66,6 +66,9 @@ export interface PageVisual {
   width?: number
   height?: number
   kind?: 'image' | 'video'
+  /** A Figma prototype embed URL. Shown live only when `interactive` is true,
+   *  which needs the file shared as anyone with the link can view. */
+  prototype?: { embed: string; interactive: boolean }
   /** What a person who cannot see the image needs to know. */
   alt: string
   /** The one-sentence caption under the figure. */

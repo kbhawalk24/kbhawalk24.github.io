@@ -102,6 +102,29 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
       caption: 'The maturity score on a search result, 2026. The lowest-rated criterion sets the score.',
     },
     {
+      id: 'state-map',
+      after: 'onboarding',
+      src: '/work/catalog-data-map-lineage/state-map-2024.jpg',
+      width: 3144,
+      height: 858,
+      alt: 'A state map of the onboarding request: checks on whether the data product is rated at least three stars, marked consumable and already onboarded, three entry points, and each step through to submission, with notes on edge cases such as the 24-hour review time.',
+      caption: 'One of my state maps for onboarding, click to open it full size. Mapping every state and edge case is what showed the fully automatic version could not work.',
+    },
+    {
+      id: 'onboarding-entry',
+      after: 'onboarding',
+      src: '/work/catalog-data-map-lineage/onboarding-entry-2024.jpg',
+      width: 1442,
+      height: 1024,
+      prototype: {
+        embed:
+          'https://embed.figma.com/proto/dPLDR6T7CC9ozRnpSivBH0/Onboarding?node-id=2610-24620&starting-point-node-id=2610%3A24620&scaling=min-zoom&content-scaling=fixed&page-id=1115%3A12002&embed-host=share&hide-ui=1',
+        interactive: false,
+      },
+      alt: 'A data product page in the shipped design, listing its tables and Kafka topic, with a link at the bottom to onboard attributes to the Customer Data Cloud.',
+      caption: 'Where the shipped flow starts: from any data product that qualifies, one link to onboard its attributes.',
+    },
+    {
       id: 'onboarding-request',
       after: 'onboarding',
       src: '/work/catalog-data-map-lineage/onboarding-request-2024.jpg',

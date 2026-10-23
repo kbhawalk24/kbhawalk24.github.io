@@ -12,6 +12,7 @@ import { SiteHeader } from '@/components/site-header'
 import { WithSectionNav } from '@/components/section-nav'
 import { VideoEmbed } from '@/components/video-embed'
 import { HeroVideo } from '@/components/hero-video'
+import { PrototypeEmbed } from '@/components/prototype-embed'
 
 // The short case study page. Top to bottom: role line, title, the System
 // Context Bar (what this is part of, and where in the sequence the reader
@@ -276,7 +277,9 @@ function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: st
       {visuals.map((v, i) => (
         <li key={v.id} className={cn((visuals.length === 1 || (odd && i === 0) || v.full) && 'md:col-span-2')}>
           <figure className="rounded-[14px] bg-card p-2 shadow-soft">
-            {v.src ? (
+            {v.src && v.prototype?.interactive ? (
+              <PrototypeEmbed embed={v.prototype.embed} poster={v.src} width={v.width ?? 1440} height={v.height ?? 1024} alt={v.alt} />
+            ) : v.src ? (
               v.kind === 'video' ? (
                 <video
                   src={v.src}
@@ -291,16 +294,20 @@ function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: st
                   aria-label={v.alt}
                 />
               ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={v.src}
-                  width={v.width}
-                  height={v.height}
-                  alt={v.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-auto w-full rounded-[10px] bg-card-soft"
-                />
+                // Opens full size in a new tab, for diagrams too dense to read in the column.
+                <a href={v.src} target="_blank" rel="noopener noreferrer" className="block cursor-zoom-in rounded-[10px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brand">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={v.src}
+                    width={v.width}
+                    height={v.height}
+                    alt={v.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-auto w-full rounded-[10px] bg-card-soft"
+                  />
+                  <span className="sr-only"> (opens full size in a new tab)</span>
+                </a>
               )
             ) : (
               <div
