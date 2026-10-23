@@ -1,6 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import { useReducedMotion } from 'motion/react'
+import { Pause, Play } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
 import { TRACKS } from '@/lib/timeline-data'
@@ -11,7 +14,8 @@ import { HeadingDot } from '@/components/heading-dot'
 // Selected work: three arcs, each with a heading and a thesis to ground the
 // reader, then the arc's case study as one full-width card. The card holds a
 // thumbnail on the left: a soft tinted panel inset in the card, with the
-// product screenshot shown whole on it as a framed window. The text sits beside it: where and when, the track
+// product screenshot shown whole on it as a framed window, or a muted clip
+// that plays while the card is on screen. The text sits beside it: where and when, the track
 // pill, the title, one line, one measured outcome and the link.
 
 const PANEL = {
@@ -19,22 +23,89 @@ const PANEL = {
     'linear-gradient(160deg, color-mix(in oklab, var(--accent-brand) 5%, var(--card)) 0%, color-mix(in oklab, var(--accent-brand) 15%, var(--card)) 100%)',
 }
 
-function Thumbnail({ card }: { card: WorkCard }) {
+// A muted clip that plays only while its card is on screen. Visitors who
+// prefer reduced motion see the poster; the button pauses it either way.
+function ThumbVideo({ cover }: { cover: NonNullable<WorkCard['cover']> }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  const reduce = useReducedMotion()
+  const [playing, setPlaying] = useState(false)
+  const [userPaused, setUserPaused] = useState(false)
+
+  useEffect(() => {
+    const v = ref.current
+    if (!v || reduce || userPaused) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) v.play().catch(() => {})
+        else v.pause()
+      },
+      { threshold: 0.4 },
+    )
+    io.observe(v)
+    return () => io.disconnect()
+  }, [reduce, userPaused])
+
+  function toggle() {
+    const v = ref.current
+    if (!v) return
+    if (v.paused) {
+      setUserPaused(false)
+      v.play().catch(() => {})
+    } else {
+      setUserPaused(true)
+      v.pause()
+    }
+  }
+
   return (
-    <Link
-      href={card.href ?? '#work'}
-      tabIndex={-1}
-      aria-hidden="true"
-      className="group flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[12px] p-[7%] md:aspect-auto md:min-h-[440px]"
+    <>
+      <video
+        ref={ref}
+        src={cover.video}
+        poster={cover.src}
+        width={cover.width}
+        height={cover.height}
+        muted
+        loop
+        playsInline
+        preload="none"
+        aria-hidden="true"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        className="block h-auto w-full"
+      />
+      <button
+        type="button"
+        onClick={toggle}
+        aria-label={playing ? 'Pause the preview' : 'Play the preview'}
+        className="pointer-events-auto absolute bottom-2.5 right-2.5 inline-flex size-9 items-center justify-center rounded-full bg-foreground/75 text-background shadow-soft transition-[background-color,transform] duration-150 ease-out hover:bg-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brand focus-visible:ring-offset-2"
+      >
+        {playing ? <Pause className="size-3.5" aria-hidden="true" /> : <Play className="size-3.5 translate-x-px" aria-hidden="true" />}
+      </button>
+    </>
+  )
+}
+
+function Thumbnail({ card }: { card: WorkCard }) {
+  const cover = card.cover
+  return (
+    <div
+      className="group relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[12px] p-[7%] md:aspect-auto md:min-h-[440px]"
       style={PANEL}
     >
-      {card.cover && (
-        <div className="w-full overflow-hidden rounded-[8px] bg-card shadow-[0_24px_48px_-16px_rgb(20_20_20/0.28)] ring-1 ring-foreground/10 transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-1.5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={card.cover.src} alt="" loading="lazy" decoding="async" className="block h-auto w-full" />
+      {/* The whole panel opens the case study; the title link carries the name. */}
+      <Link href={card.href ?? '#work'} tabIndex={-1} aria-hidden="true" className="absolute inset-0" />
+      {cover && (
+        <div className="pointer-events-none relative w-full overflow-hidden rounded-[8px] bg-card shadow-[0_24px_48px_-16px_rgb(20_20_20/0.28)] ring-1 ring-foreground/10 transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-1.5">
+          {cover.video ? (
+            <ThumbVideo cover={cover} />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={cover.src} alt="" loading="lazy" decoding="async" className="block h-auto w-full" />
+          )}
         </div>
       )}
-    </Link>
+    </div>
   )
 }
 

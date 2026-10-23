@@ -20,8 +20,10 @@ export interface WorkCard {
   /** What the cover will show once it exists; read out for the placeholder. */
   visualNote: string
   /** The cover image, once it exists. */
-  /** The thumbnail screenshot, shown whole on the card's tinted panel. */
-  cover?: { src: string; alt: string }
+  /** The thumbnail screenshot, shown whole on the card's tinted panel. With
+   *  `video`, a muted looping clip plays over it while the card is on screen;
+   *  `src` is then the clip's poster and must share its aspect ratio. */
+  cover?: { src: string; alt: string; video?: string; width?: number; height?: number }
   /** One line of plain text under the title. */
   line: string
   /** One measured outcome per card. */
@@ -59,6 +61,9 @@ export const ARCS: Arc[] = [
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         cover: {
           src: '/work/agentic-discovery/copilot-ask.jpg',
+          video: '/work/agentic-discovery/copilot-thumb.mp4',
+          width: 1280,
+          height: 906,
           alt: 'Data Copilot beside a table page, answering a question with a SQL query and an explanation',
         },
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
@@ -85,8 +90,11 @@ export const ARCS: Arc[] = [
           'Five years of building it one layer at a time: the Data Map, lineage in four weeks, AI-written metadata people could correct, and self-service onboarding.',
         visualNote: 'A data product page in the 2026 platform.',
         cover: {
-          src: '/work/catalog-data-map-lineage/lineage-mvp-2023.jpg',
-          alt: 'The 2023 lineage design: a table with what feeds it and what depends on it',
+          src: '/work/catalog-data-map-lineage/hero-poster.jpg',
+          video: '/work/catalog-data-map-lineage/hero.mp4',
+          width: 1600,
+          height: 870,
+          alt: 'The data discovery platform: a table’s lineage graph, search with a maturity score, and a realtime data product',
         },
         stats: [{ value: '68% → 96%', label: 'Searches with a click in the top five' }],
         status: 'live',
@@ -110,8 +118,11 @@ export const ARCS: Arc[] = [
           'Three TV advertising analytics products, from first concept to commercial launch.',
         visualNote: 'The 15-target chart beside the shipped 5-target comparison chart in 605 Platform.',
         cover: {
-          src: '/work/605-tv-analytics/platform-campaign.png',
-          alt: 'The 605 Platform campaign dashboard with reach and frequency charts and ranked network tables',
+          src: '/work/605-tv-analytics/hero-poster.jpg',
+          video: '/work/605-tv-analytics/hero.mp4',
+          width: 1440,
+          height: 820,
+          alt: 'The 605 Platform main dashboard: networks by rating, household reach and time-shifted viewing',
         },
         stats: [{ value: '$2M', label: 'Additional booked revenue from pitches on the new designs' }],
         status: 'live',
