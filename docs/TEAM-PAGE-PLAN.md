@@ -9,7 +9,8 @@
 ## Three IC case studies on the landing page
 - Agentic discovery in Cursor and Claude.
 - Search 2.0 and Data Collections.
-- Third: 605 or the catalog. Open; recommendation is 605.
+- Third: the catalog, decided 23 October. Framed as the most hands-on work, about five years, and the move from a catalog of tables to a platform. It absorbs the self-service onboarding page.
+- 605 leaves the landing cards; its page stays live and is linked from the timeline.
 
 ## Team page, in order
 1. Scope: what the team covered. The lifecycle wheel, plus "one designer for every 85 engineers" drawn as dots. (Recommended option B.)
@@ -18,6 +19,5 @@
 4. How I communicated: rituals and documents, waiting on Kanchi's list (weekly syncs, strategy docs others designed from, research readouts, offsites). Recognition quotes as proof, credited without names.
 
 ## Open
-- Third IC case study: 605 or catalog.
 - Kanchi's list of rituals and documents for section 4.
 - Screenshots: from ~/Documents/Work/Intuit (2021-2026)/Media/Screenshots; crop browser chrome, blur names; three crops done in the session scratchpad (agent answer, Amplitude click depth, research repository).
