@@ -13,13 +13,15 @@ export interface WorkCard {
   title: string
   period: string
   roleTag: string
+  /** Where the work was done, shown above the title. */
+  org: string
   /** The kind of work, shown as the card's pill. */
   track: Track
   /** What the cover will show once it exists; read out for the placeholder. */
   visualNote: string
   /** The cover image, once it exists. */
-  /** The cover image. `position` is a CSS object-position; top left by default. */
-  cover?: { src: string; alt: string; position?: string }
+  /** The thumbnail screenshot, shown whole on the card's tinted panel. */
+  cover?: { src: string; alt: string }
   /** One line of plain text under the title. */
   line: string
   /** One measured outcome per card. */
@@ -47,6 +49,7 @@ export const ARCS: Arc[] = [
     cards: [
       {
         slug: 'agentic-discovery',
+        org: 'Intuit',
         title: 'Finding data: from search to an agent',
         period: '2023–2026',
         roleTag: 'Principal Product Designer → Design Manager',
@@ -55,7 +58,7 @@ export const ARCS: Arc[] = [
           'An assistant that came before search was precise, the search rebuild that fixed it, and the agent inside Cursor and Claude.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         cover: {
-          src: '/work/agentic-discovery/hero-poster.jpg',
+          src: '/work/agentic-discovery/thumb.jpg',
           alt: 'The agent in Cursor showing the SQL query it wrote before running it',
         },
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
@@ -73,17 +76,17 @@ export const ARCS: Arc[] = [
     cards: [
       {
         slug: 'catalog-data-map-lineage',
+        org: 'Intuit',
         title: 'The catalog: from a list of tables to a platform',
         period: '2021–2026',
         roleTag: 'Founding Product Designer → Principal → Design Manager',
         track: 'ic',
         line:
           'Five years of building it one layer at a time: the Data Map, lineage in four weeks, AI-written metadata people could correct, and self-service onboarding.',
-        visualNote: 'The lineage graph of a table in the 2026 platform.',
+        visualNote: 'A data product page in the 2026 platform.',
         cover: {
-          src: '/work/catalog-data-map-lineage/lineage-2026.jpg',
-          alt: 'A lineage graph showing the tables and pipeline jobs that feed a table and the table it feeds',
-          position: 'center',
+          src: '/work/catalog-data-map-lineage/data-product-2026.jpg',
+          alt: 'A data product page with its physical copies listed on the left and its owner, description and attributes on the right',
         },
         stats: [{ value: '68% → 96%', label: 'Searches with a click in the top five' }],
         status: 'live',
@@ -98,6 +101,7 @@ export const ARCS: Arc[] = [
     cards: [
       {
         slug: '605-tv-analytics',
+        org: '605',
         title: '605 TV Analytics: Multi-Audience Reports Under Render Constraints',
         period: '2017–2021',
         roleTag: 'First Product Designer',
