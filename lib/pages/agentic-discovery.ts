@@ -1,4 +1,5 @@
 import type { ShortPage } from './types'
+import { TINTS } from '@/lib/tint'
 
 // Case study 1: Finding data, from search to an agent. Search 2.0 is folded
 // in as the research and craft chapter. Structure: how I think through a
@@ -48,6 +49,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   hero: {
     src: '/work/agentic-discovery/hero.mp4',
     poster: '/work/agentic-discovery/hero-poster.jpg',
+    tint: TINTS.neutral,
     width: 1340,
     height: 994,
     alt: 'A screen recording of the agent in Cursor. Asked for the usage of the top features in the data discovery app, it searches for tables, writes a SQL query, shows it before running, then runs it and a category breakdown in Databricks.',

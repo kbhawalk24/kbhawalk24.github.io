@@ -54,6 +54,8 @@ export interface PageHero {
   /** What the clip shows, for people who cannot see it. */
   alt: string
   caption: string
+  /** The prototype's own colour, for the panel around the clip (see lib/tint). */
+  tint: string
 }
 
 export interface PageVisual {

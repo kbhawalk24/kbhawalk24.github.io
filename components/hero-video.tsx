@@ -5,6 +5,7 @@ import { useReducedMotion } from 'motion/react'
 import { Pause, Play } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { PageHero } from '@/lib/pages/types'
+import { tintPanel } from '@/lib/tint'
 
 // The prototype clip that opens a case study. Muted and looping, it starts
 // on its own once it is on screen and stops when it scrolls away. A visitor
@@ -48,8 +49,9 @@ export function HeroVideo({ hero, className }: { hero: PageHero; className?: str
   }
 
   return (
-    <figure className={cn('rounded-[14px] bg-card p-2 shadow-soft', className)}>
-      <div className="relative">
+    <figure className={cn('rounded-[18px] bg-card p-2 shadow-soft sm:p-3', className)}>
+      <div className="rounded-[12px] p-[5%]" style={tintPanel(hero.tint)}>
+      <div className="relative overflow-hidden rounded-[8px] shadow-[0_24px_48px_-16px_rgb(20_20_20/0.28)] ring-1 ring-foreground/10">
         <video
           ref={ref}
           src={hero.src}
@@ -63,7 +65,7 @@ export function HeroVideo({ hero, className }: { hero: PageHero; className?: str
           aria-label={hero.alt}
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
-          className="h-auto w-full rounded-[10px] bg-card-soft"
+          className="block h-auto w-full bg-card-soft"
         />
         <button
           type="button"
@@ -73,6 +75,7 @@ export function HeroVideo({ hero, className }: { hero: PageHero; className?: str
         >
           {playing ? <Pause className="size-4" aria-hidden="true" /> : <Play className="size-4 translate-x-px" aria-hidden="true" />}
         </button>
+      </div>
       </div>
       <figcaption className="px-2 pb-2 pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">
         {hero.caption}

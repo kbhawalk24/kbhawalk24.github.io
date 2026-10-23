@@ -1,4 +1,5 @@
 import type { Track } from '@/lib/timeline-data'
+import { TINTS } from '@/lib/tint'
 
 // The homepage's words: the work grouped into three arcs, each with one
 // case study shown as a full-width card.
@@ -23,7 +24,7 @@ export interface WorkCard {
   /** The thumbnail screenshot, shown whole on the card's tinted panel. With
    *  `video`, a muted looping clip plays over it while the card is on screen;
    *  `src` is then the clip's poster and must share its aspect ratio. */
-  cover?: { src: string; alt: string; video?: string; width?: number; height?: number }
+  cover?: { src: string; alt: string; video?: string; width?: number; height?: number; tint: string }
   /** One line of plain text under the title. */
   line: string
   /** One measured outcome per card. */
@@ -62,6 +63,7 @@ export const ARCS: Arc[] = [
         cover: {
           src: '/work/agentic-discovery/copilot-ask.jpg',
           video: '/work/agentic-discovery/copilot-thumb.mp4',
+          tint: TINTS.dde2023,
           width: 1280,
           height: 906,
           alt: 'Data Copilot beside a table page, answering a question with a SQL query and an explanation',
@@ -92,6 +94,7 @@ export const ARCS: Arc[] = [
         cover: {
           src: '/work/catalog-data-map-lineage/hero-poster.jpg',
           video: '/work/catalog-data-map-lineage/hero.mp4',
+          tint: TINTS.platform2026,
           width: 1600,
           height: 870,
           alt: 'The data discovery platform: a table’s lineage graph, search with a maturity score, and a realtime data product',
@@ -120,6 +123,7 @@ export const ARCS: Arc[] = [
         cover: {
           src: '/work/605-tv-analytics/hero-poster.jpg',
           video: '/work/605-tv-analytics/hero.mp4',
+          tint: TINTS.platform605,
           width: 1440,
           height: 820,
           alt: 'The 605 Platform main dashboard: networks by rating, household reach and time-shifted viewing',

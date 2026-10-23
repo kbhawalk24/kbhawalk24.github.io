@@ -1,4 +1,5 @@
 import type { ShortPage } from './types'
+import { TINTS } from '@/lib/tint'
 
 // Case study 2: the catalog, from a list of tables to a platform. Structure:
 // a build-up, one dated chapter per layer. Each chapter says what was wrong,
@@ -48,6 +49,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
   hero: {
     src: '/work/catalog-data-map-lineage/hero.mp4',
     poster: '/work/catalog-data-map-lineage/hero-poster.jpg',
+    tint: TINTS.platform2026,
     width: 1600,
     height: 870,
     alt: "A screen recording of the data discovery platform. It moves through a table's lineage graph, search results with a data maturity score breakdown, and a realtime data product with its owners and attributes.",

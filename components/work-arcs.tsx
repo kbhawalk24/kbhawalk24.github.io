@@ -8,20 +8,16 @@ import { cn } from '@/lib/utils'
 import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
 import { TRACKS } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
+import { tintPanel } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
 // Selected work: three arcs, each with a heading and a thesis to ground the
 // reader, then the arc's case study as one full-width card. The card holds a
-// thumbnail on the left: a soft tinted panel inset in the card, with the
+// thumbnail on the left: a soft panel in the prototype's own colour, inset in the card, with the
 // product screenshot shown whole on it as a framed window, or a muted clip
 // that plays while the card is on screen. The text sits beside it: where and when, the track
 // pill, the title, one line, one measured outcome and the link.
-
-const PANEL = {
-  backgroundImage:
-    'linear-gradient(160deg, color-mix(in oklab, var(--accent-brand) 5%, var(--card)) 0%, color-mix(in oklab, var(--accent-brand) 15%, var(--card)) 100%)',
-}
 
 // A muted clip that plays only while its card is on screen. Visitors who
 // prefer reduced motion see the poster; the button pauses it either way.
@@ -91,7 +87,7 @@ function Thumbnail({ card }: { card: WorkCard }) {
   return (
     <div
       className="group relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[12px] p-[7%] md:aspect-auto md:min-h-[440px]"
-      style={PANEL}
+      style={cover ? tintPanel(cover.tint) : undefined}
     >
       {/* The whole panel opens the case study; the title link carries the name. */}
       <Link href={card.href ?? '#work'} tabIndex={-1} aria-hidden="true" className="absolute inset-0" />

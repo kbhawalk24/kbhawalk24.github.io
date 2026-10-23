@@ -1,4 +1,5 @@
 import type { ShortPage } from './types'
+import { TINTS } from '@/lib/tint'
 
 export const SIX_O_FIVE: ShortPage = {
   slug: '605-tv-analytics',
@@ -30,6 +31,7 @@ export const SIX_O_FIVE: ShortPage = {
   hero: {
     src: '/work/605-tv-analytics/hero.mp4',
     poster: '/work/605-tv-analytics/hero-poster.jpg',
+    tint: TINTS.platform605,
     width: 1440,
     height: 820,
     alt: 'A screen recording of the 605 Platform main dashboard, scrolling through top networks by rating, household reach, time-shifted playback, platform reach and reach by quarter hour.',
