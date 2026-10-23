@@ -1,7 +1,7 @@
 import type { Track } from '@/lib/timeline-data'
 
-// The homepage's words: the work grouped into three strategic arcs, and
-// page exists its status is 'coming-soon' and it does not link.
+// The homepage's words: the work grouped into three arcs, each with one
+// case study shown as a full-width card.
 
 export interface CardStat {
   value: string
@@ -18,7 +18,8 @@ export interface WorkCard {
   /** What the cover will show once it exists; read out for the placeholder. */
   visualNote: string
   /** The cover image, once it exists. */
-  cover?: { src: string; alt: string }
+  /** The cover image. `position` is a CSS object-position; top left by default. */
+  cover?: { src: string; alt: string; position?: string }
   /** One line of plain text under the title. */
   line: string
   /** One measured outcome per card. */
@@ -35,12 +36,6 @@ export interface Arc {
   thesis?: string
   cards: WorkCard[]
 }
-
-/** The three case studies on the homepage, in reading order. */
-export const FEATURED_SLUGS = ['agentic-discovery', 'scaling-platform-design', '605-tv-analytics'] as const
-
-/** The other pages: live and linked, not on the homepage grid. */
-export const MORE_SLUGS = ['catalog-data-map-lineage', 'self-service-onboarding'] as const
 
 export const ARCS: Arc[] = [
   {
@@ -59,6 +54,10 @@ export const ARCS: Arc[] = [
         line:
           'An assistant that came before search was precise, the search rebuild that fixed it, and the agent inside Cursor and Claude.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
+        cover: {
+          src: '/work/agentic-discovery/hero-poster.jpg',
+          alt: 'The agent in Cursor showing the SQL query it wrote before running it',
+        },
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
         status: 'live',
         href: '/work/agentic-discovery',
@@ -67,46 +66,25 @@ export const ARCS: Arc[] = [
   },
   {
     id: 'platform',
-    heading: 'Building the data platform and scaling its design team',
+    heading: 'The data platform, built from a list of tables',
     period: '2021–2026',
     thesis:
-      'I joined as the founding designer and became the design manager of the platform 6,673 people a month use to find data, model it on the Data Map, trace its lineage, get access to it and know whether it meets the clean-data standard.',
+      'I joined Intuit as the catalog’s founding designer and later led its design team, as it grew into the platform 6,673 people a month use to find data, trace its lineage, get access to it and check it against the clean-data standard.',
     cards: [
       {
-        slug: 'scaling-platform-design',
-        title: 'Scaling Platform Design at a 1:85 Ratio',
-        period: '2024–2026',
-        roleTag: 'Product Design Manager',
-        track: 'management',
-        line:
-          'One designer for every 85 engineers, and the mechanisms that made the ratio work.',
-        visualNote: 'An anonymized platform launch map beside the team project intake tracker.',
-        stats: [{ value: '<1% → 80%', label: 'Of the data estate meeting the clean-data standard · shared' }],
-        status: 'live',
-        href: '/work/scaling-platform-design',
-      },
-      {
-        slug: 'self-service-onboarding',
-        title: 'Self-Service Onboarding & Human-in-the-Loop AI Trust',
-        period: '2023–2024',
-        roleTag: 'Principal IC',
-        track: 'ic',
-        line:
-          'AI fills the request up front, and a person stays at the review step for AI-generated metadata.',
-        visualNote: 'Three onboarding flow iterations side by side.',
-        stats: [{ value: '1–2 weeks → under 24 hours', label: 'To get marketing data onboarded' }],
-        status: 'live',
-        href: '/work/self-service-onboarding',
-      },
-      {
         slug: 'catalog-data-map-lineage',
-        title: '0-to-1 Catalog, Data Map & 4-Week Lineage',
-        period: '2021–2023',
-        roleTag: 'Founding Senior IC',
+        title: 'The catalog: from a list of tables to a platform',
+        period: '2021–2026',
+        roleTag: 'Founding Product Designer → Principal → Design Manager',
         track: 'ic',
         line:
-          'From a list of tables to a map of data products with lineage beneath it, replacing the commercial catalog.',
-        visualNote: 'The Data Product object model: batch, stream and marketing copies beneath a business concept.',
+          'Five years of building it one layer at a time: the Data Map, lineage in four weeks, AI-written metadata people could correct, and self-service onboarding.',
+        visualNote: 'The lineage graph of a table in the 2026 platform.',
+        cover: {
+          src: '/work/catalog-data-map-lineage/lineage-2026.jpg',
+          alt: 'A lineage graph showing the tables and pipeline jobs that feed a table and the table it feeds',
+          position: 'center',
+        },
         stats: [{ value: '68% → 96%', label: 'Searches with a click in the top five' }],
         status: 'live',
         href: '/work/catalog-data-map-lineage',
@@ -139,12 +117,3 @@ export const ARCS: Arc[] = [
   },
 ]
 
-
-const ALL_CARDS = ARCS.flatMap((a) => a.cards)
-const bySlug = (slug: string) => {
-  const card = ALL_CARDS.find((c) => c.slug === slug)
-  if (!card) throw new Error(`No card for ${slug}`)
-  return card
-}
-export const FEATURED: WorkCard[] = FEATURED_SLUGS.map(bySlug)
-export const MORE: WorkCard[] = MORE_SLUGS.map(bySlug)

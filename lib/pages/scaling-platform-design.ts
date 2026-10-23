@@ -11,11 +11,10 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
-      { label: '0-to-1 Catalog, Data Map & Lineage', href: '/work/catalog-data-map-lineage' },
-      { label: 'Self-Service Onboarding & AI Trust', href: '/work/self-service-onboarding' },
+      { label: 'The catalog, from tables to a platform', href: '/work/catalog-data-map-lineage' },
       { label: 'Scaling the team at 1:85' },
     ],
-    current: 2,
+    current: 1,
   },
   facts: [
     { label: 'Duration', value: 'August 2024 to July 2026' },
@@ -127,9 +126,9 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
     },
   ],
   next: {
-    text: 'The access and certification flows the team shipped reused a pattern I had designed myself a year earlier. Next: the self-service onboarding flow of 2023–24, and the human-in-the-loop rules that made AI-generated metadata trustworthy',
-    label: 'Self-Service Onboarding & Human-in-the-Loop AI Trust',
-    href: '/work/self-service-onboarding',
+    text: 'The access and certification flows the team shipped reused the onboarding pattern I had designed myself a year earlier. Next: the catalog that pattern belongs to, built from a list of tables into a platform.',
+    label: 'The catalog: from a list of tables to a platform',
+    href: '/work/catalog-data-map-lineage#onboarding',
   },
   credits:
     'The mechanisms, the strategy and the pushback are mine. The products on this page were designed by the designers on my team; the certification work was shared with designers elsewhere in the data design group. Engineers delivered everything that shipped.',

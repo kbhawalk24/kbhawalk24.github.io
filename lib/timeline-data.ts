@@ -156,7 +156,7 @@ export const ROLES: TimelineRole[] = [
         detail:
           'AI pre-fills the form and validates up front, with a person kept at the review step for AI-generated metadata.',
         impact: { value: '1–2 weeks → under 24 hours', label: 'To onboard marketing data' },
-        href: '/work/self-service-onboarding',
+        href: '/work/catalog-data-map-lineage#onboarding',
       },
       {
         track: 'ic',
