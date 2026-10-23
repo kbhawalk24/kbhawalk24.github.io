@@ -20,3 +20,11 @@
 ## Open
 - Kanchi's list of rituals and documents for section 4.
 - Screenshots: from ~/Documents/Work/Intuit (2021-2026)/Media/Screenshots; crop browser chrome, blur names; three crops done in the session scratchpad (agent answer, Amplitude click depth, research repository).
+
+## Decisions of 23 October 2026 (see docs/source-kit.md)
+- Every direct report was promoted.
+- No Limits / influence passage anywhere.
+- Headcount is allowed now, to show how many people the work supported.
+- Unsourced figures from the kit stay off the site.
+- Client names allowed in case studies, never on the landing page.
+- Each case study opens with a scope and impact summary: duration, my role, team and partners, research and tools, and a metrics table with source and attribution.
