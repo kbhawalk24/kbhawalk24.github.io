@@ -28,6 +28,14 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     { value: 'About 30,000 tables, 7,000 pipelines', label: 'in the first lineage graph' },
     { value: '4 weeks', label: 'from brief to lineage launch' },
   ],
+  hero: {
+    src: '/work/catalog-data-map-lineage/hero.mp4',
+    poster: '/work/catalog-data-map-lineage/hero-poster.jpg',
+    width: 1600,
+    height: 870,
+    alt: "A screen recording of the data discovery platform. It moves through a table's lineage graph, search results with a data maturity score breakdown, and a realtime data product with its owners and attributes.",
+    caption: "The platform in May 2026: a table's lineage, search with its maturity score, and a realtime data product. Sped up 2.6 times.",
+  },
   visuals: [
     {
       id: 'object-model',

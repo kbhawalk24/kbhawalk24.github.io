@@ -45,6 +45,17 @@ export interface PageFact {
   value: string
 }
 
+/** A short muted prototype clip that opens the page, under the title. */
+export interface PageHero {
+  src: string
+  poster: string
+  width: number
+  height: number
+  /** What the clip shows, for people who cannot see it. */
+  alt: string
+  caption: string
+}
+
 export interface PageVisual {
   id: string
   /** Path under /public once the file exists, e.g. /work/605-tv-analytics/platform.png. Absent: a placeholder renders. */
@@ -84,6 +95,7 @@ export interface ShortPage {
   facts?: PageFact[]
   stats: PageStat[]
   /** Screens, diagrams, recordings; 4 to 6 per page, every one captioned. */
+  hero?: PageHero
   visuals?: PageVisual[]
   sections: PageSection[]
   next: NextHandoff

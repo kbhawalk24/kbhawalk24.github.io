@@ -27,6 +27,14 @@ export const SIX_O_FIVE: ShortPage = {
     { value: '$2M', label: 'in additional booked revenue from pitches that used the new designs, since March 2021' },
     { value: '32 → 2', label: 'reports into pages, the Impact redesign of 2020' },
   ],
+  hero: {
+    src: '/work/605-tv-analytics/hero.mp4',
+    poster: '/work/605-tv-analytics/hero-poster.jpg',
+    width: 1440,
+    height: 820,
+    alt: 'A screen recording of the 605 Platform main dashboard, scrolling through top networks by rating, household reach, time-shifted playback, platform reach and reach by quarter hour.',
+    caption: 'The 605 Platform main dashboard, 2020: networks by rating, household reach, time-shifted viewing and reach by quarter hour.',
+  },
   visuals: [
     {
       id: 'platform-campaign',

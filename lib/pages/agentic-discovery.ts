@@ -45,6 +45,14 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     { value: '81.31% → 89.24%', label: 'Searches where the first result was right' },
     { value: '711', label: 'Active users of the agent by March 2026' },
   ],
+  hero: {
+    src: '/work/agentic-discovery/hero.mp4',
+    poster: '/work/agentic-discovery/hero-poster.jpg',
+    width: 1340,
+    height: 994,
+    alt: 'A screen recording of the agent in Cursor. Asked for the usage of the top features in the data discovery app, it searches for tables, writes a SQL query, shows it before running, then runs it and a category breakdown in Databricks.',
+    caption: 'The agent inside Cursor, 2026: it finds the right tables, shows the query before it runs, then runs it. Sped up 2.5 times.',
+  },
   visuals: [
     {
       id: 'agent-answer',

@@ -11,6 +11,7 @@ import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
 import { WithSectionNav } from '@/components/section-nav'
 import { VideoEmbed } from '@/components/video-embed'
+import { HeroVideo } from '@/components/hero-video'
 
 // The short case study page. Top to bottom: role line, title, the System
 // Context Bar (what this is part of, and where in the sequence the reader
@@ -175,6 +176,8 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
                 {page.description}
               </p>
             </header>
+
+            {page.hero && <HeroVideo hero={page.hero} className="mt-8" />}
 
             <div className="mt-8">
               <ContextBar context={page.context} />
