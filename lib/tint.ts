@@ -15,3 +15,14 @@ export function tintPanel(tint: string): CSSProperties {
     backgroundImage: `linear-gradient(160deg, color-mix(in oklab, ${tint} 7%, var(--card)) 0%, color-mix(in oklab, ${tint} 20%, var(--card)) 100%)`,
   }
 }
+
+/** Text in the prototype's colour. Mixed with the foreground so it stays
+ *  readable on light and dark cards. */
+export function tintText(tint: string): CSSProperties {
+  return { color: `color-mix(in oklab, ${tint} 82%, var(--foreground))` }
+}
+
+/** A pill in the prototype's colour. */
+export function tintPill(tint: string): CSSProperties {
+  return { ...tintText(tint), backgroundColor: `color-mix(in oklab, ${tint} 12%, var(--card))` }
+}

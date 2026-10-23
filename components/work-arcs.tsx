@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
 import { TRACKS } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
-import { tintPanel } from '@/lib/tint'
+import { tintPanel, tintPill, tintText } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
@@ -107,6 +107,7 @@ function Thumbnail({ card }: { card: WorkCard }) {
 
 function Card({ card }: { card: WorkCard }) {
   const stat = card.stats[0]
+  const tint = card.cover?.tint
   return (
     <article className="grid gap-2 rounded-[18px] bg-card p-3 shadow-soft md:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] md:gap-0 md:p-4">
       <Thumbnail card={card} />
@@ -115,7 +116,10 @@ function Card({ card }: { card: WorkCard }) {
           <span className="label-micro text-muted-foreground">
             {card.org} · {card.period}
           </span>
-          <span className={cn('inline-block rounded-full px-2.5 py-1 label-micro', trackStyles[card.track].badgeFlat)}>
+          <span
+            className={cn('inline-block rounded-full px-2.5 py-1 label-micro', !tint && trackStyles[card.track].badgeFlat)}
+            style={tint ? tintPill(tint) : undefined}
+          >
             {TRACKS[card.track].label}
           </span>
         </p>
@@ -131,7 +135,10 @@ function Card({ card }: { card: WorkCard }) {
         {card.cover && <span className="sr-only">{card.cover.alt}</span>}
         <p className="mt-3 text-pretty font-sans text-base leading-relaxed text-muted-foreground">{card.line}</p>
         <p className="mt-5">
-          <span className={cn('block font-heading text-2xl font-semibold leading-tight tracking-tight tabular-nums', trackStyles[card.track].accentText)}>
+          <span
+            className={cn('block font-heading text-2xl font-semibold leading-tight tracking-tight tabular-nums', !tint && trackStyles[card.track].accentText)}
+            style={tint ? tintText(tint) : undefined}
+          >
             {stat.value}
           </span>
           <span className="mt-1 block label-micro text-muted-foreground">{stat.label}</span>
@@ -139,7 +146,8 @@ function Card({ card }: { card: WorkCard }) {
         {card.href && (
           <Link
             href={card.href}
-            className="mt-4 inline-flex min-h-11 items-center gap-2 self-start font-sans text-base font-semibold text-accent-brand transition-colors hover:underline"
+            className={cn('mt-4 inline-flex min-h-11 items-center gap-2 self-start font-sans text-base font-semibold transition-colors hover:underline', !tint && 'text-accent-brand')}
+            style={tint ? tintText(tint) : undefined}
           >
             Read the case study <span aria-hidden="true">→</span>
           </Link>
