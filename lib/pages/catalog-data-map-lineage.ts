@@ -116,11 +116,6 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
       src: '/work/catalog-data-map-lineage/onboarding-entry-2024.jpg',
       width: 1442,
       height: 1024,
-      prototype: {
-        embed:
-          'https://embed.figma.com/proto/dPLDR6T7CC9ozRnpSivBH0/Onboarding?node-id=2610-24620&starting-point-node-id=2610%3A24620&scaling=min-zoom&content-scaling=fixed&page-id=1115%3A12002&embed-host=share&hide-ui=1',
-        interactive: false,
-      },
       alt: 'A data product page in the shipped design, listing its tables and Kafka topic, with a link at the bottom to onboard attributes to the Customer Data Cloud.',
       caption: 'Where the shipped flow starts: from any data product that qualifies, one link to onboard its attributes.',
     },
