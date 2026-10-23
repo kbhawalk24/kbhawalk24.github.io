@@ -12,7 +12,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   roleTag: 'Principal Product Designer → Design Manager',
   period: '2023–2026',
   description:
-    'How I took finding data at Intuit from keyword search to an agent inside Cursor and Claude: the research, the search rebuild, the assistant people stopped using, and the specification for how the agent answers.',
+    'How I took finding data at Intuit from a 2023 assistant that came too early, through a search rebuild and collections, to an agent inside Cursor and Claude, and the specification for how it answers.',
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
@@ -94,12 +94,38 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       ],
     },
     {
+      id: 'assistant',
+      heading: 'Where it started: an assistant that came before its search was ready',
+      blocks: [
+        {
+          type: 'p',
+          text: 'In 2023 I was the sole design lead for a plain-language data assistant. I consolidated the work of 16 hackathon teams and 58 collaborators into one flow for finding tables, writing SQL and translating queries. It shipped in four months, more than 500 people used it each month, and Intuit’s CTO presented it at Investor Day 2023, describing analysts working up to twice as fast.',
+        },
+        {
+          type: 'video',
+          youtube: 'kfpmtVe2OFY',
+          start: 2505,
+          title: 'Intuit Investor Day 2023',
+          caption: 'Intuit Investor Day 2023, from 41:45: the CTO presenting the assistant I designed.',
+          href: 'https://youtu.be/kfpmtVe2OFY?t=2505',
+        },
+        {
+          type: 'p',
+          text: 'Usage did not hold after 2024. The assistant was only as good as the search underneath it, and search was not precise enough yet: when the first answer named the wrong table, people had to go back and forth with it to get to the right one. Most of the time they did not want a conversation at all. They wanted to look a table up and get on with their work. Only one of the 20 people I later interviewed used the AI search, and when a first answer failed, people did not come back.',
+        },
+        {
+          type: 'p',
+          text: 'That set the order of the work that followed: make search precise first, then give people a place for the data they reuse, and only then bring the agent back.',
+        },
+      ],
+    },
+    {
       id: 'framing',
       heading: 'How I framed it: watch people work, not ask what they want',
       blocks: [
         {
           type: 'p',
-          text: 'In spring 2024 I interviewed 20 catalog users across business units while they did their own work, and brought engineers along to watch. Then I ran a workshop with the whole team. The group product lead called the research “a major contributor to our FY25 roadmap.” Three findings set the direction for everything after.',
+          text: 'To understand what people needed instead, in spring 2024 I interviewed 20 catalog users across business units while they did their own work, and brought engineers along to watch. Then I ran a workshop with the whole team. The group product lead called the research “a major contributor to our FY25 roadmap.” Three findings set the direction for everything after.',
         },
         {
           type: 'list',
@@ -154,34 +180,12 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       ],
     },
     {
-      id: 'what-went-wrong',
-      heading: 'What went wrong: the assistant people stopped using',
-      blocks: [
-        {
-          type: 'p',
-          text: 'In 2023 I was the sole design lead for a plain-language data assistant. I consolidated the work of 16 hackathon teams and 58 collaborators into one flow for finding tables, writing SQL and translating queries. It shipped in four months, more than 500 people used it each month, and Intuit’s CTO presented it at Investor Day 2023, describing analysts working up to twice as fast.',
-        },
-        {
-          type: 'video',
-          youtube: 'kfpmtVe2OFY',
-          start: 2505,
-          title: 'Intuit Investor Day 2023',
-          caption: 'Intuit Investor Day 2023, from 41:45: the CTO presenting the assistant I designed.',
-          href: 'https://youtu.be/kfpmtVe2OFY?t=2505',
-        },
-        {
-          type: 'p',
-          text: 'Usage did not hold after 2024. My interviews showed why. Only one of the 20 people used the AI search at all, and when a first answer failed, people did not come back. They worked in their code editors and notebooks, and a chat window somewhere else was a place to visit, not a place to work.',
-        },
-      ],
-    },
-    {
       id: 'agent',
       heading: 'Decision 3: put the catalog where people already work',
       blocks: [
         {
           type: 'p',
-          text: 'The option on the table was a better chat window. I set a different strategy: move the catalog into the coding tools people already used, Cursor and Claude, as an agent with the platform’s search, lineage and access as its tools. Finding data, checking access and running the query would happen in one place.',
+          text: 'By 2025 search returned the right table first most of the time, and collections held the data each person reused. That made an agent worth trying again, but not as another chat window: people worked in their code editors and notebooks, and a chat window somewhere else was a place to visit, not a place to work. I set the strategy to move the catalog into the coding tools people already used, Cursor and Claude, as an agent with the platform’s search, lineage and access as its tools, so finding data, checking access and running the query happen in one place.',
         },
         {
           type: 'p',

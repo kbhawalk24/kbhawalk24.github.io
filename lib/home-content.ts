@@ -57,7 +57,7 @@ export const ARCS: Arc[] = [
         roleTag: 'Principal Product Designer → Design Manager',
         track: 'strategy',
         line:
-          'The research, the search rebuild, the assistant people stopped using, and the agent inside Cursor and Claude.',
+          'An assistant that came before search was precise, the search rebuild that fixed it, and the agent inside Cursor and Claude.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
         status: 'live',
