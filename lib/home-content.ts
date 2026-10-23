@@ -40,7 +40,7 @@ export interface Arc {
 export const FEATURED_SLUGS = ['agentic-discovery', 'scaling-platform-design', '605-tv-analytics'] as const
 
 /** The other pages: live and linked, not on the homepage grid. */
-export const MORE_SLUGS = ['search-2', 'catalog-data-map-lineage', 'self-service-onboarding'] as const
+export const MORE_SLUGS = ['catalog-data-map-lineage', 'self-service-onboarding'] as const
 
 export const ARCS: Arc[] = [
   {
@@ -52,29 +52,16 @@ export const ARCS: Arc[] = [
     cards: [
       {
         slug: 'agentic-discovery',
-        title: 'Agentic Discovery in Cursor & Claude',
-        period: '2025–2026',
-        roleTag: 'Principal Strategy & Spec · Design Manager',
+        title: 'Finding data: from search to an agent',
+        period: '2023–2026',
+        roleTag: 'Principal Product Designer → Design Manager',
         track: 'strategy',
         line:
-          'The catalog moved into Cursor and Claude, with the platform’s search, lineage and access as the agent’s tools.',
+          'The research, the search rebuild, the assistant people stopped using, and the agent inside Cursor and Claude.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
         status: 'live',
         href: '/work/agentic-discovery',
-      },
-      {
-        slug: 'search-2',
-        title: 'Search 2.0 & Data Collections',
-        period: '2024–2025',
-        roleTag: 'Principal IC → Design Manager',
-        track: 'ic',
-        line:
-          'Search rebuilt around four rules from research with 20 catalog users, and Collections, a person’s saved working set of data.',
-        visualNote: 'Six object-type tabs and the five-line result card anatomy.',
-        stats: [{ value: '81.31% → 89.24%', label: 'First result correct' }],
-        status: 'live',
-        href: '/work/search-2',
       },
     ],
   },

@@ -1,12 +1,6 @@
-import type { Metadata } from 'next'
-import { ShortPageLayout } from '@/components/short-page'
-import { SEARCH_2 } from '@/lib/pages/search-2'
+import { Forward } from '@/components/forward'
 
-export const metadata: Metadata = {
-  title: `${SEARCH_2.title} | Kanchi Bhawalkar`,
-  description: SEARCH_2.description,
-}
-
+// Search 2.0 is now a chapter of the Finding data case study.
 export default function Page() {
-  return <ShortPageLayout page={SEARCH_2} />
+  return <Forward to="/work/agentic-discovery#search" label="Finding data: from search to an agent" />
 }

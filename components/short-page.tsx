@@ -10,6 +10,7 @@ import { HeadingDot } from '@/components/heading-dot'
 import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
 import { WithSectionNav } from '@/components/section-nav'
+import { VideoEmbed } from '@/components/video-embed'
 
 // The short case study page. Top to bottom: role line, title, the System
 // Context Bar (what this is part of, and where in the sequence the reader
@@ -94,6 +95,48 @@ function Linked({ text, links }: { text: string; links?: InlineLink[] }) {
 }
 
 function BlockView({ block }: { block: Block }) {
+  if (block.type === 'video') {
+    return (
+      <figure className="rounded-[14px] bg-card p-2 shadow-soft">
+        <VideoEmbed id={block.youtube} start={block.start} title={block.title} />
+        <figcaption className="px-2 pb-2 pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">
+          {block.caption}{' '}
+          <a href={block.href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-foreground">
+            Watch on YouTube<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </figcaption>
+      </figure>
+    )
+  }
+  if (block.type === 'table') {
+    return (
+      <div className="-mx-6 overflow-x-auto px-6 sm:mx-0 sm:px-0">
+        <table className="w-full min-w-[560px] border-collapse text-left font-sans text-sm">
+          {block.caption && <caption className="mb-2 text-left label-micro text-muted-foreground">{block.caption}</caption>}
+          <thead>
+            <tr>
+              {block.head.map((h) => (
+                <th key={h} className="border-b border-foreground/15 py-2 pr-4 align-bottom label-micro font-medium text-muted-foreground">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {block.rows.map((row, i) => (
+              <tr key={i} className="border-b border-border">
+                {row.map((cell, j) => (
+                  <td key={j} className={cn('py-3 pr-4 align-top leading-relaxed', j === 0 ? 'text-muted-foreground' : 'text-foreground/90', j === 2 && 'font-semibold tabular-nums text-foreground')}>
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
   if (block.type === 'list') {
     return (
       <ul className="grid gap-3 pl-5">

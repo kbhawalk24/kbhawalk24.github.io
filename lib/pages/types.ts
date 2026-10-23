@@ -30,6 +30,8 @@ export interface InlineLink {
 export type Block =
   | { type: 'p'; text: string; links?: InlineLink[] }
   | { type: 'list'; items: { lead: string; text: string }[] }
+  | { type: 'table'; head: string[]; rows: string[][]; caption?: string }
+  | { type: 'video'; youtube: string; start?: number; title: string; caption: string; href: string }
 
 export interface PageSection {
   id: string
