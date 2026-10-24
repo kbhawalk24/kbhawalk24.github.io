@@ -1,10 +1,9 @@
 import type { ShortPage } from './types'
 import { TINTS } from '@/lib/tint'
 
-// Case study 2: the catalog, from a list of tables to a platform. Structure:
-// a build-up, one dated chapter per layer. Each chapter says what was wrong,
-// what I designed, and what changed. Self-service onboarding is folded in as
-// the fifth layer; the impact table at the end gives source and attribution.
+// Case study: the catalog, one dated chapter per layer. Each section is an
+// eyebrow, a heading, one lead paragraph under 60 words, one visual, and at
+// most one supporting block. Figures are sourced in the impact table.
 
 export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
   slug: 'catalog-data-map-lineage',
@@ -58,25 +57,19 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
   },
   visuals: [
     {
-      id: 'first-catalog',
-      after: 'start',
-      alt: 'The first catalog in 2021: a table page with owner, schema and usage.',
-      caption: 'The first catalog, 2021: a table page with owner, schema and usage.',
-      todo: 'Export from DDE MVP.fig.',
-    },
-    {
       id: 'data-product',
       after: 'data-map',
+      lead: true,
       src: '/work/catalog-data-map-lineage/data-product-2026.jpg',
       width: 3024,
       height: 1524,
       alt: 'A data product page. The left column lists its physical copies grouped by where they live: two data lake tables, a marketing copy, a real-time CDC entity and Kafka topics. The main area shows the business owner, the description and the attributes with their sensitivity labels.',
-      caption: 'The model in 2026: one data product, with its lake tables, real-time entity and Kafka topics listed beneath it on the left.',
+      caption: 'The model as it stands in 2026: one data product, with its lake tables, real-time entity and Kafka topics listed beneath it on the left.',
     },
     {
       id: 'lineage',
       after: 'lineage',
-      full: true,
+      lead: true,
       src: '/work/catalog-data-map-lineage/lineage-mvp-2023.jpg',
       width: 1440,
       height: 1024,
@@ -84,18 +77,9 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
       caption: 'My lineage design, launched in December 2023: what feeds a table, what depends on it, and an impact report to download.',
     },
     {
-      id: 'lineage-alert',
-      after: 'lineage',
-      full: true,
-      src: '/work/catalog-data-map-lineage/lineage-alert-2023.jpg',
-      width: 1792,
-      height: 560,
-      alt: 'Search results in the 2023 design, with a red alert badge on the first table to show an upstream outage.',
-      caption: 'The same outage, flagged in search results, so people see it before they open the table.',
-    },
-    {
       id: 'maturity',
       after: 'trust',
+      lead: true,
       src: '/work/catalog-data-map-lineage/maturity-2026.jpg',
       width: 2150,
       height: 940,
@@ -105,29 +89,22 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     {
       id: 'state-map',
       after: 'onboarding',
+      lead: true,
       src: '/work/catalog-data-map-lineage/state-map-2024.jpg',
       width: 3144,
       height: 858,
       alt: 'A state map of the onboarding request: checks on whether the data product is rated at least three stars, marked consumable and already onboarded, three entry points, and each step through to submission, with notes on edge cases such as the 24-hour review time.',
-      caption: 'One of my state maps for onboarding, click to open it full size. Mapping every state and edge case is what showed the fully automatic version could not work.',
+      caption: 'One of my state maps for onboarding. Mapping every state and edge case is what showed the fully automatic version could not work.',
     },
     {
       id: 'onboarding-entry',
-      after: 'onboarding',
+      after: 'platform',
+      lead: true,
       src: '/work/catalog-data-map-lineage/onboarding-entry-2024.jpg',
       width: 1442,
       height: 1024,
       alt: 'A data product page in the shipped design, listing its tables and Kafka topic, with a link at the bottom to onboard attributes to the Customer Data Cloud.',
-      caption: 'Where the shipped flow starts: from any data product that qualifies, one link to onboard its attributes.',
-    },
-    {
-      id: 'onboarding-request',
-      after: 'onboarding',
-      src: '/work/catalog-data-map-lineage/onboarding-request-2024.jpg',
-      width: 752,
-      height: 680,
-      alt: 'The onboarding request panel: a searchable list of a data product’s attributes with checkboxes, two selected, and a summary of what will be onboarded.',
-      caption: 'The onboarding request, 2024: pick the attributes to send to the marketing data store.',
+      caption: 'A data product in the shipped design, 2024, with its copies beneath it and the first self-service action at the bottom. The team’s later work starts from the same page.',
     },
   ],
   sections: [
@@ -135,22 +112,20 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
       id: 'start',
       eyebrow: '2021',
       short: '2021',
-      heading: '2021: a list of tables, and a catalog to retire',
+      heading: 'A list of tables, and a commercial catalog to retire',
       blocks: [
         {
           type: 'p',
           text:
-            'I joined Intuit in June 2021 as the catalog’s first designer. It did one thing: search data-lake tables and columns by name. The company was paying for a commercial catalog alongside it, and neither said whether a table was live or stale. One analyst found two customer tables with nearly identical names and had to ask in the help channel which one to trust. One of them had not been refreshed in over a year.',
+            'I joined in June 2021 as the catalog’s first designer. It searched data-lake tables by name and said nothing about whether a table was live or stale. The mandate was to retire the commercial catalog beside it, and nobody would switch to a tool that returned a name and nothing to judge it by.',
         },
         {
-          type: 'p',
-          text:
-            'The mandate was to retire the commercial catalog, and nobody would switch to a tool that returned a name and nothing to judge it by. So the first layer was the signals: a description, trust flags, a way to claim ownership, the SQL behind a view, column popularity, opening a table in a notebook, and a viewer for nested columns with search inside the schema. The goal I set in that first month held for five years. Someone with a business question should reach data they can trust without asking a person.',
-        },
-        {
-          type: 'p',
-          text:
-            'Moving that fast had a cost. Layouts drifted and had to be standardized later, and I tested features as they shipped instead of running a formal usability study.',
+          type: 'cards',
+          items: [
+            { value: '2', title: 'customer tables with nearly identical names', text: 'One analyst had to ask the help channel which to trust. One had not been refreshed in over a year.' },
+            { value: '7', title: 'signals added in the first year', text: 'Description, trust flags, ownership, the SQL behind a view, column popularity, open in a notebook, and search inside a schema.' },
+            { value: '68% → 96%', title: 'searches with a click in the top five, by April 2023', text: 'The commercial catalog was retired in fiscal 2023.' },
+          ],
         },
       ],
     },
@@ -158,22 +133,19 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
       id: 'data-map',
       eyebrow: '2022',
       short: '2022',
-      heading: '2022: organize data by what it means, not where it is stored',
+      heading: 'Organise data by what it means, not where it is stored',
       blocks: [
         {
           type: 'p',
           text:
-            'The signals fixed single tables. The next problem was structural. The same business concept, a customer or an invoice, existed as a batch table, a real-time stream and a copy in the marketing data store, with nothing connecting them. Nobody could tell whether a real-time version existed without asking.',
+            'The same business concept, a customer or an invoice, existed as a batch table, a real-time stream and a copy in the marketing store, with nothing connecting them. I designed the data product model the platform now rests on: the business meaning, with an owner, and its physical copies beneath it.',
         },
         {
-          type: 'p',
-          text:
-            'I designed the data product model the rest of the platform now rests on. A data product is the business meaning, with an owner and a description. Its physical copies sit beneath it, each with its own owner, history and quality level. The Data Map shows one entry per data product with every copy nested under it, and one view of every place a piece of data is hosted, production and test side by side.',
-        },
-        {
-          type: 'p',
-          text:
-            'It was the harder path. Keeping the storage layout of warehouse, schema and table and adding filters would have been quicker. Organizing by meaning reworked the home page, browsing, search, results and detail pages around a new unit, and no catalog we evaluated did it. It took about 20 feedback sessions to land, because the idea kept needing explaining. It still does: my team’s 2025 research found people searched the map less than tables, because they think in physical objects. The 2024 search rebuild kept the map as one tab beside the physical kinds instead of forcing it on everyone.',
+          type: 'tension',
+          items: [
+            { tension: 'Keeping the warehouse, schema, table layout and adding filters would have been quicker, and no catalog we evaluated organised by meaning.', decision: 'Rework the home page, browsing, search, results and detail pages around the data product. About 20 feedback sessions to land it.' },
+            { tension: 'My team’s 2025 research found people still think in physical objects and searched the map less than tables.', decision: 'The 2024 search rebuild kept the map as one tab beside the physical kinds instead of forcing it on everyone.' },
+          ],
         },
       ],
     },
@@ -181,22 +153,20 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
       id: 'lineage',
       eyebrow: '2023',
       short: '2023',
-      heading: '2023: lineage in four weeks',
+      heading: 'Lineage in four weeks',
       blocks: [
         {
           type: 'p',
           text:
-            'Before tax season the organization needed a way to trace where data came from, and I had four weeks. I designed a graph of what feeds a table and what depends on it, across about 30,000 tables and 7,000 pipelines, with an impact report to download. Before a change, a data producer can see whom to warn. During an incident, both sides can see what is affected.',
+            'Before tax season the organisation needed to trace where data came from, and I had four weeks. I designed a graph of what feeds a table and what depends on it, with an impact report to download. The warning about broken upstream data appears wherever the affected data appears, on search results and table headers, not only inside the graph.',
         },
         {
-          type: 'p',
-          text:
-            'The decision I would defend: a warning about broken upstream data appears wherever the affected data appears, on search results and table headers, not only inside the graph. A warning that lived only in the graph would reach only the people who opened it.',
-        },
-        {
-          type: 'p',
-          text:
-            'Lineage launched on December 6, 2023 and had 450 to 500 monthly users by July 2024. That year I handed it to a second designer. After six user visits they added a list-based summary for root-cause work and lineage down to single columns, which cut incident investigations from about 4 hours to minutes.',
+          type: 'cards',
+          items: [
+            { value: '30,000', title: 'tables and 7,000 pipelines in the graph at launch', text: 'December 6, 2023.' },
+            { value: '450–500', title: 'monthly users by July 2024', text: 'That year I handed lineage to a second designer.' },
+            { value: '4 h → minutes', title: 'for an incident investigation', text: 'After six user visits, the second designer added a list summary for root-cause work and column-level lineage.' },
+          ],
         },
       ],
     },
@@ -204,22 +174,20 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
       id: 'trust',
       eyebrow: '2023 to 2024',
       short: '2023–24',
-      heading: '2023 to 2024: AI-written metadata people could correct',
+      heading: 'AI-written metadata people could correct',
       blocks: [
         {
           type: 'p',
           text:
-            'Thousands of tables had no description. The company’s clean-data standard, defined by the platform organization, was arriving in the catalog, and AI could write the missing descriptions and tags. My 2024 study with reviewers said where that was worth doing. An AI description helped only where no human one existed, and two of the first three reviewers said unverified ones could not be trusted.',
+            'Thousands of tables had no description. The company’s clean-data standard was arriving in the catalog, and AI could write what was missing. My 2024 study with reviewers said where that was worth doing, so I designed the rules for how the standard and the AI content appear.',
         },
         {
-          type: 'p',
-          text:
-            'So I designed the rules for how the standard and the AI content appear. A maturity scorecard shows a table against the standard. AI writes a description only where none exists, and says so. Classification and compliance tags are assigned by AI, with a label for what the data is meant for. Two corrections sit beside every piece of AI content: the data’s owner can edit an AI description in place, and anyone can report a wrong tag. The AI descriptions grew out of a summer 2023 intern project I scoped and mentored.',
-        },
-        {
-          type: 'p',
-          text:
-            'In fiscal 2024, 1,600 new data products at the standard’s third level became discoverable, and monthly users grew from 1,886 to 2,664.',
+          type: 'tension',
+          items: [
+            { tension: 'An AI description helped only where no human one existed, and two of the first three reviewers said unverified ones could not be trusted.', decision: 'AI writes a description only where none exists, and says so. The owner can edit it in place.' },
+            { tension: 'Classification and compliance tags had to cover thousands of tables at once.', decision: 'AI assigns them, with a label for what the data is meant for, and anyone can report a wrong tag.' },
+            { tension: 'A standard nobody can see is a standard nobody meets.', decision: 'A maturity scorecard on every table. In fiscal 2024, 1,600 data products reached the third level and monthly users grew from 1,886 to 2,664.' },
+          ],
         },
       ],
     },
@@ -227,33 +195,20 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
       id: 'onboarding',
       eyebrow: '2024',
       short: '2024',
-      heading: '2024: self-service onboarding, on the third design',
+      heading: 'Self-service onboarding, on the third design',
       blocks: [
         {
           type: 'p',
           text:
-            'Getting clean data into the marketing data store took one to two weeks and several engineers, marketers and data owners. In fiscal 2023 it delayed campaigns by 7 days on average. I mapped the journey with marketers and data owners, and it took three designs.',
+            'Getting clean data into the marketing store took one to two weeks and several engineers, marketers and data owners; in fiscal 2023 it delayed campaigns by 7 days on average. I mapped the journey with marketers and data owners. It took three designs, and the third shipped on October 16, 2024.',
         },
         {
-          type: 'list',
+          type: 'cards',
           items: [
-            { lead: 'The first design.', text: 'A structured request, then manual approval by the data’s owner.' },
-            {
-              lead: 'The second, which stalled.',
-              text:
-                'Leadership asked for less friction, so I removed the approver for full automation. After several months of engineering it proved infeasible: access permissions and edge cases in how data moves got in the way. Drawing every state and edge case in the flow is what surfaced them.',
-            },
-            {
-              lead: 'The third, shipped on October 16, 2024.',
-              text:
-                'Self-service with no approver for data that qualifies, a ticket that keeps the owner involved for the rest, AI filling in the request, a test run against a staging copy before it is submitted, and a page that tracks the request.',
-            },
+            { title: 'The first design', text: 'A structured request, then manual approval by the data’s owner.' },
+            { title: 'The second, which stalled', text: 'Leadership asked for less friction, so I removed the approver. After months of engineering it proved infeasible: access permissions and edge cases in how data moves got in the way.' },
+            { title: 'The third, shipped', text: 'No approver for data that qualifies, a ticket that keeps the owner involved for the rest, AI filling in the request, a test run against staging, and a page that tracks it. One to two weeks became under 24 hours.' },
           ],
-        },
-        {
-          type: 'p',
-          text:
-            'One to two weeks became under 24 hours. The request and its tracker became the pattern my team later reused for access requests and certification.',
         },
       ],
     },
@@ -261,12 +216,12 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
       id: 'platform',
       eyebrow: '2025 to 2026',
       short: '2025–26',
-      heading: '2025 to 2026: the platform on stage',
+      heading: 'The platform on stage',
       blocks: [
         {
           type: 'p',
           text:
-            'From August 2024 I managed the designers who carried the platform on, and they built on the same model: access requested from the table a person is looking at, certification to the standard’s fourth level, and column-level lineage. When a partner team lost its designer in fiscal 2025, I designed table and schema creation in the developer portal myself.',
+            'From August 2024 I managed the designers who carried the platform on, and they built on the same model: access requested from the table on screen, certification to the standard’s fourth level, and column-level lineage. At AWS re:Invent 2025 Intuit showed the catalog on stage, with owners, quality rating, lineage and self-service access on one screen.',
         },
         {
           type: 'video',
@@ -276,19 +231,19 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
           caption: 'AWS re:Invent 2025, from 23:50: Intuit’s segment, with the catalog on stage.',
           href: 'https://www.youtube.com/watch?v=L_Q7LPB5HcA&t=1430',
         },
-        {
-          type: 'p',
-          text:
-            'At AWS re:Invent 2025 Intuit showed the catalog on stage, with owners, quality rating, lineage and self-service access on one screen. Intuit reported time to discover data falling from 20 days to 9.4 hours, and clean data rising from under 1% to 80% of the estate. Those are platform results that many teams share. By March 2026 the catalog had 6,673 monthly users across 320,000 tables.',
-        },
       ],
     },
     {
       id: 'impact',
       eyebrow: 'Impact',
       short: 'Impact',
-      heading: 'Impact',
+      heading: 'What changed, and whose result it is',
       blocks: [
+        {
+          type: 'p',
+          text:
+            'Intuit reported time to discover data falling from 20 days to 9.4 hours, and clean data rising from under 1% to 80% of the estate. Those are platform results many teams share. By March 2026 the catalog had 6,673 monthly users across 320,000 tables.',
+        },
         {
           type: 'table',
           head: ['When', 'What was measured', 'Change', 'Whose result'],
@@ -297,7 +252,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
             ['FY23', 'The commercial catalog', 'Retired', 'My design; shared with the catalog team'],
             ['Dec 6, 2023', 'Lineage, 4 weeks from the brief', 'About 30,000 tables and 7,000 pipelines', 'My design'],
             ['Jul 2024', 'Monthly users of lineage', '450–500', 'My design'],
-            ['FY24', 'Data products newly certified and discoverable', '1,600', 'Shared with the platform organization'],
+            ['FY24', 'Data products newly certified and discoverable', '1,600', 'Shared with the platform organisation'],
             ['FY24', 'Monthly users of the catalog', '1,886 → 2,664', 'Shared'],
             ['Oct 16, 2024', 'Time to onboard marketing data', '1–2 weeks → under 24 hours', 'My design; engineering built it'],
             ['2025', 'Time to discover data, reported by Intuit', '20 days → 9.4 hours', 'Platform-wide; shared'],
@@ -313,7 +268,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     href: '/work/605-tv-analytics',
   },
   credits:
-    'The catalog’s designs from 2021 to 2024 are mine. Engineers built everything that shipped. The platform organization defined the clean-data standard and the access team owned permissions. A second designer took lineage over in 2024, and from then designers on my team carried access, certification and lineage forward.',
+    'The catalog’s designs from 2021 to 2024 are mine. Engineers built everything that shipped. The platform organisation defined the clean-data standard and the access team owned permissions. A second designer took lineage over in 2024, and from then designers on my team carried access, certification and lineage forward.',
   sources:
     'FY22, FY23, FY24 and FY25 year-end reviews; lineage launch post, Dec 6, 2023; onboarding workshop deck, Feb 2024; onboarding launch post, Oct 16, 2024; July 2024 research readout; team research deck, Q3 FY26; FY26 mid-year review; AWS re:Invent 2025; Amplitude.',
 }

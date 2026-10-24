@@ -110,7 +110,7 @@ function BlockView({ block }: { block: Block }) {
   }
   if (block.type === 'quotes') {
     return (
-      <ul className="grid gap-4 sm:grid-cols-3">
+      <ul className={cn('grid gap-4', block.items.length === 1 ? 'max-w-[46rem]' : block.items.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3')}>
         {block.items.map((q) => (
           <li key={q.text} className="flex flex-col border-l-2 border-accent-brand pl-5">
             <blockquote className={BODY}>“{q.text}”</blockquote>
