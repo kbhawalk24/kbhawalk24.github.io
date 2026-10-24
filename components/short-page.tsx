@@ -15,11 +15,28 @@ import { VideoEmbed } from '@/components/video-embed'
 import { HeroVideo } from '@/components/hero-video'
 import { PrototypeEmbed } from '@/components/prototype-embed'
 
-// The case study page. Top to bottom: role line with read time, title, the
-// opening clip, the facts, the outcome stats, the sections (each an eyebrow,
-// a claim and one large visual, with detail in cards), the handoff to the
-// next page, then credits and sources. The page's accent follows the hero
-// clip's tint so one hue runs through it.
+// The case study page, built to five rules.
+//
+// Grid: text sits in a 46rem column; visuals and supporting blocks span the
+// full measure. Cards are three across, never four. Two images share a row
+// only when their aspect ratios match; otherwise each is full width.
+//
+// Surfaces: a white card (`bg-card shadow-soft`) or nothing. No grey panels.
+//
+// Type: heading (h2), subhead (card titles), body, small. The mono micro
+// label is used for eyebrows and captions only.
+//
+// Spacing: 8, 16, 24, 48, 96. Card padding 24. Gap between cards 16.
+// Gap between blocks 24. Sections are 96 apart.
+//
+// Content: each section is an eyebrow, a heading, one lead paragraph, one
+// visual and at most one supporting block. The data files hold to that.
+
+const CARD = 'rounded-[14px] bg-card p-6 shadow-soft'
+const SUBHEAD = 'font-heading text-xl font-semibold leading-tight tracking-tight'
+const BODY = 'text-pretty text-[17px] leading-[1.65] text-foreground/90'
+const SMALL = 'text-pretty font-sans text-sm leading-relaxed text-muted-foreground'
+const CAPTION = 'text-pretty font-sans text-sm leading-relaxed text-muted-foreground'
 
 const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes', 'statement'])
 
@@ -30,7 +47,7 @@ function readMinutes(page: ShortPage) {
       if (b.type === 'p') return b.text
       if (b.type === 'list') return b.items.map((i) => i.lead + ' ' + i.text).join(' ')
       if (b.type === 'cards') return b.items.map((i) => i.title + ' ' + i.text).join(' ')
-      if (b.type === 'tension') return b.tension + ' ' + b.decision
+      if (b.type === 'tension') return b.items.map((i) => i.tension + ' ' + i.decision).join(' ')
       if (b.type === 'quotes') return b.items.map((i) => i.text).join(' ')
       if (b.type === 'statement') return b.rows.map((r) => r.text).join(' ')
       if (b.type === 'steps') return b.items.map((i) => i.title + ' ' + (i.quote ?? '')).join(' ')
@@ -42,8 +59,7 @@ function readMinutes(page: ShortPage) {
   return Math.max(3, Math.round(words / 220))
 }
 
-/** Text with its inline links, each phrase linked at its first occurrence
- *  and opening in a new tab (they point at public videos and pages). */
+/** Text with its inline links, each phrase linked at its first occurrence. */
 function Linked({ text, links }: { text: string; links?: InlineLink[] }) {
   if (!links?.length) return <>{text}</>
   const out: React.ReactNode[] = []
@@ -53,9 +69,8 @@ function Linked({ text, links }: { text: string; links?: InlineLink[] }) {
     if (at < 0) return
     out.push(rest.slice(0, at))
     out.push(
-      <a key={i} href={l.href} target="_blank" rel="noopener noreferrer" className="font-medium text-foreground underline decoration-foreground/40 underline-offset-[3px] hover:decoration-foreground">
+      <a key={i} href={l.href} className="font-medium text-foreground underline decoration-foreground/40 underline-offset-[3px] hover:decoration-foreground">
         {l.text}
-        <span className="sr-only"> (opens in a new tab)</span>
       </a>,
     )
     rest = rest.slice(at + l.text.length)
@@ -67,9 +82,9 @@ function Linked({ text, links }: { text: string; links?: InlineLink[] }) {
 function BlockView({ block }: { block: Block }) {
   if (block.type === 'video') {
     return (
-      <figure className="rounded-[14px] bg-card p-2 shadow-soft">
+      <figure className={cn(CARD, 'p-2')}>
         <VideoEmbed id={block.youtube} start={block.start} title={block.title} />
-        <figcaption className="px-2 pb-2 pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">
+        <figcaption className={cn(CAPTION, 'px-4 pb-3 pt-4')}>
           {block.caption}{' '}
           <a href={block.href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-foreground">
             Watch on YouTube<span className="sr-only"> (opens in a new tab)</span>
@@ -80,27 +95,26 @@ function BlockView({ block }: { block: Block }) {
   }
   if (block.type === 'statement') {
     return (
-      <figure className="rounded-[14px] bg-card p-6 shadow-soft md:p-8">
-        <dl className="grid gap-x-6 gap-y-3 md:grid-cols-[9rem_minmax(0,1fr)]">
+      <figure className={CARD}>
+        <dl className="grid gap-x-6 gap-y-4 md:grid-cols-[10rem_minmax(0,1fr)]">
           {block.rows.map((r) => (
             <div key={r.label} className="contents">
-              <dt className="label-micro text-accent-brand md:pt-1">{r.label}</dt>
-              <dd className="text-pretty font-heading text-xl font-semibold leading-snug tracking-tight md:text-2xl">{r.text}</dd>
+              <dt className={cn(SMALL, 'font-semibold text-accent-brand md:pt-1')}>{r.label}</dt>
+              <dd className={SUBHEAD}>{r.text}</dd>
             </div>
           ))}
         </dl>
-        <figcaption className="mt-5 label-micro text-muted-foreground">{block.who}</figcaption>
+        <figcaption className={cn(CAPTION, 'mt-6')}>{block.who}</figcaption>
       </figure>
     )
   }
   if (block.type === 'quotes') {
     return (
-      <ul className={cn('grid gap-3', block.items.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : block.items.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2')}>
+      <ul className="grid gap-4 sm:grid-cols-3">
         {block.items.map((q) => (
-          <li key={q.text} className="flex flex-col rounded-[14px] bg-card-soft p-5">
-            <p className="font-heading text-2xl leading-none text-accent-brand" aria-hidden="true">“</p>
-            <blockquote className="mt-1 text-pretty font-sans text-[15px] leading-relaxed text-foreground">{q.text}</blockquote>
-            <p className="mt-auto pt-4 label-micro text-muted-foreground">
+          <li key={q.text} className="flex flex-col border-l-2 border-accent-brand pl-5">
+            <blockquote className={BODY}>“{q.text}”</blockquote>
+            <p className={cn(SMALL, 'mt-auto pt-4')}>
               {q.who}
               {q.when && <span> · {q.when}</span>}
             </p>
@@ -111,14 +125,12 @@ function BlockView({ block }: { block: Block }) {
   }
   if (block.type === 'cards') {
     return (
-      <ul className={cn('grid gap-3', block.items.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3')}>
+      <ul className="grid gap-4 sm:grid-cols-3">
         {block.items.map((item) => (
-          <li key={item.title} className="rounded-[14px] bg-card p-5 shadow-soft">
-            {item.value && (
-              <p className="font-heading text-3xl font-semibold leading-none tracking-tight tabular-nums text-accent-brand">{item.value}</p>
-            )}
-            <p className={cn('font-heading text-lg font-semibold leading-tight tracking-tight', item.value && 'mt-3')}>{item.title}</p>
-            <p className="mt-2 text-pretty font-sans text-sm leading-relaxed text-foreground/80">{item.text}</p>
+          <li key={item.title} className={CARD}>
+            {item.value && <p className="font-heading text-3xl font-semibold leading-none tracking-tight tabular-nums text-accent-brand">{item.value}</p>}
+            <p className={cn(SUBHEAD, item.value && 'mt-4')}>{item.title}</p>
+            <p className={cn(SMALL, 'mt-2')}>{item.text}</p>
           </li>
         ))}
       </ul>
@@ -126,57 +138,53 @@ function BlockView({ block }: { block: Block }) {
   }
   if (block.type === 'tension') {
     return (
-      <div className="grid gap-3 md:grid-cols-2">
-        <div className="rounded-[14px] bg-card-soft p-5">
-          <p className="label-micro text-muted-foreground">What the evidence said</p>
-          <p className="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-foreground/85">{block.tension}</p>
-        </div>
-        <div className="rounded-[14px] bg-card p-5 shadow-soft">
-          <p className="label-micro text-accent-brand">What I decided, and what it cost</p>
-          <p className="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-foreground">{block.decision}</p>
-        </div>
-      </div>
+      <ol className={cn(CARD, 'divide-y divide-border p-0')}>
+        {block.items.map((item, i) => (
+          <li key={i} className="grid gap-4 p-6 md:grid-cols-2 md:gap-8">
+            <div>
+              <p className={cn(SMALL, 'font-semibold')}>What the evidence said</p>
+              <p className={cn(BODY, 'mt-2')}>{item.tension}</p>
+            </div>
+            <div>
+              <p className={cn(SMALL, 'font-semibold text-accent-brand')}>What I decided, and what it cost</p>
+              <p className={cn(BODY, 'mt-2')}>{item.decision}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     )
   }
   if (block.type === 'steps') {
     return (
-      <figure className="w-full max-w-full">
-        {block.caption && block.items.length === 4 && (
-          <figcaption className="pb-3 font-heading text-lg font-semibold leading-tight tracking-tight">{block.caption}</figcaption>
-        )}
-        <ol className={cn('grid gap-3 sm:grid-cols-2', block.items.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3')}>
+      <figure>
+        <ol className="grid gap-4 sm:grid-cols-3">
           {block.items.map((step, i) => (
-            <li key={step.title} className="flex flex-col rounded-[14px] bg-card p-4 shadow-soft">
-              <p className="label-micro text-muted-foreground">
+            <li key={step.title} className={cn(CARD, 'flex flex-col')}>
+              <p className={SMALL}>
                 <span className="tabular-nums">{i + 1}</span> · {step.tools}
               </p>
-              <p className="mt-2 font-heading text-lg font-semibold leading-tight tracking-tight">{step.title}</p>
+              <p className={cn(SUBHEAD, 'mt-2')}>{step.title}</p>
               {step.quote && (
-                <p className="mt-3 text-pretty font-sans text-sm leading-relaxed text-foreground/85">
+                <p className={cn(SMALL, 'mt-3 text-foreground/85')}>
                   “{step.quote}”{step.who && <span className="text-muted-foreground"> {step.who}</span>}
                 </p>
               )}
-              {step.time && (
-                <p className={cn('mt-auto pt-3 text-accent-brand', step.time.length > 40 ? 'font-sans text-sm font-semibold leading-snug' : 'label-micro')}>{step.time}</p>
-              )}
+              {step.time && <p className={cn(SMALL, 'mt-auto pt-4 font-semibold text-accent-brand')}>{step.time}</p>}
             </li>
           ))}
         </ol>
-        {block.caption && block.items.length !== 4 && (
-          <figcaption className="pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">{block.caption}</figcaption>
-        )}
+        {block.caption && <figcaption className={cn(CAPTION, 'pt-4')}>{block.caption}</figcaption>}
       </figure>
     )
   }
   if (block.type === 'table') {
     return (
-      <div className="min-w-0 max-w-full overflow-x-auto [scrollbar-width:thin]" style={{ contain: 'inline-size' }}>
-        <table className="w-full min-w-[560px] border-collapse text-left font-sans text-sm">
-          {block.caption && <caption className="mb-2 text-left label-micro text-muted-foreground">{block.caption}</caption>}
+      <div className={cn(CARD, 'min-w-0 max-w-full overflow-x-auto p-2 [scrollbar-width:thin]')} style={{ contain: 'inline-size' }}>
+        <table className="w-full min-w-[640px] border-collapse text-left font-sans text-sm">
           <thead>
             <tr>
               {block.head.map((h) => (
-                <th key={h} className="border-b border-foreground/15 py-2 pr-4 align-bottom label-micro font-medium text-muted-foreground">
+                <th key={h} className="border-b border-border px-4 py-3 align-bottom text-sm font-semibold text-muted-foreground">
                   {h}
                 </th>
               ))}
@@ -184,9 +192,9 @@ function BlockView({ block }: { block: Block }) {
           </thead>
           <tbody>
             {block.rows.map((row, i) => (
-              <tr key={i} className="border-b border-border">
+              <tr key={i} className="border-b border-border last:border-0">
                 {row.map((cell, j) => (
-                  <td key={j} className={cn('py-3 pr-4 align-top leading-relaxed', j === 0 ? 'text-muted-foreground' : 'text-foreground/90', j === 2 && 'font-semibold tabular-nums text-foreground')}>
+                  <td key={j} className={cn('px-4 py-3 align-top leading-relaxed', j === 0 ? 'text-muted-foreground' : 'text-foreground/90', j === 2 && 'font-semibold tabular-nums text-foreground')}>
                     {cell}
                   </td>
                 ))}
@@ -194,6 +202,7 @@ function BlockView({ block }: { block: Block }) {
             ))}
           </tbody>
         </table>
+        {block.caption && <p className={cn(CAPTION, 'px-4 pb-2 pt-4')}>{block.caption}</p>}
       </div>
     )
   }
@@ -201,7 +210,7 @@ function BlockView({ block }: { block: Block }) {
     return (
       <ul className="grid gap-3 pl-5">
         {block.items.map((item) => (
-          <li key={item.lead} className="list-disc text-pretty text-[17px] leading-[1.65] text-foreground/90">
+          <li key={item.lead} className={cn('list-disc', BODY)}>
             <span className="font-semibold text-foreground">{item.lead}</span> {item.text}
           </li>
         ))}
@@ -209,7 +218,7 @@ function BlockView({ block }: { block: Block }) {
     )
   }
   return (
-    <p className="text-pretty text-[17px] leading-[1.65] text-foreground/90">
+    <p className={BODY}>
       <Linked text={block.text} links={block.links} />
     </p>
   )
@@ -218,91 +227,84 @@ function BlockView({ block }: { block: Block }) {
 export function ShortPageLayout({ page }: { page: ShortPage }) {
   return (
     <MotionConfig reducedMotion="user">
-        <SkipLink />
-        <SiteHeader onHome={false} />
+      <SkipLink />
+      <SiteHeader onHome={false} />
 
-        <main
-          id="main"
-          className="mx-auto max-w-[82rem] px-6 pb-20 pt-32 md:px-10 lg:px-14"
-          style={page.hero && page.hero.tint !== TINTS.neutral ? ({ '--accent-brand': page.hero.tint } as React.CSSProperties) : undefined}
-        >
-          <WithSectionNav chapters={page.sections.map((s) => ({ id: s.id, title: s.short ?? s.heading }))}>
+      <main
+        id="main"
+        className="mx-auto max-w-[82rem] px-6 pb-24 pt-32 md:px-10 lg:px-14"
+        style={page.hero && page.hero.tint !== TINTS.neutral ? ({ '--accent-brand': page.hero.tint } as React.CSSProperties) : undefined}
+      >
+        <WithSectionNav chapters={page.sections.map((s) => ({ id: s.id, title: s.short ?? s.heading }))}>
           <article className="max-w-[68rem]">
             <header>
               <p className="label-micro text-accent-brand">
                 {page.roleTag} <span className="text-muted-foreground">· {page.period} · {readMinutes(page)} min read</span>
               </p>
-              <h1 className="mt-4 text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">
-                {page.title}
-              </h1>
-              <p className="mt-4 max-w-[46rem] text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">
-                {page.description}
-              </p>
+              <h1 className="mt-4 max-w-[46rem] text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">{page.title}</h1>
+              <p className="mt-4 max-w-[46rem] text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">{page.description}</p>
             </header>
 
-            {page.hero && <HeroVideo hero={page.hero} className="mt-8" />}
+            {page.hero && <HeroVideo hero={page.hero} className="mt-12" />}
 
             {page.facts && page.facts.length > 0 && <Facts facts={page.facts} />}
 
-            <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
               {page.stats.map((s) => (
-                <li key={s.label} className="rounded-[14px] bg-card p-4 shadow-soft">
-                  <p className="font-heading text-2xl font-semibold leading-tight tracking-tight tabular-nums text-accent-brand">
-                    {s.value}
-                  </p>
-                  <p className="mt-1 label-micro text-muted-foreground">{s.label}</p>
+                <li key={s.label} className={CARD}>
+                  <p className="font-heading text-3xl font-semibold leading-none tracking-tight tabular-nums text-accent-brand">{s.value}</p>
+                  <p className={cn(SMALL, 'mt-3')}>{s.label}</p>
                 </li>
               ))}
             </ul>
 
-            <Visuals visuals={visualsAfter(page, undefined)} className="mt-8" />
+            <Visuals visuals={visualsAfter(page, undefined)} className="mt-12" />
 
             {page.sections.map((section) => (
-              <Reveal key={section.id} as="section" className="border-t border-border py-12 md:py-16">
+              <Reveal key={section.id} as="section" className="mt-24">
                 <div id={section.id} className="scroll-mt-28">
-                  {section.eyebrow && <p className="mb-3 label-micro text-accent-brand">{section.eyebrow}</p>}
-                  <h2 className="max-w-[46rem] text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">
+                  {section.eyebrow && <p className="label-micro text-accent-brand">{section.eyebrow}</p>}
+                  <h2 className={cn('max-w-[46rem] text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl', section.eyebrow && 'mt-3')}>
                     {section.heading}
                     <HeadingDot />
                   </h2>
-                  <Visuals visuals={visualsLead(page, section.id)} className="mt-6" />
-                  <div className="mt-5 grid gap-5">
-                    {section.blocks.map((block, i) => (
-                      <div key={i} className={cn(!WIDE_BLOCKS.has(block.type) && 'max-w-[46rem]')}>
-                        <BlockView block={block} />
-                      </div>
-                    ))}
+                  <div className="mt-6 grid gap-6">
+                    {section.blocks
+                      .filter((b) => b.type === 'p')
+                      .map((block, i) => (
+                        <div key={`p${i}`} className="max-w-[46rem]">
+                          <BlockView block={block} />
+                        </div>
+                      ))}
+                    <Visuals visuals={visualsLead(page, section.id)} />
+                    {section.blocks
+                      .filter((b) => b.type !== 'p')
+                      .map((block, i) => (
+                        <div key={`b${i}`} className={cn(!WIDE_BLOCKS.has(block.type) && 'max-w-[46rem]')}>
+                          <BlockView block={block} />
+                        </div>
+                      ))}
+                    <Visuals visuals={visualsAfter(page, section.id)} />
                   </div>
-                  <Visuals visuals={visualsAfter(page, section.id)} className="mt-8" />
                 </div>
               </Reveal>
             ))}
 
-            <Reveal as="section" className="border-t border-border pt-10 md:pt-12">
-              <aside aria-label="What this unlocked next" className="rounded-[14px] bg-card p-5 shadow-soft md:p-6">
+            <Reveal as="section" className="mt-24">
+              <aside aria-label="What this unlocked next" className={CARD}>
                 <p className="label-micro text-muted-foreground">What this unlocked next</p>
-                <p className="mt-2 max-w-2xl text-pretty leading-relaxed text-foreground/90">{page.next.text}</p>
+                <p className={cn(BODY, 'mt-3 max-w-[46rem]')}>{page.next.text}</p>
                 {page.next.href ? (
-                  <Link
-                    href={page.next.href}
-                    className="mt-4 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline"
-                  >
+                  <Link href={page.next.href} className="mt-4 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline">
                     {page.next.label} <span aria-hidden="true">→</span>
                   </Link>
                 ) : (
-                  <p className="mt-4 flex min-h-11 flex-wrap items-center gap-x-3 gap-y-1">
-                    <span className="font-sans text-base font-semibold text-foreground">
-                      {page.next.label} <span aria-hidden="true">→</span>
-                    </span>
-                    <span className="inline-flex items-center rounded-full bg-card-soft px-3 py-1.5 label-micro text-foreground ring-1 ring-foreground/10">
-                      Coming soon
-                    </span>
-                  </p>
+                  <p className="mt-4 font-sans text-base font-semibold text-foreground">{page.next.label}</p>
                 )}
               </aside>
             </Reveal>
 
-            <footer className="mt-10 grid gap-2 border-t border-border pt-6 font-sans text-sm text-muted-foreground">
+            <footer className={cn(SMALL, 'mt-12 grid gap-2 border-t border-border pt-6')}>
               <p>
                 <span className="font-semibold text-foreground">Credits.</span> {page.credits}
               </p>
@@ -311,10 +313,10 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
               </p>
             </footer>
           </article>
-          </WithSectionNav>
-        </main>
-        <ContactFooter />
-      </MotionConfig>
+        </WithSectionNav>
+      </main>
+      <ContactFooter />
+    </MotionConfig>
   )
 }
 
@@ -325,70 +327,44 @@ function visualsLead(page: ShortPage, after: string) {
   return (page.visuals ?? []).filter((v) => v.after === after && v.lead)
 }
 
-// Diagonal hatching for a slot whose file has not landed yet.
 const STRIPES = {
-  backgroundImage:
-    'repeating-linear-gradient(135deg, transparent 0 10px, color-mix(in oklab, var(--foreground) 7%, transparent) 10px 11px)',
+  backgroundImage: 'repeating-linear-gradient(135deg, transparent 0 10px, color-mix(in oklab, var(--foreground) 7%, transparent) 10px 11px)',
 }
 
-// Figures with captions. One visual spans the measure; two or more sit in a
-// two-column grid from 768px up, with the first spanning both columns when the
-// count is odd so nothing is left hanging.
+/** Two visuals share a row only when their aspect ratios are within 10%. */
+function sameAspect(a: PageVisual, b: PageVisual) {
+  if (!a.width || !a.height || !b.width || !b.height) return false
+  const ra = a.width / a.height
+  const rb = b.width / b.height
+  return Math.abs(ra - rb) / Math.max(ra, rb) < 0.1
+}
+
 function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: string }) {
   if (visuals.length === 0) return null
-  const odd = visuals.length % 2 === 1
+  const pair = visuals.length === 2 && sameAspect(visuals[0], visuals[1])
   return (
-    <ul className={cn('grid gap-5 md:grid-cols-2 md:gap-6', className)}>
-      {visuals.map((v, i) => (
-        <li key={v.id} className={cn((visuals.length === 1 || (odd && i === 0) || v.full) && 'md:col-span-2')}>
-          <figure className="rounded-[14px] bg-card p-2 shadow-soft">
+    <ul className={cn('grid gap-4', pair && 'md:grid-cols-2', className)}>
+      {visuals.map((v) => (
+        <li key={v.id}>
+          <figure className={cn(CARD, 'p-2')}>
             {v.src && v.prototype?.interactive ? (
               <PrototypeEmbed embed={v.prototype.embed} poster={v.src} width={v.width ?? 1440} height={v.height ?? 1024} alt={v.alt} />
             ) : v.src ? (
               v.kind === 'video' ? (
-                <video
-                  src={v.src}
-                  width={v.width}
-                  height={v.height}
-                  className="w-full rounded-[10px] bg-card-soft"
-                  controls
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  aria-label={v.alt}
-                />
+                <video src={v.src} width={v.width} height={v.height} className="w-full rounded-[10px] bg-card-soft" controls muted loop playsInline preload="metadata" aria-label={v.alt} />
               ) : (
-                // Opens full size in a new tab, for diagrams too dense to read in the column.
                 <a href={v.src} target="_blank" rel="noopener noreferrer" className="block cursor-zoom-in rounded-[10px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brand">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={v.src}
-                    width={v.width}
-                    height={v.height}
-                    alt={v.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-auto w-full rounded-[10px] bg-card-soft"
-                  />
+                  <img src={v.src} width={v.width} height={v.height} alt={v.alt} loading="lazy" decoding="async" className="h-auto w-full rounded-[10px] bg-card-soft" />
                   <span className="sr-only"> (opens full size in a new tab)</span>
                 </a>
               )
             ) : (
-              <div
-                role="img"
-                aria-label={`Image to come: ${v.alt}`}
-                className="flex aspect-[16/10] items-end rounded-[10px] bg-card-soft p-4"
-                style={STRIPES}
-              >
-                <span className="rounded-full bg-card px-3 py-1 label-micro text-muted-foreground shadow-soft">
-                  Image to come
-                </span>
+              <div role="img" aria-label={`Image to come: ${v.alt}`} className="flex aspect-[16/10] items-end rounded-[10px] bg-card-soft p-4" style={STRIPES}>
+                <span className="rounded-full bg-card px-3 py-1 label-micro text-muted-foreground shadow-soft">Image to come</span>
               </div>
             )}
-            <figcaption className="px-2 pb-2 pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">
-              {v.caption}
-            </figcaption>
+            <figcaption className={cn(CAPTION, 'px-4 pb-3 pt-4')}>{v.caption}</figcaption>
           </figure>
         </li>
       ))}
@@ -396,15 +372,13 @@ function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: st
   )
 }
 
-// Duration, role, team and research: the facts a reader wants before the
-// story, in four short cells under the context bar.
 function Facts({ facts }: { facts: PageFact[] }) {
   return (
-    <dl className="mt-6 grid gap-x-8 gap-y-5 border-t border-border pt-6 sm:grid-cols-2 lg:grid-cols-4">
+    <dl className="mt-12 grid gap-x-8 gap-y-6 border-t border-border pt-6 sm:grid-cols-2 lg:grid-cols-4">
       {facts.map((f) => (
         <div key={f.label}>
-          <dt className="label-micro text-muted-foreground">{f.label}</dt>
-          <dd className="mt-1.5 text-pretty font-sans text-base leading-relaxed text-foreground">{f.value}</dd>
+          <dt className={cn(SMALL, 'font-semibold')}>{f.label}</dt>
+          <dd className="mt-2 text-pretty font-sans text-base leading-relaxed text-foreground">{f.value}</dd>
         </div>
       ))}
     </dl>
