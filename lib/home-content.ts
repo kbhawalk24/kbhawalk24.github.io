@@ -197,11 +197,6 @@ export const HERO = {
       before: 'Before that, at ',
       after: ', from 2017 to 2021, I designed three 0-to-1 TV analytics products that brought in more than $20M in new revenue.',
     },
-    {
-      org: 'TIBCO',
-      before: 'Earlier, at ',
-      after: ', from 2012 to 2015, I wrote backend Java for an enterprise integration platform.',
-    },
   ],
 }
 
