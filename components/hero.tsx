@@ -18,10 +18,9 @@ const OUTLINE_BUTTON =
   'inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25'
 
 /** The about block: one paragraph with the fields in the accent colour,
- *  three lines of history under hairlines, the buttons, and the ask as one
- *  line. Replaces the earlier single paragraph; the name and the
+ *  three lines of history under hairlines, and the buttons. Replaces the earlier single paragraph; the name and the
  *  illustration above are unchanged. */
-function About({ ctaRef }: { ctaRef: React.RefObject<HTMLParagraphElement | null> }) {
+function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
   return (
     <div>
       <p className="max-w-[38rem] text-pretty font-sans text-lg leading-[1.6] text-foreground md:text-xl">
@@ -58,7 +57,7 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLParagraphElement | null
         ))}
       </dl>
 
-      <div className="mt-8 flex flex-wrap items-center gap-3">
+      <div ref={ctaRef} className="mt-8 flex flex-wrap items-center gap-3">
         <MagneticWrap className="inline-block">
           <a
             href="#work"
@@ -79,13 +78,6 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLParagraphElement | null
           <span className="sr-only"> (opens in a new tab)</span>
         </a>
       </div>
-
-      <p ref={ctaRef} className="mt-7 flex items-start gap-2.5 font-sans text-[15px] text-foreground">
-        <span className="mt-2 size-2 shrink-0 rounded-full bg-track-ic" aria-hidden="true" />
-        <span>
-          <span className="font-semibold">{HERO.exploring.label}</span> {HERO.exploring.text}
-        </span>
-      </p>
     </div>
   )
 }
@@ -106,7 +98,7 @@ export const BIO_BLUR_RANGE = { start: 0.4, end: 0.52 }
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
-  const ctaRef = useRef<HTMLParagraphElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
   // The pinned stage is viewport-tall but the settled about block is not,
   // so there is blank stage under the buttons at release. Measured once the
   // about text has settled and taken off the section's bottom, so the next

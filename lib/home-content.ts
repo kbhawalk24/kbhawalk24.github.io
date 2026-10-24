@@ -194,7 +194,6 @@ export const HERO = {
     { org: '605', period: '2017–21', text: 'Three 0-to-1 TV analytics products;', strong: '$20M+', tail: ' new revenue.' },
     { org: 'TIBCO', period: '2012–15', text: 'Backend Java on an enterprise integration platform.' },
   ],
-  exploring: { label: 'Exploring', text: 'Principal or Design Management roles · Bay Area · AI, data, dev tools' },
 }
 
 export const INTUIT_CHAPTER = {
