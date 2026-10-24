@@ -47,6 +47,15 @@ export const SEARCH_2: ShortPage = {
     { value: '14.8 h → 9.4 h', label: 'Time to discover data, Nov 2024 to Jul 2025' },
     { value: '41% → 63%', label: 'Searches that ended in a click, Jan 2024 to Jan 2026' },
   ],
+  hero: {
+    src: '/work/search-2/hero.mp4',
+    poster: '/work/search-2/hero-poster.jpg',
+    width: 1600,
+    height: 854,
+    tint: TINTS.dde2023,
+    alt: 'A screen recording with two browser windows side by side. On the left, Search 2.0 in alpha: a Tables tab, filters down the left, and each result with owner, last refresh and queries run. On the right, the old search for the same query: one list under Data Catalog and Data Map with filter pills across the top.',
+    caption: 'October 2024, the same searches in Search 2.0 (left, in alpha) and the search it replaced (right). Sped up 2.3 times.',
+  },
   visuals: [
     {
       id: 'tables-tab',
