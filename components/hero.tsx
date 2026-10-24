@@ -29,12 +29,12 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
         {HERO.intro.after}
       </p>
 
-      <p className="mt-6 text-pretty font-sans text-lg leading-[1.6] text-foreground/85">
+      <p className="mt-8 text-pretty font-sans text-lg leading-[1.6] text-foreground md:text-xl">
         {HERO.history.map((h, n) => (
           <span key={h.org}>
             {n > 0 && ' '}
             {h.before}
-            <span translate="no" className="font-semibold text-foreground">{h.org}</span>
+            <span translate="no" className="font-semibold">{h.org}</span>
             {h.after}
             {'pills' in h &&
               h.pills?.map((pl, i, all) => (
