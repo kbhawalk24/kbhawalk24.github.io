@@ -173,32 +173,29 @@ export const ARCS: Arc[] = [
 // The hero's words and the Intuit chapter diagram under it.
 
 export const HERO = {
-  eyebrow: 'Kanchi Bhawalkar · Product Design Manager & Principal IC · Ex-Intuit · Former backend engineer',
-  lead: 'I design for',
-  /** The three fields, as pills in the headline. `filled` is the accent pill. */
-  fields: [
-    { label: 'AI', icon: 'sparkles', filled: true },
-    { label: 'enterprise data platforms', icon: 'database', filled: false },
-    { label: 'developer tools', icon: 'code', filled: false },
-  ],
-  paragraph:
-    'With roots as a backend engineer, I thrive in the deep end of technical complexity, both as a hands-on Principal Designer and a team manager.',
+  eyebrow: 'Product Design Manager & Principal IC',
+  /** The intro: the fields are set in the accent colour. */
+  intro: {
+    before: 'I’m a technical design leader specializing in ',
+    fields: 'AI, enterprise data platforms, and developer tools',
+    after: '. With roots as a backend engineer, I thrive in the deep end of technical complexity, both as a hands-on Principal Designer and a team manager.',
+  },
   history: [
     {
       org: 'Intuit',
       period: '2021–26',
-      text: 'Led core Data Platform design. Owned',
+      text: 'Led Data Platform design. Owned',
       /** Pills inside the line, each scrolling to a work card. */
       pills: [
         { label: 'data discovery', href: '#search-2' },
         { label: 'platform strategy', href: '#agentic-discovery' },
       ],
-      tail: ', incl. agentic AI & MCP.',
+      tail: '.',
     },
     { org: '605', period: '2017–21', text: 'Three 0-to-1 TV analytics products;', strong: '$20M+', tail: ' new revenue.' },
-    { org: 'TIBCO', period: '2012–15', text: 'Three years of backend Java, enterprise integration.' },
+    { org: 'TIBCO', period: '2012–15', text: 'Backend Java on an enterprise integration platform.' },
   ],
-  exploring: { label: 'Exploring', text: 'Principal / Design Management roles · Bay Area' },
+  exploring: { label: 'Exploring', text: 'Principal or Design Management roles · Bay Area · AI, data, dev tools' },
 }
 
 export const INTUIT_CHAPTER = {
