@@ -169,3 +169,73 @@ export const ARCS: Arc[] = [
   },
 ]
 
+
+// The hero's words and the Intuit chapter diagram under it.
+
+export const HERO = {
+  eyebrow: 'Kanchi Bhawalkar · Product Design Manager & Principal IC · Ex-Intuit · Former backend engineer',
+  lead: 'I design for',
+  /** The three fields, as pills in the headline. `filled` is the accent pill. */
+  fields: [
+    { label: 'AI', icon: 'sparkles', filled: true },
+    { label: 'enterprise data platforms', icon: 'database', filled: false },
+    { label: 'developer tools', icon: 'code', filled: false },
+  ],
+  paragraph:
+    'With roots as a backend engineer, I thrive in the deep end of technical complexity, both as a hands-on Principal Designer and a team manager.',
+  history: [
+    {
+      org: 'Intuit',
+      period: '2021–26',
+      text: 'Led core Data Platform design. Owned',
+      /** Pills inside the line, each scrolling to a work card. */
+      pills: [
+        { label: 'data discovery', href: '#search-2' },
+        { label: 'platform strategy', href: '#agentic-discovery' },
+      ],
+      tail: ', incl. agentic AI & MCP.',
+    },
+    { org: '605', period: '2017–21', text: 'Three 0-to-1 TV analytics products;', strong: '$20M+', tail: ' new revenue.' },
+    { org: 'TIBCO', period: '2012–15', text: 'Three years of backend Java, enterprise integration.' },
+  ],
+  exploring: { label: 'Exploring', text: 'Principal / Design Management roles · Bay Area' },
+}
+
+export const INTUIT_CHAPTER = {
+  eyebrow: 'Inside the Intuit chapter',
+  heading: 'What I owned, and what I led the team through.',
+  text: 'Two areas were mine end to end. Six more ran through my team as design manager, from instrumentation at the source to access control at the edge.',
+  pill: { initial: 'K', text: 'Led design for the core Data Platform', meta: 'Intuit 2021–2026' },
+  owned: {
+    label: 'Personally owned',
+    meta: 'hands-on',
+    items: [
+      {
+        title: 'Data discovery',
+        icon: 'search',
+        tone: 'ic',
+        text: 'Catalog & search, Data Map, plain-language assistant, lineage views, the agent in Cursor & Claude.',
+        href: '#search-2',
+      },
+      {
+        title: 'Platform design strategy',
+        icon: 'compass',
+        tone: 'strategy',
+        text: 'Clean-data standard, fine-grained access model, and agentic AI & MCP workflows across the platform.',
+        href: '#agentic-discovery',
+      },
+    ],
+  },
+  directed: {
+    label: 'Directed the team across',
+    meta: 'as design manager',
+    items: [
+      { title: 'Pipeline authoring', icon: 'workflow', text: 'Batch & stream' },
+      { title: 'Observability', icon: 'activity', text: 'Quality checks, reliability & monitoring' },
+      { title: 'Lineage', icon: 'git-fork', text: 'Upstream & downstream impact' },
+      { title: 'Governance', icon: 'shield-check', text: 'Scoring, certification, standards' },
+      { title: 'Fine-grained access control', icon: 'key-round', text: 'Requests, policies & approvals' },
+      { title: 'Instrumentation', icon: 'chart-column', text: 'Event capture & data product onboarding' },
+    ],
+  },
+} as const
