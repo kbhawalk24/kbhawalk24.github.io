@@ -59,6 +59,8 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
   sections: [
     {
       id: 'framing',
+      eyebrow: 'The problem',
+      short: 'Problem',
       heading: 'How the problem was framed',
       blocks: [
         {
@@ -70,6 +72,8 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
     },
     {
       id: 'rules',
+      eyebrow: 'Mechanisms',
+      short: 'Mechanisms',
       heading: 'The system rules, not just screens',
       blocks: [
         {
@@ -90,6 +94,8 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
     },
     {
       id: 'trade-offs',
+      eyebrow: 'Trade-offs',
+      short: 'Trade-offs',
       heading: 'Hard trade-offs and organizational influence',
       blocks: [
         {
@@ -101,6 +107,8 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
     },
     {
       id: 'multiplier',
+      eyebrow: 'What the team shipped',
+      short: 'Results',
       heading: 'The systemic multiplier',
       blocks: [
         {

@@ -92,6 +92,8 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   sections: [
     {
       id: 'problem',
+      eyebrow: 'The problem',
+      short: 'Problem',
       heading: 'The problem: people found data by asking a person',
       blocks: [
         {
@@ -106,6 +108,8 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'assistant',
+      eyebrow: 'Where it started',
+      short: 'The assistant',
       heading: 'Where it started: an assistant that came before its search was ready',
       blocks: [
         {
@@ -132,6 +136,8 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'rebuild',
+      eyebrow: 'The rebuild',
+      short: 'The rebuild',
       heading: 'Between the assistant and the agent: fix the search underneath',
       blocks: [
         {
@@ -144,6 +150,8 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'collections',
+      eyebrow: 'Collections',
+      short: 'Collections',
       heading: 'Decision 2: give people a home for the data they reuse',
       blocks: [
         {
@@ -158,6 +166,8 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'agent',
+      eyebrow: 'The agent',
+      short: 'The agent',
       heading: 'Decision 3: put the catalog where people already work',
       blocks: [
         {
@@ -188,6 +198,8 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'open',
+      eyebrow: 'The open question',
+      short: 'Open question',
       heading: 'The question after the agent: where should it live?',
       blocks: [
         {
@@ -204,6 +216,8 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'impact',
+      eyebrow: 'Impact',
+      short: 'Impact',
       heading: 'Impact',
       blocks: [
         {

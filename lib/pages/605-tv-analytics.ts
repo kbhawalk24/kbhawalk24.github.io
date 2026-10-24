@@ -97,6 +97,8 @@ export const SIX_O_FIVE: ShortPage = {
   sections: [
     {
       id: 'framing',
+      eyebrow: 'The problem',
+      short: 'Problem',
       heading: 'How the problem was framed',
       blocks: [
         {
@@ -108,6 +110,8 @@ export const SIX_O_FIVE: ShortPage = {
     },
     {
       id: 'rules',
+      eyebrow: 'The design',
+      short: 'Design',
       heading: 'The system rules, not just screens',
       blocks: [
         {
@@ -124,6 +128,8 @@ export const SIX_O_FIVE: ShortPage = {
     },
     {
       id: 'trade-offs',
+      eyebrow: 'Trade-offs',
+      short: 'Trade-offs',
       heading: 'Hard trade-offs and organizational influence',
       blocks: [
         {
@@ -135,6 +141,8 @@ export const SIX_O_FIVE: ShortPage = {
     },
     {
       id: 'multiplier',
+      eyebrow: 'What it unlocked',
+      short: 'Impact',
       heading: 'The systemic multiplier',
       blocks: [
         {

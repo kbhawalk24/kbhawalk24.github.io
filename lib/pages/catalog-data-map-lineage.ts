@@ -133,6 +133,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
   sections: [
     {
       id: 'start',
+      eyebrow: '2021',
+      short: '2021',
       heading: '2021: a list of tables, and a catalog to retire',
       blocks: [
         {
@@ -154,6 +156,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     },
     {
       id: 'data-map',
+      eyebrow: '2022',
+      short: '2022',
       heading: '2022: organize data by what it means, not where it is stored',
       blocks: [
         {
@@ -175,6 +179,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     },
     {
       id: 'lineage',
+      eyebrow: '2023',
+      short: '2023',
       heading: '2023: lineage in four weeks',
       blocks: [
         {
@@ -196,6 +202,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     },
     {
       id: 'trust',
+      eyebrow: '2023 to 2024',
+      short: '2023–24',
       heading: '2023 to 2024: AI-written metadata people could correct',
       blocks: [
         {
@@ -217,6 +225,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     },
     {
       id: 'onboarding',
+      eyebrow: '2024',
+      short: '2024',
       heading: '2024: self-service onboarding, on the third design',
       blocks: [
         {
@@ -249,6 +259,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     },
     {
       id: 'platform',
+      eyebrow: '2025 to 2026',
+      short: '2025–26',
       heading: '2025 to 2026: the platform on stage',
       blocks: [
         {
@@ -273,6 +285,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     },
     {
       id: 'impact',
+      eyebrow: 'Impact',
+      short: 'Impact',
       heading: 'Impact',
       blocks: [
         {

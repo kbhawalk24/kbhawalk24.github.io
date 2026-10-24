@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import { MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
-import type { Block, InlineLink, PageFact, PageVisual, ShortPage, SystemContext } from '@/lib/pages/types'
+import type { Block, InlineLink, PageFact, PageVisual, ShortPage } from '@/lib/pages/types'
+import { TINTS } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
@@ -14,64 +15,30 @@ import { VideoEmbed } from '@/components/video-embed'
 import { HeroVideo } from '@/components/hero-video'
 import { PrototypeEmbed } from '@/components/prototype-embed'
 
-// The short case study page. Top to bottom: role line, title, the System
-// Context Bar (what this is part of, and where in the sequence the reader
-// is), the outcome stats, four short sections, the handoff to the next
-// page, then credits and sources.
+// The case study page. Top to bottom: role line with read time, title, the
+// opening clip, the facts, the outcome stats, the sections (each an eyebrow,
+// a claim and one large visual, with detail in cards), the handoff to the
+// next page, then credits and sources. The page's accent follows the hero
+// clip's tint so one hue runs through it.
 
-function ContextSteps({ context }: { context: SystemContext }) {
-  return (
-    <ol className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-2">
-      {context.steps.map((step, i) => {
-        const current = i === context.current
-        const pill = cn(
-          'inline-flex min-h-8 items-center gap-2 rounded-full px-3 py-1 label-micro',
-          current
-            ? 'bg-primary text-primary-foreground'
-            : 'bg-card-soft text-foreground ring-1 ring-foreground/10',
-        )
-        const body = (
-          <>
-            <span className="tabular-nums">{i + 1}.</span> {step.label}
-            {current && <span className="hidden normal-case tracking-normal opacity-80 sm:inline">(you are here)</span>}
-          </>
-        )
-        return (
-          <li key={step.label} className="flex items-center gap-x-2">
-            {step.href && !current ? (
-              <Link href={step.href} className={cn(pill, 'hover:ring-foreground/25')}>
-                {body}
-              </Link>
-            ) : (
-              <span className={pill} aria-current={current ? 'page' : undefined}>
-                {body}
-              </span>
-            )}
-            {i < context.steps.length - 1 && (
-              <span aria-hidden="true" className="text-muted-foreground">
-                →
-              </span>
-            )}
-          </li>
-        )
-      })}
-    </ol>
-  )
-}
+const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes'])
 
-function ContextBar({ context }: { context: SystemContext }) {
-  return (
-    <aside aria-label="System context" className="rounded-[14px] bg-card p-5 shadow-soft md:p-6">
-      <p className="font-sans text-sm leading-relaxed text-foreground">
-        <span className="label-micro text-muted-foreground">System context</span>
-        <span className="mx-2 text-muted-foreground" aria-hidden="true">
-          ·
-        </span>
-        {context.system}
-      </p>
-      <ContextSteps context={context} />
-    </aside>
-  )
+function readMinutes(page: ShortPage) {
+  const words = page.sections
+    .flatMap((sec) => sec.blocks)
+    .map((b) => {
+      if (b.type === 'p') return b.text
+      if (b.type === 'list') return b.items.map((i) => i.lead + ' ' + i.text).join(' ')
+      if (b.type === 'cards') return b.items.map((i) => i.title + ' ' + i.text).join(' ')
+      if (b.type === 'tension') return b.tension + ' ' + b.decision
+      if (b.type === 'quotes') return b.items.map((i) => i.text).join(' ')
+      if (b.type === 'steps') return b.items.map((i) => i.title + ' ' + (i.quote ?? '')).join(' ')
+      if (b.type === 'table') return b.rows.flat().join(' ')
+      return ''
+    })
+    .join(' ')
+    .split(/\s+/).length
+  return Math.max(3, Math.round(words / 220))
 }
 
 /** Text with its inline links, each phrase linked at its first occurrence
@@ -110,10 +77,58 @@ function BlockView({ block }: { block: Block }) {
       </figure>
     )
   }
+  if (block.type === 'quotes') {
+    return (
+      <ul className={cn('grid gap-3', block.items.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : block.items.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2')}>
+        {block.items.map((q) => (
+          <li key={q.text} className="flex flex-col rounded-[14px] bg-card-soft p-5">
+            <p className="font-heading text-2xl leading-none text-accent-brand" aria-hidden="true">“</p>
+            <blockquote className="mt-1 text-pretty font-sans text-[15px] leading-relaxed text-foreground">{q.text}</blockquote>
+            <p className="mt-auto pt-4 label-micro text-muted-foreground">
+              {q.who}
+              {q.when && <span> · {q.when}</span>}
+            </p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  if (block.type === 'cards') {
+    return (
+      <ul className={cn('grid gap-3', block.items.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3')}>
+        {block.items.map((item) => (
+          <li key={item.title} className="rounded-[14px] bg-card p-5 shadow-soft">
+            {item.value && (
+              <p className="font-heading text-3xl font-semibold leading-none tracking-tight tabular-nums text-accent-brand">{item.value}</p>
+            )}
+            <p className={cn('font-heading text-lg font-semibold leading-tight tracking-tight', item.value && 'mt-3')}>{item.title}</p>
+            <p className="mt-2 text-pretty font-sans text-sm leading-relaxed text-foreground/80">{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  if (block.type === 'tension') {
+    return (
+      <div className="grid gap-3 md:grid-cols-2">
+        <div className="rounded-[14px] bg-card-soft p-5">
+          <p className="label-micro text-muted-foreground">What the evidence said</p>
+          <p className="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-foreground/85">{block.tension}</p>
+        </div>
+        <div className="rounded-[14px] bg-card p-5 shadow-soft">
+          <p className="label-micro text-accent-brand">What I decided, and what it cost</p>
+          <p className="mt-2 text-pretty font-sans text-[15px] leading-relaxed text-foreground">{block.decision}</p>
+        </div>
+      </div>
+    )
+  }
   if (block.type === 'steps') {
     return (
       <figure className="-mx-6 px-6 sm:mx-0 sm:px-0">
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {block.caption && block.items.length === 4 && (
+          <figcaption className="pb-3 font-heading text-lg font-semibold leading-tight tracking-tight">{block.caption}</figcaption>
+        )}
+        <ol className={cn('grid gap-3 sm:grid-cols-2', block.items.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3')}>
           {block.items.map((step, i) => (
             <li key={step.title} className="flex flex-col rounded-[14px] bg-card p-4 shadow-soft">
               <p className="label-micro text-muted-foreground">
@@ -125,11 +140,13 @@ function BlockView({ block }: { block: Block }) {
                   “{step.quote}”{step.who && <span className="text-muted-foreground"> {step.who}</span>}
                 </p>
               )}
-              {step.time && <p className="mt-auto pt-3 label-micro text-accent-brand">{step.time}</p>}
+              {step.time && (
+                <p className={cn('mt-auto pt-3 text-accent-brand', step.time.length > 40 ? 'font-sans text-sm font-semibold leading-snug' : 'label-micro')}>{step.time}</p>
+              )}
             </li>
           ))}
         </ol>
-        {block.caption && (
+        {block.caption && block.items.length !== 4 && (
           <figcaption className="pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">{block.caption}</figcaption>
         )}
       </figure>
@@ -168,7 +185,7 @@ function BlockView({ block }: { block: Block }) {
     return (
       <ul className="grid gap-3 pl-5">
         {block.items.map((item) => (
-          <li key={item.lead} className="list-disc text-pretty leading-relaxed text-foreground/90">
+          <li key={item.lead} className="list-disc text-pretty text-[17px] leading-[1.65] text-foreground/90">
             <span className="font-semibold text-foreground">{item.lead}</span> {item.text}
           </li>
         ))}
@@ -176,7 +193,7 @@ function BlockView({ block }: { block: Block }) {
     )
   }
   return (
-    <p className="text-pretty leading-relaxed text-foreground/90">
+    <p className="text-pretty text-[17px] leading-[1.65] text-foreground/90">
       <Linked text={block.text} links={block.links} />
     </p>
   )
@@ -188,26 +205,26 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
         <SkipLink />
         <SiteHeader onHome={false} />
 
-        <main id="main" className="mx-auto max-w-6xl px-6 pb-20 pt-32 md:px-10 lg:px-14">
-          <WithSectionNav chapters={page.sections.map((s) => ({ id: s.id, title: s.heading }))}>
-          <article className="max-w-3xl">
+        <main
+          id="main"
+          className="mx-auto max-w-[82rem] px-6 pb-20 pt-32 md:px-10 lg:px-14"
+          style={page.hero && page.hero.tint !== TINTS.neutral ? ({ '--accent-brand': page.hero.tint } as React.CSSProperties) : undefined}
+        >
+          <WithSectionNav chapters={page.sections.map((s) => ({ id: s.id, title: s.short ?? s.heading }))}>
+          <article className="max-w-[68rem]">
             <header>
               <p className="label-micro text-accent-brand">
-                {page.roleTag} <span className="text-muted-foreground">· {page.period}</span>
+                {page.roleTag} <span className="text-muted-foreground">· {page.period} · {readMinutes(page)} min read</span>
               </p>
               <h1 className="mt-4 text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">
                 {page.title}
               </h1>
-              <p className="mt-4 text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">
+              <p className="mt-4 max-w-[46rem] text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">
                 {page.description}
               </p>
             </header>
 
             {page.hero && <HeroVideo hero={page.hero} className="mt-8" />}
-
-            <div className="mt-8">
-              <ContextBar context={page.context} />
-            </div>
 
             {page.facts && page.facts.length > 0 && <Facts facts={page.facts} />}
 
@@ -225,15 +242,18 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
             <Visuals visuals={visualsAfter(page, undefined)} className="mt-8" />
 
             {page.sections.map((section) => (
-              <Reveal key={section.id} as="section" className="border-t border-border py-10 md:py-12">
+              <Reveal key={section.id} as="section" className="border-t border-border py-12 md:py-16">
                 <div id={section.id} className="scroll-mt-28">
-                  <h2 className="text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">
+                  {section.eyebrow && <p className="mb-3 label-micro text-accent-brand">{section.eyebrow}</p>}
+                  <h2 className="max-w-[46rem] text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">
                     {section.heading}
                     <HeadingDot />
                   </h2>
-                  <div className="mt-4 grid max-w-2xl gap-4">
+                  <div className="mt-5 grid gap-5">
                     {section.blocks.map((block, i) => (
-                      <BlockView key={i} block={block} />
+                      <div key={i} className={cn(!WIDE_BLOCKS.has(block.type) && 'max-w-[46rem]')}>
+                        <BlockView block={block} />
+                      </div>
                     ))}
                   </div>
                   <Visuals visuals={visualsAfter(page, section.id)} className="mt-8" />

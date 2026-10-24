@@ -115,19 +115,19 @@ export function SectionNav({
   )
 }
 
-/** Two-column page body: the rail on the left from 1024px up, the row above the content below that. */
+/** Two-column page body: the content, with the rail on the right from 1024px up and the row above the content below that. */
 export function WithSectionNav({ chapters, children }: { chapters: Chapter[]; children: React.ReactNode }) {
   return (
-    <div className="lg:grid lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-12 xl:gap-16">
-      <aside className="hidden lg:block">
-        <div className="sticky top-28">
-          <SectionNav chapters={chapters} variant="rail" />
-        </div>
-      </aside>
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_11rem] lg:gap-12 xl:gap-16">
       <div className="min-w-0">
         <SectionNav chapters={chapters} variant="row" className="mb-8 lg:hidden" />
         {children}
       </div>
+      <aside className="hidden lg:block">
+        <div className="sticky top-28 rounded-[14px] bg-card p-5 shadow-soft">
+          <SectionNav chapters={chapters} variant="rail" label="Contents" />
+        </div>
+      </aside>
     </div>
   )
 }

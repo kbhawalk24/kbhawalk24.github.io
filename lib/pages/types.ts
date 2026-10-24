@@ -32,12 +32,23 @@ export type Block =
   | { type: 'list'; items: { lead: string; text: string }[] }
   | { type: 'table'; head: string[]; rows: string[][]; caption?: string }
   | { type: 'video'; youtube: string; start?: number; title: string; caption: string; href: string }
+  /** Exact words from research or feedback, credited by role and date. */
+  | { type: 'quotes'; items: { text: string; who: string; when?: string }[] }
+  /** Three or four short cards in a row: insights, outcomes, learnings. */
+  | { type: 'cards'; items: { title: string; text: string; value?: string }[] }
+  /** What the evidence said, beside what I decided and what it cost. */
+  | { type: 'tension'; tension: string; decision: string }
   /** A path through stages, each with the tools it ran through, one thing
    *  someone said (credited by role) and, where known, how long it took. */
   | { type: 'steps'; caption?: string; items: { title: string; tools: string; quote?: string; who?: string; time?: string }[] }
 
 export interface PageSection {
   id: string
+  /** The small label above the heading, e.g. THE RESEARCH. */
+  eyebrow?: string
+  /** Short name for the contents rail; the heading is used when absent. */
+  short?: string
+  /** A claim, not a description. */
   heading: string
   blocks: Block[]
 }
