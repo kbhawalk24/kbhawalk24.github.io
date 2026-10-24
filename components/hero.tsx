@@ -18,7 +18,7 @@ const OUTLINE_BUTTON =
   'inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25'
 
 /** The about block: one paragraph with the fields in the accent colour,
- *  three lines of history under hairlines, and the buttons. Replaces the earlier single paragraph; the name and the
+ *  one paragraph of history, and the buttons. Replaces the earlier single paragraph; the name and the
  *  illustration above are unchanged. */
 function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
   return (
@@ -29,33 +29,30 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
         {HERO.intro.after}
       </p>
 
-      <dl className="mt-8 divide-y divide-border border-y border-border font-sans text-[15px] leading-[1.6] text-foreground">
-        {HERO.history.map((h) => (
-          <div key={h.org} className="grid gap-x-6 gap-y-1 py-3.5 sm:grid-cols-[10rem_minmax(0,1fr)]">
-            <dt className="font-semibold">
-              <span translate="no">{h.org}</span> · {h.period}
-            </dt>
-            <dd className="text-foreground/85">
-              {h.text}
-              {'pills' in h &&
-                h.pills?.map((p, i, all) => (
-                  <span key={p.label}>
-                    {' '}
-                    <a
-                      href={p.href}
-                      className="inline-flex items-center gap-1 rounded-full bg-track-management/10 px-2.5 py-0.5 font-medium text-track-management transition-colors hover:bg-track-management/20"
-                    >
-                      {p.label} <span aria-hidden="true">↓</span>
-                    </a>
-                    {i < all.length - 1 && ' &'}
-                  </span>
-                ))}
-              {'strong' in h && <span className="font-semibold text-foreground"> {h.strong}</span>}
-              {'tail' in h && h.tail}
-            </dd>
-          </div>
+      <p className="mt-6 text-pretty font-sans text-lg leading-[1.6] text-foreground/85">
+        {HERO.history.map((h, n) => (
+          <span key={h.org}>
+            {n > 0 && ' '}
+            {h.before}
+            <span translate="no" className="font-semibold text-foreground">{h.org}</span>
+            {h.after}
+            {'pills' in h &&
+              h.pills?.map((pl, i, all) => (
+                <span key={pl.label}>
+                  {' '}
+                  <a
+                    href={pl.href}
+                    className="inline-flex items-center gap-1 rounded-full bg-track-management/10 px-2.5 py-0.5 font-medium text-track-management transition-colors hover:bg-track-management/20"
+                  >
+                    {pl.label} <span aria-hidden="true">↓</span>
+                  </a>
+                  {i < all.length - 1 && ' and'}
+                </span>
+              ))}
+            {'tail' in h && h.tail}
+          </span>
         ))}
-      </dl>
+      </p>
 
 
       <div ref={ctaRef} className="mt-8 flex flex-wrap items-center gap-3">

@@ -179,20 +179,29 @@ export const HERO = {
     fields: 'AI, enterprise data platforms, and developer tools',
     after: '. With roots as a backend engineer, I thrive in the deep end of technical complexity, both as a hands-on Principal Designer and a team manager.',
   },
+  /** The history as one paragraph, one sentence per employer. */
   history: [
     {
       org: 'Intuit',
-      period: '2021–26',
-      text: 'Led Data Platform design. Owned',
-      /** Pills inside the line, each scrolling to a work card. */
+      before: 'Most recently at ',
+      after: ', from 2021 to 2026, I led Data Platform design, owning',
+      /** Links inside the sentence, each scrolling to a work card. */
       pills: [
         { label: 'data discovery', href: '#search-2' },
         { label: 'platform strategy', href: '#agentic-discovery' },
       ],
-      tail: '; led the team across pipeline authoring, observability, lineage, governance, fine-grained access control and instrumentation.',
+      tail: ' and leading the team across pipeline authoring, observability, lineage, governance, fine-grained access control and instrumentation.',
     },
-    { org: '605', period: '2017–21', text: 'Three 0-to-1 TV analytics products;', strong: '$20M+', tail: ' new revenue.' },
-    { org: 'TIBCO', period: '2012–15', text: 'Backend Java on an enterprise integration platform.' },
+    {
+      org: '605',
+      before: 'Before that, at ',
+      after: ', from 2017 to 2021, I designed three 0-to-1 TV analytics products that brought in more than $20M in new revenue.',
+    },
+    {
+      org: 'TIBCO',
+      before: 'Earlier, at ',
+      after: ', from 2012 to 2015, I wrote backend Java for an enterprise integration platform.',
+    },
   ],
 }
 
