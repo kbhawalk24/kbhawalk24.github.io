@@ -29,6 +29,9 @@ export interface WorkCard {
   line: string
   /** One measured outcome per card. */
   stats: [CardStat]
+  /** Instead of one outcome: the same journey measured at three moments.
+   *  Each step keeps its own label, because they are not one metric. */
+  journey?: { when: string; value: string; label: string }[]
   status: 'coming-soon' | 'live'
   /** The page, once it exists. */
   href?: string
@@ -58,7 +61,7 @@ export const ARCS: Arc[] = [
         roleTag: 'Principal Product Designer → Design Manager',
         track: 'strategy',
         line:
-          'An assistant that came before search was precise, the search rebuild that fixed it, and the agent inside Cursor and Claude.',
+          'How finding data at Intuit went from days of asking around, through a search rebuilt on what people actually do, to an agent that answers inside Cursor and Claude.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         cover: {
           src: '/work/agentic-discovery/copilot-ask.jpg',
@@ -69,6 +72,11 @@ export const ARCS: Arc[] = [
           alt: 'Data Copilot beside a table page, answering a question with a SQL query and an explanation',
         },
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
+        journey: [
+          { when: '2023', value: '20 days', label: 'To discover data, before the rebuild' },
+          { when: '2025', value: '9.4 hours', label: 'After Search 2.0' },
+          { when: '2026', value: '4 minutes', label: 'From a question to an answer, with the agent' },
+        ],
         status: 'live',
         href: '/work/agentic-discovery',
       },

@@ -134,15 +134,41 @@ function Card({ card }: { card: WorkCard }) {
         </h4>
         {card.cover && <span className="sr-only">{card.cover.alt}</span>}
         <p className="mt-3 text-pretty font-sans text-base leading-relaxed text-muted-foreground">{card.line}</p>
-        <p className="mt-5">
-          <span
-            className={cn('block font-heading text-2xl font-semibold leading-tight tracking-tight tabular-nums', !tint && trackStyles[card.track].accentText)}
-            style={tint ? tintText(tint) : undefined}
-          >
-            {stat.value}
-          </span>
-          <span className="mt-1 block label-micro text-muted-foreground">{stat.label}</span>
-        </p>
+        {card.journey ? (
+          <ol className="mt-5">
+            {card.journey.map((step, i) => (
+              <li
+                key={step.when}
+                className={cn('grid grid-cols-[3.5rem_minmax(0,1fr)] items-baseline gap-x-3 py-2.5', i > 0 && 'border-t border-foreground/10')}
+              >
+                <span className="label-micro text-muted-foreground">{step.when}</span>
+                <span>
+                  <span
+                    className={cn(
+                      'block font-heading font-semibold leading-tight tracking-tight tabular-nums',
+                      i === card.journey!.length - 1 ? 'text-2xl md:text-3xl' : 'text-2xl',
+                      !tint && trackStyles[card.track].accentText,
+                    )}
+                    style={tint ? tintText(tint) : undefined}
+                  >
+                    {step.value}
+                  </span>
+                  <span className="mt-0.5 block label-micro text-muted-foreground">{step.label}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p className="mt-5">
+            <span
+              className={cn('block font-heading text-2xl font-semibold leading-tight tracking-tight tabular-nums', !tint && trackStyles[card.track].accentText)}
+              style={tint ? tintText(tint) : undefined}
+            >
+              {stat.value}
+            </span>
+            <span className="mt-1 block label-micro text-muted-foreground">{stat.label}</span>
+          </p>
+        )}
         {card.href && (
           <Link
             href={card.href}
