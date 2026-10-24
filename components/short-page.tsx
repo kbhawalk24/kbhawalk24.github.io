@@ -21,7 +21,7 @@ import { PrototypeEmbed } from '@/components/prototype-embed'
 // next page, then credits and sources. The page's accent follows the hero
 // clip's tint so one hue runs through it.
 
-const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes'])
+const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes', 'statement'])
 
 function readMinutes(page: ShortPage) {
   const words = page.sections
@@ -32,6 +32,7 @@ function readMinutes(page: ShortPage) {
       if (b.type === 'cards') return b.items.map((i) => i.title + ' ' + i.text).join(' ')
       if (b.type === 'tension') return b.tension + ' ' + b.decision
       if (b.type === 'quotes') return b.items.map((i) => i.text).join(' ')
+      if (b.type === 'statement') return b.rows.map((r) => r.text).join(' ')
       if (b.type === 'steps') return b.items.map((i) => i.title + ' ' + (i.quote ?? '')).join(' ')
       if (b.type === 'table') return b.rows.flat().join(' ')
       return ''
@@ -74,6 +75,21 @@ function BlockView({ block }: { block: Block }) {
             Watch on YouTube<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </figcaption>
+      </figure>
+    )
+  }
+  if (block.type === 'statement') {
+    return (
+      <figure className="rounded-[14px] bg-card p-6 shadow-soft md:p-8">
+        <dl className="grid gap-x-6 gap-y-3 md:grid-cols-[9rem_minmax(0,1fr)]">
+          {block.rows.map((r) => (
+            <div key={r.label} className="contents">
+              <dt className="label-micro text-accent-brand md:pt-1">{r.label}</dt>
+              <dd className="text-pretty font-heading text-xl font-semibold leading-snug tracking-tight md:text-2xl">{r.text}</dd>
+            </div>
+          ))}
+        </dl>
+        <figcaption className="mt-5 label-micro text-muted-foreground">{block.who}</figcaption>
       </figure>
     )
   }
@@ -249,6 +265,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
                     {section.heading}
                     <HeadingDot />
                   </h2>
+                  <Visuals visuals={visualsLead(page, section.id)} className="mt-6" />
                   <div className="mt-5 grid gap-5">
                     {section.blocks.map((block, i) => (
                       <div key={i} className={cn(!WIDE_BLOCKS.has(block.type) && 'max-w-[46rem]')}>
@@ -302,7 +319,10 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
 }
 
 function visualsAfter(page: ShortPage, after: string | undefined) {
-  return (page.visuals ?? []).filter((v) => v.after === after)
+  return (page.visuals ?? []).filter((v) => v.after === after && !v.lead)
+}
+function visualsLead(page: ShortPage, after: string) {
+  return (page.visuals ?? []).filter((v) => v.after === after && v.lead)
 }
 
 // Diagonal hatching for a slot whose file has not landed yet.

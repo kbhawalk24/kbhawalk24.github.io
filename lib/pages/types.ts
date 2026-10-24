@@ -32,6 +32,8 @@ export type Block =
   | { type: 'list'; items: { lead: string; text: string }[] }
   | { type: 'table'; head: string[]; rows: string[][]; caption?: string }
   | { type: 'video'; youtube: string; start?: number; title: string; caption: string; href: string }
+  /** A persona statement in the workshop format: I am, trying to, but, because. */
+  | { type: 'statement'; who: string; rows: { label: string; text: string }[] }
   /** Exact words from research or feedback, credited by role and date. */
   | { type: 'quotes'; items: { text: string; who: string; when?: string }[] }
   /** Three or four short cards in a row: insights, outcomes, learnings. */
@@ -89,6 +91,8 @@ export interface PageVisual {
   caption: string
   /** Span the full measure even when it shares a section with other visuals. */
   full?: boolean
+  /** Open the section: render between the heading and the first block. */
+  lead?: boolean
   /** Where it sits: under the stats when absent, else after this section id. */
   after?: string
   /** For a placeholder: what to export and from where. Not rendered. */
