@@ -10,6 +10,28 @@ The page should show five things and name none of them: a problem framed at the 
 
 ## Sections, in order, with what goes in each
 
+### 0. The path, before anything else: how people actually got to data in 2024
+
+A diagram at the top of the page, drawn in the site's style from your User Journey board and grounded in the April 2024 follow-me-home synthesis (20 people: 8 analysts, 6 software or data engineers, 2 ML engineers, 2 marketing managers, a solutions architect, a product manager; nine business units). Six stages, left to right. Under each: the tools people used, one or two things they said, credited by role, and the time it took where someone gave one. The red annotations from your board become the problems the rest of the page solves.
+
+**1. Get requirements.** Jira tickets and meetings. "It usually takes about a week from getting a data request to finding the right sources. The biggest delay is getting stakeholders and data owners into one meeting." (marketing manager). A product manager: six to twelve months to get one attribute identified, into a table and into the marketing store.
+
+**2. Search.** Slack first, then GitHub, then the catalog. "I start in Slack channels like the TurboTax data help channel. If I find a table name there, I search for it in Data Discovery." (staff analyst). "90% of the time someone knows the answer: a colleague or the help channel." (staff analyst). "Search GitHub first when looking for new data, then ask the team." (data engineer). One ML engineer tried the catalog for about five minutes, did not expect to get close, and did not narrow down or iterate. A manager searched "county" and got "country". Problem on the board: there is no way to learn that data does not exist.
+
+**3. Validate.** Columns, old queries on GitHub, the people who ran them, a sample in Databricks. "I'd rather just look at a query and see if that's what I need without bothering them." (senior analyst). What analysts actually check: same columns and primary keys, row count steady over time, partitioned, one unified source, how detailed the owner's description is, who queried it recently. "If no one mentions having used a table, I discard it." The copy problem: a search for the payroll company status table lands on a published copy of a data mart table, and nothing says which is the original. Problem on the board: surface the experts and the proof inside the catalog.
+
+**4. Request access.** Tickets, one table at a time. "Every time someone points me at a new table it takes two or three days to get access, and only then can I check whether it is relevant." (staff analyst). A principal engineer: about a month, across several Slack channels, to reach transcript data. Marketing managers have no lake access at all. An HR analyst asked for a five-minute preview before requesting permanent access. Problem: validation sits behind access, so people pay for access to find out a table is wrong.
+
+**5. Explore.** Databricks, Athena, Postman. "Even with the right table names the SQL won't run; the dialects differ." (software engineer). An ML engineer checked by hand that the lake and the marketing store agreed, and found discrepancies. Problem: cross-validating across sources is manual.
+
+**6. Move or use.** CDC Explorer, Kafka, the marketing store. "I knew the batch data I wanted. Then I realised it had to be real-time, and the real-time source did not exist." (ML engineer). Discovery took about three months of an eight-to-nine-month project; faster discovery was worth about $2 million in earlier release. Problem on the board: link real-time to batch so the verification loop disappears.
+
+**Cross-cutting, under the diagram.** How often the search is for something new: one in four. A solutions architect put it at 75% the same core tables, 25% new; a staff analyst at 25 to 30% of her time; a marketing manager at one in ten. That is better evidence than the "one in five" the site uses today, and it should replace it.
+
+**Measures attached to the path.** 20 days for the whole path in 2023 (public, re:Invent). 14.8 hours for the search stage in November 2024, 9.4 in July 2025, 8.2 in May 2026 (tracker). 4 minutes from question to answer with the agent in 2026. This is how the card's chain becomes honest: each number labelled with the stage it measures.
+
+Images: the diagram itself; beside it, your User Journey board with the Jira and Slack screenshots blurred, as the proof it came from a real session; and three of the workshop stickies as a strip: "Use case explorer, shows when there are no results", "AI DDE coach", "Natural language search across Slack, GitHub and Databricks". They show the agent was already on the whiteboard in April 2024.
+
 ### 1. The problem: one box that returned everything
 
 Open on the before picture. Searching "company status" in 2024 returned 1,838,670 results under Data Catalog: columns named company_status from nine schemas, each with the same description, before the first table. Eight filter pills across the top. The July 2024 review recorded why nobody used them: the useful ones (product, schema, domain) did not exist; the rest were two clicks deep, like Data Product Type → Data Mart; they were written in Data Map vocabulary; and nothing showed that a filter was applied. People did not refine. They asked a colleague.
@@ -28,7 +50,7 @@ Images: the Copilot clip; the Investor Day video.
 
 ### 3. The research: twenty people, six tools, one haystack
 
-Spring 2024. You designed and ran the catalog's first follow-me-home series: 20 people across seven business units (8 analysts, 4 software engineers, 2 data engineers, 2 marketing managers, 2 ML engineers, a solutions architect, a product manager), with the engineering team watching, one prompt: "Walk us through a recent time you found data. What tools, how long, what went wrong?" Then an in-person design-for-delight workshop with engineering, PM and design, where the group plotted ideas on impact against existing-versus-new technology and starred three. The group product manager called it "a major contributor to our FY25 roadmap."
+Spring 2024. You designed and ran the catalog's first follow-me-home series: 20 people across nine business units (8 analysts, 4 software engineers, 2 data engineers, 2 marketing managers, 2 ML engineers, a solutions architect, a product manager), with the engineering team watching, one prompt: "Walk us through a recent time you found data. What tools, how long, what went wrong?" Then an in-person design-for-delight workshop with engineering, PM and design, where the group plotted ideas on impact against existing-versus-new technology and starred three. The group product manager called it "a major contributor to our FY25 roadmap."
 
 What you learned, as the deck states it:
 - Discovery runs on people. Before the catalog: trusted colleagues and about fifteen Slack channels. During validation: old queries, wikis, GitHub. After: a subject matter expert's say-so. True across every persona.
