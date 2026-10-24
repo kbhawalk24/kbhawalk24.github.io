@@ -23,15 +23,15 @@ const OUTLINE_BUTTON =
 function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
   return (
     <div>
-      <p className="max-w-[38rem] text-pretty font-sans text-lg leading-[1.6] text-foreground md:text-xl">
+      <p className="text-pretty font-sans text-lg leading-[1.6] text-foreground md:text-xl">
         {HERO.intro.before}
         <span className="font-semibold text-accent-brand">{HERO.intro.fields}</span>
         {HERO.intro.after}
       </p>
 
-      <dl className="mt-8 max-w-[38rem] divide-y divide-border border-y border-border font-sans text-[15px] leading-[1.6] text-foreground">
+      <dl className="mt-8 divide-y divide-border border-y border-border font-sans text-[15px] leading-[1.6] text-foreground">
         {HERO.history.map((h) => (
-          <div key={h.org} className="grid gap-x-6 gap-y-1 py-3.5 sm:grid-cols-[8.5rem_minmax(0,1fr)]">
+          <div key={h.org} className="grid gap-x-6 gap-y-1 py-3.5 sm:grid-cols-[10rem_minmax(0,1fr)]">
             <dt className="font-semibold">
               <span translate="no">{h.org}</span> · {h.period}
             </dt>
@@ -56,6 +56,7 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
           </div>
         ))}
       </dl>
+
 
       <div ref={ctaRef} className="mt-8 flex flex-wrap items-center gap-3">
         <MagneticWrap className="inline-block">
@@ -289,13 +290,7 @@ export function Hero() {
                   transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT }}
                   className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-left font-sans text-lg tracking-wide text-foreground"
                 >
-                  <span>
-                    Product Design Manager and Principal Designer,{' '}
-                    <span translate="no" className="font-semibold">
-                      Intuit
-                    </span>{' '}
-                    2021 to 2026
-                  </span>
+                  <span>Product Design Manager and Principal Designer</span>
                 </motion.div>
               </div>
             </div>
@@ -304,7 +299,7 @@ export function Hero() {
                 and the ask with its buttons. */}
             <div
               style={still ? undefined : { opacity: fade.bioOpacity, filter: `blur(${fade.bioBlurPx}px)` }}
-              className="mt-12 w-full text-left md:mt-16"
+              className="mt-8 w-full text-left"
             >
              <About ctaRef={ctaRef} />
             </div>
