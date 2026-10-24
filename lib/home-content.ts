@@ -27,6 +27,8 @@ export interface WorkCard {
   cover?: { src: string; alt: string; video?: string; width?: number; height?: number; tint: string }
   /** One line of plain text under the title. */
   line: string
+  /** The sticky on the thumbnail: what to read this one for. */
+  note?: string
   /** One measured outcome per card. */
   stats: [CardStat]
   /** Instead of one outcome: the same journey measured at three moments.
@@ -54,27 +56,48 @@ export const ARCS: Arc[] = [
       'I led data discovery for five years across a data lake of 320,000 tables and the data products built on it, from keyword search to a plain-language assistant, and then to an agent inside Cursor and Claude.',
     cards: [
       {
+        slug: 'search-2',
+        org: 'Intuit',
+        title: 'Search 2.0: rebuilding how people find data',
+        period: '2024–2025',
+        roleTag: 'Principal Product Designer',
+        track: 'ic',
+        note: 'Read this to see how I work as an IC designer.',
+        line:
+          'Twenty people followed through a search, one specification, and a search rebuilt around what they actually do: a tab per kind of object, facets that change with the query, five lines of evidence per result.',
+        visualNote: 'The Search 2.0 design for table results.',
+        cover: {
+          src: '/work/search-2/tables-tab-design.jpg',
+          tint: TINTS.dde2023,
+          alt: 'The Search 2.0 design for table results, with tabs per object type, facets on the left and metadata on every result',
+        },
+        stats: [{ value: '81.31% → 89.24%', label: 'Searches where the first result was right' }],
+        status: 'live',
+        href: '/work/search-2',
+      },
+      {
         slug: 'agentic-discovery',
         org: 'Intuit',
-        title: 'Finding data: from search to an agent',
+        title: 'Finding data: from an assistant to an agent',
         period: '2023–2026',
         roleTag: 'Principal Product Designer → Design Manager',
         track: 'strategy',
+        note: 'Read this for design strategy on agentic data discovery.',
         line:
-          'How finding data at Intuit went from days of asking around, through a search rebuilt on what people actually do, to an agent that answers inside Cursor and Claude.',
+          'An assistant that came too early, a place to keep the data people reuse, the specification for how an agent inside Cursor and Claude answers, and the question of where it should live next.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         cover: {
-          src: '/work/agentic-discovery/copilot-ask.jpg',
-          video: '/work/agentic-discovery/copilot-thumb.mp4',
-          tint: TINTS.dde2023,
-          width: 1280,
-          height: 906,
-          alt: 'Data Copilot beside a table page, answering a question with a SQL query and an explanation',
+          src: '/work/agentic-discovery/hero-poster.jpg',
+          video: '/work/agentic-discovery/hero.mp4',
+          tint: TINTS.neutral,
+          width: 1340,
+          height: 994,
+          alt: 'The agent inside Cursor finding tables, writing a query and showing it before running it',
         },
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
         journey: [
-          { when: '2023', value: '20 days', label: 'To discover data, before the rebuild' },
-          { when: '2025', value: '9.4 hours', label: 'After Search 2.0' },
+          { when: '2023', value: '20 days', label: 'To find, get access to and explore data' },
+          { when: '2025', value: '9.4 hours', label: 'To discover data, after Search 2.0' },
           { when: '2026', value: '4 minutes', label: 'From a question to an answer, with the agent' },
         ],
         status: 'live',
@@ -92,6 +115,7 @@ export const ARCS: Arc[] = [
       {
         slug: 'catalog-data-map-lineage',
         org: 'Intuit',
+        note: 'Read this to see how I grew a product into a platform over five years.',
         title: 'The catalog: from a list of tables to a platform',
         period: '2021–2026',
         roleTag: 'Founding Product Designer → Principal → Design Manager',
@@ -121,6 +145,7 @@ export const ARCS: Arc[] = [
       {
         slug: '605-tv-analytics',
         org: '605',
+        note: 'Read this for zero-to-one products and data visualisation craft.',
         title: '605 TV Analytics: Multi-Audience Reports Under Render Constraints',
         period: '2017–2021',
         roleTag: 'First Product Designer',

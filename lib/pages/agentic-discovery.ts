@@ -9,19 +9,20 @@ import { TINTS } from '@/lib/tint'
 export const AGENTIC_DISCOVERY: ShortPage = {
   slug: 'agentic-discovery',
   href: '/work/agentic-discovery',
-  title: 'Finding data: from search to an agent',
+  title: 'Finding data: from an assistant to an agent',
   roleTag: 'Principal Product Designer → Design Manager',
   period: '2023–2026',
   description:
-    'How I took finding data at Intuit from a 2023 assistant that came too early, through a search rebuild and collections, to an agent inside Cursor and Claude, and the specification for how it answers.',
+    'The strategy behind putting Intuit’s data catalog inside Cursor and Claude: an assistant that came too early, what the search rebuild taught, a place to keep the data people reuse, the specification for how the agent answers, and the question I am working on now.',
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
-      { label: 'Finding data' },
-      { label: 'The catalog, from tables to a platform', href: '/work/catalog-data-map-lineage' },
+      { label: 'Search 2.0', href: '/work/search-2' },
+      { label: 'The agent' },
+      { label: 'The catalog', href: '/work/catalog-data-map-lineage' },
       { label: '605', href: '/work/605-tv-analytics' },
     ],
-    current: 0,
+    current: 1,
   },
   facts: [
     { label: 'Duration', value: 'August 2023 to March 2026' },
@@ -43,8 +44,8 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   ],
   stats: [
     { value: '45 min → 4 min', label: 'From a question to an answer, with the agent' },
-    { value: '81.31% → 89.24%', label: 'Searches where the first result was right' },
-    { value: '711', label: 'Active users of the agent by March 2026' },
+    { value: '711', label: 'Active users of the agent in its first 90 days' },
+    { value: '56,560', label: 'Tool calls in those 90 days' },
   ],
   hero: {
     src: '/work/agentic-discovery/hero.mp4',
@@ -72,26 +73,6 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       after: 'assistant',
       alt: 'Data Copilot open beside a table page. Asked how many companies signed up this year by sales channel, it returns a SQL query and a plain-language explanation of what the query does.',
       caption: 'Data Copilot, 2023, from my prototype: ask a question about the table on screen and it writes the SQL and explains it.',
-    },
-    {
-      id: 'search-2-table',
-      src: '/work/agentic-discovery/search-2-table.jpg',
-      width: 1440,
-      height: 1020,
-      after: 'search',
-      full: true,
-      alt: 'Table search results in the Search 2.0 design. Filters on the left for hidden results, compliance, usage, schema and maturity. Each result shows its path, description and tags, and on the right its owner team, last refresh, size, query count and upstream and downstream counts.',
-      caption: 'My Search 2.0 design for table results, 2024: every result carries what a person needs to judge it, from last refresh to how many queries use it.',
-    },
-    {
-      id: 'click-depth',
-      full: true,
-      src: '/work/agentic-discovery/amplitude-click-depth.jpg',
-      width: 2087,
-      height: 930,
-      after: 'search',
-      alt: 'Stacked monthly bars showing which search result people clicked, with the first result the large majority every month',
-      caption: 'Which result people clicked, November 2025 to May 2026. The first result carries most clicks every month.',
     },
     {
       id: 'collections',
@@ -141,7 +122,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
         },
         {
           type: 'p',
-          text: 'Usage did not hold after 2024. The assistant was only as good as the search underneath it, and search was not precise enough yet: when the first answer named the wrong table, people had to go back and forth with it to get to the right one. Most of the time they did not want a conversation at all. They wanted to look a table up and get on with their work. Only one of the 20 people I later interviewed used the AI search, and when a first answer failed, people did not come back.',
+          text: 'Usage did not hold after 2024. The assistant was only as good as the search underneath it, and that search reached tables and nothing else: columns, topics, data products and dashboards were outside it, so a question about any of those had no answer. The tables it did find came with little to judge them by, none of the metadata Search 2.0 later put on every result, so when the first answer named the wrong table people had to go back and forth with it. Most of the time they did not want a conversation at all. They wanted to look a table up and get on with their work. Only one of the 20 people I later interviewed used the AI search, and when a first answer failed, people did not come back.',
         },
         {
           type: 'p',
@@ -150,48 +131,14 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       ],
     },
     {
-      id: 'framing',
-      heading: 'How I framed it: watch people work, not ask what they want',
+      id: 'rebuild',
+      heading: 'Between the assistant and the agent: fix the search underneath',
       blocks: [
         {
           type: 'p',
-          text: 'To understand what people needed instead, in spring 2024 I interviewed 20 catalog users across business units while they did their own work, and brought engineers along to watch. Then I ran a workshop with the whole team. The group product lead called the research “a major contributor to our FY25 roadmap.” Three findings set the direction for everything after.',
-        },
-        {
-          type: 'list',
-          items: [
-            { lead: 'People know what kind of data they want.', text: 'They arrive knowing whether they need a table or a stream, so search should start there, not make them filter for it.' },
-            { lead: 'Four times in five, they go back to data they already know.', text: 'Only about one search in five is for something new. Search was never the whole job.' },
-            { lead: 'Trust decides the click.', text: 'People checked freshness, owners and past queries before using anything, and asked a colleague when the catalog could not tell them.' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'search',
-      heading: 'Decision 1: rebuild search around what people already know',
-      blocks: [
-        {
-          type: 'p',
-          text: 'The old search split results into a catalog and a map and left people to work out which one held their data. I wrote the Search 2.0 specification in June 2024 around five rules.',
-        },
-        {
-          type: 'list',
-          items: [
-            { lead: 'One tab per kind of data.', text: 'Tables, the Data Map, real-time streams, feature sets, dashboards and marketing attributes, each with its own tab.' },
-            { lead: 'Filters and facets do different jobs.', text: 'A filter is the kind of data and never changes; a facet is a property of the results and changes with the query, with four behaviors depending on how many values it has.' },
-            { lead: 'Five lines per result, no more.', text: 'Split between signals of health, such as freshness and quality, and signals of use, such as how often a table is queried.' },
-            { lead: 'Cut what would not ship well.', text: 'Nested facet browsing came out of the first release after engineering review, and tags were left open when a reviewer warned they would turn subjective.' },
-            { lead: 'No unverified AI text by default.', text: 'When two of the first three reviewers said AI-written descriptions felt untrustworthy, we stopped showing unverified ones and put human editing first.' },
-          ],
-        },
-        {
-          type: 'p',
-          text: 'Table search launched on November 14, 2024, with keyword precision up 12.5% and semantic precision up 58%. After I became a manager, a designer on my team took my design for searching the map to launch on March 26, 2025, across 10,000 data products and 460,000 attributes: the first result was right 89.24% of the time, up from 81.31%, and 99 in 100 searches finished in 1.93 seconds instead of 50.59.',
-        },
-        {
-          type: 'p',
-          text: 'What it cost: the instrumentation showed exact-name searches got slightly worse while everything else improved, dipping from 96% to 94% top-five clicks in July 2025 before recovering to 95%. The lesson I took: an exact name deserves its own fast path.',
+          text:
+            'The assistant answered from search as it was: tables only, with none of the metadata a person needs to judge a result. So before any agent, the search had to change. That work has its own page. In short: I followed twenty people through a search, wrote a specification that gave each kind of object its own tab and each result five lines of evidence, and the team shipped table search in November 2024 and map search in March 2025, with the first result right 89.24% of the time instead of 81.31%. Two findings from that research set the agent’s shape: three searches in four go back to data the person already knows, and people wanted answers where they were working, not in another window.',
+          links: [{ text: 'its own page', href: '/work/search-2' }],
         },
       ],
     },
@@ -240,6 +187,22 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       ],
     },
     {
+      id: 'open',
+      heading: 'The question after the agent: where should it live?',
+      blocks: [
+        {
+          type: 'p',
+          text:
+            'The agent lives in Cursor and Claude. The catalog itself still has a search box. In 2026 I wrote the brief for how the two should relate, and it is the problem I am working on now. Three modes: lookup, for people who can name what they want; an assistant beside the page, whose context is whatever table or search is on screen; and an immersive chat for open-ended work, with the page it came from still visible. Four rules that hold across them: the mode follows the intent, never the persona; the assistant’s context follows the page and always says what it is looking at; a person can expand to the immersive view from anywhere, and only they can; and expanding never loses their place.',
+        },
+        {
+          type: 'p',
+          text:
+            'Two decisions so far, each from testing with users. Search and chat keep separate entry points, because when the two sat side by side people clicked the familiar search box out of habit and never saw the agent. And links inside the chat open in a new tab by default, because people did not want to lose the thread. What is still open: how the assistant should signal that its context has changed when a person moves to a new page, and what it should do on a page with no clear subject.',
+        },
+      ],
+    },
+    {
       id: 'impact',
       heading: 'Impact',
       blocks: [
@@ -248,9 +211,6 @@ export const AGENTIC_DISCOVERY: ShortPage = {
           head: ['When', 'What was measured', 'Change', 'Whose result'],
           rows: [
             ['2023', 'Analysts using the 2023 assistant', 'Up to 2x faster; 500+ people a month', 'My design; figure from the CTO at Investor Day'],
-            ['Nov 14, 2024', 'Table search precision', '+12.5% keyword, +58% semantic', 'My design; engineering built the ranking'],
-            ['Mar 26, 2025', 'Searches where the first result was right', '81.31% → 89.24%', 'My design, taken to launch by a designer on my team'],
-            ['Mar 26, 2025', 'Time for 99 in 100 searches', '50.59 s → 1.93 s', 'Engineering and the search-model team'],
             ['Aug 7, 2025', 'Collections shipped', 'A saved working set of data, now the agent’s context', 'My strategy; designed by my team'],
             ['Mar 2026', 'From a question to an answer, with the agent', '45 min → 4 min', 'My strategy and specification; shared'],
             ['Mar 11, 2026', 'Agent adoption in its first 90 days', '711 active users; 56,560 tool calls', 'Shared'],
@@ -260,7 +220,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
   ],
   next: {
-    text: 'Finding data only works if the catalog underneath it can be trusted. Next: how I built that catalog from a list of tables into a platform.',
+    text: 'The agent answers from a catalog that took five years to build. Next: how it went from a list of tables to a platform.',
     label: 'The catalog, from tables to a platform',
     href: '/work/catalog-data-map-lineage',
   },

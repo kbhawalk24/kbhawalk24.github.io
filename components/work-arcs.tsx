@@ -91,6 +91,13 @@ function Thumbnail({ card }: { card: WorkCard }) {
     >
       {/* The whole panel opens the case study; the title link carries the name. */}
       <Link href={card.href ?? '#work'} tabIndex={-1} aria-hidden="true" className="absolute inset-0" />
+      {card.note && (
+        <p
+          className="pointer-events-none absolute left-4 top-4 z-10 max-w-[13rem] -rotate-2 rounded-[3px] bg-[#fff3b0] px-3 py-2.5 font-sans text-[13px] font-semibold leading-snug text-[#3d3200] shadow-[0_6px_14px_-4px_rgb(20_20_20/0.35)] sm:left-5 sm:top-5 sm:max-w-[15rem] sm:text-sm"
+        >
+          {card.note}
+        </p>
+      )}
       {cover && (
         <div className="pointer-events-none relative w-full overflow-hidden rounded-[8px] bg-card shadow-[0_24px_48px_-16px_rgb(20_20_20/0.28)] ring-1 ring-foreground/10 transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-1.5">
           {cover.video ? (

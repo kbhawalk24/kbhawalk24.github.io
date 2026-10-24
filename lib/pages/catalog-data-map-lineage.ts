@@ -17,11 +17,12 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
-      { label: 'Finding data', href: '/work/agentic-discovery' },
-      { label: 'The catalog, from tables to a platform' },
+      { label: 'Search 2.0', href: '/work/search-2' },
+      { label: 'The agent', href: '/work/agentic-discovery' },
+      { label: 'The catalog' },
       { label: '605', href: '/work/605-tv-analytics' },
     ],
-    current: 1,
+    current: 2,
   },
   facts: [
     { label: 'Duration', value: 'June 2021 to July 2026; hands-on design from 2021 to 2024' },

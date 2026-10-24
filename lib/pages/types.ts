@@ -32,6 +32,9 @@ export type Block =
   | { type: 'list'; items: { lead: string; text: string }[] }
   | { type: 'table'; head: string[]; rows: string[][]; caption?: string }
   | { type: 'video'; youtube: string; start?: number; title: string; caption: string; href: string }
+  /** A path through stages, each with the tools it ran through, one thing
+   *  someone said (credited by role) and, where known, how long it took. */
+  | { type: 'steps'; caption?: string; items: { title: string; tools: string; quote?: string; who?: string; time?: string }[] }
 
 export interface PageSection {
   id: string

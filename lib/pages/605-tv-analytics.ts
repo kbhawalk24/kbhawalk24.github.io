@@ -12,10 +12,12 @@ export const SIX_O_FIVE: ShortPage = {
   context: {
     system: 'Before Intuit: 605, a TV advertising analytics company, three products from first concept to launch.',
     steps: [
-      { label: '605, TV advertising analytics, 2017–2021' },
-      { label: 'Intuit, the data platform, 2021–2026', href: '/work/catalog-data-map-lineage' },
+      { label: 'Search 2.0', href: '/work/search-2' },
+      { label: 'The agent', href: '/work/agentic-discovery' },
+      { label: 'The catalog', href: '/work/catalog-data-map-lineage' },
+      { label: '605' },
     ],
-    current: 0,
+    current: 3,
   },
   facts: [
     { label: 'Duration', value: 'October 2017 to June 2021' },

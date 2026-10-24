@@ -148,7 +148,7 @@ export const ROLES: TimelineRole[] = [
         detail:
           'I designed semantic search for tables and the Data Map around four rules from research with 20 catalog users. The slowest searches went from 50.59 seconds to 1.93.',
         impact: { value: '81.31% → 89.24%', label: 'First result correct' },
-        href: '/work/agentic-discovery',
+        href: '/work/search-2',
       },
       {
         track: 'ic',
@@ -170,7 +170,7 @@ export const ROLES: TimelineRole[] = [
         headline: 'Research that set the FY25 roadmap',
         detail:
           'I ran 20 in-context user visits and a cross-functional workshop; the group product lead called it “a major contributor to our FY25 roadmap.”',
-        href: '/work/agentic-discovery',
+        href: '/work/search-2',
       },
     ],
   },

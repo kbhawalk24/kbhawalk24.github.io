@@ -110,6 +110,31 @@ function BlockView({ block }: { block: Block }) {
       </figure>
     )
   }
+  if (block.type === 'steps') {
+    return (
+      <figure className="-mx-6 px-6 sm:mx-0 sm:px-0">
+        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {block.items.map((step, i) => (
+            <li key={step.title} className="flex flex-col rounded-[14px] bg-card p-4 shadow-soft">
+              <p className="label-micro text-muted-foreground">
+                <span className="tabular-nums">{i + 1}</span> · {step.tools}
+              </p>
+              <p className="mt-2 font-heading text-lg font-semibold leading-tight tracking-tight">{step.title}</p>
+              {step.quote && (
+                <p className="mt-3 text-pretty font-sans text-sm leading-relaxed text-foreground/85">
+                  “{step.quote}”{step.who && <span className="text-muted-foreground"> {step.who}</span>}
+                </p>
+              )}
+              {step.time && <p className="mt-auto pt-3 label-micro text-accent-brand">{step.time}</p>}
+            </li>
+          ))}
+        </ol>
+        {block.caption && (
+          <figcaption className="pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">{block.caption}</figcaption>
+        )}
+      </figure>
+    )
+  }
   if (block.type === 'table') {
     return (
       <div className="-mx-6 overflow-x-auto px-6 sm:mx-0 sm:px-0">
