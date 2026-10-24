@@ -124,7 +124,7 @@ function BlockView({ block }: { block: Block }) {
   }
   if (block.type === 'steps') {
     return (
-      <figure className="-mx-6 px-6 sm:mx-0 sm:px-0">
+      <figure className="w-full max-w-full">
         {block.caption && block.items.length === 4 && (
           <figcaption className="pb-3 font-heading text-lg font-semibold leading-tight tracking-tight">{block.caption}</figcaption>
         )}
@@ -154,7 +154,7 @@ function BlockView({ block }: { block: Block }) {
   }
   if (block.type === 'table') {
     return (
-      <div className="-mx-6 overflow-x-auto px-6 sm:mx-0 sm:px-0">
+      <div className="min-w-0 max-w-full overflow-x-auto [scrollbar-width:thin]" style={{ contain: 'inline-size' }}>
         <table className="w-full min-w-[560px] border-collapse text-left font-sans text-sm">
           {block.caption && <caption className="mb-2 text-left label-micro text-muted-foreground">{block.caption}</caption>}
           <thead>

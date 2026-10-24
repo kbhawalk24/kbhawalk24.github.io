@@ -63,7 +63,7 @@ export function SectionNav({
 
   if (variant === 'row') {
     return (
-      <nav aria-label={label} className={cn('-mx-6 overflow-x-auto px-6 [scrollbar-width:none]', className)}>
+      <nav aria-label={label} className={cn('w-full max-w-full overflow-x-auto overflow-y-hidden [scrollbar-width:none]', className)} style={{ contain: 'inline-size' }}>
         <ol className="flex w-max gap-2">
           {chapters.map((c) => {
             const isActive = c.id === active
