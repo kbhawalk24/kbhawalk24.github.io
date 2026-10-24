@@ -26,3 +26,13 @@ export function tintText(tint: string): CSSProperties {
 export function tintPill(tint: string): CSSProperties {
   return { ...tintText(tint), backgroundColor: `color-mix(in oklab, ${tint} 12%, var(--card))` }
 }
+
+/** A paper note in the colour opposite the prototype's, so it sits apart
+ *  from the panel. Browsers without relative colour syntax get apricot. */
+export function tintSticky(tint: string): CSSProperties {
+  if (tint === TINTS.neutral) return { backgroundColor: '#ffe3c4', color: '#4a2d05' }
+  return {
+    backgroundColor: `oklch(from ${tint} 0.93 0.07 calc(h + 180))`,
+    color: `oklch(from ${tint} 0.34 0.09 calc(h + 180))`,
+  }
+}

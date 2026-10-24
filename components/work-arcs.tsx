@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
 import { TRACKS } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
-import { tintPanel, tintPill, tintText } from '@/lib/tint'
+import { tintPanel, tintPill, tintSticky, tintText } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
@@ -91,13 +91,6 @@ function Thumbnail({ card }: { card: WorkCard }) {
     >
       {/* The whole panel opens the case study; the title link carries the name. */}
       <Link href={card.href ?? '#work'} tabIndex={-1} aria-hidden="true" className="absolute inset-0" />
-      {card.note && (
-        <p
-          className="pointer-events-none absolute left-4 top-4 z-10 max-w-[13rem] -rotate-2 rounded-[3px] bg-[#fff3b0] px-3 py-2.5 font-sans text-[13px] font-semibold leading-snug text-[#3d3200] shadow-[0_6px_14px_-4px_rgb(20_20_20/0.35)] sm:left-5 sm:top-5 sm:max-w-[15rem] sm:text-sm"
-        >
-          {card.note}
-        </p>
-      )}
       {cover && (
         <div className="pointer-events-none relative w-full overflow-hidden rounded-[8px] bg-card shadow-[0_24px_48px_-16px_rgb(20_20_20/0.28)] ring-1 ring-foreground/10 transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-1.5">
           {cover.video ? (
@@ -116,7 +109,15 @@ function Card({ card }: { card: WorkCard }) {
   const stat = card.stats[0]
   const tint = card.cover?.tint
   return (
-    <article className="grid gap-2 rounded-[18px] bg-card p-3 shadow-soft md:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] md:gap-0 md:p-4">
+    <article className="relative grid gap-2 rounded-[18px] bg-card p-3 shadow-soft md:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] md:gap-0 md:p-4">
+      {card.note && (
+        <p
+          className="pointer-events-none absolute left-5 top-0 z-10 max-w-[13rem] -translate-y-1/2 -rotate-2 rounded-[3px] bg-[#ffe3c4] px-3.5 py-3 font-sans text-[13px] font-semibold leading-snug text-[#4a2d05] shadow-[0_8px_18px_-6px_rgb(20_20_20/0.4)] sm:left-7 sm:max-w-[15rem] sm:text-sm"
+          style={tint ? tintSticky(tint) : undefined}
+        >
+          {card.note}
+        </p>
+      )}
       <Thumbnail card={card} />
       <div className="flex flex-col justify-center px-3 pb-4 pt-4 sm:px-5 md:px-10 md:py-10">
         <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -193,14 +194,14 @@ function Card({ card }: { card: WorkCard }) {
 function ArcSection({ arc, index }: { arc: Arc; index: number }) {
   return (
     <div className={index === 0 ? undefined : 'mt-16 md:mt-24'}>
-      <Reveal className="mb-8">
+      <Reveal className="mb-12">
         <p className="label-micro text-muted-foreground">
           Arc {index + 1} · {arc.period}
         </p>
         <h3 className="mt-3 text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">{arc.heading}</h3>
         {arc.thesis && <p className="mt-4 max-w-4xl text-pretty font-sans text-lg leading-[1.6] text-foreground">{arc.thesis}</p>}
       </Reveal>
-      <ol className="grid gap-6">
+      <ol className="grid gap-12">
         {arc.cards.map((card) => (
           <Reveal key={card.slug} as="li">
             <Card card={card} />
