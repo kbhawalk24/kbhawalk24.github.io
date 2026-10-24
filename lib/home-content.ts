@@ -173,7 +173,6 @@ export const ARCS: Arc[] = [
 // The hero's words and the Intuit chapter diagram under it.
 
 export const HERO = {
-  eyebrow: 'Product Design Manager & Principal IC',
   /** The intro: the fields are set in the accent colour. */
   intro: {
     before: 'I’m a technical design leader specializing in ',
@@ -190,7 +189,7 @@ export const HERO = {
         { label: 'data discovery', href: '#search-2' },
         { label: 'platform strategy', href: '#agentic-discovery' },
       ],
-      tail: '.',
+      tail: '; led the team across pipeline authoring, observability, lineage, governance, fine-grained access control and instrumentation.',
     },
     { org: '605', period: '2017–21', text: 'Three 0-to-1 TV analytics products;', strong: '$20M+', tail: ' new revenue.' },
     { org: 'TIBCO', period: '2012–15', text: 'Backend Java on an enterprise integration platform.' },

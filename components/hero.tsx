@@ -24,8 +24,7 @@ const OUTLINE_BUTTON =
 function About({ ctaRef }: { ctaRef: React.RefObject<HTMLParagraphElement | null> }) {
   return (
     <div>
-      <p className="label-micro text-muted-foreground">{HERO.eyebrow}</p>
-      <p className="mt-4 max-w-[38rem] text-pretty font-sans text-lg leading-[1.6] text-foreground md:text-xl">
+      <p className="max-w-[38rem] text-pretty font-sans text-lg leading-[1.6] text-foreground md:text-xl">
         {HERO.intro.before}
         <span className="font-semibold text-accent-brand">{HERO.intro.fields}</span>
         {HERO.intro.after}
