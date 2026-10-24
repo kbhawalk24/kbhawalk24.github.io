@@ -18,7 +18,7 @@ const OUTLINE_BUTTON =
   'inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-foreground ring-1 ring-foreground/10 transition-[background-color,box-shadow] hover:bg-secondary hover:ring-foreground/25'
 
 /** The about block: one paragraph with the fields in the accent colour,
- *  one paragraph of history, and the buttons. Replaces the earlier single paragraph; the name and the
+ *  one paragraph per employer, and the buttons. Replaces the earlier single paragraph; the name and the
  *  illustration above are unchanged. */
 function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
   return (
@@ -29,10 +29,8 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
         {HERO.intro.after}
       </p>
 
-      <p className="mt-8 text-pretty font-sans text-lg leading-[1.6] text-foreground md:text-xl">
-        {HERO.history.map((h, n) => (
-          <span key={h.org}>
-            {n > 0 && ' '}
+      {HERO.history.map((h) => (
+          <p key={h.org} className="mt-8 text-pretty font-sans text-lg leading-[1.6] text-foreground md:text-xl">
             {h.before}
             <span translate="no" className="font-semibold">{h.org}</span>
             {h.after}
@@ -50,9 +48,8 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
                 </span>
               ))}
             {'tail' in h && h.tail}
-          </span>
+          </p>
         ))}
-      </p>
 
 
       <div ref={ctaRef} className="mt-8 flex flex-wrap items-center gap-3">
