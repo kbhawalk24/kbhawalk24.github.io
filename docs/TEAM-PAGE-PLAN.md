@@ -6,7 +6,11 @@
 - Timeline: unchanged.
 - Nav: Work · Team · Timeline · Resume · LinkedIn.
 
-## Three IC case studies on the landing page (decided 23 October)
+## Four case studies on the landing page (revised 24 October)
+
+Search 2.0 split out of Finding data on 24 October: it is the IC craft story, the agent page is the design strategy story. Each homepage card carries a sticky saying what to read it for. Four cards: Search 2.0 (IC craft), the agent (design strategy), the catalog (growing a product into a platform), 605 (zero-to-one and data visualisation).
+
+## Three IC case studies on the landing page (decided 23 October, superseded above)
 1. Finding data: from search to an agent. Search 2.0 folded in as the research chapter; leads with the agent and 45 min to 4 min. Structure: systematic problem solving.
 2. The catalog: from a list of tables to a platform. About five years, most hands-on; absorbs self-service onboarding. Structure: a build-up narrative, not a template.
 3. 605: three analytics products. Structure: breadth and scale of impact.
