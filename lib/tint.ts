@@ -4,6 +4,7 @@ import type { CSSProperties } from 'react'
  *  prototype, screenshot or clip always takes the prototype's own colour. */
 export const TINTS = {
   dde2023: '#008481', // Data Discovery 2023 designs and Data Copilot: header teal
+  search2design: '#1c5ca0', // the Search 2.0 Figma designs (tables tab): header blue
   platform2026: '#006bbe', // the 2026 data discovery platform: primary button blue
   platform605: '#8745c6', // 605 Platform: brand purple
   neutral: '#6b7280', // Cursor and other greyscale tools

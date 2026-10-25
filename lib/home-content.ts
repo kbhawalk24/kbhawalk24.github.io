@@ -68,7 +68,7 @@ export const ARCS: Arc[] = [
         visualNote: 'The Search 2.0 design for table results.',
         cover: {
           src: '/work/search-2/tables-tab-design.jpg',
-          tint: TINTS.dde2023,
+          tint: TINTS.search2design,
           alt: 'The Search 2.0 design for table results, with tabs per object type, facets on the left and metadata on every result',
         },
         stats: [{ value: '14.8 h → 9.4 h', label: 'Time to discover data, for 6,673 people a month' }],
