@@ -206,7 +206,7 @@ export const ROLES: TimelineRole[] = [
         detail:
           'Intuit’s first AI data tooling, which I consolidated from sixteen hackathon explorations. The CTO showed it at Investor Day 2023.',
         impact: { value: 'Up to 2×', label: 'Faster for data scientists and analysts, Investor Day 2023' },
-        href: '/about#in-public',
+        href: '/work/agentic-discovery#assistant',
       },
       {
         track: 'ic',

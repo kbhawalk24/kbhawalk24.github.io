@@ -138,6 +138,37 @@ export const ARCS: Arc[] = [
     ],
   },
   {
+    id: 'team',
+    heading: 'Leading design for the data platform',
+    period: '2024–2026',
+    thesis:
+      'From August 2024 I managed the designers for the platform’s nine product areas, one designer for every 85 engineers, and kept designing.',
+    cards: [
+      {
+        slug: 'leading-the-team',
+        org: 'Intuit',
+        note: 'Read this for how I manage.',
+        title: 'Leading design for the data platform: one designer for every 85 engineers',
+        period: '2024–2026',
+        roleTag: 'Design Manager',
+        track: 'management',
+        line:
+          'Where I spent my time, one intake and one research base for nine product areas, AI in the work first, what the team shipped, and every designer promoted.',
+        visualNote: 'The design project tracker.',
+        cover: {
+          src: '/work/leading-the-team/tracker-2025.jpg',
+          tint: TINTS.platform2026,
+          width: 2000,
+          height: 1087,
+          alt: 'The design project tracker: every design request across nine product areas with its status and designer',
+        },
+        stats: [{ value: '1 : 85', label: 'Designers to engineers across nine product areas' }],
+        status: 'live',
+        href: '/work/leading-the-team',
+      },
+    ],
+  },
+  {
     id: 'early',
     heading: 'Before Intuit: three products at 605',
     period: '2017–2021',

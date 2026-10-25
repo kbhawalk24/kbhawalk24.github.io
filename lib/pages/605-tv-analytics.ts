@@ -215,9 +215,9 @@ export const SIX_O_FIVE: ShortPage = {
     },
   ],
   next: {
-    text: 'Five years later the same questions, at a company with 320,000 tables. The person behind the work, how I manage, and how I work with AI',
-    label: 'About me, how I manage, how I work with AI',
-    href: '/about',
+    text: 'Five years later the same questions, at a company with 320,000 tables, and a team to lead through them.',
+    label: 'Leading design for the data platform',
+    href: '/work/leading-the-team',
   },
   credits:
     'The designs are mine. About 20 engineers and 5 product managers built and shipped the products; two designers joined as the team grew.',

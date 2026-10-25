@@ -1,4 +1,6 @@
-# Site restructure and the Team page (agreed 23 October 2026)
+# Site restructure and the Team page (agreed 23 October 2026; built 24 October as /work/leading-the-team)
+
+Built 24 October 2026: the Team page is a fifth case study in the five-rule template, `lib/pages/leading-the-team.ts`, with a fifth landing card and "Team" in the nav. /about is retired. Still open: Kanchi's list of rituals and documents for the "How I communicated" section (section 8 of the page carries a first version).
 
 ## Shape
 - Landing: the hero with the about paragraph, then three IC case studies.
