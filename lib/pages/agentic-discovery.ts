@@ -12,7 +12,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   roleTag: 'Principal Product Designer → Design Manager',
   period: '2023–2026',
   description:
-    'The strategy behind putting Intuit’s data catalog inside Cursor and Claude: an assistant that came too early, a place to keep the data people reuse, the specification for how the agent answers, and the question I am working on now.',
+    'How Intuit’s data catalog ended up inside Cursor and Claude: an assistant that shipped in 2023 before its search could support it, a saved working set of data, the specification for how the agent answers, and the question I am working on now.',
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
@@ -74,7 +74,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       width: 1440,
       height: 1020,
       alt: 'Search 2.0 results on the Tables tab: each result with its owner, last refresh, row count, queries in the last 30 days and lineage counts.',
-      caption: 'Search 2.0, 2024: the five lines of evidence on every result that the assistant never had.',
+      caption: 'Search 2.0, 2024: the five lines of evidence on every result. The 2023 assistant had none of them to work with.',
     },
     {
       id: 'collections',
@@ -87,6 +87,16 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       caption: 'Collections, as shipped in August 2025: a person’s saved working set of data, private or shared.',
     },
     {
+      id: 'agent-answer',
+      after: 'agent',
+      lead: true,
+      src: '/work/agentic-discovery/agent-answer.jpg',
+      width: 2601,
+      height: 726,
+      alt: 'The data agent answering a question about how job roles use search, with a run query and its results table',
+      caption: 'The agent answering a question with a query it has already run, 2026. The answer follows the rules in the next section.',
+    },
+    {
       id: 'catalog-entry-points',
       after: 'open',
       lead: true,
@@ -95,17 +105,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       width: 1600,
       height: 872,
       alt: 'A screen recording of the catalog, May 2026. The home page offers three ways in: a specific asset, a business question, or data for a use case, with a link to open the agent directly. Then a data product page, and a table search with its facets.',
-      caption: 'The catalog in May 2026: three ways in on the home page, lookup, a question, or a use case, then a data product and a search. Where the agent sits among them is the open question. Sped up 1.8 times.',
-    },
-    {
-      id: 'agent-answer',
-      after: 'agent',
-      lead: true,
-      src: '/work/agentic-discovery/agent-answer.jpg',
-      width: 2601,
-      height: 726,
-      alt: 'The data agent answering a question about how job roles use search, with a run query and its results table',
-      caption: 'The agent answering a question with a query it has already run, 2026. The answer follows the rules below.',
+      caption: 'The catalog in May 2026: three ways in on the home page (a specific asset, a business question, a use case), then a data product and a search. Where the agent sits among them is the open question. Sped up 1.8 times.',
     },
   ],
   sections: [
@@ -117,13 +117,13 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       blocks: [
         {
           type: 'p',
-          text: 'Intuit’s data lake held 320,000 tables. Over one year, 666 questions went to the company’s data help channel. The goal stayed the same for five years: someone with a business question should reach data they can trust without asking anyone.',
+          text: 'Intuit’s data lake held 320,000 tables. Over one year, 666 questions went to the company’s data help channel. The goal for the catalog had been the same since 2021: someone with a business question should reach data they can trust without asking anyone.',
         },
         {
           type: 'cards',
           items: [
             { value: '43%', title: 'of help-channel questions were people trying to find the right data', text: '666 questions over one year, read and coded one by one.' },
-            { value: '73%', title: 'were answered only because a specific person happened to know', text: 'The proof lived with people, not in the catalog.' },
+            { value: '73%', title: 'were answered because a specific person happened to know', text: 'In most of those the answer was a table the catalog already listed.' },
             { value: '1 of 20', title: 'people I interviewed used the AI search', text: 'When a first answer failed, people did not come back.' },
           ],
         },
@@ -133,7 +133,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       id: 'assistant',
       eyebrow: '2023',
       short: 'The assistant',
-      heading: 'An assistant that came before its search was ready',
+      heading: 'Data Copilot, 2023',
       blocks: [
         {
           type: 'p',
@@ -153,19 +153,19 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       id: 'rebuild',
       eyebrow: '2024',
       short: 'The rebuild',
-      heading: 'Usage did not hold, so I fixed the search underneath first',
+      heading: 'Usage fell, so the search underneath came first',
       blocks: [
         {
           type: 'p',
-          text: 'The assistant was only as good as its search, and that search reached tables and nothing else, with no metadata to judge a result by. So before any agent, the search had to change. I led that research and rebuild; it has its own page. Two of its findings set the agent’s shape.',
+          text: 'The assistant could only be as good as its search, and that search reached tables alone, with no metadata to judge a result by. So before any agent, the search had to change. I led that research and rebuild; it has its own page. Two of its findings decided what the agent would be.',
           links: [{ text: 'its own page', href: '/work/search-2' }],
         },
         {
           type: 'cards',
           items: [
-            { value: '3 in 4', title: 'searches go back to data the person already knows', text: 'The fastest search is no search. That became collections.' },
-            { value: '89%', title: 'first results right, up from 81%, after Search 2.0', text: 'Precise enough for an agent to build on.' },
-            { value: '20 of 20', title: 'people wanted answers where they were working', text: 'Not in another window. That became the agent in Cursor and Claude.' },
+            { value: '3 in 4', title: 'searches go back to data the person already knows', text: 'That became Collections, a saved working set the agent checks first.' },
+            { value: '89%', title: 'of first results right after Search 2.0, up from 81%', text: 'Precise enough for an agent to build on.' },
+            { value: '20 of 20', title: 'people wanted answers where they were working', text: 'That became the agent in Cursor and Claude, instead of another chat window.' },
           ],
         },
       ],
@@ -174,7 +174,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       id: 'collections',
       eyebrow: '2025',
       short: 'Collections',
-      heading: 'Give people a home for the data they reuse',
+      heading: 'Collections, 2025',
       blocks: [
         {
           type: 'p',
@@ -192,11 +192,11 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       id: 'agent',
       eyebrow: '2025 to 2026',
       short: 'The agent',
-      heading: 'Put the catalog where people already work',
+      heading: 'An agent inside Cursor and Claude',
       blocks: [
         {
           type: 'p',
-          text: 'People worked in code editors and notebooks; a chat window somewhere else was a place to visit, not a place to work. I set the strategy to move the catalog into Cursor and Claude as an agent with the platform’s search, lineage and access as its tools, and wrote the specification for how it answers three kinds of request.',
+          text: 'People worked in code editors and notebooks and had to leave them to use the assistant’s chat window, which few did for long. I set the strategy to move the catalog into Cursor and Claude as an agent, with the platform’s search, lineage and access as its tools, and wrote the specification for how it answers three kinds of request.',
         },
         {
           type: 'cards',
@@ -212,11 +212,11 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       id: 'rules',
       eyebrow: 'The rules',
       short: 'Rules',
-      heading: 'Four rules under every answer',
+      heading: 'The four rules',
       blocks: [
         {
           type: 'p',
-          text: 'I recruited the first users, tested answers against real questions and refined the rules. A designer on my team built the response patterns that shipped and benchmarked their precision; engineers built the servers.',
+          text: 'I recruited the first users, tested answers against real questions and refined the rules from what went wrong. A designer on my team built the response patterns that shipped and benchmarked their precision; engineers built the servers.',
         },
         {
           type: 'tension',
@@ -233,17 +233,17 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       id: 'open',
       eyebrow: 'The open question',
       short: 'Open question',
-      heading: 'Where should the agent live inside the catalog?',
+      heading: 'Where the agent sits inside the catalog',
       blocks: [
         {
           type: 'p',
-          text: 'The agent lives in Cursor and Claude; the catalog still has a search box. In 2026 I wrote the brief for how the two relate, the problem I am working on now: lookup for people who can name what they want, an assistant beside the page whose context is whatever is on screen, and an immersive chat for open-ended work.',
+          text: 'The agent lives in Cursor and Claude; the catalog still has a search box. In 2026 I wrote the brief for how the two relate, which is the problem I am working on now. It has three modes: lookup for people who can name what they want, an assistant beside the page whose context is whatever is on screen, and a full-screen chat for open-ended work.',
         },
         {
           type: 'tension',
           items: [
-            { tension: 'Side by side, people clicked the familiar search box out of habit and never saw the agent.', decision: 'Search and chat keep separate entry points. The mode follows the intent, never the persona.' },
-            { tension: 'People did not want to lose the thread when they opened a result.', decision: 'Links inside the chat open in a new tab. Expanding to the immersive view never loses their place.' },
+            { tension: 'Side by side, people clicked the familiar search box out of habit and never saw the agent.', decision: 'Search and chat keep separate entry points. Which mode a person gets depends on the task, not on their job title.' },
+            { tension: 'People did not want to lose the thread when they opened a result.', decision: 'Links inside the chat open in a new tab. Expanding to the full-screen view keeps the person’s place.' },
             { tension: 'Still open: what the assistant says when a person moves to a new page, or to a page with no clear subject.', decision: 'Testing now. The assistant always says what it is looking at.' },
           ],
         },
@@ -251,9 +251,9 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'impact',
-      eyebrow: 'Impact',
-      short: 'Impact',
-      heading: 'What changed, and whose result it is',
+      eyebrow: 'Results',
+      short: 'Results',
+      heading: 'Results, with attribution',
       blocks: [
         {
           type: 'p',
@@ -273,9 +273,9 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
   ],
   next: {
-    text: 'The agent answers from a catalog that took five years to build. Next: how it went from a list of tables to a platform.',
-    label: 'Building the data discovery platform',
-    href: '/work/catalog-data-map-lineage',
+    text: 'The agent was built by a team I managed. Next: how I ran that team, across nine product areas.',
+    label: 'Leading design for the data platform, 2024 to 2026',
+    href: '/work/leading-the-team',
   },
   credits:
     'The research, the collections strategy, the 2023 assistant and the agent’s specification are mine. Designers on my team designed collections and built the agent’s response patterns. Engineers and the search-model team delivered the precision and speed and built the agent’s servers.',

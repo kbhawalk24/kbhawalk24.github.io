@@ -29,9 +29,9 @@ export const SIX_O_FIVE: ShortPage = {
     { label: 'Research', value: 'Interviews across client, agency and network teams; five networks tested the Indxr prototype' },
   ],
   stats: [
-    { value: '3–4 min → 1–1.5 min', label: 'to render a report' },
-    { value: '$2M', label: 'in additional booked revenue from pitches that used the new designs, since March 2021' },
-    { value: '32 → 2', label: 'reports into pages, the Impact redesign of 2020' },
+    { value: '3–4 min → 1–1.5 min', label: 'To render a report' },
+    { value: '$2M', label: 'In additional booked revenue from pitches that used the new designs, since March 2021' },
+    { value: '32 → 2', label: 'Reports into pages, the Impact redesign of 2020' },
   ],
   hero: {
     src: '/work/605-tv-analytics/hero.mp4',
@@ -114,7 +114,7 @@ export const SIX_O_FIVE: ShortPage = {
         {
           type: 'p',
           text:
-            'I was 605’s first product designer and led design for three products from first concept to launch. The problem that defines this page came from its users: researchers at a network compared audiences by a workaround. I asked four of them to walk me through it, and my manager studied five reports our own team had built the same way.',
+            'I was 605’s first product designer and led design for three products from first concept to launch. The problem on this page came from the users: researchers at a network compared audiences by a workaround. I asked four of them to walk me through it, and my manager studied five reports our own team had built the same way.',
         },
         {
           type: 'cards',
@@ -130,19 +130,19 @@ export const SIX_O_FIVE: ShortPage = {
       id: 'first-design',
       eyebrow: 'The first design',
       short: 'First design',
-      heading: 'Design to the limit, or to the common case',
+      heading: 'The first design: 15 audiences in one chart',
       blocks: [
         {
           type: 'p',
           text:
-            'My first design supported 15 audiences in one chart, the upper limit we had observed. Engineering said the charts would take 3 to 4 minutes to render and the work 4 months. So I went back to both networks and asked for real examples.',
+            'My first design supported 15 audiences in one chart, the most we had ever observed. Engineering said the charts would take 3 to 4 minutes to render and the work 4 months. So I went back to both networks and asked for real examples.',
         },
         {
           type: 'tension',
           items: [
             { tension: 'In 9 of 10 real examples people compared 2 to 5 audiences; 15 appeared once.', decision: 'A chart holds up to five audiences. The render fell to 1 to 1.5 minutes and the work fit a 2-month client deadline.' },
-            { tension: 'Users found the colour confusing: it meant audience in one chart and metric in the next.', decision: 'Colour means audience, and only audience, everywhere in the product.' },
-            { tension: 'When two metrics shared a chart there was only ever one audience.', decision: 'Two metrics share a chart only with one audience, so the worst case is two charts at once.' },
+            { tension: 'Users found the colour confusing: it meant audience in one chart and metric in the next.', decision: 'Colour means audience in every chart in the product, and nothing else is coloured.' },
+            { tension: 'When two metrics shared a chart there was only ever one audience.', decision: 'Two metrics share a chart only when there is one audience, so the worst case is two charts at once.' },
           ],
         },
       ],
@@ -151,7 +151,7 @@ export const SIX_O_FIVE: ShortPage = {
       id: 'rules',
       eyebrow: 'The design',
       short: 'Design',
-      heading: 'The product shipped on three rules, not a set of screens',
+      heading: 'The three rules',
       blocks: [
         {
           type: 'p',
@@ -161,7 +161,7 @@ export const SIX_O_FIVE: ShortPage = {
         {
           type: 'cards',
           items: [
-            { value: '5', title: 'audiences per chart, at most', text: 'The 9-in-10 case, at a render people would wait for.' },
+            { value: '5', title: 'audiences per chart, at most', text: 'The 9-in-10 case, at a render time people would wait for.' },
             { value: '1', title: 'meaning for colour: the audience', text: 'Never the metric, never the network.' },
             { value: '2', title: 'charts at once, in the worst case', text: 'Two metrics share a chart only when there is one audience.' },
           ],
@@ -172,7 +172,7 @@ export const SIX_O_FIVE: ShortPage = {
       id: 'indxr',
       eyebrow: 'Indxr',
       short: 'Indxr',
-      heading: 'For the audience-finding tool, the rules came from five networks',
+      heading: 'Indxr: five networks tested the prototype',
       blocks: [
         {
           type: 'p',
@@ -191,14 +191,14 @@ export const SIX_O_FIVE: ShortPage = {
     },
     {
       id: 'shipped',
-      eyebrow: 'What it unlocked',
-      short: 'Impact',
-      heading: 'What shipped, and what carried to Intuit',
+      eyebrow: 'What shipped',
+      short: 'Results',
+      heading: 'What shipped',
       blocks: [
         {
           type: 'p',
           text:
-            'Pitches that used the new designs brought $2M in additional booked revenue from March 2021. Impact, the attribution product, went from 32 separate reports to two pages in 2020. The method carried to Intuit: find the common case before designing to the limit, give colour one meaning, and show where the data came from before anyone has to ask.',
+            'Pitches that used the new designs brought $2M in additional booked revenue from March 2021. Impact, the attribution product, went from 32 separate reports to two pages in 2020. Three habits came with me to Intuit: find the common case before designing to the limit, give colour one meaning, and show where the data came from before anyone has to ask.',
         },
         {
           type: 'table',
@@ -206,7 +206,6 @@ export const SIX_O_FIVE: ShortPage = {
           rows: [
             ['2020', 'Time to render a Platform report', '3–4 min → 1–1.5 min', 'My design; engineering built the charts'],
             ['2020', 'Impact, the attribution product', '32 reports → 2 pages', 'My design'],
-            ['2019', 'Internal data-quality dashboard', 'About 8 bugs caught, each worth around 2 days', 'My design, for our own team'],
             ['Mar 2021', 'Additional booked revenue from pitches using the new designs', '$2M', 'Shared with sales'],
             ['Apr 2021', 'Platform booked revenue since the 2020 launch', 'Over $20M, three networks', 'Shared'],
           ],
@@ -215,9 +214,9 @@ export const SIX_O_FIVE: ShortPage = {
     },
   ],
   next: {
-    text: 'Five years later the same questions, at a company with 320,000 tables, and a team to lead through them.',
-    label: 'Leading design for the data platform',
-    href: '/work/leading-the-team',
+    text: 'That is the five case studies. The homepage has them side by side.',
+    label: 'All the work',
+    href: '/#work',
   },
   credits:
     'The designs are mine. About 20 engineers and 5 product managers built and shipped the products; two designers joined as the team grew.',

@@ -12,7 +12,7 @@ export const SEARCH_2: ShortPage = {
   roleTag: 'Principal Product Designer',
   period: '2024–2025',
   description:
-    'Finding data at Intuit was slow because trust lived with people, not in the catalog. I made that case to the roadmap in 2024. Search 2.0 was its first delivery; the object model under it became the team’s framework and, later, the agent’s.',
+    'Finding data at Intuit took days because the proof that a table could be trusted lived with people, and the catalog did not show it. I made that case to the roadmap in 2024. Search 2.0 was the first delivery; its object model became the team’s framework and later the agent’s.',
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
@@ -25,12 +25,12 @@ export const SEARCH_2: ShortPage = {
   },
   facts: [
     { label: 'Duration', value: 'March 2024 to September 2025' },
-    { label: 'My role', value: 'Principal designer: the research, the case to the roadmap, the specification, table search. Map search taken to launch by a designer on my team' },
+    { label: 'My role', value: 'Principal designer: the research, the case to the roadmap, the specification, table search. A designer on my team took map search to launch' },
     { label: 'Team', value: 'The catalog’s PM and engineers, the search-model team, three senior engineers who reviewed the spec' },
-    { label: 'Research', value: '20 follow-me-home sessions across nine business units, with engineers in the room; a workshop; 1,392 help-channel questions; Amplitude' },
+    { label: 'Research', value: '20 follow-me-home sessions across nine business units, with engineers in the room; a workshop; two help-channel analyses, 1,392 questions in all; Amplitude' },
   ],
   stats: [
-    { value: '14.8 h → 9.4 h', label: 'Time to discover data, Nov 2024 to Jul 2025' },
+    { value: '14.8 h → 9.4 h', label: 'Time to discover data, the catalog’s own measure, Nov 2024 to Jul 2025' },
     { value: '41% → 63%', label: 'Searches that ended in a click, Jan 2024 to Jan 2026' },
     { value: '8 of 9', label: 'Research findings that became launches' },
   ],
@@ -84,28 +84,18 @@ export const SEARCH_2: ShortPage = {
       alt: 'Stacked monthly bars showing which search result people clicked, November 2025 to May 2026, with the first result the large majority every month.',
       caption: 'Which result people clicked, November 2025 to May 2026. The first result took about four clicks in five every month.',
     },
-    {
-      id: 'ai-mode',
-      after: 'after',
-      lead: true,
-      src: '/work/agentic-discovery/agent-immersive-2026.jpg',
-      width: 1436,
-      height: 1045,
-      alt: 'The AI Mode tab of search, 2026 design: a full-width chat with the question, a show-thinking toggle, the matching table with its maturity score and an ask-anything box.',
-      caption: 'Two years on: AI Mode as one more tab in the same search, 2026 design. The object model from Search 2.0 is what the agent answers with.',
-    },
   ],
   sections: [
     {
       id: 'argument',
-      eyebrow: 'The argument',
+      eyebrow: 'The research',
       short: 'Argument',
-      heading: 'Finding data was slow because the proof lived with people',
+      heading: 'Where the days went: a six-tool path',
       blocks: [
         {
           type: 'p',
           text:
-            'Cutting the time to find data was a company goal for 2024, and the assumption was a search problem. I followed twenty people through a real search. The catalog was one stop on a six-tool path, and the stage that took the days was trust: people found a table in minutes, then spent days learning whether to believe it.',
+            'Cutting the time to find data was a company goal for 2024, and the assumption was that search was slow. I followed twenty people through a real search. The catalog was one stop on a six-tool path. People found a table in minutes, then spent days finding out whether they could believe it.',
         },
         {
           type: 'steps',
@@ -117,7 +107,7 @@ export const SEARCH_2: ShortPage = {
             { title: 'Explore', tools: 'Databricks, Athena, Postman', quote: 'Even with the right table names the SQL won’t run. The dialects differ.', who: 'A software engineer' },
             { title: 'Move or use it', tools: 'CDC Explorer, Kafka', time: '3 months of a 9-month project', quote: 'I realised it had to be real-time, and the real-time source did not exist.', who: 'A machine learning engineer' },
           ],
-          caption: 'The six stages, from the April 2024 sessions. About 20 days end to end in 2023, by the company’s public figure. Search 2.0 took aim at stages two and three.',
+          caption: 'The six stages, from the April 2024 sessions. Intuit’s public figure for the whole path in 2023 was about 20 days. Search 2.0 took aim at stages two and three.',
         },
       ],
     },
@@ -125,40 +115,40 @@ export const SEARCH_2: ShortPage = {
       id: 'problem',
       eyebrow: 'The problem',
       short: 'Problem',
-      heading: 'The search returned everything and proved nothing',
+      heading: 'The 2024 search: 1.8 million results and nothing to judge them by',
       blocks: [
         {
           type: 'p',
           text:
-            'Nothing on a result said who owned it, when it was refreshed or whether anyone used it. The filters that would have helped did not exist; the ones that did were two clicks deep, in the platform’s words, with no sign they were applied. People did not refine. They asked a colleague.',
+            'A result did not say who owned the table, when it was refreshed or whether anyone used it. The filters people needed did not exist, and the ones that did sat two clicks deep, named in the platform’s vocabulary, with no sign once applied. People did not refine a search. They asked a colleague.',
         },
         {
           type: 'cards',
           items: [
-            { value: '73%', title: 'of help-channel questions were answered only because a specific person knew', text: '666 questions over one year. 43% could not locate the data at all.' },
+            { value: '73%', title: 'of help-channel questions were answered because a specific person happened to know', text: '666 questions over one year. 43% could not find the data at all.' },
             { value: '5%', title: 'of technical marketers used discovery, against 61% of analysts', text: 'Search was failing the people who did not already know the schemas.' },
-            { value: '$2M', title: 'in earlier release, by one engineer’s estimate', text: 'Three months finding real-time sources for a $4 million-a-year project.' },
+            { value: '$2M', title: 'of revenue delayed, by one engineer’s estimate', text: 'Three months finding real-time sources for a $4 million-a-year project.' },
           ],
         },
       ],
     },
     {
       id: 'research',
-      eyebrow: 'The research',
+      eyebrow: 'The sessions',
       short: 'Research',
-      heading: 'Twenty sessions, three findings that changed what the team built',
+      heading: 'Twenty sessions, three findings',
       blocks: [
         {
           type: 'p',
           text:
-            'The catalog’s first follow-me-home series: eight analysts, six engineers, two ML engineers, two marketing managers, a solutions architect and a product manager, across nine business units, with engineers in the room. Then a workshop where the team placed ideas by impact against what existing technology could do.',
+            'The catalog’s first follow-me-home series: eight analysts, six engineers, two ML engineers, two marketing managers, a solutions architect and a product manager, across nine business units, with engineers in the room. Afterwards a workshop, where the team placed ideas by impact against what existing technology could do.',
         },
         {
           type: 'cards',
           items: [
-            { title: 'Trust is decided in two results, from evidence the catalog did not show', text: 'An owner they knew, a recent refresh, their own domain, who queried it lately. Same names with nothing to tell them apart stopped people cold.' },
-            { title: 'People know what kind of thing they want before they search', text: 'A table, a topic, a dashboard. One list hid the kind. The exceptions: marketers and ML engineers moving data between systems.' },
-            { title: 'Three searches in four go back to data the person already knows', text: 'A solutions architect: 75% the same core tables. The catalog treated every search as a first search.' },
+            { title: 'People decide whether to trust a table within two results, from evidence the catalog did not show', text: 'An owner they knew, a recent refresh, their own domain, who had queried it lately. Two tables with the same name and nothing to tell them apart stopped people cold.' },
+            { title: 'People know what kind of thing they want before they search', text: 'A table, a topic, a dashboard. One combined list hid the kind. The exceptions were marketers and ML engineers moving data between systems.' },
+            { title: 'Three searches in four go back to data the person already knows', text: 'A solutions architect put it at 75% the same core tables. The catalog treated every search as a first search.' },
           ],
         },
       ],
@@ -167,7 +157,7 @@ export const SEARCH_2: ShortPage = {
       id: 'voices',
       eyebrow: 'In their words',
       short: 'Voices',
-      heading: 'What people said when the catalog could not tell them',
+      heading: 'Quotes from the sessions',
       blocks: [
         {
           type: 'quotes',
@@ -188,7 +178,7 @@ export const SEARCH_2: ShortPage = {
         {
           type: 'p',
           text:
-            'A machine learning engineer building an onboarding recommendation model. He tried the catalog, fell back to Slack and GitHub, and for every attribute he found still had to find its real-time equivalent. His statement, in the workshop’s own format.',
+            'A machine learning engineer building an onboarding recommendation model. He tried the catalog, fell back to Slack and GitHub, and for every attribute he found still had to find its real-time equivalent. His statement, in the format the workshop used.',
         },
         {
           type: 'statement',
@@ -212,7 +202,7 @@ export const SEARCH_2: ShortPage = {
       blocks: [
         {
           type: 'p',
-          text: 'One finding per row, the item it became, when it shipped, and whose work it was. I designed the first four and the specification the rest were built on; designers on my team designed the others after I became their manager in August 2024.',
+          text: 'One finding per row, what it became, when it shipped, and whose work it was. I designed the first four and the specification the rest were built on. Designers on my team designed the others after I became their manager in August 2024.',
         },
         {
           type: 'table',
@@ -233,22 +223,22 @@ export const SEARCH_2: ShortPage = {
     },
     {
       id: 'decisions',
-      eyebrow: 'The decisions',
+      eyebrow: 'The specification',
       short: 'Decisions',
-      heading: 'Four positions I took in the specification, and what each one cost',
+      heading: 'Four decisions in the specification',
       blocks: [
         {
           type: 'tension',
           items: [
             {
               image: { src: '/work/search-2/decision-tabs.png', width: 820, height: 240, alt: 'The shipped search, 2026: one tab per kind of object, Data Map, Tables, CDC Attributes and Topics, with the first table result under it.' },
-              tension: 'In 2022 I argued for the Data Map: organise the catalog by what data means. In 2024 the sessions said people search by the physical kind of thing they want.',
-              decision: 'One tab per kind, with the map as one tab among six. I gave up the structure I had fought for, because people browse by meaning and search by kind. The map stayed the way to understand a data product.',
+              tension: 'In 2022 I had argued for the Data Map, which organises the catalog by what data means. In 2024 the sessions showed people searching by the physical kind of thing they want.',
+              decision: 'One tab per kind, with the map as one tab among six. I gave up the structure I had fought for, because people browse by meaning and search by kind. The map stayed as the way to understand a data product.',
             },
             {
               image: { src: '/work/search-2/decision-filters.png', width: 660, height: 470, alt: 'The filter column of the design beside the first results: hidden results, compliance, usage and schema, every filter visible with its state.' },
-              tension: 'Every request for a new filter was reasonable alone. Together they made eight pills nobody used, because object type and freshness looked and behaved the same.',
-              decision: 'Filters are not facets. A filter is the kind of object and never changes. A facet is a property of the results and changes with the query. Four facet behaviours, all inside what the search service could already do.',
+              tension: 'Every request for a new filter was reasonable on its own. Together they made eight pills nobody used, because object type and freshness looked and behaved the same.',
+              decision: 'I separated filters from facets. A filter is the kind of object and never changes. A facet is a property of the results and changes with the query. Four facet behaviours, all within what the search service could already do.',
             },
             {
               image: { src: '/work/search-2/decision-result.png', width: 1030, height: 520, alt: 'Two results, each with its owner, last refresh, queries run, row count and data product beside the description.' },
@@ -258,7 +248,7 @@ export const SEARCH_2: ShortPage = {
             {
               image: { src: '/work/search-2/decision-datamap.png', width: 1440, height: 1050, alt: 'The Data Map tab design: data products with their freshness, hosting location and type filters down the left.' },
               tension: 'The spec asked for browsing inside nested facets, a sort order, a richer Data Map tab, and a way to mark data as yours.',
-              decision: 'Nested browsing came out after engineering review; search within a facet stayed. Sort deferred. The richer map tab dropped for bandwidth, and I said so. Tags versus collections I left open on purpose. It became Collections a year later.',
+              decision: 'Nested browsing came out after engineering review; search within a facet stayed. Sort was deferred. The richer map tab was dropped for bandwidth, and I said so in the spec. Tags versus collections I left open on purpose. It became Collections a year later.',
             },
           ],
         },
@@ -268,12 +258,12 @@ export const SEARCH_2: ShortPage = {
       id: 'shipped',
       eyebrow: 'What shipped',
       short: 'Shipped',
-      heading: 'The time came out of the path, and one thing got worse before it got better',
+      heading: 'What shipped, and what got worse first',
       blocks: [
         {
           type: 'p',
           text:
-            'Table search launched on 14 November 2024, map search on 26 March 2025, and the old search was switched off on 19 September 2025 with Search 2.0 already primary for 70% of users. Exact-name lookups got worse first: semantic ranking outranked the literal match, and the top-five click rate on exact names dipped from 96% to 94% before the team added a fast path and it recovered to 95%. The cost that is mine: precision was measured after launch, because instrumentation was not in the first scope.',
+            'Table search launched on 14 November 2024 and map search on 26 March 2025. The old search was switched off on 19 September 2025, by which time Search 2.0 was already the primary search for 70% of users. The catalog’s own measure of the search step fell from 14.8 hours to 9.4; Intuit’s public figure for the whole path, including access and exploration, was 20 days. Exact-name lookups got worse before they got better: semantic ranking outranked the literal match, and the top-five click rate on exact names dipped from 96% to 94% until the team added a fast path, after which it recovered to 95%. One cost is mine. Precision was measured after launch, because instrumentation was not in the first scope.',
         },
         {
           type: 'quotes',
@@ -287,14 +277,14 @@ export const SEARCH_2: ShortPage = {
     },
     {
       id: 'after',
-      eyebrow: 'What it set up',
+      eyebrow: 'Afterwards',
       short: 'After',
-      heading: 'The object model became the team’s framework, then the agent’s',
+      heading: 'What the object model was reused for',
       blocks: [
         {
           type: 'p',
           text:
-            'The tabs were an object model: tables, data products, topics, attributes, each with its own evidence. The team reused it for topic and attribute search without a new design, and it became the shape of the agent’s tools in 2026. I handed map search to a designer on my team on purpose, so the surface kept one owner while I took the agent. That story is the next page.',
+            'The tabs were an object model: tables, data products, topics and attributes, each with its own evidence. The team reused it for topic and attribute search without a new design, and in 2026 it became the shape of the agent’s tools. I handed map search to a designer on my team so that the surface kept one owner while I took the agent. That story is on the next page.',
           links: [{ text: 'the next page', href: '/work/agentic-discovery' }],
         },
         {
@@ -309,7 +299,7 @@ export const SEARCH_2: ShortPage = {
     },
   ],
   next: {
-    text: 'Search 2.0 gave the catalog results people could judge. The next question was where the search should live at all: in a chat window, or inside the tools where people already work.',
+    text: 'Search 2.0 gave the catalog results people could judge. The next question was where the search should live: in a chat window, or inside the tools where people already work.',
     label: 'Building the data discovery agent for Cursor and Claude',
     href: '/work/agentic-discovery',
   },

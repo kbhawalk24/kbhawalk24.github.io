@@ -1,7 +1,6 @@
 'use client'
 
 import { MotionConfig } from 'motion/react'
-import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
 import { Hero } from '@/components/hero'
 import { WorkArcs } from '@/components/work-arcs'
@@ -13,7 +12,6 @@ import { ContactFooter } from '@/components/contact-footer'
 export default function Page() {
   return (
     <MotionConfig reducedMotion="user">
-      <SkipLink />
       <SiteHeader />
       <main id="main">
         <Hero />

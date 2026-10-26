@@ -31,9 +31,6 @@ export interface WorkCard {
   note?: string
   /** One measured outcome per card. */
   stats: [CardStat]
-  /** Instead of one outcome: the same journey measured at three moments.
-   *  Each step keeps its own label, because they are not one metric. */
-  journey?: { when: string; value: string; label: string }[]
   status: 'coming-soon' | 'live'
   /** The page, once it exists. */
   href?: string
@@ -53,7 +50,7 @@ export const ARCS: Arc[] = [
     heading: 'Data discovery: search, then an agent',
     period: '2021–2026',
     thesis:
-      'I led data discovery for five years across a data lake of 320,000 tables and the data products built on it, from keyword search to a plain-language assistant, and then to an agent inside Cursor and Claude.',
+      'Five years of data discovery across a data lake of 320,000 tables: keyword search, then a plain-language assistant, then an agent inside Cursor and Claude.',
     cards: [
       {
         slug: 'search-2',
@@ -64,7 +61,7 @@ export const ARCS: Arc[] = [
         track: 'ic',
         note: 'Read this for how I take research to roadmap to shipped work.',
         line:
-          'Twenty people followed through a search, a case made to the roadmap, eight findings that became eight launches, and the object model the team and the agent still run on.',
+          'Twenty people followed through a real search, eight findings that became eight launches, and the object model the team and the agent still run on.',
         visualNote: 'The Search 2.0 design for table results.',
         cover: {
           src: '/work/search-2/tables-tab-design.jpg',
@@ -84,7 +81,7 @@ export const ARCS: Arc[] = [
         track: 'strategy',
         note: 'Read this for design strategy on agentic data discovery.',
         line:
-          'An assistant that came too early, a place to keep the data people reuse, the specification for how an agent inside Cursor and Claude answers, and the question of where it should live next.',
+          'An assistant that shipped before its search could support it, a saved working set of data, the specification for how the agent answers, and the question of where it sits in the catalog.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         cover: {
           src: '/work/agentic-discovery/hero-poster.jpg',
@@ -95,11 +92,6 @@ export const ARCS: Arc[] = [
           alt: 'The agent inside Cursor finding tables, writing a query and showing it before running it',
         },
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
-        journey: [
-          { when: '2023', value: '20 days', label: 'To find, get access to and explore data' },
-          { when: '2025', value: '9.4 hours', label: 'To discover data, after Search 2.0' },
-          { when: '2026', value: '4 minutes', label: 'From a question to an answer, with the agent' },
-        ],
         status: 'live',
         href: '/work/agentic-discovery',
       },
@@ -110,7 +102,7 @@ export const ARCS: Arc[] = [
     heading: 'The data discovery platform',
     period: '2021–2026',
     thesis:
-      'I joined Intuit as the catalog’s founding designer and later led its design team, as it grew into the platform 6,673 people a month use to find data, trace its lineage, get access to it and check it against the clean-data standard.',
+      'I joined Intuit as the catalog’s founding designer. By 2026 it was the platform 6,673 people a month use to find data, trace its lineage, get access to it and check it against the clean-data standard.',
     cards: [
       {
         slug: 'catalog-data-map-lineage',
@@ -121,7 +113,7 @@ export const ARCS: Arc[] = [
         roleTag: 'Founding Product Designer → Principal → Design Manager',
         track: 'ic',
         line:
-          'Five years of building it one layer at a time: the Data Map, lineage in four weeks, AI-written metadata people could correct, and self-service onboarding.',
+          'One layer at a time: signals to judge a table, the Data Map, lineage in four weeks, AI-written metadata people could correct, and self-service onboarding.',
         visualNote: 'A data product page in the 2026 platform.',
         cover: {
           src: '/work/catalog-data-map-lineage/hero-poster.jpg',
@@ -142,7 +134,7 @@ export const ARCS: Arc[] = [
     heading: 'Leading design for the data platform',
     period: '2024–2026',
     thesis:
-      'From August 2024 I managed the designers for the platform’s nine product areas, one designer for every 85 engineers, and kept designing.',
+      'From August 2024 I managed the designers for the platform’s nine product areas, one designer for every 85 engineers, and kept designing myself.',
     cards: [
       {
         slug: 'leading-the-team',
@@ -153,7 +145,7 @@ export const ARCS: Arc[] = [
         roleTag: 'Design Manager',
         track: 'management',
         line:
-          'Where I spent my time, one intake and one research base for nine product areas, AI in the work first, what the team shipped, and every designer promoted.',
+          'Where I spent my time, one intake and one research base for nine areas, AI tools in my own work first, what the team shipped, and every designer promoted.',
         visualNote: 'The design project tracker.',
         cover: {
           src: '/work/leading-the-team/tracker-2025.jpg',

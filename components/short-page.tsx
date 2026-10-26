@@ -8,7 +8,6 @@ import { TINTS } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
-import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
 import { WithSectionNav } from '@/components/section-nav'
 import { VideoEmbed } from '@/components/video-embed'
@@ -242,7 +241,6 @@ function BlockView({ block }: { block: Block }) {
 export function ShortPageLayout({ page }: { page: ShortPage }) {
   return (
     <MotionConfig reducedMotion="user">
-      <SkipLink />
       <SiteHeader onHome={false} />
 
       <main
