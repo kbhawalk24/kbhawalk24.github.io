@@ -110,11 +110,6 @@ function Card({ card }: { card: WorkCard }) {
   const tint = card.cover?.tint
   return (
     <article id={card.slug} className="relative grid scroll-mt-36 gap-2 rounded-[18px] bg-card p-3 shadow-soft md:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] md:gap-0 md:p-4">
-      {card.note && (
-        <p className="pointer-events-none absolute right-5 top-0 z-10 max-w-[13rem] -translate-y-1/2 rotate-2 rounded-[3px] bg-[#fdf0a6] px-3.5 py-3 font-sans text-[13px] font-semibold leading-snug text-[#3f3200] shadow-[0_8px_18px_-6px_rgb(20_20_20/0.4)] sm:right-7 sm:max-w-[15rem] sm:text-sm">
-          {card.note}
-        </p>
-      )}
       <Thumbnail card={card} />
       <div className="flex flex-col justify-center px-3 pb-4 pt-4 sm:px-5 md:px-10 md:py-10">
         <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
