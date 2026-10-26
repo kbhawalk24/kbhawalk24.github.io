@@ -50,7 +50,7 @@ export interface Arc {
 export const ARCS: Arc[] = [
   {
     id: 'discovery',
-    heading: 'Data discovery, from keywords to coding agents',
+    heading: 'Data discovery: search, then an agent',
     period: '2021–2026',
     thesis:
       'I led data discovery for five years across a data lake of 320,000 tables and the data products built on it, from keyword search to a plain-language assistant, and then to an agent inside Cursor and Claude.',
@@ -58,7 +58,7 @@ export const ARCS: Arc[] = [
       {
         slug: 'search-2',
         org: 'Intuit',
-        title: 'Search 2.0: making the catalog carry the proof people got from colleagues',
+        title: 'Search 2.0: redesigning search for the data catalog',
         period: '2024–2025',
         roleTag: 'Principal Product Designer',
         track: 'ic',
@@ -78,7 +78,7 @@ export const ARCS: Arc[] = [
       {
         slug: 'agentic-discovery',
         org: 'Intuit',
-        title: 'Finding data: from an assistant to an agent',
+        title: 'Building the data discovery agent for Cursor and Claude',
         period: '2023–2026',
         roleTag: 'Principal Product Designer → Design Manager',
         track: 'strategy',
@@ -107,7 +107,7 @@ export const ARCS: Arc[] = [
   },
   {
     id: 'platform',
-    heading: 'The data platform, built from a list of tables',
+    heading: 'The data discovery platform',
     period: '2021–2026',
     thesis:
       'I joined Intuit as the catalog’s founding designer and later led its design team, as it grew into the platform 6,673 people a month use to find data, trace its lineage, get access to it and check it against the clean-data standard.',
@@ -116,7 +116,7 @@ export const ARCS: Arc[] = [
         slug: 'catalog-data-map-lineage',
         org: 'Intuit',
         note: 'Read this to see how I grew a product into a platform over five years.',
-        title: 'The catalog: from a list of tables to a platform',
+        title: 'Building the data discovery platform, 2021 to 2026',
         period: '2021–2026',
         roleTag: 'Founding Product Designer → Principal → Design Manager',
         track: 'ic',
@@ -148,7 +148,7 @@ export const ARCS: Arc[] = [
         slug: 'leading-the-team',
         org: 'Intuit',
         note: 'Read this for how I manage.',
-        title: 'Leading design for the data platform: one designer for every 85 engineers',
+        title: 'Leading design for the data platform, 2024 to 2026',
         period: '2024–2026',
         roleTag: 'Design Manager',
         track: 'management',
@@ -170,14 +170,14 @@ export const ARCS: Arc[] = [
   },
   {
     id: 'early',
-    heading: 'Before Intuit: three products at 605',
+    heading: 'Before Intuit: 605',
     period: '2017–2021',
     cards: [
       {
         slug: '605-tv-analytics',
         org: '605',
         note: 'Read this for zero-to-one products and data visualisation craft.',
-        title: '605 TV Analytics: Multi-Audience Reports Under Render Constraints',
+        title: 'Designing three TV analytics products at 605',
         period: '2017–2021',
         roleTag: 'First Product Designer',
         track: 'ic',

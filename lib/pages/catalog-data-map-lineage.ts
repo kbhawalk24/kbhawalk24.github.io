@@ -8,7 +8,7 @@ import { TINTS } from '@/lib/tint'
 export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
   slug: 'catalog-data-map-lineage',
   href: '/work/catalog-data-map-lineage',
-  title: 'The catalog: from a list of tables to a platform',
+  title: 'Building the data discovery platform, 2021 to 2026',
   roleTag: 'Founding Product Designer → Principal → Design Manager',
   period: '2021–2026',
   description:
@@ -264,7 +264,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
   ],
   next: {
     text: 'Before Intuit, the same instinct at a smaller company: three TV advertising analytics products designed from first concept to launch, under render and privacy constraints.',
-    label: '605 TV Analytics: Multi-Audience Reports Under Render Constraints',
+    label: 'Designing three TV analytics products at 605',
     href: '/work/605-tv-analytics',
   },
   credits:

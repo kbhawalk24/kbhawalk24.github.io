@@ -9,7 +9,7 @@ import type { ShortPage } from './types'
 export const LEADING_THE_TEAM: ShortPage = {
   slug: 'leading-the-team',
   href: '/work/leading-the-team',
-  title: 'Leading design for the data platform: one designer for every 85 engineers',
+  title: 'Leading design for the data platform, 2024 to 2026',
   roleTag: 'Design Manager',
   period: '2024–2026',
   description:
@@ -286,7 +286,7 @@ export const LEADING_THE_TEAM: ShortPage = {
   ],
   next: {
     text: 'The team’s work sits on a catalog I designed first. Next: how it went from a list of tables to a platform.',
-    label: 'The catalog, from tables to a platform',
+    label: 'Building the data discovery platform',
     href: '/work/catalog-data-map-lineage',
   },
   credits:

@@ -8,7 +8,7 @@ import { TINTS } from '@/lib/tint'
 export const SEARCH_2: ShortPage = {
   slug: 'search-2',
   href: '/work/search-2',
-  title: 'Search 2.0: making the catalog carry the proof people got from colleagues',
+  title: 'Search 2.0: redesigning search for the data catalog',
   roleTag: 'Principal Product Designer',
   period: '2024–2025',
   description:
@@ -35,13 +35,14 @@ export const SEARCH_2: ShortPage = {
     { value: '8 of 9', label: 'Research findings that became launches' },
   ],
   hero: {
-    src: '/work/search-2/hero.mp4',
-    poster: '/work/search-2/hero-poster.jpg',
-    width: 1600,
-    height: 854,
-    tint: TINTS.dde2023,
-    alt: 'A screen recording with two browser windows side by side. On the left, Search 2.0 in alpha: a Tables tab, filters down the left, and each result with owner, last refresh and queries run. On the right, the old search for the same query: one list under Data Catalog and Data Map with filter pills across the top.',
-    caption: 'October 2024: the same searches in Search 2.0 (left, in alpha) and the search it replaced (right). Sped up 2.3 times.',
+    still: true,
+    src: '/work/search-2/hero-annotated.jpg',
+    poster: '/work/search-2/hero-annotated.jpg',
+    width: 2000,
+    height: 1196,
+    tint: TINTS.search2design,
+    alt: 'The Search 2.0 design for table results, annotated for the July 2024 design review: one tab per object type, filters visible down the left with search inside a schema, business-unit tags, data maturity stars, and five lines of operational and social-trust metadata on every result.',
+    caption: 'The Search 2.0 design as reviewed in July 2024, with the annotations from the review: one tab per kind of object, visible filters, and the five lines of evidence on every result.',
   },
   visuals: [
     {
@@ -75,14 +76,14 @@ export const SEARCH_2: ShortPage = {
       caption: 'The April 2024 workshop: engineering, product and design placing ideas by impact against what existing technology could do. Three starred.',
     },
     {
-      id: 'ownership',
+      id: 'raw-notes',
       after: 'voices',
       lead: true,
-      src: '/work/search-2/ownership-modal-2024.jpg',
-      width: 2000,
-      height: 1100,
-      alt: 'A table page with a Team Members dialog open, listing 3 data stewards, 5 admins, 1 dev manager, 39 developers and 46 devops members. No individual owner is named.',
-      caption: '“Who owns this?” answered with 94 names. People wanted one.',
+      src: '/work/search-2/raw-notes-board-2024.jpg',
+      width: 2400,
+      height: 619,
+      alt: 'The raw-notes board from the April 2024 sessions: twenty columns of sticky notes, one column per person, each note a thing they said or did, with the ones that recurred marked in purple.',
+      caption: 'The raw notes from the twenty sessions, April 2024: one row per person, one note per observation, the recurring ones in purple. Zoomed out; the quotes below are read from it.',
     },
     {
       id: 'ai-search',
@@ -346,7 +347,7 @@ export const SEARCH_2: ShortPage = {
   ],
   next: {
     text: 'Search 2.0 gave the catalog results people could judge. The next question was where the search should live at all: in a chat window, or inside the tools where people already work.',
-    label: 'Finding data: from an assistant to an agent',
+    label: 'Building the data discovery agent for Cursor and Claude',
     href: '/work/agentic-discovery',
   },
   credits:

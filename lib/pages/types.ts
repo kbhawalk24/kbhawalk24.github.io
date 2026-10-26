@@ -65,6 +65,8 @@ export interface PageFact {
 export interface PageHero {
   src: string
   poster: string
+  /** A still design frame instead of a clip: `src` is the image, no controls. */
+  still?: boolean
   width: number
   height: number
   /** What the clip shows, for people who cannot see it. */

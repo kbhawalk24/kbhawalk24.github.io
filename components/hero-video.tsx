@@ -20,7 +20,7 @@ export function HeroVideo({ hero, className }: { hero: PageHero; className?: str
 
   useEffect(() => {
     const v = ref.current
-    if (!v || reduce || userPaused) return
+    if (!v || reduce || userPaused || hero.still) return
     // Start at once when it is already on screen; the observer then handles
     // scrolling away and back.
     const r = v.getBoundingClientRect()
@@ -34,7 +34,7 @@ export function HeroVideo({ hero, className }: { hero: PageHero; className?: str
     )
     io.observe(v)
     return () => io.disconnect()
-  }, [reduce, userPaused])
+  }, [reduce, userPaused, hero.still])
 
   function toggle() {
     const v = ref.current
@@ -49,9 +49,14 @@ export function HeroVideo({ hero, className }: { hero: PageHero; className?: str
   }
 
   return (
-    <figure className={cn('rounded-[18px] bg-card p-2 shadow-soft sm:p-3', className)}>
-      <div className="rounded-[12px] p-[5%]" style={tintPanel(hero.tint)}>
+    <figure className={className}>
+      <div className="rounded-[18px] p-[5%] sm:p-[4%]" style={tintPanel(hero.tint)}>
       <div className="relative overflow-hidden rounded-[8px] shadow-[0_24px_48px_-16px_rgb(20_20_20/0.28)] ring-1 ring-foreground/10">
+        {hero.still ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={hero.src} alt={hero.alt} width={hero.width} height={hero.height} className="block h-auto w-full bg-card" />
+        ) : (
+        <>
         <video
           ref={ref}
           src={hero.src}
@@ -75,9 +80,11 @@ export function HeroVideo({ hero, className }: { hero: PageHero; className?: str
         >
           {playing ? <Pause className="size-4" aria-hidden="true" /> : <Play className="size-4 translate-x-px" aria-hidden="true" />}
         </button>
+        </>
+        )}
       </div>
       </div>
-      <figcaption className="px-2 pb-2 pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">
+      <figcaption className="px-1 pt-3 text-pretty font-sans text-sm leading-relaxed text-muted-foreground">
         {hero.caption}
       </figcaption>
     </figure>

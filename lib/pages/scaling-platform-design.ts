@@ -11,7 +11,7 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
-      { label: 'The catalog, from tables to a platform', href: '/work/catalog-data-map-lineage' },
+      { label: 'Building the data discovery platform', href: '/work/catalog-data-map-lineage' },
       { label: 'Scaling the team at 1:85' },
     ],
     current: 1,
@@ -135,7 +135,7 @@ export const SCALING_PLATFORM_DESIGN: ShortPage = {
   ],
   next: {
     text: 'The access and certification flows the team shipped reused the onboarding pattern I had designed myself a year earlier. Next: the catalog that pattern belongs to, built from a list of tables into a platform.',
-    label: 'The catalog: from a list of tables to a platform',
+    label: 'Building the data discovery platform, 2021 to 2026',
     href: '/work/catalog-data-map-lineage#onboarding',
   },
   credits:

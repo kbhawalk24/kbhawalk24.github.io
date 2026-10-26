@@ -8,7 +8,7 @@ import { TINTS } from '@/lib/tint'
 export const AGENTIC_DISCOVERY: ShortPage = {
   slug: 'agentic-discovery',
   href: '/work/agentic-discovery',
-  title: 'Finding data: from an assistant to an agent',
+  title: 'Building the data discovery agent for Cursor and Claude',
   roleTag: 'Principal Product Designer → Design Manager',
   period: '2023–2026',
   description:
@@ -283,7 +283,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   ],
   next: {
     text: 'The agent answers from a catalog that took five years to build. Next: how it went from a list of tables to a platform.',
-    label: 'The catalog, from tables to a platform',
+    label: 'Building the data discovery platform',
     href: '/work/catalog-data-map-lineage',
   },
   credits:

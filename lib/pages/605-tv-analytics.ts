@@ -7,7 +7,7 @@ import { TINTS } from '@/lib/tint'
 export const SIX_O_FIVE: ShortPage = {
   slug: '605-tv-analytics',
   href: '/work/605-tv-analytics',
-  title: '605 TV Analytics: Multi-Audience Reports Under Render Constraints',
+  title: 'Designing three TV analytics products at 605',
   roleTag: 'First Product Designer',
   period: '2017–2021',
   description:
