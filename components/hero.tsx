@@ -42,9 +42,9 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
                     href={pl.href}
                     className="inline-flex items-center gap-1 rounded-full bg-track-management/10 px-2.5 py-0.5 font-medium text-track-management transition-colors hover:bg-track-management/20"
                   >
-                    {pl.label} <span aria-hidden="true">↓</span>
+                    {pl.label} <span aria-hidden="true">{pl.href.startsWith('#') ? '↓' : '→'}</span>
                   </a>
-                  {i < all.length - 1 && ' and'}
+                  {i < all.length - 2 ? ',' : i === all.length - 2 ? ' and' : ''}
                 </span>
               ))}
             {'tail' in h && h.tail}

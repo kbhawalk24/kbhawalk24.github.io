@@ -130,6 +130,36 @@ export const ARCS: Arc[] = [
     ],
   },
   {
+    id: 'team',
+    heading: 'Leading design for the data platform',
+    period: '2024–2026',
+    thesis:
+      'From August 2024 I managed the designers for the platform’s nine product areas, one designer for every 85 engineers, and kept designing myself.',
+    cards: [
+      {
+        slug: 'leading-the-team',
+        org: 'Intuit',
+        title: 'Leading design for the data platform, 2024 to 2026',
+        period: '2024–2026',
+        roleTag: 'Design Manager',
+        track: 'management',
+        line:
+          'Where I spent my time, one intake and one research base for nine areas, AI tools in my own work first, what the team shipped, and every designer promoted.',
+        visualNote: 'The design project tracker.',
+        cover: {
+          src: '/work/leading-the-team/tracker-2025.jpg',
+          tint: TINTS.platform2026,
+          width: 2000,
+          height: 1087,
+          alt: 'The design project tracker: every design request across nine product areas with its status and designer',
+        },
+        stats: [{ value: '1 : 85', label: 'Designers to engineers across nine product areas' }],
+        status: 'live',
+        href: '/work/leading-the-team',
+      },
+    ],
+  },
+  {
     id: 'early',
     heading: 'Before Intuit: 605',
     period: '2017–2021',
@@ -177,12 +207,13 @@ export const HERO = {
       org: 'Intuit',
       before: 'Most recently at ',
       after: ', from 2021 to 2026, I led Data Platform design, owning',
-      /** Links inside the sentence, each scrolling to a work card. */
+      /** Links inside the sentence: two to work cards, one to the Management page. */
       pills: [
         { label: 'data discovery', href: '#search-2' },
         { label: 'platform strategy', href: '#agentic-discovery' },
+        { label: 'leading the team', href: '/work/leading-the-team' },
       ],
-      tail: ' and leading the team across pipeline authoring, observability, lineage, governance, fine-grained access control and instrumentation.',
+      tail: ' across pipeline authoring, observability, lineage, governance, fine-grained access control and instrumentation.',
     },
     {
       org: '605',
