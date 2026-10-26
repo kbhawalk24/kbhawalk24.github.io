@@ -180,7 +180,7 @@ export const LEADING_THE_TEAM: ShortPage = {
         {
           type: 'p',
           text:
-            'Coded prototypes in v0 and Figma Make, so a flow can be used before it is specified; research synthesis in NotebookLM; AI-made launch videos in place of recorded walkthroughs. I used each in my own design work first. My manager wrote that he then saw every designer on my team adopt them, and a working prototype before a spec became the team’s standard.',
+            'Coded prototypes in v0 and Figma Make, so a flow can be used before it is specified; research synthesis in NotebookLM; AI-made launch videos in place of recorded walkthroughs. I used each in my own design work first. My manager wrote that he then saw every designer on my team adopt them. Three practices started on the team from there: coded prototypes with developers, AI-made launch videos that engineering copied, and a design sign-off before release.',
         },
         {
           type: 'cards',
@@ -207,7 +207,7 @@ export const LEADING_THE_TEAM: ShortPage = {
           type: 'table',
           head: ['Area', 'Launches, 2024 to 2026', 'What changed', 'Source'],
           rows: [
-            ['Access to data', 'Unified request tracker; stream access; restricted tax data; table and encrypted-column requests; bulk access; owner auto-approval', 'Streams 2–3 weeks → 3 days, 61% approved automatically; decryption 9 → 3 days; 5,000 tables in a week', 'Launch posts, Dec 2024 to Sep 2025; FY25 review'],
+            ['Access to data', 'Unified request tracker; stream access; restricted tax data; table and encrypted-column requests; bulk access; owner auto-approval', 'Manual requests 25% faster; streams 2–3 weeks → 3 days, 61% approved automatically; 85% fewer ineligible tax-data denials; decryption 9 → 3 days; 5,000 tables in a week, 200+ hours saved; internal data 24 hours → near-instant', 'Launch posts, Dec 2024 to Sep 2025; FY25 review'],
             ['Lineage for incidents', 'List-based dependency summary; column-level lineage with readable impact reports', 'Root-cause investigations about 4 hours → minutes; 19 marketing data incidents resolved in one tax season', 'FY26 mid-year review'],
             ['Certifying clean data', 'Guided fourth-level certification across several production paths', 'Clean data under 1% → 80% of the estate; P0 and P1 incidents 17 → 0 in tax year 2025 · shared', 'Launch post, Nov 2025; AWS re:Invent 2025'],
             ['Discovery and the agent', 'Query insights; stream and marketing-attribute search; Collections; the agent’s response patterns', '99.99% first-result precision on stream and marketing search; the agent’s results are on its own page', 'Launch posts, May 2025 to Mar 2026'],

@@ -167,9 +167,9 @@ export const ARCS: Arc[] = [
 export const HERO = {
   /** The intro: the fields are set in the accent colour. */
   intro: {
-    before: 'I’m a technical design leader specializing in ',
-    fields: 'AI, enterprise data platforms, and developer tools',
-    after: '. With roots as a backend engineer, I thrive in the deep end of technical complexity, both as a hands-on Principal Designer and a team manager.',
+    before: 'I’m a product design leader with 12+ years of experience turning complex data infrastructure into tools people trust and use. I started as a backend software engineer, which means I’m happiest untangling messy systems, debating trade-offs with engineers, and designing ',
+    fields: 'AI workflows that go deeper than a chat box',
+    after: '.',
   },
   /** The history as one paragraph, one sentence per employer. */
   history: [

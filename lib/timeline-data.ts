@@ -80,7 +80,7 @@ export const ROLES: TimelineRole[] = [
         headline: 'Scaled the platform into company-wide infrastructure',
         detail: 'The platform grew from a single team’s discovery tool into the default way Intuit finds, trusts and gets data.',
         impact: { value: '2,664 → 6,673', label: 'Monthly users, Jul 2024 to Mar 2026' },
-        href: '/work/scaling-platform-design',
+        href: '/work/leading-the-team',
       },
       {
         track: 'management',
@@ -88,7 +88,7 @@ export const ROLES: TimelineRole[] = [
         detail:
           'I also hired for the wider design team. A 2023 intern I had managed joined the team full-time, and the team began a design sign-off before release that engineering adopted.',
         impact: { value: 'All', label: 'Direct reports promoted' },
-        href: '/work/scaling-platform-design',
+        href: '/work/leading-the-team',
       },
       {
         track: 'management',
@@ -96,7 +96,7 @@ export const ROLES: TimelineRole[] = [
         detail:
           'Tables and encrypted columns are requested together, real-time data arrives in 3 days instead of 2 to 3 weeks, and 61% of requests are approved automatically.',
         impact: { value: '9 → 3 days', label: 'Tables and encrypted columns, Aug 2025' },
-        href: '/work/scaling-platform-design',
+        href: '/work/leading-the-team',
       },
       {
         track: 'management',
@@ -104,7 +104,7 @@ export const ROLES: TimelineRole[] = [
         detail:
           'Investigating an incident fell from about 4 hours to minutes, and the lineage found the root cause of 19 marketing data incidents in one tax season.',
         impact: { value: 'About 4 hours → minutes', label: 'To investigate a data incident, tax year 2025' },
-        href: '/work/scaling-platform-design',
+        href: '/work/leading-the-team',
       },
       {
         track: 'strategy',
@@ -112,7 +112,7 @@ export const ROLES: TimelineRole[] = [
         detail:
           'Every way data is produced follows the same steps, and producers and consumers see the same display of maturity. Peak-season P0 and P1 incidents fell from 17 to 0, a result many teams share.',
         impact: { value: '<1% → 80%', label: 'Of the data estate meeting the standard', shared: true },
-        href: '/work/scaling-platform-design',
+        href: '/work/leading-the-team',
       },
       {
         track: 'strategy',
@@ -127,7 +127,7 @@ export const ROLES: TimelineRole[] = [
         headline: 'Argued two features onto the roadmap',
         detail:
           'Query insights and Collections both shipped; the engineering manager wrote that neither would have happened without design sponsorship.',
-        href: '/work/scaling-platform-design',
+        href: '/work/leading-the-team',
       },
     ],
   },

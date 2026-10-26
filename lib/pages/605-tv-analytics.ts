@@ -114,7 +114,7 @@ export const SIX_O_FIVE: ShortPage = {
         {
           type: 'p',
           text:
-            'I was 605’s first product designer and led design for three products from first concept to launch. The problem on this page came from the users: researchers at a network compared audiences by a workaround. I asked four of them to walk me through it, and my manager studied five reports our own team had built the same way.',
+            'I was 605’s first product designer and led design for three products from first concept to launch, for network clients including AMC Networks and Discovery. The problem on this page came from the users: reports supported one target audience at a time, so researchers compared audiences by a workaround. I asked four researchers at AMC to walk me through it, and my manager studied five reports our own team had built the same way.',
         },
         {
           type: 'cards',
@@ -135,7 +135,7 @@ export const SIX_O_FIVE: ShortPage = {
         {
           type: 'p',
           text:
-            'My first design supported 15 audiences in one chart, the most we had ever observed. Engineering said the charts would take 3 to 4 minutes to render and the work 4 months. So I went back to both networks and asked for real examples.',
+            'My first design supported 15 audiences in one chart, the most we had ever observed. Engineering said the charts would take 3 to 4 minutes to render instead of 30 to 60 seconds, and the work 4 months against a 2-month client deadline. So I went back to both networks and asked for real examples.',
         },
         {
           type: 'tension',
@@ -156,7 +156,7 @@ export const SIX_O_FIVE: ShortPage = {
         {
           type: 'p',
           text:
-            'The rules held across every chart and report in the Platform, so a new report needed no new decisions about colour or layout. The redesign was delivered in 2 months for a client deadline. By April 2021 the Platform had over $20M in booked revenue and three networks as clients since its 2020 launch.',
+            'The rules held across every chart and report in the Platform, so a new report needed no new decisions about colour or layout. In-app search and filtering were deferred, since the exports already had the data. The redesign was delivered in 2 months for the client deadline. By April 2021 the Platform had over $20M in booked revenue and three networks as clients since its 2020 launch.',
         },
         {
           type: 'cards',
@@ -177,7 +177,7 @@ export const SIX_O_FIVE: ShortPage = {
         {
           type: 'p',
           text:
-            'Indxr lets a network define an audience from hundreds of attributes and see its size and shape. Five networks tested the first prototype. More than half of every session went to questions about where the data came from.',
+            'Indxr lets a network define an audience from hundreds of attributes and see its size and shape, replacing manual program-ranking pulls that took a day to two weeks. Five networks tested the first prototype. Its search, export and sign-in were reused across all three products. More than half of every session went to questions about where the data came from.',
         },
         {
           type: 'tension',
@@ -198,7 +198,7 @@ export const SIX_O_FIVE: ShortPage = {
         {
           type: 'p',
           text:
-            'Pitches that used the new designs brought $2M in additional booked revenue from March 2021. Impact, the attribution product, went from 32 separate reports to two pages in 2020. Three habits came with me to Intuit: find the common case before designing to the limit, give colour one meaning, and show where the data came from before anyone has to ask.',
+            'Pitches that used the new designs brought $2M in additional booked revenue from March 2021. Impact, the attribution product, went from 32 separate statistical reports to a two-page interactive view in 2020, and I replaced a chart type that had caused about 8 bugs, each worth about 2 days of engineering. Under all three products sat a data-visualisation system I designed and partly built: an accessible five-colour palette, tabular numerals, and an internal client reporting dashboard. Three habits came with me to Intuit: find the common case before designing to the limit, give colour one meaning, and show where the data came from before anyone has to ask.',
         },
         {
           type: 'table',

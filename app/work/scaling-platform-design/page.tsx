@@ -1,12 +1,6 @@
-import type { Metadata } from 'next'
-import { ShortPageLayout } from '@/components/short-page'
-import { SCALING_PLATFORM_DESIGN } from '@/lib/pages/scaling-platform-design'
+import { Forward } from '@/components/forward'
 
-export const metadata: Metadata = {
-  title: `${SCALING_PLATFORM_DESIGN.title} | Kanchi Bhawalkar`,
-  description: SCALING_PLATFORM_DESIGN.description,
-}
-
+// The 1:85 page became the management case study.
 export default function Page() {
-  return <ShortPageLayout page={SCALING_PLATFORM_DESIGN} />
+  return <Forward to="/work/leading-the-team" label="Leading design for the data platform, 2024 to 2026" />
 }

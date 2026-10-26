@@ -196,7 +196,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       blocks: [
         {
           type: 'p',
-          text: 'People worked in code editors and notebooks and had to leave them to use the assistant’s chat window, which few did for long. I set the strategy to move the catalog into Cursor and Claude as an agent, with the platform’s search, lineage and access as its tools, and wrote the specification for how it answers three kinds of request.',
+          text: 'People worked in code editors and notebooks and had to leave them to use the assistant’s chat window, which few did for long. I set the strategy to move the catalog into Cursor and Claude through MCP servers, as an agent with the platform’s search, lineage and access as its tools, and wrote the specification for how it answers three kinds of request.',
         },
         {
           type: 'cards',
@@ -216,7 +216,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       blocks: [
         {
           type: 'p',
-          text: 'I recruited the first users, tested answers against real questions and refined the rules from what went wrong. A designer on my team built the response patterns that shipped and benchmarked their precision; engineers built the servers.',
+          text: 'I recruited the first users, tested answers against real questions and refined the rules from what went wrong. A designer on my team built the response patterns that shipped and benchmarked their precision; engineers built the MCP servers.',
         },
         {
           type: 'tension',
