@@ -85,16 +85,6 @@ export const SEARCH_2: ShortPage = {
       caption: 'The raw notes from the twenty sessions, April 2024: one row per person, one note per observation, the recurring ones in purple. Zoomed out; the quotes below are read from it.',
     },
     {
-      id: 'ai-search',
-      after: 'persona',
-      lead: true,
-      src: '/work/search-2/ai-search-2024.jpg',
-      width: 1990,
-      height: 1000,
-      alt: 'The old AI search asked for a table with an email column in a named schema. It returns five unrelated tables: order headers, users, a QuickBooks Self-Employed view, a user dimension and a payroll view.',
-      caption: 'What the AI search that already existed returned for a plain request. One of the twenty had ever used it.',
-    },
-    {
       id: 'workshop-ideas',
       after: 'roadmap',
       lead: true,
