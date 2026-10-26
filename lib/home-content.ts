@@ -207,12 +207,8 @@ export const HERO = {
       org: 'Intuit',
       before: 'Most recently at ',
       after: ', from 2021 to 2026, I led Data Platform design, owning',
-      /** Links inside the sentence: two to work cards, one to the Management page. */
-      pills: [
-        { label: 'data discovery', href: '#search-2' },
-        { label: 'platform strategy', href: '#agentic-discovery' },
-        { label: 'leading the team', href: '/work/leading-the-team' },
-      ],
+      /** The three phrases set in the accent colour; they do not link anywhere. */
+      pills: [{ label: 'data discovery' }, { label: 'platform strategy' }, { label: 'leading the team' }],
       tail: ' across pipeline authoring, observability, lineage, governance, fine-grained access control and instrumentation.',
     },
     {

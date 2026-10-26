@@ -38,12 +38,7 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
               h.pills?.map((pl, i, all) => (
                 <span key={pl.label}>
                   {' '}
-                  <a
-                    href={pl.href}
-                    className="inline-flex items-center gap-1 rounded-full bg-track-management/10 px-2.5 py-0.5 font-medium text-track-management transition-colors hover:bg-track-management/20"
-                  >
-                    {pl.label} <span aria-hidden="true">{pl.href.startsWith('#') ? '↓' : '→'}</span>
-                  </a>
+                  <span className="font-semibold text-accent-brand">{pl.label}</span>
                   {i < all.length - 2 ? ',' : i === all.length - 2 ? ' and' : ''}
                 </span>
               ))}
