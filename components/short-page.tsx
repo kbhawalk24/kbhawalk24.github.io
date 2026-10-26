@@ -235,6 +235,16 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
         className="mx-auto max-w-[82rem] px-6 pb-24 pt-32 md:px-10 lg:px-14"
         style={page.hero && page.hero.tint !== TINTS.neutral ? ({ '--accent-brand': page.hero.tint } as React.CSSProperties) : undefined}
       >
+        {page.hero && page.hero.tint !== TINTS.neutral && (
+          /* The wash takes the page's colour: the same two blooms as the site's violet, mixed from the hero tint. */
+          <div
+            aria-hidden="true"
+            className="pointer-events-none fixed inset-0 -z-10"
+            style={{
+              background: `radial-gradient(circle 1100px at 0% 100%, color-mix(in oklab, ${page.hero.tint} 16%, var(--card)) 0%, transparent 72%), radial-gradient(circle 900px at 100% 0%, color-mix(in oklab, ${page.hero.tint} 8%, var(--card)) 0%, transparent 70%), var(--background)`,
+            }}
+          />
+        )}
         <WithSectionNav chapters={page.sections.map((s) => ({ id: s.id, title: s.short ?? s.heading }))}>
           <article className="max-w-[68rem]">
             <header>

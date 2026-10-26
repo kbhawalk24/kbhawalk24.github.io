@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
 import { TRACKS } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
-import { tintPanel, tintPill, tintText } from '@/lib/tint'
+import { tintPanel, tintText } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
@@ -116,10 +116,7 @@ function Card({ card }: { card: WorkCard }) {
           <span className="label-micro text-muted-foreground">
             {card.org} · {card.period}
           </span>
-          <span
-            className={cn('inline-block rounded-full px-2.5 py-1 label-micro', !tint && trackStyles[card.track].badgeFlat)}
-            style={tint ? tintPill(tint) : undefined}
-          >
+          <span className="inline-block rounded-full bg-foreground/[0.06] px-2.5 py-1 label-micro text-muted-foreground">
             {TRACKS[card.track].label}
           </span>
         </p>
@@ -153,7 +150,7 @@ function Card({ card }: { card: WorkCard }) {
                   >
                     {step.value}
                   </span>
-                  <span className="mt-0.5 block label-micro text-muted-foreground">{step.label}</span>
+                  <span className="mt-0.5 block font-sans text-[13px] leading-snug text-muted-foreground">{step.label}</span>
                 </span>
               </li>
             ))}
@@ -166,7 +163,7 @@ function Card({ card }: { card: WorkCard }) {
             >
               {stat.value}
             </span>
-            <span className="mt-1 block label-micro text-muted-foreground">{stat.label}</span>
+            <span className="mt-1 block font-sans text-[13px] leading-snug text-muted-foreground">{stat.label}</span>
           </p>
         )}
         {card.href && (
@@ -187,10 +184,7 @@ function ArcSection({ arc, index }: { arc: Arc; index: number }) {
   return (
     <div className={index === 0 ? undefined : 'mt-16 md:mt-24'}>
       <Reveal className="mb-12">
-        <p className="label-micro text-muted-foreground">
-          Arc {index + 1} · {arc.period}
-        </p>
-        <h3 className="mt-3 text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">{arc.heading}</h3>
+        <h3 className=" text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">{arc.heading}</h3>
         {arc.thesis && <p className="mt-4 max-w-4xl text-pretty font-sans text-lg leading-[1.6] text-foreground">{arc.thesis}</p>}
       </Reveal>
       <ol className="grid gap-12">

@@ -85,8 +85,8 @@ export function mapClamp(v: number, inMin: number, inMax: number, outMin: number
 // Scroll-progress thresholds driving the hero's illustration → bio crossfade.
 // Illustration blurs first, then fades — finishing right as the bio starts
 // fading in, so the handoff reads as one continuous motion.
-export const ILLUSTRATION_BLUR_RANGE = { start: 0.12, end: 0.3 }
-export const ILLUSTRATION_FADE_RANGE = { start: 0.2, end: 0.4 }
+export const ILLUSTRATION_BLUR_RANGE = { start: 0.1, end: 0.26 }
+export const ILLUSTRATION_FADE_RANGE = { start: 0.14, end: 0.34 }
 export const BIO_OPACITY_RANGE = { start: 0.4, end: 0.62 }
 export const BIO_BLUR_RANGE = { start: 0.4, end: 0.52 }
 
@@ -242,9 +242,9 @@ export function Hero() {
                 style={
                   still
                     ? undefined
-                    : { opacity: fade.illustrationOpacity, filter: `blur(${fade.illustrationBlurPx}px)` }
+                    : { opacity: fade.illustrationOpacity, filter: `blur(${fade.illustrationBlurPx}px)`, visibility: fade.illustrationOpacity <= 0.01 ? 'hidden' : 'visible' }
                 }
-                className="w-full max-w-md shrink-0 md:absolute md:-top-64 md:right-0 md:w-96 md:max-w-none lg:w-[28rem] xl:w-[30rem]"
+                className="w-full max-w-[min(28rem,46vh)] shrink-0 md:absolute md:-top-64 md:right-0 md:w-96 md:max-w-none lg:w-[28rem] xl:w-[30rem]"
               >
                 <motion.div
                   style={{ y: nameY }}

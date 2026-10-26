@@ -24,6 +24,12 @@ export function SiteHeader({ onHome = true }: { onHome?: boolean }) {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4 md:top-6">
+      {/* Content scrolling under the pill fades out before it reaches it. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 -top-4 h-24 md:-top-6 md:h-28"
+        style={{ background: 'linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 85%, transparent) 45%, transparent 100%)' }}
+      />
       <motion.nav
         aria-label="Site"
         initial={{ y: -12, opacity: 0 }}

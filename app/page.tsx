@@ -4,7 +4,6 @@ import { MotionConfig } from 'motion/react'
 import { SkipLink } from '@/components/skip-link'
 import { SiteHeader } from '@/components/site-header'
 import { Hero } from '@/components/hero'
-import { IntuitChapter } from '@/components/intuit-chapter'
 import { WorkArcs } from '@/components/work-arcs'
 import { ContactFooter } from '@/components/contact-footer'
 
@@ -18,7 +17,6 @@ export default function Page() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <IntuitChapter />
         <WorkArcs />
       </main>
       <ContactFooter />
