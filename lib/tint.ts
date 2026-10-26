@@ -17,11 +17,6 @@ export function tintPanel(tint: string): CSSProperties {
   }
 }
 
-/** The card around a prototype panel: the same colour, a lighter wash. */
-export function tintCard(tint: string): CSSProperties {
-  return { backgroundColor: `color-mix(in oklab, ${tint} 6%, var(--card))` }
-}
-
 /** Text in the prototype's colour. Mixed with the foreground so it stays
  *  readable on light and dark cards. */
 export function tintText(tint: string): CSSProperties {
