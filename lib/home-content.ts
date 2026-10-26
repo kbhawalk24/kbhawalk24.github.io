@@ -61,14 +61,14 @@ export const ARCS: Arc[] = [
         track: 'ic',
         note: 'Read this for how I take research to roadmap to shipped work.',
         line:
-          'Twenty people followed through a real search, eight findings that became eight launches, and the object model the team and the agent still run on.',
+          'Twenty people watched searching for data, 1,392 help-channel questions, a specification, and eight findings that became eight launches.',
         visualNote: 'The Search 2.0 design for table results.',
         cover: {
           src: '/work/search-2/tables-tab-design.jpg',
           tint: TINTS.search2design,
           alt: 'The Search 2.0 design for table results, with tabs per object type, facets on the left and metadata on every result',
         },
-        stats: [{ value: '14.8 h → 9.4 h', label: 'Time to discover data, for 6,673 people a month' }],
+        stats: [{ value: '14.2 h → 9.4 h', label: 'Time to discover data, for 6,673 people a month' }],
         status: 'live',
         href: '/work/search-2',
       },
