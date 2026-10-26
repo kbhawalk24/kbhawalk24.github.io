@@ -110,7 +110,7 @@ function Card({ card }: { card: WorkCard }) {
   const stat = card.stats[0]
   const tint = card.cover?.tint
   return (
-    <article id={card.slug} className="grid scroll-mt-36 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:items-center md:gap-14">
+    <article id={card.slug} className="grid scroll-mt-36 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] md:items-center md:gap-16 lg:gap-24">
       <div className="order-2 md:order-1">
         <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <span className="label-micro text-muted-foreground">
@@ -184,7 +184,8 @@ function ArcSection({ arc, index }: { arc: Arc; index: number }) {
 export function WorkArcs() {
   return (
     <section id="work" className="relative z-10 scroll-mt-28">
-      <div className="mx-auto max-w-6xl px-6 pt-16 md:px-10 md:pt-24 lg:px-14">
+      {/* Full width, with the page gutters: each entry runs edge to edge. */}
+      <div className="mx-auto w-full px-6 pt-16 md:px-10 md:pt-24 lg:px-14">
         <Reveal className="mb-10 md:mb-12">
           <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
             Selected work
