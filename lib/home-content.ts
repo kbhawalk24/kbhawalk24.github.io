@@ -31,9 +31,6 @@ export interface WorkCard {
   note?: string
   /** One measured outcome per card. */
   stats: [CardStat]
-  /** Instead of one outcome: the same journey measured at three moments.
-   *  Each step keeps its own label, because they are not one metric. */
-  journey?: { when: string; value: string; label: string }[]
   status: 'coming-soon' | 'live'
   /** The page, once it exists. */
   href?: string
@@ -95,11 +92,6 @@ export const ARCS: Arc[] = [
           alt: 'The agent inside Cursor finding tables, writing a query and showing it before running it',
         },
         stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
-        journey: [
-          { when: '2023', value: '20 days', label: 'To find, get access to and explore data' },
-          { when: '2025', value: '9.4 hours', label: 'To discover data, after Search 2.0' },
-          { when: '2026', value: '4 minutes', label: 'From a question to an answer, with the agent' },
-        ],
         status: 'live',
         href: '/work/agentic-discovery',
       },

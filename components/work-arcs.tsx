@@ -85,22 +85,28 @@ function ThumbVideo({ cover }: { cover: NonNullable<WorkCard['cover']> }) {
 function Thumbnail({ card }: { card: WorkCard }) {
   const cover = card.cover
   return (
-    <div
-      className="group relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[12px] p-[7%] md:aspect-auto md:min-h-[440px]"
-      style={cover ? tintPanel(cover.tint) : undefined}
-    >
-      {/* The whole panel opens the case study; the title link carries the name. */}
-      <Link href={card.href ?? '#work'} tabIndex={-1} aria-hidden="true" className="absolute inset-0" />
-      {cover && (
-        <div className="pointer-events-none relative w-full overflow-hidden rounded-[8px] bg-card shadow-[0_24px_48px_-16px_rgb(20_20_20/0.28)] ring-1 ring-foreground/10 transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-1.5">
-          {cover.video ? (
-            <ThumbVideo cover={cover} />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={cover.src} alt="" loading="lazy" decoding="async" className="block h-auto w-full" />
-          )}
-        </div>
+    <div className="relative">
+      {card.note && (
+        <p className="pointer-events-none absolute right-5 top-0 z-10 max-w-[13rem] -translate-y-1/2 rotate-2 rounded-[3px] bg-[#fdf0a6] px-3.5 py-3 font-sans text-[13px] font-semibold leading-snug text-[#3f3200] shadow-[0_8px_18px_-6px_rgb(20_20_20/0.4)] sm:right-7 sm:max-w-[15rem] sm:text-sm">
+          {card.note}
+        </p>
       )}
+      {/* The screenshot sits inset on the panel and runs off its bottom edge,
+          so every cover crops the same way whatever its aspect. */}
+      <div className="group relative aspect-[4/3] overflow-hidden rounded-[18px]" style={cover ? tintPanel(cover.tint) : undefined}>
+        {/* The whole panel opens the case study; the title link carries the name. */}
+        <Link href={card.href ?? '#work'} tabIndex={-1} aria-hidden="true" className="absolute inset-0 z-10" />
+        {cover && (
+          <div className="pointer-events-none absolute inset-x-[5%] top-[7%] overflow-hidden rounded-t-[10px] bg-card shadow-[0_24px_48px_-16px_rgb(20_20_20/0.28)] ring-1 ring-foreground/10 transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-1.5">
+            {cover.video ? (
+              <ThumbVideo cover={cover} />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={cover.src} alt="" loading="lazy" decoding="async" className="block h-auto w-full" />
+            )}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
@@ -109,14 +115,8 @@ function Card({ card }: { card: WorkCard }) {
   const stat = card.stats[0]
   const tint = card.cover?.tint
   return (
-    <article id={card.slug} className="relative grid scroll-mt-36 gap-2 rounded-[18px] bg-card p-3 shadow-soft md:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] md:gap-0 md:p-4">
-      {card.note && (
-        <p className="pointer-events-none absolute right-5 top-0 z-10 max-w-[13rem] -translate-y-1/2 rotate-2 rounded-[3px] bg-[#fdf0a6] px-3.5 py-3 font-sans text-[13px] font-semibold leading-snug text-[#3f3200] shadow-[0_8px_18px_-6px_rgb(20_20_20/0.4)] sm:right-7 sm:max-w-[15rem] sm:text-sm">
-          {card.note}
-        </p>
-      )}
-      <Thumbnail card={card} />
-      <div className="flex flex-col justify-center px-3 pb-4 pt-4 sm:px-5 md:px-10 md:py-10">
+    <article id={card.slug} className="grid scroll-mt-36 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:items-center md:gap-14">
+      <div className="order-2 md:order-1">
         <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <span className="label-micro text-muted-foreground">
             {card.org} · {card.period}
@@ -128,7 +128,7 @@ function Card({ card }: { card: WorkCard }) {
             {TRACKS[card.track].label}
           </span>
         </p>
-        <h4 className="mt-4 text-balance font-heading text-2xl font-semibold leading-tight tracking-tight md:text-3xl">
+        <h4 className="mt-4 text-balance font-heading text-3xl font-semibold leading-[1.1] tracking-tight md:text-4xl">
           {card.href ? (
             <Link href={card.href} className="underline-offset-4 hover:underline">
               {card.title}
@@ -138,51 +138,28 @@ function Card({ card }: { card: WorkCard }) {
           )}
         </h4>
         {card.cover && <span className="sr-only">{card.cover.alt}</span>}
-        <p className="mt-3 text-pretty font-sans text-base leading-relaxed text-muted-foreground">{card.line}</p>
-        {card.journey ? (
-          <ol className="mt-5">
-            {card.journey.map((step, i) => (
-              <li
-                key={step.when}
-                className={cn('grid grid-cols-[3.5rem_minmax(0,1fr)] items-baseline gap-x-3 py-2.5', i > 0 && 'border-t border-foreground/10')}
-              >
-                <span className="label-micro text-muted-foreground">{step.when}</span>
-                <span>
-                  <span
-                    className={cn(
-                      'block font-heading font-semibold leading-tight tracking-tight tabular-nums',
-                      i === card.journey!.length - 1 ? 'text-2xl md:text-3xl' : 'text-2xl',
-                      !tint && trackStyles[card.track].accentText,
-                    )}
-                    style={tint ? tintText(tint) : undefined}
-                  >
-                    {step.value}
-                  </span>
-                  <span className="mt-0.5 block label-micro text-muted-foreground">{step.label}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-        ) : (
-          <p className="mt-5">
-            <span
-              className={cn('block font-heading text-2xl font-semibold leading-tight tracking-tight tabular-nums', !tint && trackStyles[card.track].accentText)}
-              style={tint ? tintText(tint) : undefined}
-            >
-              {stat.value}
-            </span>
-            <span className="mt-1 block label-micro text-muted-foreground">{stat.label}</span>
-          </p>
-        )}
+        <p className="mt-4 text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">{card.line}</p>
+        <p className="mt-6 inline-block rounded-[14px] bg-card px-6 py-5 shadow-soft">
+          <span
+            className={cn('block font-heading text-3xl font-semibold leading-none tracking-tight tabular-nums md:text-4xl', !tint && trackStyles[card.track].accentText)}
+            style={tint ? tintText(tint) : undefined}
+          >
+            {stat.value}
+          </span>
+          <span className="mt-2.5 block label-micro text-muted-foreground">{stat.label}</span>
+        </p>
         {card.href && (
           <Link
             href={card.href}
-            className={cn('mt-4 inline-flex min-h-11 items-center gap-2 self-start font-sans text-base font-semibold transition-colors hover:underline', !tint && 'text-accent-brand')}
+            className={cn('mt-5 flex min-h-11 w-fit items-center gap-2 font-sans text-lg font-semibold transition-colors hover:underline', !tint && 'text-accent-brand')}
             style={tint ? tintText(tint) : undefined}
           >
             Read the case study <span aria-hidden="true">→</span>
           </Link>
         )}
+      </div>
+      <div className="order-1 md:order-2">
+        <Thumbnail card={card} />
       </div>
     </article>
   )
