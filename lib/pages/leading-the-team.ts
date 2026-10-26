@@ -21,7 +21,7 @@ export const LEADING_THE_TEAM: ShortPage = {
       { label: 'The agent', href: '/work/agentic-discovery' },
       { label: 'The catalog', href: '/work/catalog-data-map-lineage' },
       { label: '605', href: '/work/605-tv-analytics' },
-      { label: 'The team' },
+      { label: 'Management' },
     ],
     current: 4,
   },

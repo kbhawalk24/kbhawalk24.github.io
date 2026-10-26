@@ -211,8 +211,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
         {
           type: 'p',
           text:
-            'From August 2024 the designers I managed carried the platform on, on the same model: access requested from the table on screen, certification to the standard’s fourth level, and column-level lineage. That work is on the Team page. At AWS re:Invent 2025 Intuit showed the catalog on stage, with owners, quality rating, lineage and self-service access on one screen.',
-          links: [{ text: 'the Team page', href: '/work/leading-the-team' }],
+            'From August 2024 the designers I managed carried the platform on, on the same model: access requested from the table on screen, certification to the standard’s fourth level, and column-level lineage. That work is on the Management page. At AWS re:Invent 2025 Intuit showed the catalog on stage, with owners, quality rating, lineage and self-service access on one screen.',
+          links: [{ text: 'the Management page', href: '/work/leading-the-team' }],
         },
         {
           type: 'video',
@@ -233,10 +233,10 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
         {
           type: 'p',
           text:
-            'By March 2026 the catalog had 6,673 monthly users across 320,000 tables, a platform figure many teams share. The results below are from the years I designed it myself. The time-to-data figures are on the Search 2.0 page and the team’s results on the Team page.',
+            'By March 2026 the catalog had 6,673 monthly users across 320,000 tables, a platform figure many teams share. The results below are from the years I designed it myself. The time-to-data figures are on the Search 2.0 page and the team’s results on the Management page.',
           links: [
             { text: 'the Search 2.0 page', href: '/work/search-2' },
-            { text: 'the Team page', href: '/work/leading-the-team' },
+            { text: 'the Management page', href: '/work/leading-the-team' },
           ],
         },
         {
