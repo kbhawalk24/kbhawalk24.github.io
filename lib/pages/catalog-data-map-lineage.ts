@@ -51,9 +51,9 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     poster: '/work/catalog-data-map-lineage/hero-poster.jpg',
     tint: TINTS.platform2026,
     width: 1600,
-    height: 870,
-    alt: 'A screen recording of the data discovery platform: search results with a data maturity score breakdown, then a realtime data product page with its tables, owners and attributes.',
-    caption: 'The platform in May 2026: search with the maturity score on every result, then a data product with its copies and attributes. Sped up 2 times.',
+    height: 872,
+    alt: 'A screen recording of the data discovery platform, May 2026: the home page with three ways in and recently viewed data, then a table page with its columns, owners, tags, usage statistics and table statistics.',
+    caption: 'The platform in May 2026: the home page, then a table with its columns, owners, usage and statistics on one screen. Sped up 1.8 times.',
   },
   visuals: [
     {
