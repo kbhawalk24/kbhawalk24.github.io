@@ -86,14 +86,9 @@ function Thumbnail({ card }: { card: WorkCard }) {
   const cover = card.cover
   return (
     <div className="relative">
-      {card.note && (
-        <p className="pointer-events-none absolute right-5 top-0 z-10 max-w-[13rem] -translate-y-1/2 rotate-2 rounded-[3px] bg-[#fdf0a6] px-3.5 py-3 font-sans text-[13px] font-semibold leading-snug text-[#3f3200] shadow-[0_8px_18px_-6px_rgb(20_20_20/0.4)] sm:right-7 sm:max-w-[15rem] sm:text-sm">
-          {card.note}
-        </p>
-      )}
-      {/* The screenshot sits inset on the panel and runs off its bottom edge,
-          so every cover crops the same way whatever its aspect. */}
-      <div className="group relative aspect-[4/3] overflow-hidden rounded-[18px]" style={cover ? tintPanel(cover.tint) : undefined}>
+      {/* The screenshot sits inset on the panel; a tall one runs off the
+          panel's bottom edge, so every cover crops the same way. */}
+      <div className="group relative aspect-[4/3] overflow-hidden rounded-[22px]" style={cover ? tintPanel(cover.tint) : undefined}>
         {/* The whole panel opens the case study; the title link carries the name. */}
         <Link href={card.href ?? '#work'} tabIndex={-1} aria-hidden="true" className="absolute inset-0 z-10" />
         {cover && (
@@ -115,7 +110,12 @@ function Card({ card }: { card: WorkCard }) {
   const stat = card.stats[0]
   const tint = card.cover?.tint
   return (
-    <article id={card.slug} className="grid scroll-mt-36 gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:items-center md:gap-14">
+    <article id={card.slug} className="relative grid scroll-mt-36 gap-8 rounded-[32px] bg-card-soft p-5 sm:p-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:items-center md:gap-16 md:p-12">
+      {card.note && (
+        <p className="pointer-events-none absolute right-5 top-0 z-10 max-w-[13rem] -translate-y-1/2 rotate-2 rounded-[3px] bg-[#fdf0a6] px-3.5 py-3 font-sans text-[13px] font-semibold leading-snug text-[#3f3200] shadow-[0_8px_18px_-6px_rgb(20_20_20/0.4)] sm:right-8 sm:max-w-[15rem] sm:text-sm">
+          {card.note}
+        </p>
+      )}
       <div className="order-2 md:order-1">
         <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <span className="label-micro text-muted-foreground">
