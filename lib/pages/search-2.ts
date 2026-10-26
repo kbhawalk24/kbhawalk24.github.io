@@ -251,17 +251,17 @@ export const SEARCH_2: ShortPage = {
           type: 'tension',
           items: [
             {
-              image: { src: '/work/search-2/decision-tabs.png', width: 1450, height: 178, alt: 'The search header with one tab per kind of object: Overview, Tables, Data Map, CDC Attributes, Dashboards, ML Models and Features, Queries, Slack, People.' },
+              image: { src: '/work/search-2/decision-tabs.png', width: 820, height: 240, alt: 'The shipped search, 2026: one tab per kind of object, Data Map, Tables, CDC Attributes and Topics, with the first table result under it.' },
               tension: 'In 2022 I argued for the Data Map: organise the catalog by what data means. In 2024 the sessions said people search by the physical kind of thing they want.',
               decision: 'One tab per kind, with the map as one tab among six. I gave up the structure I had fought for, because people browse by meaning and search by kind. The map stayed the way to understand a data product.',
             },
             {
-              image: { src: '/work/search-2/decision-filters.png', width: 400, height: 860, alt: 'The filter column: schema with search inside it, business-unit tags, and data maturity stars, every filter visible.' },
+              image: { src: '/work/search-2/decision-filters.png', width: 660, height: 470, alt: 'The filter column of the design beside the first results: hidden results, compliance, usage and schema, every filter visible with its state.' },
               tension: 'Every request for a new filter was reasonable alone. Together they made eight pills nobody used, because object type and freshness looked and behaved the same.',
               decision: 'Filters are not facets. A filter is the kind of object and never changes. A facet is a property of the results and changes with the query. Four facet behaviours, all inside what the search service could already do.',
             },
             {
-              image: { src: '/work/search-2/decision-result.png', width: 1080, height: 300, alt: 'Two results, each with its owner, last refresh, queries run, row count and data product beside the description.' },
+              image: { src: '/work/search-2/decision-result.png', width: 1030, height: 520, alt: 'Two results, each with its owner, last refresh, queries run, row count and data product beside the description.' },
               tension: 'Engineers and stewards wanted every piece of metadata on each result: a dozen lines, some in platform vocabulary.',
               decision: 'Five lines per result, chosen by asking in every session what a person needed to pick between two similar tables. I held that line against every request for a sixth.',
             },
