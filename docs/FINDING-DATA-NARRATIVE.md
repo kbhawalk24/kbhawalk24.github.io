@@ -145,3 +145,7 @@ Built: 20 days (2023), 9.4 hours (2025), 4 minutes (2026). See the conflict on t
 ## Leave out
 
 Names of engineers, PMs and users (roles only). "Manager 2". "Senior Staff pattern", "influence without authority", "force-multiplication". The claim that no one had studied search before; "the catalog's first follow-me-home series" is what the deck supports.
+
+## Decision, 26 October 2026: time to discover data
+
+The site uses one baseline everywhere: 14.2 hours (the tracker's figure for the search step, August 2024), falling to 9.4 hours by July 2025. This matches the resume and the October 2026 master document. The 14.8-hour figure in the November 2024 launch post is not used on the site. Intuit's public 20-day figure is quoted only as the whole-path number for 2023, and always labelled as such.

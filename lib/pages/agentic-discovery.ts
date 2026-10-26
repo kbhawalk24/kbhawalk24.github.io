@@ -164,7 +164,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
           type: 'cards',
           items: [
             { value: '3 in 4', title: 'searches go back to data the person already knows', text: 'That became Collections, a saved working set the agent checks first.' },
-            { value: '89%', title: 'of first results right after Search 2.0, up from 81%', text: 'Precise enough for an agent to build on.' },
+            { value: '81.31% → 89.24%', title: 'first-result precision on Data Map search after Search 2.0', text: 'Precise enough for an agent to build on.' },
             { value: '20 of 20', title: 'people wanted answers where they were working', text: 'That became the agent in Cursor and Claude, instead of another chat window.' },
           ],
         },
