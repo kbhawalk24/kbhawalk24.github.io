@@ -75,16 +75,6 @@ export const SEARCH_2: ShortPage = {
       caption: 'The raw notes from the twenty sessions, April 2024: one row per person, one note per observation, the recurring ones in purple. Zoomed out; the quotes below are read from it.',
     },
     {
-      id: 'result-hover',
-      after: 'roadmap',
-      lead: true,
-      src: '/work/search-2/result-hover-details.jpg',
-      width: 2520,
-      height: 1205,
-      alt: 'The Search 2.0 design with the hover states beside it: a quality score with errors, warnings and passed checks; downstream dependencies by processors, tables and dashboards; a lineage summary; and a data profile for a column with its value counts and range.',
-      caption: 'What the five lines open into, from the specification: quality checks, downstream dependencies, a lineage summary and a column profile, each one a finding from the sessions.',
-    },
-    {
       id: 'click-depth',
       after: 'shipped',
       lead: true,
