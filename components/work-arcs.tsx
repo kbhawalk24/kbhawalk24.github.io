@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
 import { TRACKS } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
-import { tintPanel, tintPill, tintText } from '@/lib/tint'
+import { tintCard, tintPanel, tintPill, tintText } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
 
@@ -110,7 +110,11 @@ function Card({ card }: { card: WorkCard }) {
   const stat = card.stats[0]
   const tint = card.cover?.tint
   return (
-    <article id={card.slug} className="relative grid scroll-mt-36 gap-8 rounded-[32px] bg-card-soft p-5 sm:p-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:items-center md:gap-16 md:p-12">
+    <article
+      id={card.slug}
+      className="relative grid scroll-mt-36 gap-8 rounded-[32px] bg-card-soft p-5 sm:p-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:items-center md:gap-16 md:p-12"
+      style={tint ? tintCard(tint) : undefined}
+    >
       {card.note && (
         <p className="pointer-events-none absolute right-5 top-0 z-10 max-w-[13rem] -translate-y-1/2 rotate-2 rounded-[3px] bg-[#fdf0a6] px-3.5 py-3 font-sans text-[13px] font-semibold leading-snug text-[#3f3200] shadow-[0_8px_18px_-6px_rgb(20_20_20/0.4)] sm:right-8 sm:max-w-[15rem] sm:text-sm">
           {card.note}
