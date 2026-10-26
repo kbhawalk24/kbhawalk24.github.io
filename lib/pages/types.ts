@@ -39,7 +39,7 @@ export type Block =
   /** Three or four short cards in a row: insights, outcomes, learnings. */
   | { type: 'cards'; items: { title: string; text: string; value?: string }[] }
   /** What the evidence said, beside what I decided and what it cost. */
-  | { type: 'tension'; items: { tension: string; decision: string }[] }
+  | { type: 'tension'; items: { tension: string; decision: string; image?: { src: string; width: number; height: number; alt: string } }[] }
   /** A path through stages, each with the tools it ran through, one thing
    *  someone said (credited by role) and, where known, how long it took. */
   | { type: 'steps'; caption?: string; items: { title: string; tools: string; quote?: string; who?: string; time?: string }[] }

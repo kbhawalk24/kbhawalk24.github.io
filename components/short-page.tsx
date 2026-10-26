@@ -140,15 +140,30 @@ function BlockView({ block }: { block: Block }) {
     return (
       <ol className={cn(CARD, 'divide-y divide-border p-0')}>
         {block.items.map((item, i) => (
-          <li key={i} className="grid gap-4 p-6 md:grid-cols-2 md:gap-8">
-            <div>
-              <p className={cn(SMALL, 'font-semibold')}>What the evidence said</p>
-              <p className={cn(BODY, 'mt-2')}>{item.tension}</p>
+          <li key={i} className={cn('grid gap-4 p-6 md:gap-8', item.image ? 'md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center' : 'md:grid-cols-2')}>
+            {/* With an image, the crop of the design sits beside the row's text. */}
+            {item.image && (
+              <div className="flex items-center justify-center self-stretch rounded-[10px] bg-card-soft p-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={item.image.src} width={item.image.width} height={item.image.height} alt={item.image.alt} loading="lazy" decoding="async" className="h-auto max-h-[26rem] w-full rounded-[6px] object-contain" />
+              </div>
+            )}
+            <div className={cn(item.image && 'flex flex-col gap-5')}>
+              <div>
+                <p className={cn(SMALL, 'font-semibold')}>What the evidence said</p>
+                <p className={cn(BODY, 'mt-2')}>{item.tension}</p>
+              </div>
+              <div className={cn(!item.image && 'md:hidden')}>
+                <p className={cn(SMALL, 'font-semibold text-accent-brand')}>What I decided, and what it cost</p>
+                <p className={cn(BODY, 'mt-2')}>{item.decision}</p>
+              </div>
             </div>
-            <div>
-              <p className={cn(SMALL, 'font-semibold text-accent-brand')}>What I decided, and what it cost</p>
-              <p className={cn(BODY, 'mt-2')}>{item.decision}</p>
-            </div>
+            {!item.image && (
+              <div className="hidden md:block">
+                <p className={cn(SMALL, 'font-semibold text-accent-brand')}>What I decided, and what it cost</p>
+                <p className={cn(BODY, 'mt-2')}>{item.decision}</p>
+              </div>
+            )}
           </li>
         ))}
       </ol>
