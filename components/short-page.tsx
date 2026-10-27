@@ -583,39 +583,36 @@ const FACT_ICONS: Record<string, React.ComponentType<{ className?: string; style
   Role: UserRound, Scope: Boxes, Research: Search, Shipped: Rocket, Team: UserRound,
 }
 
-/** The opening facts as a transposed table: one row per label, read top to
- *  bottom in the order Role, Scope, Research, Shipped. Facts sit on a
- *  four-column sub-grid so they align down the block, each as the fact in
- *  medium weight with its date or count in small muted type beneath. The
- *  label is top-aligned with the row's first line; the icon carries the
- *  page's tint. Spacing on the 8-point scale. */
+/** The opening facts: four columns across, Role, Scope, Research, Shipped,
+ *  each with a tinted icon and its label on top and short facts stacked
+ *  beneath, the date or count of each in muted type on its own line.
+ *  Hairline dividers between columns; two columns on tablets, one on phones. */
 function Facts({ facts, tint }: { facts: PageFact[]; tint: string }) {
   return (
-    <dl className={cn(CARD, 'mt-12 divide-y divide-border overflow-hidden p-0')}>
-      {facts.map((f) => {
+    <dl className={cn(CARD, 'mt-12 grid overflow-hidden p-0 sm:grid-cols-2 lg:grid-cols-4')}>
+      {facts.map((f, i) => {
         const Icon = FACT_ICONS[f.label]
         return (
-          <div key={f.label} className="grid sm:grid-cols-[10rem_minmax(0,1fr)]">
-            <dt className="flex items-center gap-3 px-5 pt-4 sm:items-start sm:py-4 sm:pr-4">
+          <div key={f.label} className={cn('px-5 py-5', i > 0 && 'border-t border-border sm:border-t-0', i % 2 === 1 && 'sm:border-l sm:border-border', i >= 2 && 'sm:border-t sm:border-border lg:border-t-0', i > 0 && 'lg:border-l lg:border-border')}>
+            <dt className="flex items-center gap-3">
               {Icon && (
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: `color-mix(in oklab, ${tint} 12%, var(--card))` }}>
                   <Icon className="size-4" style={tintText(tint)} aria-hidden />
                 </span>
               )}
-              <span className="font-heading text-base font-semibold leading-8 tracking-tight text-foreground">{f.label}</span>
+              <span className="font-heading text-base font-semibold tracking-tight text-foreground">{f.label}</span>
             </dt>
             {f.lines ? (
-              <dd className="flex flex-col gap-y-1.5 px-5 pb-4 pt-2 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-y-1 sm:border-l sm:border-border sm:py-4 sm:pt-5">
-                {f.lines.map((line, li) => (
-                  <span key={line.text + (line.note ?? '')} className="font-sans text-[15px] leading-snug text-foreground">
-                    <span className="font-medium">{line.text}</span>
-                    {line.note && <span className="text-muted-foreground"> {line.note}</span>}
-                    {li < f.lines!.length - 1 && <span className="mx-3 hidden text-muted-foreground/60 sm:inline" aria-hidden>·</span>}
-                  </span>
+              <dd className="mt-4 grid gap-3">
+                {f.lines.map((line) => (
+                  <div key={line.text + (line.note ?? '')}>
+                    <p className="font-sans text-[15px] font-medium leading-snug text-foreground">{line.text}</p>
+                    {line.note && <p className="mt-0.5 font-sans text-[13px] leading-snug text-muted-foreground">{line.note}</p>}
+                  </div>
                 ))}
               </dd>
             ) : (
-              <dd className="px-5 pb-4 pt-2 text-pretty font-sans text-[15px] leading-relaxed text-foreground sm:border-l sm:border-border sm:py-4">{f.value}</dd>
+              <dd className="mt-4 text-pretty font-sans text-[15px] leading-relaxed text-foreground">{f.value}</dd>
             )}
           </div>
         )
