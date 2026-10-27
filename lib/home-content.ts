@@ -16,8 +16,10 @@ export interface WorkCard {
   roleTag: string
   /** Where the work was done, shown above the title. */
   org: string
-  /** The kind of work, shown as the card's pill. */
+  /** The kind of work, for the accent colour. */
   track: Track
+  /** Two or three words a recruiter scans for, shown as the card's pill. */
+  role: string
   /** What the cover will show once it exists; read out for the placeholder. */
   visualNote: string
   /** The cover image, once it exists. */
@@ -47,10 +49,8 @@ export interface Arc {
 export const ARCS: Arc[] = [
   {
     id: 'discovery',
-    heading: 'Data discovery: search, then an agent',
-    period: '2021–2026',
-    thesis:
-      'Five years of data discovery across a data lake of 320,000 tables: keyword search, then a plain-language assistant, then an agent inside Cursor and Claude.',
+    heading: 'Data discovery',
+    period: '2023–2026',
     cards: [
       {
         slug: 'search-2',
@@ -58,17 +58,17 @@ export const ARCS: Arc[] = [
         title: 'Search 2.0: redesigning search for the data catalog',
         period: '2024–2025',
         roleTag: 'Principal Product Designer',
+        role: 'Principal IC',
         track: 'ic',
-        note: 'Read this for how I take research to roadmap to shipped work.',
         line:
-          'Twenty people watched searching for data, 1,392 help-channel questions, a specification, and eight findings that became eight launches.',
+          'The search box was fine; the problem was trust. Twenty sessions showed why, I overturned the structure I had designed in 2022, and the specification became eight launches.',
         visualNote: 'The Search 2.0 design for table results.',
         cover: {
           src: '/work/search-2/tables-tab-design.jpg',
           tint: TINTS.search2design,
           alt: 'The Search 2.0 design for table results, with tabs per object type, facets on the left and metadata on every result',
         },
-        stats: [{ value: '14.2 h → 8.9 h', label: 'Time to discover data, Aug 2024 to Jan 2026, for 6,673 people a month' }],
+        stats: [{ value: '32% → 63%', label: 'Searches that ended in a click, Jan 2024 to Jan 2026' }],
         status: 'live',
         href: '/work/search-2',
       },
@@ -78,10 +78,10 @@ export const ARCS: Arc[] = [
         title: 'Building the data discovery agent for Cursor and Claude',
         period: '2023–2026',
         roleTag: 'Principal Product Designer → Design Manager',
+        role: 'Principal IC → manager',
         track: 'strategy',
-        note: 'Read this for design strategy on agentic data discovery.',
         line:
-          'An assistant that shipped before its search could support it, a saved working set of data, the specification for how the agent answers, and the question of where it sits in the catalog.',
+          'Why the 2023 chatbot faded, and what the agent does differently: it lives where people work, checks their own collections first, and never shows a query it has not run.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         cover: {
           src: '/work/agentic-discovery/hero-poster.jpg',
@@ -91,7 +91,7 @@ export const ARCS: Arc[] = [
           height: 994,
           alt: 'The agent inside Cursor finding tables, writing a query and showing it before running it',
         },
-        stats: [{ value: '45 min → 4 min', label: 'From a question to an answer' }],
+        stats: [{ value: '45 min → 4 min', label: 'From a question to a verified answer' }],
         status: 'live',
         href: '/work/agentic-discovery',
       },
@@ -99,21 +99,19 @@ export const ARCS: Arc[] = [
   },
   {
     id: 'platform',
-    heading: 'The data discovery platform',
+    heading: 'The data platform',
     period: '2021–2026',
-    thesis:
-      'I joined Intuit as the catalog’s founding designer. By 2026 it was the platform 6,673 people a month use to find data, trace its lineage, get access to it and check it against the clean-data standard.',
     cards: [
       {
         slug: 'catalog-data-map-lineage',
         org: 'Intuit',
-        note: 'Read this to see how I grew a product into a platform over five years.',
         title: 'Building the data discovery platform, 2021 to 2026',
         period: '2021–2026',
         roleTag: 'Founding Product Designer → Principal → Design Manager',
+        role: 'Founding designer',
         track: 'ic',
         line:
-          'One layer at a time: signals to judge a table, the Data Map, lineage in four weeks, AI-written metadata people could correct, and self-service onboarding.',
+          'Five years from a list of table names to the platform Intuit showed on stage at AWS re:Invent: signals to judge a table, the data product model, lineage in four weeks, self-service onboarding.',
         visualNote: 'A data product page in the 2026 platform.',
         cover: {
           src: '/work/catalog-data-map-lineage/hero-poster.jpg',
@@ -123,7 +121,7 @@ export const ARCS: Arc[] = [
           height: 872,
           alt: 'The data discovery platform: the home page, then a table page with its columns, owners and statistics',
         },
-        stats: [{ value: '68% → 96%', label: 'Searches with a click in the top five' }],
+        stats: [{ value: '68% → 96%', label: 'Searches with a click in the top five, in the catalog’s first two years' }],
         status: 'live',
         href: '/work/catalog-data-map-lineage',
       },
@@ -131,10 +129,8 @@ export const ARCS: Arc[] = [
   },
   {
     id: 'team',
-    heading: 'Leading design for the data platform',
+    heading: 'Leading the design team',
     period: '2024–2026',
-    thesis:
-      'From August 2024 I managed the designers for the platform’s nine product areas, one designer for every 85 engineers, and kept designing myself.',
     cards: [
       {
         slug: 'leading-the-team',
@@ -142,9 +138,10 @@ export const ARCS: Arc[] = [
         title: 'Leading design for the data platform, 2024 to 2026',
         period: '2024–2026',
         roleTag: 'Design Manager',
+        role: 'Design manager',
         track: 'management',
         line:
-          'Where I spent my time, one intake and one research base for nine areas, AI tools in my own work first, what the team shipped, and every designer promoted.',
+          'How I ran design at a 1:85 ratio: one intake and one research base for nine areas, AI tools in my own work before asking the team to use them, and every designer who reported to me promoted.',
         visualNote: 'The design project tracker.',
         cover: {
           src: '/work/leading-the-team/tracker-2025.jpg',
@@ -153,7 +150,7 @@ export const ARCS: Arc[] = [
           height: 1087,
           alt: 'The design project tracker: every design request across nine product areas with its status and designer',
         },
-        stats: [{ value: '1 : 85', label: 'Designers to engineers across nine product areas' }],
+        stats: [{ value: '1 : 85', label: 'Designer to engineer ratio I ran design at, across nine product areas' }],
         status: 'live',
         href: '/work/leading-the-team',
       },
@@ -161,20 +158,20 @@ export const ARCS: Arc[] = [
   },
   {
     id: 'early',
-    heading: 'Before Intuit: 605',
+    heading: 'Before Intuit',
     period: '2017–2021',
     cards: [
       {
         slug: '605-tv-analytics',
         org: '605',
-        note: 'Read this for zero-to-one products and data visualisation craft.',
         title: 'Designing three TV analytics products at 605',
         period: '2017–2021',
         roleTag: 'First Product Designer',
+        role: 'First designer',
         track: 'ic',
         line:
-          'Three TV advertising analytics products, from first concept to commercial launch.',
-        visualNote: 'The 15-target chart beside the shipped 5-target comparison chart in 605 Platform.',
+          'Three analytics products from first concept to launch, and the rule that made them work: design to the common case, not the limit.',
+        visualNote: 'The 605 Platform main dashboard.',
         cover: {
           src: '/work/605-tv-analytics/hero-poster.jpg',
           video: '/work/605-tv-analytics/hero.mp4',
@@ -206,10 +203,10 @@ export const HERO = {
     {
       org: 'Intuit',
       before: 'Most recently at ',
-      after: ', from 2021 to 2026, I led Data Platform design, owning',
-      /** The three phrases set in the accent colour; they do not link anywhere. */
-      pills: [{ label: 'data discovery' }, { label: 'platform strategy' }, { label: 'leading the team' }],
-      tail: ' across pipeline authoring, observability, lineage, governance, fine-grained access control and instrumentation.',
+      after: ', from 2021 to 2026, my work came in three parts:',
+      /** The three phrases set in the accent colour match the three groups under Selected work. */
+      pills: [{ label: 'data discovery' }, { label: 'the data platform' }, { label: 'leading the design team' }],
+      tail: ', across nine product areas from pipeline authoring to access control.',
     },
     {
       org: '605',

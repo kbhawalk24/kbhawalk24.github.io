@@ -6,7 +6,6 @@ import { useReducedMotion } from 'motion/react'
 import { Pause, Play } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ARCS, type Arc, type WorkCard } from '@/lib/home-content'
-import { TRACKS } from '@/lib/timeline-data'
 import { trackStyles } from '@/lib/track-styles'
 import { tintPanel, tintText } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
@@ -117,7 +116,7 @@ function Card({ card }: { card: WorkCard }) {
             {card.org} · {card.period}
           </span>
           <span className="inline-block rounded-full bg-foreground/[0.06] px-2.5 py-1 label-micro text-muted-foreground">
-            {TRACKS[card.track].label}
+            {card.role}
           </span>
         </p>
         <h4 className="mt-4 text-balance font-heading text-2xl font-semibold leading-tight tracking-tight md:text-3xl">
@@ -158,8 +157,8 @@ function ArcSection({ arc, index }: { arc: Arc; index: number }) {
   return (
     <div className={index === 0 ? undefined : 'mt-16 md:mt-24'}>
       <Reveal className="mb-12">
-        <h3 className=" text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">{arc.heading}</h3>
-        {arc.thesis && <p className="mt-4 max-w-4xl text-pretty font-sans text-lg leading-[1.6] text-foreground">{arc.thesis}</p>}
+        <h3 className="text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl">{arc.heading}</h3>
+        {arc.thesis && <p className="mt-2 max-w-3xl text-pretty font-sans text-base leading-relaxed text-muted-foreground">{arc.thesis}</p>}
       </Reveal>
       <ol className="grid gap-12">
         {arc.cards.map((card) => (
