@@ -55,7 +55,7 @@ export const ARCS: Arc[] = [
       {
         slug: 'search-2',
         org: 'Intuit',
-        title: 'Search 2.0: rebuilding data discovery across 320,000 tables',
+        title: 'Rebuilding search for Intuit’s data catalog',
         period: '2024–2025',
         roleTag: 'Principal Product Designer',
         role: 'Principal IC',

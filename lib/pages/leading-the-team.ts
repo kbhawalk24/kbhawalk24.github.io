@@ -17,7 +17,7 @@ export const LEADING_THE_TEAM: ShortPage = {
   context: {
     system: 'Intuit’s enterprise data platform: 9 product areas · about 550 engineers and 16 PMs · 6,673 monthly users.',
     steps: [
-      { label: 'Search 2.0', href: '/work/search-2' },
+      { label: 'Catalog search', href: '/work/search-2' },
       { label: 'The agent', href: '/work/agentic-discovery' },
       { label: 'The catalog', href: '/work/catalog-data-map-lineage' },
       { label: '605', href: '/work/605-tv-analytics' },

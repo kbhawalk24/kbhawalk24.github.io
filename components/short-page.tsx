@@ -4,7 +4,8 @@ import { event } from '@/lib/analytics'
 import Link from 'next/link'
 import { MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
-import type { Block, InlineLink, PageFact, PageVisual, ShortPage } from '@/lib/pages/types'
+import type { Block, ChipIcon, InlineLink, PageFact, PageVisual, ShortPage } from '@/lib/pages/types'
+import { Boxes, Brain, ChartColumn, ClipboardList, Code, KeyRound, Megaphone, MessageSquare, RotateCcw, Search, Table2, UserRound, Wrench } from 'lucide-react'
 import { TINTS } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { ContactFooter } from '@/components/contact-footer'
@@ -38,7 +39,12 @@ const BODY = 'text-pretty text-[17px] leading-[1.65] text-foreground/90'
 const SMALL = 'text-pretty font-sans text-sm leading-relaxed text-muted-foreground'
 const CAPTION = 'text-pretty font-sans text-sm leading-relaxed text-muted-foreground'
 
-const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes', 'statement', 'clips'])
+const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes', 'statement', 'clips', 'chips', 'journey', 'compare', 'anatomy', 'donut', 'timeline'])
+
+const CHIP_ICONS: Record<ChipIcon, React.ComponentType<{ className?: string; 'aria-hidden'?: boolean }>> = {
+  chart: ChartColumn, code: Code, megaphone: Megaphone, wrench: Wrench, brain: Brain, boxes: Boxes, clipboard: ClipboardList,
+  search: Search, message: MessageSquare, person: UserRound, key: KeyRound, table: Table2, restart: RotateCcw,
+}
 
 function readMinutes(page: ShortPage) {
   const words = page.sections
@@ -54,6 +60,12 @@ function readMinutes(page: ShortPage) {
       if (b.type === 'clips') return b.items.map((i) => i.title + ' ' + i.text).join(' ')
       if (b.type === 'table') return b.rows.flat().join(' ')
       if (b.type === 'subhead') return b.text
+      if (b.type === 'chips') return b.items.map((i) => i.label).join(' ')
+      if (b.type === 'journey') return b.items.map((i) => i.title).join(' ')
+      if (b.type === 'compare') return b.panels.map((i) => i.text).join(' ')
+      if (b.type === 'anatomy') return b.lines.map((i) => i.text).join(' ')
+      if (b.type === 'donut') return b.segments.map((i) => i.label + ' ' + (i.text ?? '')).join(' ')
+      if (b.type === 'timeline') return b.items.map((i) => i.title + ' ' + i.text).join(' ')
       return ''
     })
     .join(' ')
@@ -82,6 +94,156 @@ function Linked({ text, links }: { text: string; links?: InlineLink[] }) {
 }
 
 function BlockView({ block }: { block: Block }) {
+  if (block.type === 'chips') {
+    return (
+      <ul className="flex flex-wrap gap-2.5">
+        {block.items.map((c) => {
+          const Icon = c.icon ? CHIP_ICONS[c.icon] : null
+          return (
+            <li key={c.label} className="inline-flex min-h-11 items-center gap-2.5 rounded-full bg-card py-2 pl-3 pr-4 shadow-soft">
+              {Icon && <Icon className="size-4 text-accent-brand" aria-hidden />}
+              <span className="font-heading text-lg font-semibold leading-none tabular-nums text-accent-brand">{c.count}</span>
+              <span className="font-sans text-sm text-foreground">{c.label}</span>
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
+  if (block.type === 'journey') {
+    return (
+      <figure>
+        <ol className="grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {block.items.map((step, i) => (
+            <li
+              key={step.title}
+              className={cn(
+                'relative flex min-h-28 flex-col justify-between rounded-[12px] p-4',
+                step.outside ? 'border border-dashed border-foreground/25 bg-transparent' : 'bg-card shadow-soft ring-1 ring-accent-brand/40',
+              )}
+            >
+              <span className={cn('label-micro', step.outside ? 'text-muted-foreground' : 'text-accent-brand')}>{String(i + 1).padStart(2, '0')}</span>
+              <span className="mt-3 text-pretty font-sans text-[15px] font-medium leading-snug text-foreground">{step.title}</span>
+              <span className={cn(SMALL, 'mt-3 text-xs')}>{step.outside ? 'Outside the catalog' : 'In the catalog'}</span>
+            </li>
+          ))}
+        </ol>
+        {block.caption && <figcaption className={cn(CAPTION, 'mt-3')}>{block.caption}</figcaption>}
+      </figure>
+    )
+  }
+  if (block.type === 'compare') {
+    return (
+      <ul className={cn('grid gap-4', block.panels.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2')}>
+        {block.panels.map((panel) => (
+          <li key={panel.label} className={cn(CARD, panel.accent && 'ring-1 ring-accent-brand/40')}>
+            <p className={cn('label-micro', panel.accent ? 'text-accent-brand' : 'text-muted-foreground')}>{panel.label}</p>
+            <p className={cn(BODY, 'mt-3')}>{panel.text}</p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {panel.pills.map((pill) => (
+                <li key={pill} className={cn('rounded-full px-3 py-1 font-sans text-[13px] font-medium', panel.accent ? 'bg-accent-brand/10 text-accent-brand' : 'bg-foreground/[0.06] text-foreground')}>
+                  {pill}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  if (block.type === 'anatomy') {
+    return (
+      <figure className={cn(CARD, 'grid gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:items-center')}>
+        <div className="min-w-0 rounded-[12px] bg-card-soft p-4 sm:p-5">
+          <div className="rounded-[10px] bg-card p-4 shadow-soft ring-1 ring-foreground/10">
+            <p className="label-micro text-muted-foreground">{block.kind}</p>
+            <p className="mt-1 font-mono text-[15px] font-semibold text-foreground">{block.name}</p>
+            <ol className="mt-3 grid gap-2">
+              {block.lines.map((line, i) => (
+                <li key={i} className="flex items-baseline justify-between gap-4 border-t border-border pt-2 first:border-t-0 first:pt-0">
+                  <span className="min-w-0 break-words font-sans text-sm text-foreground/90">
+                    <span className="mr-2 tabular-nums text-muted-foreground">{i + 1}</span>
+                    {line.text}
+                  </span>
+                  <span className={cn('shrink-0 rounded-full px-2 py-0.5 label-micro', line.group === block.groups[0] ? 'bg-accent-brand/10 text-accent-brand' : 'bg-foreground/[0.06] text-muted-foreground')}>{line.group}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+        <div>
+          <ul className="grid gap-3">
+            {block.groups.map((g, gi) => (
+              <li key={g} className="flex items-start gap-3">
+                <span className={cn('mt-1.5 size-2.5 shrink-0 rounded-full', gi === 0 ? 'bg-accent-brand' : 'bg-foreground/30')} aria-hidden />
+                <span className={BODY}>
+                  <span className="font-semibold">{g}:</span>{' '}
+                  {block.lines.filter((l) => l.group === g).length} of the {block.lines.length} lines
+                </span>
+              </li>
+            ))}
+          </ul>
+          {block.caption && <figcaption className={cn(CAPTION, 'mt-4')}>{block.caption}</figcaption>}
+        </div>
+      </figure>
+    )
+  }
+  if (block.type === 'donut') {
+    const total = block.segments.reduce((a, b) => a + b.value, 0)
+    const r = 42
+    const circ = 2 * Math.PI * r
+    const fills = ['var(--accent-brand)', 'color-mix(in oklab, var(--accent-brand) 45%, var(--card))', 'color-mix(in oklab, var(--foreground) 18%, var(--card))', 'color-mix(in oklab, var(--foreground) 8%, var(--card))']
+    let offset = 0
+    const arcs = block.segments.map((seg, i) => {
+      const len = (seg.value / total) * circ
+      const el = <circle key={i} cx="50" cy="50" r={r} fill="none" stroke={fills[i] ?? fills[3]} strokeWidth="14" strokeDasharray={`${len - 2} ${circ - len + 2}`} strokeDashoffset={-offset} transform="rotate(-90 50 50)" />
+      offset += len
+      return el
+    })
+    return (
+      <figure className={cn(CARD, 'grid items-center gap-6 sm:grid-cols-[12rem_minmax(0,1fr)]')}>
+        <div className="relative mx-auto w-44">
+          <svg viewBox="0 0 100 100" className="w-full" role="img" aria-label={`${block.total}: ${block.segments.map((s) => `${s.label} ${s.value}%`).join(', ')}`}>
+            {arcs}
+          </svg>
+          <p className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+            <span className="font-heading text-2xl font-semibold leading-none tracking-tight text-foreground">{block.total.split(' ')[0]}</span>
+            <span className={cn(SMALL, 'mt-1 text-xs')}>{block.total.split(' ').slice(1).join(' ')}</span>
+          </p>
+        </div>
+        <div>
+          <ul className="grid gap-3">
+            {block.segments.map((seg, i) => (
+              <li key={seg.label} className="flex items-start gap-3 border-t border-border pt-3 first:border-t-0 first:pt-0">
+                <span className="mt-2 size-2.5 shrink-0 rounded-full" style={{ background: fills[i] ?? fills[3] }} aria-hidden />
+                <span className="font-heading text-2xl font-semibold leading-none tabular-nums text-foreground">{seg.value}%</span>
+                <span className="min-w-0">
+                  <span className="block font-sans text-[15px] font-medium leading-snug text-foreground">{seg.label}</span>
+                  {seg.text && <span className={cn(SMALL, 'mt-0.5 block')}>{seg.text}</span>}
+                </span>
+              </li>
+            ))}
+          </ul>
+          {block.note && <figcaption className={cn(CAPTION, 'mt-4')}>{block.note}</figcaption>}
+        </div>
+      </figure>
+    )
+  }
+  if (block.type === 'timeline') {
+    return (
+      <ol className="relative grid gap-6 border-l border-border pl-6">
+        {block.items.map((item, i) => (
+          <li key={item.title} className="relative">
+            <span className={cn('absolute -left-[1.85rem] top-1.5 size-3 rounded-full ring-4 ring-background', i === block.items.length - 1 ? 'bg-foreground' : 'bg-accent-brand')} aria-hidden />
+            <p className="label-micro text-accent-brand">{item.when}</p>
+            <p className={cn(SUBHEAD, 'mt-1 text-lg')}>{item.title}</p>
+            <p className={cn(SMALL, 'mt-1 max-w-[40rem]')}>{item.text}</p>
+            {item.state && <span className="mt-2 inline-block rounded-full bg-foreground/[0.06] px-2.5 py-1 label-micro text-muted-foreground">{item.state}</span>}
+          </li>
+        ))}
+      </ol>
+    )
+  }
   if (block.type === 'subhead') {
     return (
       <h3 className="mt-6 flex items-baseline gap-3 text-balance font-heading text-xl font-semibold tracking-tight md:text-2xl">
@@ -371,7 +533,7 @@ function SectionBlocks({ blocks, lead }: { blocks: Block[]; lead: PageVisual[] }
   const firstWide = blocks.findIndex((b) => b.type !== 'p')
   const cut = firstWide < 0 ? blocks.length : firstWide
   const render = (block: Block, i: number) => (
-    <div key={i} className={cn(!WIDE_BLOCKS.has(block.type) && 'max-w-[46rem]')}>
+    <div key={i} className={cn('min-w-0', !WIDE_BLOCKS.has(block.type) && 'max-w-[46rem]')}>
       <BlockView block={block} />
     </div>
   )

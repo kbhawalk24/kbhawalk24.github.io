@@ -16,7 +16,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
-      { label: 'Search 2.0', href: '/work/search-2' },
+      { label: 'Catalog search', href: '/work/search-2' },
       { label: 'The agent', href: '/work/agentic-discovery' },
       { label: 'The catalog' },
       { label: '605', href: '/work/605-tv-analytics' },

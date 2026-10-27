@@ -27,6 +27,9 @@ export interface InlineLink {
   href: string
 }
 
+/** Icons available to chips, by name, so page data stays plain. */
+export type ChipIcon = 'chart' | 'code' | 'megaphone' | 'wrench' | 'brain' | 'boxes' | 'clipboard' | 'search' | 'message' | 'person' | 'key' | 'table' | 'restart'
+
 export type Block =
   | { type: 'p'; text: string; links?: InlineLink[] }
   | { type: 'list'; items: { lead: string; text: string }[] }
@@ -44,6 +47,18 @@ export type Block =
    *  someone said (credited by role) and, where known, how long it took. */
   | { type: 'steps'; caption?: string; items: { title: string; tools: string; quote?: string; who?: string; time?: string }[] }
   /** Three or four small muted looping clips in a row, each with a title and one line: a behaviour shown rather than described. */
+  /** Icon-and-count chips in a row: who was in the research, what was in scope. */
+  | { type: 'chips'; items: { count: string; label: string; icon?: ChipIcon }[] }
+  /** A path of numbered steps; `outside` marks the ones that happen outside the product. */
+  | { type: 'journey'; items: { title: string; outside?: boolean }[]; caption?: string }
+  /** Two or three labelled panels side by side, each with a line of text and example pills. */
+  | { type: 'compare'; panels: { label: string; text: string; pills: string[]; accent?: boolean }[] }
+  /** A built mock of one result card, each line tagged with the kind of evidence it is. */
+  | { type: 'anatomy'; kind: string; name: string; lines: { text: string; group: string }[]; groups: string[]; caption?: string }
+  /** A donut of two to four segments, values written in the legend, never colour alone. */
+  | { type: 'donut'; total: string; segments: { value: number; label: string; text?: string }[]; note?: string }
+  /** A vertical timeline: when, what, one line, and the state it is in. */
+  | { type: 'timeline'; items: { when: string; title: string; text: string; state?: string }[] }
   /** A numbered sub-heading inside a section, for a section that makes several positions in order. */
   | { type: 'subhead'; number?: string; text: string }
   | { type: 'clips'; caption?: string; items: { src: string; width: number; height: number; title: string; text: string; alt: string }[] }
