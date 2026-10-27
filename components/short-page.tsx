@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
 import type { Block, ChipIcon, InlineLink, PageFact, PageVisual, ShortPage } from '@/lib/pages/types'
-import { Boxes, Brain, ChartColumn, ClipboardList, Code, KeyRound, Megaphone, MessageSquare, RotateCcw, Search, Table2, UserRound, Wrench } from 'lucide-react'
-import { TINTS } from '@/lib/tint'
+import { Boxes, Brain, ChartColumn, ClipboardList, Code, KeyRound, Megaphone, MessageSquare, Rocket, RotateCcw, Search, Table2, UserRound, Wrench } from 'lucide-react'
+import { TINTS, tintPanel, tintText } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { ContactFooter } from '@/components/contact-footer'
 import { HeadingDot } from '@/components/heading-dot'
@@ -459,7 +459,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
 
             {page.hero && <HeroVideo hero={page.hero} className="mt-12" />}
 
-            {page.facts && page.facts.length > 0 && <Facts facts={page.facts} />}
+            {page.facts && page.facts.length > 0 && <Facts facts={page.facts} tint={page.hero?.tint ?? TINTS.neutral} />}
 
             <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
               {page.stats.map((s) => (
@@ -579,26 +579,41 @@ function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: st
   )
 }
 
-function Facts({ facts }: { facts: PageFact[] }) {
+const FACT_ICONS: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties; 'aria-hidden'?: boolean }>> = {
+  Role: UserRound, Scope: Boxes, Research: Search, Shipped: Rocket, Team: UserRound,
+}
+
+/** The opening facts: one column per label, a tinted header cell with an icon, then short stacked lines. */
+function Facts({ facts, tint }: { facts: PageFact[]; tint: string }) {
   return (
-    <dl className={cn(CARD, 'mt-12 grid gap-y-6 p-0 sm:grid-cols-2 lg:grid-cols-4')}>
-      {facts.map((f, i) => (
-        <div key={f.label} className={cn('px-6 py-5', i > 0 && 'lg:border-l lg:border-border', i % 2 === 1 && 'sm:border-l sm:border-border lg:border-l', i >= 2 && 'sm:border-t sm:border-border lg:border-t-0')}>
-          <dt className="font-sans text-base font-semibold text-foreground">{f.label}</dt>
-          {f.lines ? (
-            <dd className="mt-3 grid gap-1">
-              {f.lines.map((line) => (
-                <p key={line.text + (line.note ?? '')} className="font-sans text-base leading-snug text-foreground">
-                  {line.text}
-                  {line.note && <span className="text-muted-foreground"> {line.note}</span>}
-                </p>
-              ))}
-            </dd>
-          ) : (
-            <dd className="mt-3 text-pretty font-sans text-base leading-relaxed text-foreground">{f.value}</dd>
-          )}
-        </div>
-      ))}
+    <dl className={cn(CARD, 'mt-12 grid overflow-hidden p-0 sm:grid-cols-2 lg:grid-cols-4')}>
+      {facts.map((f, i) => {
+        const Icon = FACT_ICONS[f.label]
+        return (
+          <div key={f.label} className={cn('flex flex-col', i % 2 === 1 && 'sm:border-l sm:border-border', i >= 2 && 'sm:border-t sm:border-border lg:border-t-0', i > 0 && 'lg:border-l lg:border-border')}>
+            <dt className="flex items-center gap-2.5 px-5 py-3.5" style={tintPanel(tint)}>
+              {Icon && (
+                <span className="flex size-7 items-center justify-center rounded-full bg-card shadow-soft">
+                  <Icon className="size-3.5" style={tintText(tint)} aria-hidden />
+                </span>
+              )}
+              <span className="font-heading text-base font-semibold tracking-tight text-foreground">{f.label}</span>
+            </dt>
+            {f.lines ? (
+              <dd className="grid content-start gap-2 px-5 py-4">
+                {f.lines.map((line) => (
+                  <p key={line.text + (line.note ?? '')} className="font-sans text-[15px] leading-snug text-foreground">
+                    <span className="font-medium">{line.text}</span>
+                    {line.note && <span className="text-muted-foreground"> {line.note}</span>}
+                  </p>
+                ))}
+              </dd>
+            ) : (
+              <dd className="px-5 py-4 text-pretty font-sans text-[15px] leading-relaxed text-foreground">{f.value}</dd>
+            )}
+          </div>
+        )
+      })}
     </dl>
   )
 }
