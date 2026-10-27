@@ -246,7 +246,7 @@ function BlockView({ block }: { block: Block }) {
   }
   if (block.type === 'subhead') {
     return (
-      <h3 className="mt-6 flex items-baseline gap-3 text-balance font-heading text-xl font-semibold tracking-tight md:text-2xl">
+      <h3 className="mt-6 flex items-baseline gap-3 font-heading text-xl font-semibold tracking-tight md:text-2xl">
         {block.number && <span className="label-micro shrink-0 text-accent-brand">{block.number}</span>}
         <span>{block.text}</span>
       </h3>
@@ -453,7 +453,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
               <p className="label-micro text-accent-brand">
                 {page.roleTag} <span className="text-muted-foreground">· {page.period} · {readMinutes(page)} min read</span>
               </p>
-              <h1 className="mt-4 max-w-[46rem] text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">{page.title}</h1>
+              <h1 className="mt-4 font-heading text-4xl font-extrabold tracking-tight md:text-5xl">{page.title}</h1>
               <p className="mt-4 text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">{page.description}</p>
             </header>
 
@@ -476,7 +476,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
               <Reveal key={section.id} as="section" className="mt-24">
                 <div id={section.id} className="scroll-mt-28">
                   {section.eyebrow && <p className="label-micro text-accent-brand">{section.eyebrow}</p>}
-                  <h2 className={cn('max-w-[46rem] text-balance font-heading text-2xl font-semibold tracking-tight md:text-3xl', section.eyebrow && 'mt-3')}>
+                  <h2 className={cn('font-heading text-2xl font-semibold tracking-tight md:text-3xl', section.eyebrow && 'mt-3')}>
                     {section.heading}
                     <HeadingDot />
                   </h2>

@@ -35,7 +35,7 @@ export function IntuitChapter() {
       <div className="mx-auto grid w-full max-w-6xl items-start gap-10 px-6 py-16 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-16 md:px-10 md:py-24 lg:px-14">
         <div>
           <p className="label-micro text-muted-foreground">{c.eyebrow}</p>
-          <h2 className="mt-3 text-balance font-heading text-3xl font-semibold tracking-tight text-foreground md:text-4xl">{c.heading}</h2>
+          <h2 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-foreground md:text-4xl">{c.heading}</h2>
           <p className="mt-5 max-w-[30rem] text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">{c.text}</p>
         </div>
 

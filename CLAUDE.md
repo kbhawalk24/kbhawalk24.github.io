@@ -26,3 +26,7 @@ Dashboard: https://cloud.umami.is (Kanchi's account).
 - No em-dashes anywhere in site copy. Plain, factual headings.
 - Quotes only where they carry a fact the surrounding text does not.
 - The original hero (name, illustration, scroll choreography) stays.
+
+## Layout rules
+
+- **Headings span end to end.** No heading, on any page, gets a max-width or `text-balance`; it runs the full width of its column and wraps where the column ends. Paragraphs may keep their measure; headings never do.

@@ -116,7 +116,7 @@ export function CareerTimeline({ heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
                     </span>
                   )}
                 </p>
-                <h2 className="mt-3 text-balance font-heading text-2xl font-semibold leading-tight tracking-tight">
+                <h2 className="mt-3 font-heading text-2xl font-semibold leading-tight tracking-tight">
                   {role.title}
                 </h2>
                 <CompanyMark logo={role.companyLogo} name={role.company} />
