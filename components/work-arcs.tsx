@@ -1,5 +1,6 @@
 'use client'
 
+import { event } from '@/lib/analytics'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'motion/react'
@@ -89,7 +90,7 @@ function Thumbnail({ card }: { card: WorkCard }) {
       style={cover ? tintPanel(cover.tint) : undefined}
     >
       {/* The whole panel opens the case study; the title link carries the name. */}
-      <Link href={card.href ?? '#work'} tabIndex={-1} aria-hidden="true" className="absolute inset-0" />
+      <Link href={card.href ?? '#work'} tabIndex={-1} aria-hidden="true" className="absolute inset-0" {...event('work-card', { card: card.slug, via: 'panel' })} />
       {cover && (
         <div className="pointer-events-none relative w-full overflow-hidden rounded-[8px] bg-card shadow-[0_24px_48px_-16px_rgb(20_20_20/0.28)] ring-1 ring-foreground/10 transition-transform duration-300 ease-out motion-safe:group-hover:-translate-y-1.5">
           {cover.video ? (
@@ -121,7 +122,7 @@ function Card({ card }: { card: WorkCard }) {
         </p>
         <h4 className="mt-4 text-balance font-heading text-2xl font-semibold leading-tight tracking-tight md:text-3xl">
           {card.href ? (
-            <Link href={card.href} className="underline-offset-4 hover:underline">
+            <Link href={card.href} className="underline-offset-4 hover:underline" {...event('work-card', { card: card.slug, via: 'title' })}>
               {card.title}
             </Link>
           ) : (
@@ -144,6 +145,7 @@ function Card({ card }: { card: WorkCard }) {
             href={card.href}
             className={cn('mt-4 inline-flex min-h-11 items-center gap-2 self-start font-sans text-base font-semibold transition-colors hover:underline', !tint && 'text-accent-brand')}
             style={tint ? tintText(tint) : undefined}
+            {...event('work-card', { card: card.slug, via: 'read' })}
           >
             Read the case study <span aria-hidden="true">→</span>
           </Link>

@@ -1,5 +1,6 @@
 'use client'
 
+import { event } from '@/lib/analytics'
 import Link from 'next/link'
 import { MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
@@ -330,7 +331,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
                 <p className="label-micro text-muted-foreground">What this unlocked next</p>
                 <p className={cn(BODY, 'mt-3 max-w-[46rem]')}>{page.next.text}</p>
                 {page.next.href ? (
-                  <Link href={page.next.href} className="mt-4 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline">
+                  <Link href={page.next.href} {...event('next-case', { from: page.slug })} className="mt-4 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline">
                     {page.next.label} <span aria-hidden="true">→</span>
                   </Link>
                 ) : (

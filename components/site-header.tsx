@@ -1,5 +1,6 @@
 'use client'
 
+import { event } from '@/lib/analytics'
 import { useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
@@ -47,7 +48,7 @@ export function SiteHeader({ onHome = true }: { onHome?: boolean }) {
 
         <div className="hidden items-center sm:flex">
           {links.map((l) => (
-            <NavLink key={l.label} href={l.href} external={l.external}>
+            <NavLink key={l.label} href={l.href} external={l.external} label={l.label}>
               {l.label}
             </NavLink>
           ))}
@@ -70,26 +71,30 @@ const externalProps = (external?: boolean) =>
 function NavLink({
   href,
   external,
+  label,
   children,
 }: {
   href: string
   external?: boolean
+  /** The nav item's name, recorded with the click. */
+  label: string
   children: React.ReactNode
 }) {
+  const track = event('nav', { item: label })
   const className =
     'inline-flex min-h-9 items-center rounded-full px-3 font-sans text-sm text-muted-foreground transition-colors hover:text-foreground'
   // A file or an outside site gets a plain anchor; <Link> would try to
   // prefetch it as a route.
   if (external) {
     return (
-      <a href={href} {...externalProps(true)} className={className}>
+      <a href={href} {...externalProps(true)} {...track} className={className}>
         {children}
         <span className="sr-only"> (opens in a new tab)</span>
       </a>
     )
   }
   return (
-    <Link href={href} className={className}>
+    <Link href={href} {...track} className={className}>
       {children}
     </Link>
   )
@@ -158,6 +163,7 @@ function NavMenu({
                 <MenuItem
                   href={l.href}
                   external={l.external}
+                  label={l.label}
                   onClick={() => setOpen(false)}
                 >
                   {l.label}
@@ -174,7 +180,7 @@ function NavMenu({
             )}
             {group.map((l) => (
               <li key={l.href}>
-                <MenuItem href={l.href} onClick={() => setOpen(false)}>
+                <MenuItem href={l.href} label={l.label} onClick={() => setOpen(false)}>
                   {l.label}
                 </MenuItem>
               </li>
@@ -189,11 +195,14 @@ function NavMenu({
 function MenuItem({
   href,
   external,
+  label,
   onClick,
   children,
 }: {
   href: string
   external?: boolean
+  /** The menu item's name, recorded with the click. */
+  label: string
   onClick: () => void
   children: React.ReactNode
 }) {
@@ -201,14 +210,14 @@ function MenuItem({
     'block rounded-[10px] px-3 py-2 font-sans text-sm text-foreground transition-colors hover:bg-card-soft'
   if (external) {
     return (
-      <a href={href} {...externalProps(true)} onClick={onClick} className={className}>
+      <a href={href} {...externalProps(true)} onClick={onClick} {...event('nav', { item: label })} className={className}>
         {children}
         <span className="sr-only"> (opens in a new tab)</span>
       </a>
     )
   }
   return (
-    <Link href={href} onClick={onClick} className={className}>
+    <Link href={href} onClick={onClick} {...event('nav', { item: label })} className={className}>
       {children}
     </Link>
   )

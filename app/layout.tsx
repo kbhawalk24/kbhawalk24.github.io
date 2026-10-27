@@ -1,4 +1,4 @@
-import { Analytics } from '@vercel/analytics/next'
+import { Analytics } from '@/components/analytics'
 import type { Metadata, Viewport } from 'next'
 import { IBM_Plex_Mono, League_Spartan, Mulish } from 'next/font/google'
 import './globals.css'
@@ -59,7 +59,7 @@ export default function RootLayout({
           }}
         />
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <Analytics />
       </body>
     </html>
   )

@@ -1,5 +1,6 @@
 'use client'
 
+import { event } from '@/lib/analytics'
 import { useLayoutEffect, useRef, useState } from 'react'
 
 import Image from 'next/image'
@@ -51,6 +52,7 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
         <MagneticWrap className="inline-block">
           <a
             href="#work"
+            {...event('hero-button', { button: 'work' })}
             className="group inline-flex items-center gap-3 rounded-full bg-primary py-1.5 pl-6 pr-1.5 text-sm font-medium text-primary-foreground shadow-cta transition-[box-shadow,transform] hover:shadow-cta-hover active:scale-[0.98]"
           >
             Work
@@ -59,11 +61,11 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
             </span>
           </a>
         </MagneticWrap>
-        <a href="/kanchi-bhawalkar-resume.pdf" target="_blank" rel="noopener noreferrer" className={OUTLINE_BUTTON}>
+        <a href="/kanchi-bhawalkar-resume.pdf" target="_blank" rel="noopener noreferrer" className={OUTLINE_BUTTON} {...event('hero-button', { button: 'resume' })}>
           Resume <span aria-hidden="true">↗</span>
           <span className="sr-only"> (opens in a new tab)</span>
         </a>
-        <a href="https://linkedin.com/in/kanchib" target="_blank" rel="noopener noreferrer" className={OUTLINE_BUTTON}>
+        <a href="https://linkedin.com/in/kanchib" target="_blank" rel="noopener noreferrer" className={OUTLINE_BUTTON} {...event('hero-button', { button: 'linkedin' })}>
           LinkedIn <span aria-hidden="true">↗</span>
           <span className="sr-only"> (opens in a new tab)</span>
         </a>
