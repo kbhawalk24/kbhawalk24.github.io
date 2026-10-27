@@ -605,12 +605,13 @@ function Facts({ facts, tint }: { facts: PageFact[]; tint: string }) {
               <span className="font-heading text-base font-semibold leading-8 tracking-tight text-foreground">{f.label}</span>
             </dt>
             {f.lines ? (
-              <dd className="grid gap-x-6 gap-y-3 px-5 pb-4 pt-2 sm:grid-cols-2 sm:border-l sm:border-border sm:py-4 lg:grid-cols-4">
-                {f.lines.map((line) => (
-                  <div key={line.text + (line.note ?? '')} className="min-w-0 sm:pt-1">
-                    <p className="font-sans text-[15px] font-medium leading-snug text-foreground">{line.text}</p>
-                    {line.note && <p className="mt-0.5 font-sans text-[13px] leading-snug text-muted-foreground">{line.note}</p>}
-                  </div>
+              <dd className="flex flex-col gap-y-1.5 px-5 pb-4 pt-2 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-y-1 sm:border-l sm:border-border sm:py-4 sm:pt-5">
+                {f.lines.map((line, li) => (
+                  <span key={line.text + (line.note ?? '')} className="font-sans text-[15px] leading-snug text-foreground">
+                    <span className="font-medium">{line.text}</span>
+                    {line.note && <span className="text-muted-foreground"> {line.note}</span>}
+                    {li < f.lines!.length - 1 && <span className="mx-3 hidden text-muted-foreground/60 sm:inline" aria-hidden>·</span>}
+                  </span>
                 ))}
               </dd>
             ) : (
