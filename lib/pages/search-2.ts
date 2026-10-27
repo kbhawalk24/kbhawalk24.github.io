@@ -69,13 +69,13 @@ export const SEARCH_2: ShortPage = {
     },
     {
       id: 'raw-notes',
-      after: 'voices',
+      after: 'research',
       lead: true,
       src: '/work/search-2/raw-notes-board-2024.jpg',
       width: 2400,
       height: 619,
       alt: 'The raw-notes board from the April 2024 sessions: twenty columns of sticky notes, one column per person, each note a thing they said or did, with the ones that recurred marked in purple.',
-      caption: 'The raw notes from the twenty sessions and the synthesis workshop, April 2024: one row per person, one note per observation, the recurring ones in purple. The quotes below are read from it.',
+      caption: 'The raw notes from the twenty sessions and the synthesis workshop, April 2024: one row per person, one note per observation, the recurring ones in purple.',
     },
     {
       id: 'click-depth',
@@ -127,25 +127,6 @@ export const SEARCH_2: ShortPage = {
             { title: 'People know what kind of asset they want before they type', text: 'Almost everyone arrived knowing whether they needed a table, a real-time stream, a feature set or a dashboard. Marketing managers and ML engineers moving data between systems were the only exceptions.' },
             { title: 'Trust is decided in about 60 seconds, on the first two results', text: 'People looked at the top two results, then gave up or rewrote the query. Analysts trusted engineering-owned, curated tables over raw ones. ML engineers wanted a fast no: to learn quickly that a dataset does not exist and move on.' },
             { title: 'Four times in five, people are re-finding, not discovering', text: 'About 80% of sessions were people going back to tables they had vetted weeks earlier, re-running the search as a bookmark bar, because the catalog had no idea of a personal working set.' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'voices',
-      eyebrow: 'In their words',
-      short: 'Voices',
-      heading: 'Quotes from the sessions',
-      blocks: [
-        {
-          type: 'quotes',
-          items: [
-            { text: '90% of the time someone knows the answer: a colleague, or the help channel.', who: 'Staff analyst', when: 'April 2024' },
-            { text: 'I’d rather just look at a query and see if that’s what I need without bothering them.', who: 'Senior analyst', when: 'April 2024' },
-            { text: 'I don’t think I should reach out to her for this. But I do see these two. This covers all the teams. I don’t see a specific ownership here.', who: 'Senior data engineer, on team-level ownership', when: 'April 2024' },
-            { text: 'Even with the right table names the SQL won’t run. The dialects differ.', who: 'Software engineer', when: 'April 2024' },
-            { text: 'I realised it had to be real-time, and the real-time source did not exist.', who: 'Machine learning engineer', when: 'April 2024' },
-            { text: 'Kanchi led the Design for Data discovery research and cross-functional workshop, which was a major contributor to our FY25 roadmap.', who: 'Group product manager, FY24 year-end review', when: 'July 2024' },
           ],
         },
       ],
@@ -277,14 +258,6 @@ export const SEARCH_2: ShortPage = {
             'Fixing search changed the questions people asked. In the 726 Data Genius Bar questions analysed after the rebuild, 16% were still about locating a table. 68.2% were about comprehension: what a column meant, how two tables joined, which filters to apply. 74.1% could be answered by a single-table lookup if column-level context reached the person where they worked. That, with Collections shipped in August 2025, set up the next step: the catalog inside Cursor and Claude, checking a person’s collections first, which cut question-to-answer time from 45 minutes to 4. That story is on the next page.',
           links: [{ text: 'the next page', href: '/work/agentic-discovery' }],
         },
-        {
-          type: 'quotes',
-          items: [
-            { text: 'She is one of the most capable product designers I have worked with in my career to date. Most recent example would be her contributions to the Search 2.0 epic, where through multiple iterations we were able to deliver a completely new user experience and delight our customers.', who: 'Staff software engineer on Search 2.0, written reference', when: '2025' },
-            { text: 'Kanchi should be listed first in design and can stay in data leadership.', who: 'A designer on my team, replying to the Data Map search launch announcement', when: 'March 26, 2025' },
-            { text: 'We need to clone Kanchi if that is possible.', who: 'Principal product manager, in the same thread', when: 'March 26, 2025' },
-          ],
-        },
       ],
     },
   ],
@@ -296,5 +269,5 @@ export const SEARCH_2: ShortPage = {
   credits:
     'The research, the case to the roadmap, the June 2024 specification and the table search design are mine. A designer on my team took Data Map search to launch, and the team built stream search, marketing-attribute search, query insights and Collections on the same framework. Search engineering and the search-model team built the ranking and the indexing and delivered the precision and the speed.',
   sources:
-    'Design Document for Search 2.0, June 2024; design review deck, July 2024; the April 2024 follow-me-home synthesis board and User Journey board; Data Search Pattern Analysis (666 questions); Data Genius Bar Summary (726 questions); FY24 year-end review; launch posts of Nov 14, 2024, Mar 26, May, Jun 15, Aug 7 and Aug 12, 2025; the help-channel poll of Apr 30, 2025; the launch announcement thread of Mar 26, 2025; a written reference from a staff engineer, 2025; the team’s roadmap tracker and KPI dashboard; Amplitude; AWS re:Invent 2025 for the public 20-day figure.',
+    'Design Document for Search 2.0, June 2024; design review deck, July 2024; the April 2024 follow-me-home synthesis board and User Journey board; Data Search Pattern Analysis (666 questions); Data Genius Bar Summary (726 questions); FY24 year-end review; launch posts of Nov 14, 2024, Mar 26, May, Jun 15, Aug 7 and Aug 12, 2025; the help-channel poll of Apr 30, 2025; the team’s roadmap tracker and KPI dashboard; Amplitude; AWS re:Invent 2025 for the public 20-day figure.',
 }
