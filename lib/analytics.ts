@@ -4,7 +4,7 @@
 // The website ID is public by design: it only identifies which dashboard
 // receives the events, and the dashboard itself needs a login.
 
-export const UMAMI_WEBSITE_ID = ''
+export const UMAMI_WEBSITE_ID = '60d41913-e7f0-4512-b462-42c3be1bf8e4'
 
 export const UMAMI_SCRIPT = 'https://cloud.umami.is/script.js'
 
