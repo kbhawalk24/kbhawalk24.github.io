@@ -584,31 +584,33 @@ const FACT_ICONS: Record<string, React.ComponentType<{ className?: string; style
 }
 
 /** The opening facts as a transposed table: one row per label, read top to
- *  bottom in the order Role, Scope, Research, Shipped; the facts of a row
- *  run across it so each group stays together. An icon in the page's tint
- *  marks the label; everything else is hairlines and type. */
+ *  bottom in the order Role, Scope, Research, Shipped. Facts sit on a
+ *  four-column sub-grid so they align down the block, each as the fact in
+ *  medium weight with its date or count in small muted type beneath. The
+ *  label is top-aligned with the row's first line; the icon carries the
+ *  page's tint. Spacing on the 8-point scale. */
 function Facts({ facts, tint }: { facts: PageFact[]; tint: string }) {
   return (
     <dl className={cn(CARD, 'mt-12 divide-y divide-border overflow-hidden p-0')}>
       {facts.map((f) => {
         const Icon = FACT_ICONS[f.label]
         return (
-          <div key={f.label} className="grid sm:grid-cols-[11rem_minmax(0,1fr)]">
-            <dt className="flex items-center gap-3 px-5 pt-4 sm:py-4 sm:pr-4">
+          <div key={f.label} className="grid sm:grid-cols-[10rem_minmax(0,1fr)]">
+            <dt className="flex items-center gap-3 px-5 pt-4 sm:items-start sm:py-4 sm:pr-4">
               {Icon && (
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: `color-mix(in oklab, ${tint} 12%, var(--card))` }}>
                   <Icon className="size-4" style={tintText(tint)} aria-hidden />
                 </span>
               )}
-              <span className="font-heading text-base font-semibold tracking-tight text-foreground">{f.label}</span>
+              <span className="font-heading text-base font-semibold leading-8 tracking-tight text-foreground">{f.label}</span>
             </dt>
             {f.lines ? (
-              <dd className="flex flex-col gap-y-1.5 px-5 pb-4 pt-2 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-7 sm:border-l sm:border-border sm:py-4">
+              <dd className="grid gap-x-6 gap-y-3 px-5 pb-4 pt-2 sm:grid-cols-2 sm:border-l sm:border-border sm:py-4 lg:grid-cols-4">
                 {f.lines.map((line) => (
-                  <span key={line.text + (line.note ?? '')} className="font-sans text-[15px] leading-snug text-foreground">
-                    <span className="font-medium">{line.text}</span>
-                    {line.note && <span className="text-muted-foreground"> {line.note}</span>}
-                  </span>
+                  <div key={line.text + (line.note ?? '')} className="min-w-0 sm:pt-1">
+                    <p className="font-sans text-[15px] font-medium leading-snug text-foreground">{line.text}</p>
+                    {line.note && <p className="mt-0.5 font-sans text-[13px] leading-snug text-muted-foreground">{line.note}</p>}
+                  </div>
                 ))}
               </dd>
             ) : (

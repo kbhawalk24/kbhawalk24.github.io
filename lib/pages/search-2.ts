@@ -31,8 +31,8 @@ export const SEARCH_2: ShortPage = {
   },
   facts: [
     { label: 'Role', lines: [
-      { text: 'Principal Product Designer', note: '(Jan to Aug 2024)' },
-      { text: 'Product Design Manager', note: '(Aug 2024 to 2026)' },
+      { text: 'Principal Product Designer', note: 'Jan to Aug 2024' },
+      { text: 'Product Design Manager', note: 'Aug 2024 to 2026' },
     ] },
     { label: 'Scope', lines: [
       { text: 'Intuit’s data platform' },
@@ -41,15 +41,15 @@ export const SEARCH_2: ShortPage = {
       { text: 'about 6,600 monthly users' },
     ] },
     { label: 'Research', lines: [
-      { text: '20 Follow-Me-Home sessions', note: '(9 business units)' },
+      { text: '20 Follow-Me-Home sessions', note: '9 business units' },
       { text: '666 Slack help threads' },
       { text: '726 Genius Bar queries' },
     ] },
     { label: 'Shipped', lines: [
-      { text: 'Table search', note: '(Nov 2024)' },
-      { text: 'Data Map search', note: '(Mar 2025)' },
-      { text: 'Stream and marketing search', note: '(Jun to Aug 2025)' },
-      { text: 'Collections', note: '(Aug 2025)' },
+      { text: 'Table search', note: 'Nov 2024' },
+      { text: 'Data Map search', note: 'Mar 2025' },
+      { text: 'Stream and marketing search', note: 'Jun to Aug 2025' },
+      { text: 'Collections', note: 'Aug 2025' },
     ] },
   ],
   stats: [
