@@ -583,33 +583,36 @@ const FACT_ICONS: Record<string, React.ComponentType<{ className?: string; style
   Role: UserRound, Scope: Boxes, Research: Search, Shipped: Rocket, Team: UserRound,
 }
 
-/** The opening facts: one column per label, a tinted header cell with an icon, then short stacked lines. */
+/** The opening facts as a transposed table: one row per label, read top to
+ *  bottom in the order Role, Scope, Research, Shipped; the facts of a row
+ *  run across it so each group stays together. An icon in the page's tint
+ *  marks the label; everything else is hairlines and type. */
 function Facts({ facts, tint }: { facts: PageFact[]; tint: string }) {
   return (
-    <dl className={cn(CARD, 'mt-12 grid overflow-hidden p-0 sm:grid-cols-2 lg:grid-cols-4')}>
-      {facts.map((f, i) => {
+    <dl className={cn(CARD, 'mt-12 divide-y divide-border overflow-hidden p-0')}>
+      {facts.map((f) => {
         const Icon = FACT_ICONS[f.label]
         return (
-          <div key={f.label} className={cn('flex flex-col', i % 2 === 1 && 'sm:border-l sm:border-border', i >= 2 && 'sm:border-t sm:border-border lg:border-t-0', i > 0 && 'lg:border-l lg:border-border')}>
-            <dt className="flex items-center gap-2.5 px-5 py-3.5" style={tintPanel(tint)}>
+          <div key={f.label} className="grid sm:grid-cols-[11rem_minmax(0,1fr)]">
+            <dt className="flex items-center gap-3 px-5 pt-4 sm:py-4 sm:pr-4">
               {Icon && (
-                <span className="flex size-7 items-center justify-center rounded-full bg-card shadow-soft">
-                  <Icon className="size-3.5" style={tintText(tint)} aria-hidden />
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: `color-mix(in oklab, ${tint} 12%, var(--card))` }}>
+                  <Icon className="size-4" style={tintText(tint)} aria-hidden />
                 </span>
               )}
               <span className="font-heading text-base font-semibold tracking-tight text-foreground">{f.label}</span>
             </dt>
             {f.lines ? (
-              <dd className="grid content-start gap-2 px-5 py-4">
+              <dd className="flex flex-col gap-y-1.5 px-5 pb-4 pt-2 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-7 sm:border-l sm:border-border sm:py-4">
                 {f.lines.map((line) => (
-                  <p key={line.text + (line.note ?? '')} className="font-sans text-[15px] leading-snug text-foreground">
+                  <span key={line.text + (line.note ?? '')} className="font-sans text-[15px] leading-snug text-foreground">
                     <span className="font-medium">{line.text}</span>
                     {line.note && <span className="text-muted-foreground"> {line.note}</span>}
-                  </p>
+                  </span>
                 ))}
               </dd>
             ) : (
-              <dd className="px-5 py-4 text-pretty font-sans text-[15px] leading-relaxed text-foreground">{f.value}</dd>
+              <dd className="px-5 pb-4 pt-2 text-pretty font-sans text-[15px] leading-relaxed text-foreground sm:border-l sm:border-border sm:py-4">{f.value}</dd>
             )}
           </div>
         )
