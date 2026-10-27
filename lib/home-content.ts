@@ -206,7 +206,7 @@ export const HERO = {
       after: ', from 2021 to 2026, my work came in three parts:',
       /** The three phrases set in the accent colour match the three groups under Selected work. */
       pills: [{ label: 'data discovery' }, { label: 'the data platform' }, { label: 'leading the design team' }],
-      tail: ', across nine product areas from pipeline authoring to access control.',
+      tail: '. The platform had nine product areas and I designed, or directed the design of, every one: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion.',
     },
     {
       org: '605',
