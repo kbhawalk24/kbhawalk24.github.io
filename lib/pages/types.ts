@@ -43,6 +43,8 @@ export type Block =
   /** A path through stages, each with the tools it ran through, one thing
    *  someone said (credited by role) and, where known, how long it took. */
   | { type: 'steps'; caption?: string; items: { title: string; tools: string; quote?: string; who?: string; time?: string }[] }
+  /** Three or four small muted looping clips in a row, each with a title and one line: a behaviour shown rather than described. */
+  | { type: 'clips'; caption?: string; items: { src: string; width: number; height: number; title: string; text: string; alt: string }[] }
 
 export interface PageSection {
   id: string

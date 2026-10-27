@@ -68,7 +68,7 @@ export const ARCS: Arc[] = [
           tint: TINTS.search2design,
           alt: 'The Search 2.0 design for table results, with tabs per object type, facets on the left and metadata on every result',
         },
-        stats: [{ value: '14.2 h → 9.4 h', label: 'Time to discover data, for 6,673 people a month' }],
+        stats: [{ value: '14.2 h → 8.9 h', label: 'Time to discover data, Aug 2024 to Jan 2026, for 6,673 people a month' }],
         status: 'live',
         href: '/work/search-2',
       },

@@ -149,3 +149,12 @@ Names of engineers, PMs and users (roles only). "Manager 2". "Senior Staff patte
 ## Decision, 26 October 2026: time to discover data
 
 The site uses one baseline everywhere: 14.2 hours (the tracker's figure for the search step, August 2024), falling to 9.4 hours by July 2025. This matches the resume and the October 2026 master document. The 14.8-hour figure in the November 2024 launch post is not used on the site. Intuit's public 20-day figure is quoted only as the whole-path number for 2023, and always labelled as such.
+
+## Sourced 27 October 2026, from the Data Understanding KPI tracker (synthesised from the quarterly roadmap decks)
+
+- Business-unit data tags, Q3 FY24: 13 tags, 74% of lake tables covered, 295k dirty tables hidden from results. Design: Kanchi.
+- Data Marts in DDE, Q3 FY24: 2k clean consumable tables made discoverable; 85% of dirty/non-consumable tables suppressed.
+- Search session conversion: 32% (Jan 2024) → 39% (end FY24) → 41% (Aug 2024) → 61% (Jul 2025) → 63% (Jan 2026). The 41% figure the site used before was the August 2024 start-of-FY25 baseline, not January.
+- Time to discover data: 14.2 h (Aug 2024) → 9.4 h (Jul 2025) → 8.9 h (Jan 2026). The FY24 '1.36 days' figure uses a different method and is not comparable.
+- Metasearch (Search 1.0) sunset: Q4 FY25; Search 2.0 primary for ~70% of users at that point.
+- Top-5 click rate: 96% on Search 1.0 → 94% on Search 2.0 (Jul 2025) → 95% (Jan 2026).

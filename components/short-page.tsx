@@ -37,7 +37,7 @@ const BODY = 'text-pretty text-[17px] leading-[1.65] text-foreground/90'
 const SMALL = 'text-pretty font-sans text-sm leading-relaxed text-muted-foreground'
 const CAPTION = 'text-pretty font-sans text-sm leading-relaxed text-muted-foreground'
 
-const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes', 'statement'])
+const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes', 'statement', 'clips'])
 
 function readMinutes(page: ShortPage) {
   const words = page.sections
@@ -50,6 +50,7 @@ function readMinutes(page: ShortPage) {
       if (b.type === 'quotes') return b.items.map((i) => i.text).join(' ')
       if (b.type === 'statement') return b.rows.map((r) => r.text).join(' ')
       if (b.type === 'steps') return b.items.map((i) => i.title + ' ' + (i.quote ?? '')).join(' ')
+      if (b.type === 'clips') return b.items.map((i) => i.title + ' ' + i.text).join(' ')
       if (b.type === 'table') return b.rows.flat().join(' ')
       return ''
     })
@@ -124,7 +125,7 @@ function BlockView({ block }: { block: Block }) {
   }
   if (block.type === 'cards') {
     return (
-      <ul className="grid gap-4 sm:grid-cols-3">
+      <ul className={cn('grid gap-4', block.items.length === 4 ? 'sm:grid-cols-2' : 'sm:grid-cols-3')}>
         {block.items.map((item) => (
           <li key={item.title} className={CARD}>
             {item.value && <p className="font-heading text-3xl font-semibold leading-none tracking-tight tabular-nums text-accent-brand">{item.value}</p>}
@@ -166,6 +167,22 @@ function BlockView({ block }: { block: Block }) {
           </li>
         ))}
       </ol>
+    )
+  }
+  if (block.type === 'clips') {
+    return (
+      <figure>
+        <ul className={cn('grid gap-4', block.items.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3')}>
+          {block.items.map((c) => (
+            <li key={c.src} className={cn(CARD, 'flex flex-col p-3')}>
+              <video src={c.src} width={c.width} height={c.height} className="w-full rounded-[8px] bg-card-soft" autoPlay muted loop playsInline preload="metadata" aria-label={c.alt} />
+              <p className={cn(SUBHEAD, 'mt-4 text-base')}>{c.title}</p>
+              <p className={cn(SMALL, 'mt-1.5')}>{c.text}</p>
+            </li>
+          ))}
+        </ul>
+        {block.caption && <figcaption className={cn(CAPTION, 'mt-3')}>{block.caption}</figcaption>}
+      </figure>
     )
   }
   if (block.type === 'steps') {
