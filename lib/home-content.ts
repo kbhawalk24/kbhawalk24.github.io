@@ -55,20 +55,20 @@ export const ARCS: Arc[] = [
       {
         slug: 'search-2',
         org: 'Intuit',
-        title: 'Search 2.0: redesigning search for the data catalog',
+        title: 'Search 2.0: rebuilding data discovery across 320,000 tables',
         period: '2024–2025',
         roleTag: 'Principal Product Designer',
         role: 'Principal IC',
         track: 'ic',
         line:
-          'Search returned results nobody trusted. After watching twenty people search, I rebuilt it around the kind of data they look for: one tab per kind, five lines of proof on every result. Eight launches followed.',
+          'Data workers were stitching together six tools to verify one table, because search returned millions of unranked results. After shadowing 20 of them and analysing 1,392 help-channel questions, I redesigned search around physical object types, dynamic facets and strict trust signals.',
         visualNote: 'The Search 2.0 design for table results.',
         cover: {
           src: '/work/search-2/tables-tab-design.jpg',
           tint: TINTS.search2design,
           alt: 'The Search 2.0 design for table results, with tabs per object type, facets on the left and metadata on every result',
         },
-        stats: [{ value: '32% → 63%', label: 'Searches that ended in a click, Jan 2024 to Jan 2026' }],
+        stats: [{ value: '81.31% → 89.24%', label: 'First-result precision; P99 latency 50.59 s → 1.93 s; discovery time 14.2 h → 9.4 h' }],
         status: 'live',
         href: '/work/search-2',
       },
