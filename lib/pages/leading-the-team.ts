@@ -124,7 +124,6 @@ export const LEADING_THE_TEAM: ShortPage = {
         {
           type: 'quotes',
           items: [
-            { text: 'Would not have happened if not for Kanchi’s persistence and design sponsorship.', who: 'The engineering manager, on Collections', when: 'August 2025' },
             { text: 'Your thoroughness in bringing customer conversations, whether it was a month ago or two years ago, always kept us grounded.', who: 'The engineering lead for data understanding, after the offsite', when: 'January 2025' },
           ],
         },
@@ -166,7 +165,6 @@ export const LEADING_THE_TEAM: ShortPage = {
           type: 'quotes',
           items: [
             { text: 'The feedback summary is great (Ouch!) and I think ALL the platform PMs need to sit down and read this together.', who: 'A platform product manager, on the research summary', when: '2025' },
-            { text: 'Collect all the past research you’ve conducted and showcase that in a single place, summarized, with clear recommendations. In its early stages, it’s already making an impact.', who: 'My manager', when: '2025' },
           ],
         },
       ],
@@ -225,14 +223,6 @@ export const LEADING_THE_TEAM: ShortPage = {
           type: 'p',
           text:
             'I wrote a six-slide promotion case framework that every designer on the team used. My designers told my manager what they valued: clarity when requirements were unclear, boundaries when work kept changing, and getting the right people into one room to settle a decision. I also hired for the wider design team. We ran a weekly design sync with the tracker on screen, a research readout each time a study closed, and offsites in January 2025 and later that year.',
-        },
-        {
-          type: 'quotes',
-          items: [
-            { text: 'The collective output I see coming out from you all is consistent, reliable, and thoughtful.', who: 'The product lead, to the design team', when: '2025' },
-            { text: 'Hitting 5 expert sessions, getting through 3 design iterations, and building countless agentic POCs is phenomenal progress in such a short time.', who: 'A product leader, during tax peak', when: '2026' },
-            { text: 'Amazing use of v0 recently in your ability to scale design work.', who: 'My manager', when: '2025' },
-          ],
         },
       ],
     },
