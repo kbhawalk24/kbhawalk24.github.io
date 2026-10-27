@@ -52,6 +52,7 @@ function readMinutes(page: ShortPage) {
       if (b.type === 'steps') return b.items.map((i) => i.title + ' ' + (i.quote ?? '')).join(' ')
       if (b.type === 'clips') return b.items.map((i) => i.title + ' ' + i.text).join(' ')
       if (b.type === 'table') return b.rows.flat().join(' ')
+      if (b.type === 'subhead') return b.text
       return ''
     })
     .join(' ')
@@ -80,6 +81,14 @@ function Linked({ text, links }: { text: string; links?: InlineLink[] }) {
 }
 
 function BlockView({ block }: { block: Block }) {
+  if (block.type === 'subhead') {
+    return (
+      <h3 className="mt-6 flex items-baseline gap-3 text-balance font-heading text-xl font-semibold tracking-tight md:text-2xl">
+        {block.number && <span className="label-micro shrink-0 text-accent-brand">{block.number}</span>}
+        <span>{block.text}</span>
+      </h3>
+    )
+  }
   if (block.type === 'video') {
     return (
       <figure className={cn(CARD, 'p-2')}>
@@ -309,21 +318,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
                     <HeadingDot />
                   </h2>
                   <div className="mt-6 grid gap-6">
-                    {section.blocks
-                      .filter((b) => b.type === 'p')
-                      .map((block, i) => (
-                        <div key={`p${i}`} className="max-w-[46rem]">
-                          <BlockView block={block} />
-                        </div>
-                      ))}
-                    <Visuals visuals={visualsLead(page, section.id)} />
-                    {section.blocks
-                      .filter((b) => b.type !== 'p')
-                      .map((block, i) => (
-                        <div key={`b${i}`} className={cn(!WIDE_BLOCKS.has(block.type) && 'max-w-[46rem]')}>
-                          <BlockView block={block} />
-                        </div>
-                      ))}
+                    <SectionBlocks blocks={section.blocks} lead={visualsLead(page, section.id)} />
                     <Visuals visuals={visualsAfter(page, section.id)} />
                   </div>
                 </div>
@@ -368,6 +363,24 @@ function sameAspect(a: PageVisual, b: PageVisual) {
   const ra = a.width / a.height
   const rb = b.width / b.height
   return Math.abs(ra - rb) / Math.max(ra, rb) < 0.1
+}
+
+/** Blocks in source order; the lead visual sits after the opening run of paragraphs. */
+function SectionBlocks({ blocks, lead }: { blocks: Block[]; lead: PageVisual[] }) {
+  const firstWide = blocks.findIndex((b) => b.type !== 'p')
+  const cut = firstWide < 0 ? blocks.length : firstWide
+  const render = (block: Block, i: number) => (
+    <div key={i} className={cn(!WIDE_BLOCKS.has(block.type) && 'max-w-[46rem]')}>
+      <BlockView block={block} />
+    </div>
+  )
+  return (
+    <>
+      {blocks.slice(0, cut).map(render)}
+      <Visuals visuals={lead} />
+      {blocks.slice(cut).map((b, i) => render(b, i + cut))}
+    </>
+  )
 }
 
 function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: string }) {

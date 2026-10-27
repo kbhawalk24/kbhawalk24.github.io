@@ -1,10 +1,10 @@
 import type { ShortPage } from './types'
 import { TINTS } from '@/lib/tint'
 
-// Case study: Search 2.0. Eight sections that carry one argument: search
-// answered the navigation question, and the real question was comprehension.
-// Each section is a heading, one lead paragraph, one visual and at most one
-// supporting block. Sources: the June 2024 design document and its review
+// Case study: Search 2.0. Six sections: the problem, the research, research
+// to roadmap, the specification (four numbered positions), impact and
+// trade-offs, and what it set up. One argument runs through them: search
+// answered the navigation question, and the real question was comprehension. Sources: the June 2024 design document and its review
 // notes, the April 2024 session boards, the Nov 2024 and Mar 2025 launch
 // posts, the FY24 year-end review, the Data Genius Bar summary (726
 // questions), the help-channel analysis (666 questions), Amplitude, and the
@@ -71,8 +71,7 @@ export const SEARCH_2: ShortPage = {
     },
     {
       id: 'haystack',
-      after: 'comprehension',
-      lead: true,
+      after: 'research',
       src: '/work/search-2/journey-haystack-2024.jpg',
       width: 2048,
       height: 1466,
@@ -81,7 +80,7 @@ export const SEARCH_2: ShortPage = {
     },
     {
       id: 'tabs',
-      after: 'reversal',
+      after: 'spec',
       lead: true,
       src: '/work/search-2/decision-tabs.png',
       width: 820,
@@ -91,16 +90,16 @@ export const SEARCH_2: ShortPage = {
     },
     {
       id: 'search-1',
-      after: 'reversal',
+      after: 'problem',
       src: '/work/search-2/search-1-results-2024.jpg',
       width: 2048,
       height: 1147,
       alt: 'The 2024 search results for “company status”: 1,838,670 results under a Data Catalog tab, nine columns named company_status from different schemas with the same description before the first table, and eight filter pills across the top.',
-      caption: 'Before: “company status” in the old search, 2024. 1,838,670 results, nine identically named columns before a single table, and eight filter pills nobody used.',
+      caption: '“Company status” in the old search, 2024: 1,838,670 results, nine identically named columns before a single table, and eight filter pills nobody used. The search returned everything and proved nothing.',
     },
     {
       id: 'click-depth',
-      after: 'shipped',
+      after: 'impact',
       lead: true,
       src: '/work/search-2/click-depth.jpg',
       width: 2087,
@@ -114,7 +113,7 @@ export const SEARCH_2: ShortPage = {
       id: 'problem',
       eyebrow: '1 · The problem',
       short: 'Problem',
-      heading: 'The search box was fine. The problem was trust.',
+      heading: 'The search returned everything and proved nothing',
       blocks: [
         {
           type: 'p',
@@ -135,7 +134,7 @@ export const SEARCH_2: ShortPage = {
       id: 'research',
       eyebrow: '2 · The research, spring 2024',
       short: 'Research',
-      heading: 'Twenty sessions, with engineers in the room',
+      heading: 'Twenty sessions across nine business units',
       blocks: [
         {
           type: 'p',
@@ -150,14 +149,7 @@ export const SEARCH_2: ShortPage = {
             { title: '3 · Four times in five, people are re-finding, not discovering', text: 'About 80% of sessions were people going back to tables they had vetted weeks earlier, re-running the search as a bookmark bar. One ML engineer building an onboarding model spent three months finding 7 of 11 attributes, then had to find each one’s real-time equivalent again.' },
           ],
         },
-      ],
-    },
-    {
-      id: 'comprehension',
-      eyebrow: '3 · The core finding',
-      short: 'Comprehension',
-      heading: 'People were not looking for tables. They were trying to understand them.',
-      blocks: [
+        { type: 'subhead', text: 'What the three added up to' },
         {
           type: 'p',
           text:
@@ -173,7 +165,7 @@ export const SEARCH_2: ShortPage = {
     },
     {
       id: 'roadmap',
-      eyebrow: '4 · Research to roadmap',
+      eyebrow: '3 · Research to roadmap',
       short: 'Roadmap',
       heading: 'Eight findings became eight launches',
       blocks: [
@@ -200,15 +192,21 @@ export const SEARCH_2: ShortPage = {
       ],
     },
     {
-      id: 'reversal',
-      eyebrow: '5 · The specification, June 2024',
-      short: 'Reversal',
-      heading: 'I replaced the structure I had argued for in 2022',
+      id: 'spec',
+      eyebrow: '4 · The specification, June 2024',
+      short: 'Specification',
+      heading: 'Four positions I took in the design document',
       blocks: [
         {
           type: 'p',
           text:
-            'In 2022 I designed the Data Map to organise the catalog around business concepts, Customer or Invoice, with every physical copy nested underneath. By 2024 search had split into two modes, Catalog and Data Map, each mixing every kind of physical asset in one list. My own research now said that business concepts help new people orient, and that working engineers and analysts search by the physical object they need to query. So the June 2024 specification replaced the two modes with one tab per object type, grouped by where the data physically lives: tables, the Data Map, real-time streams, CDC attributes, feature sets, dashboards. The map I had fought for became one tab among them, and stayed the way to understand a data product. Reviewers pushed the split further than my first draft: tables, columns and schemas each got their own section.',
+            'In June 2024 I wrote the design document that search engineering built from, and three senior engineers reviewed it before anything was built. Four positions in it decided the shape of what shipped. Each one cost something, and the cost is written next to it.',
+        },
+        { type: 'subhead', number: '01', text: 'Give up the structure I had argued for in 2022' },
+        {
+          type: 'p',
+          text:
+            'In 2022 I designed the Data Map to organise the catalog around business concepts, Customer or Invoice, with every physical copy nested underneath. By 2024 search had split into two modes, Catalog and Data Map, each mixing every kind of physical asset in one list. My own research now said that business concepts help new people orient, and that working engineers and analysts search by the physical object they need to query. So the specification replaced the two modes with one tab per object type, grouped by where the data physically lives: tables, the Data Map, real-time streams, CDC attributes, feature sets, dashboards. The map I had fought for became one tab among them, and stayed the way to understand a data product. Reviewers pushed the split further than my first draft: tables, columns and schemas each got their own section.',
         },
         {
           type: 'cards',
@@ -218,14 +216,7 @@ export const SEARCH_2: ShortPage = {
             { title: 'A data product', text: 'The business meaning, its owner, and every physical copy listed beneath it. The 2022 idea, kept where it helps.' },
           ],
         },
-      ],
-    },
-    {
-      id: 'decisions',
-      eyebrow: '6 · Four more calls, and what each cost',
-      short: 'Decisions',
-      heading: 'Filters, facets, five lines, and what was left open',
-      blocks: [
+        { type: 'subhead', number: '02', text: 'Separate filters from facets, and keep facets to the four behaviours Vertex AI supported' },
         {
           type: 'p',
           text:
@@ -241,14 +232,7 @@ export const SEARCH_2: ShortPage = {
           ],
           caption: 'The four facet behaviours, from the prototype attached to the June 2024 specification.',
         },
-      ],
-    },
-    {
-      id: 'calls',
-      eyebrow: 'The other three',
-      short: 'Three more',
-      heading: 'Five lines per card, AI descriptions demoted, tags left open',
-      blocks: [
+        { type: 'subhead', number: '03', text: 'Cap every result card at five lines, split between operational and social proof' },
         {
           type: 'tension',
           items: [
@@ -262,6 +246,12 @@ export const SEARCH_2: ShortPage = {
               tension: 'In the design review, two of the first three reviewers said AI-written descriptions felt untrustworthy mixed in with human ones.',
               decision: 'Steward-written descriptions show by default. An AI description appears only as a labelled fallback when no human one exists, and the owner can edit it inline.',
             },
+          ],
+        },
+        { type: 'subhead', number: '04', text: 'Leave tags versus collections open, then argue for Collections' },
+        {
+          type: 'tension',
+          items: [
             {
               image: { src: '/work/search-2/decision-datamap.png', width: 1440, height: 1050, alt: 'The Data Map tab design: data products with their freshness, hosting location and type filters down the left.' },
               tension: 'Stakeholders asked for user-applied tags so analysts could label tables for their teams. A principal engineer pointed out in review that freeform tags rot into inconsistent noise.',
@@ -272,16 +262,17 @@ export const SEARCH_2: ShortPage = {
       ],
     },
     {
-      id: 'shipped',
-      eyebrow: '7 · What shipped, what it did not solve, and what was mine',
-      short: 'Shipped',
-      heading: 'Precision rose, latency fell, and two gaps showed',
+      id: 'impact',
+      eyebrow: '5 · Impact and trade-offs',
+      short: 'Impact',
+      heading: 'Precision rose, latency collapsed, and the framework carried four launches',
       blocks: [
         {
           type: 'p',
           text:
-            'Table search launched on 14 November 2024 and Data Map search on 26 March 2025; the old search was switched off in September 2025, by which point Search 2.0 was primary for about 70% of users and session conversion had gone from 41% to 61% over the year. Object-type separation ended the ambiguous mixed lists, facets cut the time to a trusted result, and certification became visible without a click. Two things it did not solve. When the ranking was tuned for natural-language queries, people who pasted an exact table name saw semantic neighbours outrank the exact string, and the Data Map default tab added a click; top-five click-through dipped from 96% to 94% in July 2025. One person wrote in the April poll: “If I search for an exact table name it defaults to Data Map, resulting in an extra click to the Tables tab compared to before.” Amplitude caught it, a fast path for exact strings and a routing change fixed it, and the rate recovered to 95% by January 2026. And column-name search still returned table-level relevance, so the comprehension gap was narrower, not closed. The cost that is mine: instrumentation was not in the first scope, so precision was measured after launch rather than designed for before it.',
+            'Engineers and the search-model team built the ranking models and the indexing; the specification defined what was searchable, how objects were separated, how facets behaved and the five lines of signal on every card. Table search launched on 14 November 2024 and Data Map search on 26 March 2025. The old search was switched off in September 2025, by which point Search 2.0 was primary for about 70% of users and session conversion had gone from 41% to 61% over the year. Object-type separation ended the ambiguous mixed lists, facets cut the time to a trusted result, and certification became visible without a click.',
         },
+        { type: 'subhead', text: 'The scorecard' },
         {
           type: 'table',
           head: ['Launch and scope', 'Metric', 'Before → after', 'Attribution and source'],
@@ -293,18 +284,24 @@ export const SEARCH_2: ShortPage = {
           ],
           caption: 'The 20-day figure is Intuit’s public number for the whole path, including access and exploration; 14.2 hours is the catalog’s own measure of the search step.',
         },
+        { type: 'subhead', text: 'What broke first, and how we fixed it' },
+        {
+          type: 'p',
+          text:
+            'When the ranking was tuned for natural-language queries, people who pasted an exact table name saw semantic neighbours outrank the exact string, and the Data Map default tab added a click; top-five click-through dipped from 96% to 94% in July 2025. One person wrote in the April poll: “If I search for an exact table name it defaults to Data Map, resulting in an extra click to the Tables tab compared to before.” Amplitude caught it, a fast path for exact strings and a routing change fixed it, and the rate recovered to 95% by January 2026. Two things stayed open. Column-name search still returned table-level relevance, so the comprehension gap was narrower, not closed. And the cost that is mine: instrumentation was not in the first scope, so precision was measured after launch rather than designed for before it.',
+        },
       ],
     },
     {
       id: 'after',
-      eyebrow: '8 · What it set up, 2025 to 2026',
-      short: 'After',
-      heading: 'Research compounds: the object model became the agent’s tool schema',
+      eyebrow: '6 · What it set up, 2025 to 2026',
+      short: 'What it set up',
+      heading: 'Search solved locating data. Comprehension and the coding agent came next.',
       blocks: [
         {
           type: 'p',
           text:
-            'Fixing search changed the questions people asked. In the 726 Data Genius Bar questions analysed after the rebuild, 16% were still about locating a table; 68.2% were about comprehension, what a column meant, how two tables joined, which filters to apply; and 74.1% could be answered by a single-table lookup if column-level context reached the person where they worked. That is the finding from section 3, measured a year later. The June 2024 specification had already listed Slack and queries as future search objects, and both shipped within the year as Slack insights and query insights. Collections followed in August 2025. Together they set up the next step: the catalog inside Cursor and Claude, where the Search 2.0 object model, tables, data products, topics and attributes each with their own evidence, is the schema the agent’s tools answer with. That story is on the next page.',
+            'Fixing search changed the questions people asked. In the 726 Data Genius Bar questions analysed after the rebuild, 16% were still about locating a table; 68.2% were about comprehension, what a column meant, how two tables joined, which filters to apply; and 74.1% could be answered by a single-table lookup if column-level context reached the person where they worked. That is the research finding, measured a year later. The June 2024 specification had already listed Slack and queries as future search objects, and both shipped within the year as Slack insights and query insights. Collections followed in August 2025. Together they set up the next step: the catalog inside Cursor and Claude, where the Search 2.0 object model, tables, data products, topics and attributes each with their own evidence, is the schema the agent’s tools answer with. That story is on the next page.',
           links: [{ text: 'the next page', href: '/work/agentic-discovery' }],
         },
         {
