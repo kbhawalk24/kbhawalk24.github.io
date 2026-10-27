@@ -326,15 +326,6 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
                 )}
               </aside>
             </Reveal>
-
-            <footer className={cn(SMALL, 'mt-12 grid gap-2 border-t border-border pt-6')}>
-              <p>
-                <span className="font-semibold text-foreground">Credits.</span> {page.credits}
-              </p>
-              <p>
-                <span className="font-semibold text-foreground">Sources.</span> {page.sources}
-              </p>
-            </footer>
           </article>
         </WithSectionNav>
       </main>

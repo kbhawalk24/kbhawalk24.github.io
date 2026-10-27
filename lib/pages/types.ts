@@ -126,6 +126,7 @@ export interface ShortPage {
   visuals?: PageVisual[]
   sections: PageSection[]
   next: NextHandoff
-  credits: string
-  sources: string
+  /** Kept in the data as a record; no longer rendered on the page. */
+  credits?: string
+  sources?: string
 }
