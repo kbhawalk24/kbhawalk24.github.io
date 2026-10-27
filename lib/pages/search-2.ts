@@ -50,16 +50,6 @@ export const SEARCH_2: ShortPage = {
   },
   visuals: [
     {
-      id: 'slack-session',
-      after: 'problem',
-      lead: true,
-      src: '/work/search-2/slack-session-2024.jpg',
-      width: 590,
-      height: 600,
-      alt: 'A Slack channel during an observed session: a thread of questions about where to find firmographic data, with links to a dashboard, a query and a table passed between colleagues. Names blurred.',
-      caption: 'An observed session, April 2024: a person searching Slack for a dataset. Links to a dashboard, a query and a table pass between colleagues. Slack was the discovery layer; the catalog was one stop on the way. Names blurred.',
-    },
-    {
       id: 'raw-notes',
       after: 'research',
       lead: true,
@@ -91,6 +81,7 @@ export const SEARCH_2: ShortPage = {
     {
       id: 'search-1',
       after: 'problem',
+      lead: true,
       src: '/work/search-2/search-1-results-2024.jpg',
       width: 2048,
       height: 1147,
