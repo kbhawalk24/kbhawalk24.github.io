@@ -121,7 +121,7 @@ export const ARCS: Arc[] = [
           height: 872,
           alt: 'The data discovery platform: the home page, then a table page with its columns, owners and statistics',
         },
-        stats: [{ value: '68% → 96%', label: 'Searches with a click in the top five, in the catalog’s first two years' }],
+        stats: [{ value: '1,886 → 6,673', label: 'People using the platform each month, Jul 2023 to Mar 2026, across 320,000 tables' }],
         status: 'live',
         href: '/work/catalog-data-map-lineage',
       },
