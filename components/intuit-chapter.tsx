@@ -36,7 +36,7 @@ export function IntuitChapter() {
         <div>
           <p className="label-micro text-muted-foreground">{c.eyebrow}</p>
           <h2 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-foreground md:text-4xl">{c.heading}</h2>
-          <p className="mt-5 max-w-[30rem] text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">{c.text}</p>
+          <p className="mt-5 text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">{c.text}</p>
         </div>
 
         <div>

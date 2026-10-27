@@ -26,7 +26,7 @@ export function ContactFooter() {
       >
         <motion.h2
           variants={fadeUp}
-          className="max-w-2xl text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl"
+          className="font-heading text-4xl font-extrabold tracking-tight md:text-5xl"
         >
           Building something complex with data? Let&rsquo;s <em>talk</em>.
           <HeadingDot />

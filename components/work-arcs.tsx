@@ -160,7 +160,7 @@ function ArcSection({ arc, index }: { arc: Arc; index: number }) {
     <div className={index === 0 ? undefined : 'mt-16 md:mt-24'}>
       <Reveal className="mb-12">
         <h3 className="font-heading text-2xl font-semibold tracking-tight md:text-3xl">{arc.heading}</h3>
-        {arc.thesis && <p className="mt-2 max-w-3xl text-pretty font-sans text-base leading-relaxed text-muted-foreground">{arc.thesis}</p>}
+        {arc.thesis && <p className="mt-2 text-pretty font-sans text-base leading-relaxed text-muted-foreground">{arc.thesis}</p>}
       </Reveal>
       <ol className="grid gap-12">
         {arc.cards.map((card) => (

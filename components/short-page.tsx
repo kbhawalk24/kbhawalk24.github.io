@@ -237,7 +237,7 @@ function BlockView({ block }: { block: Block }) {
             <span className={cn('absolute -left-[1.85rem] top-1.5 size-3 rounded-full ring-4 ring-background', i === block.items.length - 1 ? 'bg-foreground' : 'bg-accent-brand')} aria-hidden />
             <p className="label-micro text-accent-brand">{item.when}</p>
             <p className={cn(SUBHEAD, 'mt-1 text-lg')}>{item.title}</p>
-            <p className={cn(SMALL, 'mt-1 max-w-[40rem]')}>{item.text}</p>
+            <p className={cn(SMALL, 'mt-1')}>{item.text}</p>
             {item.state && <span className="mt-2 inline-block rounded-full bg-foreground/[0.06] px-2.5 py-1 label-micro text-muted-foreground">{item.state}</span>}
           </li>
         ))}
@@ -282,7 +282,7 @@ function BlockView({ block }: { block: Block }) {
   }
   if (block.type === 'quotes') {
     return (
-      <ul className={cn('grid gap-4', block.items.length === 1 ? 'max-w-[46rem]' : block.items.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3')}>
+      <ul className={cn('grid gap-4', block.items.length === 1 ? '' : block.items.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3')}>
         {block.items.map((q) => (
           <li key={q.text} className="flex flex-col border-l-2 border-accent-brand pl-5">
             <blockquote className={BODY}>“{q.text}”</blockquote>
@@ -491,7 +491,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
             <Reveal as="section" className="mt-24">
               <aside aria-label="What this unlocked next" className={CARD}>
                 <p className="label-micro text-muted-foreground">What this unlocked next</p>
-                <p className={cn(BODY, 'mt-3 max-w-[46rem]')}>{page.next.text}</p>
+                <p className={cn(BODY, 'mt-3')}>{page.next.text}</p>
                 {page.next.href ? (
                   <Link href={page.next.href} {...event('next-case', { from: page.slug })} className="mt-4 inline-flex min-h-11 items-center gap-2 font-sans text-base font-semibold text-accent-brand transition-colors hover:underline">
                     {page.next.label} <span aria-hidden="true">→</span>
@@ -533,7 +533,7 @@ function SectionBlocks({ blocks, lead }: { blocks: Block[]; lead: PageVisual[] }
   const firstWide = blocks.findIndex((b) => b.type !== 'p')
   const cut = firstWide < 0 ? blocks.length : firstWide
   const render = (block: Block, i: number) => (
-    <div key={i} className={cn('min-w-0', !WIDE_BLOCKS.has(block.type) && 'max-w-[46rem]')}>
+    <div key={i} className="min-w-0">
       <BlockView block={block} />
     </div>
   )
