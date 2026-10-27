@@ -110,7 +110,7 @@ export const SEARCH_2: ShortPage = {
         {
           type: 'p',
           text:
-            'Engineers and the search-model team built the ranking models and the indexing. The specification defined what was searchable, how objects were separated, how facets behaved and the five lines of signal on every card. Each row names whose work the number is.',
+            'Data discovery was the single longest phase of any data lifecycle at Intuit, cited by users and stakeholders alike, and that was the business case for rebuilding the information architecture across the platform rather than polishing the search box. Engineers and the search-model team built the ranking models and the indexing. The specification defined what was searchable, how objects were separated, how facets behaved and the five lines of signal on every card. Each row names whose work the number is.',
         },
         {
           type: 'table',
@@ -218,25 +218,33 @@ export const SEARCH_2: ShortPage = {
           text:
             'In June 2024 I wrote the design document that search engineering built from. Three senior engineers reviewed it before anything was built. Four positions in it decided the shape of what shipped.',
         },
-        { type: 'subhead', number: '01', text: 'Giving up the 2022 Data Map structure' },
+        { type: 'subhead', number: '01', text: 'Giving up the 2022 Data Map structure: object taxonomy mapping' },
         {
           type: 'p',
           text:
-            'In 2022 I had designed the Data Map around abstract business concepts, Customer or Invoice, with every physical copy nested underneath. By 2024 search had split into Catalog and Data Map modes, each mixing every kind of physical asset in one list, and the research showed that working engineers and analysts search by the physical object they need to query. I replaced the split with one dedicated tab per object type, grouped by where the data physically lives: Tables, Data Map, Real-Time Streams, Feature Sets, Dashboards and Marketing Attributes. The map I had argued for became one tab among six, and stayed the way to understand a data product. Reviewers pushed the split further than my first draft: tables, columns and schemas each got their own section.',
+            'In 2022 I had designed the Data Map around abstract business concepts, Customer or Invoice, with every physical copy nested underneath. By 2024 search had split into Catalog and Data Map modes, each mixing every kind of physical asset in one list, and the research showed that working engineers and analysts search by the physical object they need to query. So I mapped every searchable object in the platform to the place it is physically hosted, grouped related objects under one tab, and replaced the two modes with one dedicated tab per object type: Tables, Data Map, Real-Time Streams, Feature Sets, Dashboards and Marketing Attributes. The map I had argued for became one tab among six, and stayed the way to understand a data product. Reviewers pushed the split further than my first draft: tables, columns and schemas each got their own section. The mapping below is from the specification; the last two rows were listed as future objects and shipped within the year.',
         },
         {
-          type: 'cards',
-          items: [
-            { title: 'A table', text: 'Owner · domain · last refresh · maturity stars · queries in 30 days. Enough to choose between two tables with the same name.' },
-            { title: 'A real-time stream', text: 'Producer · consumers · schema. The evidence a stream needs is not the evidence a table needs.' },
-            { title: 'A data product', text: 'The business meaning, its owner, and every physical copy listed beneath it. The 2022 idea, kept where it helps.' },
+          type: 'table',
+          head: ['Tab', 'Objects grouped under it', 'Evidence shown on a result', 'Shipped'],
+          rows: [
+            ['Tables', 'Tables · columns · schemas', 'Owner · domain · last refresh · maturity stars · queries in 30 days', 'Nov 14, 2024'],
+            ['Data Map', 'Data products · attributes', 'Business meaning · owner · every physical copy beneath it', 'Mar 26, 2025'],
+            ['Real-time streams', 'Kafka topics · attributes', 'Producer · consumers · schema', 'Jun 15, 2025'],
+            ['CDC attributes', 'Change-data-capture attributes', 'Source · consumers', 'Aug 2025'],
+            ['Feature sets', 'Feature sets · features', 'Owning team · model', 'Framework in place'],
+            ['Dashboards', 'Dashboards', 'Author · views · last updated', 'Framework in place'],
+            ['Marketing attributes', 'Marketing attributes', 'Owner · freshness', 'Aug 12, 2025'],
+            ['Queries (future in spec)', 'Queries', 'Who ran it · against which table', 'Query insights, May 2025'],
+            ['Enterprise tools (future in spec)', 'Slack · GitHub · Google Docs · wiki', 'The thread or document itself', 'Slack insights, FY25'],
           ],
+          caption: 'The object taxonomy from the June 2024 specification: each searchable object assigned to the tab for where it is hosted, with the evidence that kind of object needs. Dates from the launch posts.',
         },
-        { type: 'subhead', number: '02', text: 'Separating filters from facets, and four facet behaviours inside Vertex AI’s limits' },
+        { type: 'subhead', number: '02', text: 'Separating filters from facets: API cardinality and facet constraints' },
         {
           type: 'p',
           text:
-            'The old interface treated every narrowing control the same. The specification drew the line: a filter is the kind of object, the top tabs, and never changes with the query; a facet is a property of the returned results, domain, owner, freshness, maturity, and changes with the active tab and query. Any nominal metadata with unlimited values is always a facet. To keep engineering scope inside what the Vertex AI search service supported out of the box, I defined four facet behaviours by cardinality and hierarchy.',
+            'The old interface treated every narrowing control the same. The specification drew the line: a filter is the kind of object, the top tabs, and never changes with the query; a facet is a property of the returned results, domain, owner, freshness, maturity, and changes with the active tab and query. Any nominal metadata with unlimited values is always a facet. The constraint was the API: the Vertex AI search service supported a fixed set of facet operations, so I defined four facet behaviours by the cardinality and hierarchy of the values, and kept every one inside what the service did out of the box.',
         },
         {
           type: 'list',
@@ -257,19 +265,19 @@ export const SEARCH_2: ShortPage = {
           ],
           caption: 'The four facet behaviours, from the prototype attached to the June 2024 specification.',
         },
-        { type: 'subhead', number: '03', text: 'Five-line result card anatomy, and guardrails on AI descriptions' },
+        { type: 'subhead', number: '03', text: 'Five-line result card anatomy: a payload budget, and AI fallback guardrails' },
         {
           type: 'tension',
           items: [
             {
               image: { src: '/work/search-2/decision-result.png', width: 1030, height: 520, alt: 'Two results, each with its owner, last refresh, queries run, row count and data product beside the description.' },
               tension: 'People decided within 60 seconds on the top two results, and result cards had become a dumping ground for every metadata field a team wanted to promote.',
-              decision: 'A hard ceiling of five lines per card. Operational signals: table path, clean-data maturity stars, last refresh, steward. Social proof: query volume, unique active users, verified documentation and Slack insights. Everything else deferred to a side panel per object type, so the five lines stayed the ones that choose between two similar results.',
+              decision: 'A payload budget of five lines per result, fixed in the specification. Operational signals, three lines: table path, clean-data maturity stars, last refresh and steward. Social proof, two lines: query volume, unique active users, verified documentation and Slack insights. Everything else deferred to a side panel per object type, so the budget stayed spent on the lines that choose between two similar results.',
             },
             {
               image: { src: '/work/search-2/decision-filters.png', width: 660, height: 470, alt: 'The filter column of the design beside the first results: hidden results, compliance, usage and schema, every filter visible with its state.' },
               tension: 'In the design review, two of the first three reviewers said AI-written descriptions felt untrustworthy mixed in with human ones.',
-              decision: 'Steward-written descriptions show by default. An AI description appears only as an explicitly labelled fallback when no human documentation exists, and the data owner can edit it inline. AI moved from an ungrounded metadata generator to an editor-approved assistance layer.',
+              decision: 'Steward-written descriptions show by default. An AI description appears only as an explicitly labelled fallback when no human documentation exists, inside the same five-line budget, and the data owner can edit it inline. AI moved from an ungrounded metadata generator to an editor-approved assistance layer.',
             },
           ],
         },
@@ -301,16 +309,16 @@ export const SEARCH_2: ShortPage = {
           type: 'tension',
           items: [
             {
-              tension: 'Exact-name search degradation. Tuning the ranking for vector and semantic recall meant that people who pasted an exact physical table name saw semantic neighbours outrank the exact string, and the Data Map default tab added a click. Top-five click-through dropped from 96% to 94% in July 2025. One person wrote in the poll: “If I search for an exact table name it defaults to Data Map, resulting in an extra click to the Tables tab compared to before.”',
-              decision: 'Amplitude telemetry isolated the exact-string queries. Engineering built a deterministic exact-match routing fast path and the tab routing changed; top-five click-through recovered to 95% by January 2026 without giving up natural-language quality. The cost that is mine: instrumentation was not in the first scope, so this was measured after launch rather than designed for before it.',
+              tension: 'Telemetry-driven exact-match routing. Tuning the ranking for vector and semantic recall meant that people who pasted an exact physical table name saw semantic neighbours outrank the exact string, and the Data Map default tab added a click. Top-five click-through dropped from 96% to 94% in July 2025. One person wrote in the poll: “If I search for an exact table name it defaults to Data Map, resulting in an extra click to the Tables tab compared to before.”',
+              decision: 'Amplitude telemetry isolated the exact-string queries, and I took the finding to search engineering, who built a deterministic exact-match routing fast path; the tab routing changed with it. top-five click-through recovered to 95% by January 2026 without giving up natural-language quality. The cost that is mine: instrumentation was not in the first scope, so this was measured after launch rather than designed for before it.',
             },
             {
-              tension: 'Information architecture against speed of refinement. Enterprise metadata taxonomies favour deeply nested trees, and the business-domain facet was one. Exposing the tree inside a query-dependent facet was the costliest item in the engineering review.',
+              tension: 'Information architecture against cognitive load in facet design. Enterprise metadata taxonomies favour deeply nested trees, and the business-domain facet was one. Exposing the tree inside a query-dependent facet was the costliest item in the engineering review, and the slowest control to refine a search with.',
               decision: 'Nested tree browsing came out of release one; flat keyword matching of any node in the tree shipped instead. That traded taxonomy completeness for execution speed and lower interaction latency. Column-name search still returned table-level relevance, so the comprehension gap narrowed rather than closed.',
             },
             {
-              tension: 'Governance against AI-generated metadata. Unverified LLM summaries across enterprise datasets threatened the trust the whole redesign was meant to restore.',
-              decision: 'Steward-written documentation overrides the AI fallback everywhere, the fallback is labelled, and owners edit it inline. The rule held through the later launches and became the model the agent page follows.',
+              tension: 'AI fallback and the payload budget. Unverified LLM summaries across enterprise datasets threatened the trust the whole redesign was meant to restore, and every line they took was a line of evidence lost.',
+              decision: 'Steward-written documentation overrides the AI fallback everywhere, the fallback is labelled and held inside the five-line budget, and owners edit it inline. The rule held through the later launches and became the model the agent page follows.',
             },
           ],
         },
