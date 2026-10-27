@@ -61,7 +61,7 @@ export const ARCS: Arc[] = [
         role: 'Principal IC',
         track: 'ic',
         line:
-          'The search box was fine; the problem was trust. Twenty sessions showed why, I overturned the structure I had designed in 2022, and the specification became eight launches.',
+          'Search returned results nobody trusted. After watching twenty people search, I rebuilt it around the kind of data they look for: one tab per kind, five lines of proof on every result. Eight launches followed.',
         visualNote: 'The Search 2.0 design for table results.',
         cover: {
           src: '/work/search-2/tables-tab-design.jpg',
