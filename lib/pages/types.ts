@@ -74,10 +74,13 @@ export interface PageSection {
   blocks: Block[]
 }
 
-/** One cell of the facts block under the context bar. */
+/** One column of the facts block under the hero: a label and short stacked
+ *  lines, each with an optional note set lighter (a date, a count). `value`
+ *  is the older one-sentence form. */
 export interface PageFact {
   label: string
-  value: string
+  value?: string
+  lines?: { text: string; note?: string }[]
 }
 
 /** A short muted prototype clip that opens the page, under the title. */

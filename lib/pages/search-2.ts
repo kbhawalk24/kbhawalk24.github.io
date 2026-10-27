@@ -30,10 +30,27 @@ export const SEARCH_2: ShortPage = {
     current: 0,
   },
   facts: [
-    { label: 'Role', value: 'Principal designer, Jan to Aug 2024: research, index clean-up, specification. Design manager, Aug 2024 to 2026: launches, sunset, extensions' },
-    { label: 'Scope', value: '320,000 tables · 10,000 data products · 460,000 attributes · about 6,600 monthly users' },
-    { label: 'Who built it', value: 'Search and search-model engineering; three senior engineers reviewed the spec; my team took five later launches to ship' },
-    { label: 'Research', value: '20 sessions across 9 business units · 1,392 help-channel questions · Amplitude' },
+    { label: 'Role', lines: [
+      { text: 'Principal Product Designer', note: '(Jan to Aug 2024)' },
+      { text: 'Product Design Manager', note: '(Aug 2024 to 2026)' },
+    ] },
+    { label: 'Scope', lines: [
+      { text: 'Intuit’s data platform' },
+      { text: '320,000 tables' },
+      { text: '10,000 data products' },
+      { text: 'about 6,600 monthly users' },
+    ] },
+    { label: 'Research', lines: [
+      { text: '20 Follow-Me-Home sessions', note: '(9 business units)' },
+      { text: '666 Slack help threads' },
+      { text: '726 Genius Bar queries' },
+    ] },
+    { label: 'Shipped', lines: [
+      { text: 'Table search', note: '(Nov 2024)' },
+      { text: 'Data Map search', note: '(Mar 2025)' },
+      { text: 'Stream and marketing search', note: '(Jun to Aug 2025)' },
+      { text: 'Collections', note: '(Aug 2025)' },
+    ] },
   ],
   stats: [
     { value: '81.31% → 89.24%', label: 'First-result precision on Data Map search, Mar 2025; MRR 0.81 → 0.89; P99 latency 50.59 s → 1.93 s' },

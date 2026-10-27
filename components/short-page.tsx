@@ -581,11 +581,22 @@ function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: st
 
 function Facts({ facts }: { facts: PageFact[] }) {
   return (
-    <dl className="mt-12 grid gap-x-8 gap-y-6 border-t border-border pt-6 sm:grid-cols-2 lg:grid-cols-4">
-      {facts.map((f) => (
-        <div key={f.label}>
-          <dt className={cn(SMALL, 'font-semibold')}>{f.label}</dt>
-          <dd className="mt-2 text-pretty font-sans text-base leading-relaxed text-foreground">{f.value}</dd>
+    <dl className={cn(CARD, 'mt-12 grid gap-y-6 p-0 sm:grid-cols-2 lg:grid-cols-4')}>
+      {facts.map((f, i) => (
+        <div key={f.label} className={cn('px-6 py-5', i > 0 && 'lg:border-l lg:border-border', i % 2 === 1 && 'sm:border-l sm:border-border lg:border-l', i >= 2 && 'sm:border-t sm:border-border lg:border-t-0')}>
+          <dt className="font-sans text-base font-semibold text-foreground">{f.label}</dt>
+          {f.lines ? (
+            <dd className="mt-3 grid gap-1">
+              {f.lines.map((line) => (
+                <p key={line.text + (line.note ?? '')} className="font-sans text-base leading-snug text-foreground">
+                  {line.text}
+                  {line.note && <span className="text-muted-foreground"> {line.note}</span>}
+                </p>
+              ))}
+            </dd>
+          ) : (
+            <dd className="mt-3 text-pretty font-sans text-base leading-relaxed text-foreground">{f.value}</dd>
+          )}
         </div>
       ))}
     </dl>

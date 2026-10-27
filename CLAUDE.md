@@ -30,3 +30,4 @@ Dashboard: https://cloud.umami.is (Kanchi's account).
 ## Layout rules
 
 - **Headings span end to end.** No heading, on any page, gets a max-width or `text-balance`; it runs the full width of its column and wraps where the column ends. Paragraphs may keep their measure; headings never do.
+- **Opening facts are a four-column table of short lines.** Under the hero of every case page: Role, Scope, Research, Shipped, each as stacked lines of a few words with the date or count set lighter in brackets (`PageFact.lines`). Never a sentence per cell.
