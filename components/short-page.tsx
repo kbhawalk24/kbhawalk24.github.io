@@ -265,7 +265,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
                 {page.roleTag} <span className="text-muted-foreground">· {page.period} · {readMinutes(page)} min read</span>
               </p>
               <h1 className="mt-4 max-w-[46rem] text-balance font-heading text-4xl font-extrabold tracking-tight md:text-5xl">{page.title}</h1>
-              <p className="mt-4 max-w-[46rem] text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">{page.description}</p>
+              <p className="mt-4 text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">{page.description}</p>
             </header>
 
             {page.hero && <HeroVideo hero={page.hero} className="mt-12" />}
