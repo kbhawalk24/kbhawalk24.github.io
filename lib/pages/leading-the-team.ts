@@ -100,10 +100,11 @@ export const LEADING_THE_TEAM: ShortPage = {
           text:
             'From August 2024 I managed the designers for Intuit’s data platform: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion. Across the data design group that was one designer for every 85 engineers. They shipped the work. I set the strategy and the shared research base, and kept designing.',
         },
+        { type: 'wheel' },
         {
           type: 'cards',
           items: [
-            { value: '9', title: 'product areas, from instrumentation at the source to access at the edge', text: 'About 550 engineers and 16 product managers sent design requests.' },
+            { value: '9', title: 'product areas, all nine named above', text: 'About 550 engineers and 16 product managers sent design requests.' },
             { value: '3', title: 'product designers, each owning two or three areas', text: 'A summer 2023 intern I had mentored joined the team full-time.' },
             { value: '24', title: 'launches with design in them, 2024 to 2026', text: 'Across access, lineage, certification, discovery and the agent.' },
           ],

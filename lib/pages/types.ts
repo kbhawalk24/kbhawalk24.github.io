@@ -61,6 +61,8 @@ export type Block =
   | { type: 'timeline'; items: { when: string; title: string; text: string; state?: string }[] }
   /** A numbered sub-heading inside a section, for a section that makes several positions in order. */
   | { type: 'subhead'; number?: string; text: string }
+  /** The lifecycle wheel (components/lifecycle-wheel.tsx): the seven stages, the three rings and the reach counter. Management page only. */
+  | { type: 'wheel' }
   | { type: 'clips'; caption?: string; items: { src: string; width: number; height: number; title: string; text: string; alt: string }[] }
 
 export interface PageSection {

@@ -116,25 +116,3 @@ export const INITIATIVES: Initiative[] = [
   { id: 'clean', label: 'Clean-data standard', shape: 'circle' },
   { id: 'access', label: 'Fine-grained access control', shape: 'square' },
 ]
-
-/** The four rows of the matrix under the cards. Each is a yes-or-no per
- *  stage; the label is the legend. */
-export interface MatrixRow {
-  id: string
-  label: string
-  note: string
-  tone: Track
-  applies: (stage: Stage) => boolean
-}
-
-export const MATRIX_ROWS: MatrixRow[] = [
-  { id: 'designed', label: 'Designed myself', note: '2021–2024', tone: 'ic', applies: (s) => s.mine === 'ic' },
-  { id: 'owned', label: 'Owned as design manager', note: '2024–2026', tone: 'management', applies: (s) => s.mine !== 'none' },
-  { id: 'clean', label: 'Clean-data standard', note: 'strategy mine', tone: 'strategy', applies: (s) => s.initiatives.includes('clean') },
-  { id: 'access', label: 'Fine-grained access control', note: 'strategy mine, every stage', tone: 'strategy', applies: (s) => s.initiatives.includes('access') },
-]
-
-export const BAND = {
-  heading: 'Led design and strategy for Intuit’s data platform, end to end',
-  sub: '2021–2026 · the seven stages of the data lifecycle. In the grid below, a filled cell means the row applies to that stage.',
-}

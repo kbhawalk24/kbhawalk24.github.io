@@ -15,6 +15,7 @@ import { WithSectionNav } from '@/components/section-nav'
 import { VideoEmbed } from '@/components/video-embed'
 import { HeroVideo } from '@/components/hero-video'
 import { PrototypeEmbed } from '@/components/prototype-embed'
+import { LifecycleWheel } from '@/components/lifecycle-wheel'
 
 // The case study page, built to five rules.
 //
@@ -39,7 +40,7 @@ const BODY = 'text-pretty text-[17px] leading-[1.65] text-foreground/90'
 const SMALL = 'text-pretty font-sans text-sm leading-relaxed text-muted-foreground'
 const CAPTION = 'text-pretty font-sans text-sm leading-relaxed text-muted-foreground'
 
-const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes', 'statement', 'clips', 'chips', 'journey', 'compare', 'anatomy', 'donut', 'timeline'])
+const WIDE_BLOCKS = new Set(['steps', 'cards', 'tension', 'table', 'video', 'quotes', 'statement', 'clips', 'chips', 'journey', 'compare', 'anatomy', 'donut', 'timeline', 'wheel'])
 
 const CHIP_ICONS: Record<ChipIcon, React.ComponentType<{ className?: string; 'aria-hidden'?: boolean }>> = {
   chart: ChartColumn, code: Code, megaphone: Megaphone, wrench: Wrench, brain: Brain, boxes: Boxes, clipboard: ClipboardList,
@@ -94,6 +95,7 @@ function Linked({ text, links }: { text: string; links?: InlineLink[] }) {
 }
 
 function BlockView({ block }: { block: Block }) {
+  if (block.type === 'wheel') return <LifecycleWheel className="mt-2" />
   if (block.type === 'chips') {
     return (
       <ul className="flex flex-wrap gap-2.5">
