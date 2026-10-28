@@ -44,14 +44,15 @@ const EMPTY = 'var(--stripe-a)'
 
 // People using the platform each month: a sourced series (FY24 review;
 // analytics dashboard, Mar 2026), counted through the designed and manager
-// scenes. The one number in the centre.
+// scenes. The one number in the centre. The 1:85 ratio is not repeated
+// here: it is for the whole data design group and lives in the stat card.
 const REACH = { start: 1886, designed: 2664, manager: 6673 }
 
 // One sourced line under a product, where there is one (docs/source-kit.md).
 const METRIC: Record<string, string> = {
   'Catalog and search': '10,000 data products searchable',
-  'Plain-language assistant': '500+ people a month',
-  Lineage: '450–500 people a month by Jul 2024',
+  'Plain-language assistant': '500+ people a month, 2023 to 2024',
+  Lineage: '450–500 people a month, Jul 2024',
 }
 
 interface Ring {
@@ -66,12 +67,12 @@ interface Ring {
 
 const RINGS: Ring[] = [
   { label: 'Designed hands-on', tag: '2021 to 2024 · founding designer', color: GREEN, f: STAGES.map((s) => s.mine === 'ic'), rad: 170, s: CUES.Designed + 0.8, e: CUES.Manager },
-  { label: 'Led as design manager', tag: '2024 to 2026 · one designer for every 85 engineers', color: PURPLE, f: STAGES.map((s) => s.mine !== 'none'), rad: 225, s: CUES.Manager + 0.8, e: CUES.Strategy },
-  { label: 'Set platform strategy', tag: 'Every stage · 1,600 three-star data products made discoverable in FY24', color: ORANGE, f: STAGES.map(() => true), rad: 280, s: CUES.Strategy + 0.6, e: CUES.Summary },
+  { label: 'Led as design manager', tag: '2024 to 2026 · three designers, nine product areas', color: PURPLE, f: STAGES.map((s) => s.mine !== 'none'), rad: 225, s: CUES.Manager + 0.8, e: CUES.Strategy },
+  { label: 'Set platform strategy', tag: 'Every stage, 2023 to 2026', color: ORANGE, f: STAGES.map(() => true), rad: 280, s: CUES.Strategy + 0.6, e: CUES.Summary },
 ]
-const INITIATIVES = [
-  { name: 'Clean-data standard', m: 'Clean data under 1% → 80% of the estate · Nov 2025 · shared', s: CUES.Strategy + 1.4 },
-  { name: 'Fine-grained access control', m: null, s: CUES.Strategy + 1.7 },
+const INITIATIVES: { name: string; m: string[]; s: number }[] = [
+  { name: 'Clean-data standard', m: ['1,600 three-star data products made discoverable, FY24', 'Clean data under 1% → 80% of the estate, Nov 2025 · shared'], s: CUES.Strategy + 1.4 },
+  { name: 'Fine-grained access control', m: [], s: CUES.Strategy + 1.7 },
 ]
 
 /** 0 = designed hands-on, then led; 1 = led as design manager; -1 = outside design's scope. */
@@ -265,16 +266,6 @@ function Artboard({ T, hover, setHover, settled }: { T: number; hover: Hover; se
               <div>
                 <div className="font-heading text-[32px] font-bold leading-[1.15]">{g.label}</div>
                 <div className="mt-1.5 text-[20px] leading-[1.3] text-muted-foreground">{g.tag}</div>
-                {k === 1 && (
-                  <div className="mt-3 flex items-center gap-2.5">
-                    <span className="size-3.5 shrink-0 rounded-full" style={{ background: PURPLE }} />
-                    <div className="grid gap-[3px]" style={{ gridTemplateColumns: 'repeat(17, 7px)' }}>
-                      {Array.from({ length: 85 }, (_, d) => (
-                        <span key={d} className="size-[7px] rounded-full bg-muted-foreground/40" style={{ opacity: enter(T, g.s + 0.8 + d * 0.012, 0.2) }} />
-                      ))}
-                    </div>
-                  </div>
-                )}
                 {k === 2 && (
                   <div className="mt-4 flex flex-col gap-2.5">
                     {INITIATIVES.map((n) => {
@@ -282,11 +273,11 @@ function Artboard({ T, hover, setHover, settled }: { T: number; hover: Hover; se
                       return (
                         <div key={n.name} style={{ opacity: q, transform: `translateY(${(1 - q) * 10}px)` }}>
                           <div className="text-[23px] font-semibold leading-tight">{n.name}</div>
-                          {n.m && (
-                            <div className="mt-0.5 font-mono text-[16px] leading-snug" style={{ color: ORANGE }}>
-                              {n.m}
+                          {n.m.map((line) => (
+                            <div key={line} className="mt-0.5 font-mono text-[16px] leading-snug" style={{ color: ORANGE }}>
+                              {line}
                             </div>
-                          )}
+                          ))}
                         </div>
                       )
                     })}
@@ -350,7 +341,7 @@ function WheelList({ className }: { className?: string }) {
         })}
       </ol>
       <p className="font-sans text-sm leading-relaxed text-muted-foreground">
-        People using the platform each month: 1,886 in July 2023, 2,664 in July 2024, 6,673 in March 2026. Strategy across every stage: the clean-data standard (clean data under 1% → 80% of the estate, November 2025, a shared result) and fine-grained access control.
+        People using the platform each month: 1,886 in July 2023, 2,664 in July 2024, 6,673 in March 2026. Strategy across every stage, 2023 to 2026: the clean-data standard (1,600 three-star data products made discoverable in FY24; clean data under 1% → 80% of the estate by November 2025, a shared result) and fine-grained access control.
       </p>
     </div>
   )

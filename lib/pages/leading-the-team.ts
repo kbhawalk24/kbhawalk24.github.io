@@ -98,7 +98,7 @@ export const LEADING_THE_TEAM: ShortPage = {
         {
           type: 'p',
           text:
-            'From August 2024 I managed the designers for Intuit’s data platform: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion. Across the data design group that was one designer for every 85 engineers. They shipped the work. I set the strategy and the shared research base, and kept designing.',
+            'From August 2024 I managed the designers for Intuit’s data platform: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion. Across the data design group that was one designer for every 85 engineers. They shipped the work. I set the strategy and the shared research base, and kept designing. The nine areas sit on the seven stages of the data lifecycle, drawn below: what I designed myself, what I led, and where I set the strategy.',
         },
         { type: 'wheel' },
         {
