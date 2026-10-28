@@ -135,13 +135,13 @@ export const ARCS: Arc[] = [
       {
         slug: 'leading-the-team',
         org: 'Intuit',
-        title: 'Leading design for the data platform, 2024 to 2026',
+        title: 'Leading the designers behind Intuit’s enterprise data platform',
         period: '2024–2026',
         roleTag: 'Design Manager',
         role: 'Design manager',
         track: 'management',
         line:
-          'How I ran design at a 1:85 ratio: one intake and one research base for nine areas, AI tools in my own work before asking the team to use them, and every designer who reported to me promoted.',
+          'How I built one research repository in Marvin, one intake tracker and an AI prototyping culture across nine product areas, managing at one designer to 85 engineers.',
         visualNote: 'The design project tracker.',
         cover: {
           src: '/work/leading-the-team/tracker-2025.jpg',

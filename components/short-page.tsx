@@ -582,7 +582,7 @@ function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: st
 }
 
 const FACT_ICONS: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties; 'aria-hidden'?: boolean }>> = {
-  Role: UserRound, Scope: Boxes, Research: Search, Shipped: Rocket, Team: UserRound,
+  Role: UserRound, Scope: Boxes, Research: Search, Shipped: Rocket, Team: UserRound, Systems: ClipboardList, Outcomes: ChartColumn,
 }
 
 /** The opening facts: four columns across, Role, Scope, Research, Shipped,

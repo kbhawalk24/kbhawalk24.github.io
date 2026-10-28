@@ -274,7 +274,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   ],
   next: {
     text: 'The agent was built by a team I managed. Next: how I ran that team, across nine product areas.',
-    label: 'Leading design for the data platform, 2024 to 2026',
+    label: 'Leading the designers behind Intuit’s enterprise data platform',
     href: '/work/leading-the-team',
   },
   credits:
