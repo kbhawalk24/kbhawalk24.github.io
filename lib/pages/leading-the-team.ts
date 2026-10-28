@@ -1,10 +1,11 @@
 import type { ShortPage } from './types'
 
 // Case study: leading design for the data platform, August 2024 to July
-// 2026. Each section is an eyebrow, a heading, one lead paragraph under 60
-// words, one visual, and at most one supporting block. Figures are from the
-// year-end reviews, launch posts and recognition notes listed in sources;
-// people are credited by role, never by name.
+// 2026. Five sections: the scope (with the lifecycle wheel), how I ran it,
+// AI in the work, what the team shipped, the people and the results. Each
+// is one paragraph, one or two visuals and at most one supporting block.
+// Figures are from the year-end reviews, launch posts and recognition
+// notes listed in sources; people are credited by role, never by name.
 
 export const LEADING_THE_TEAM: ShortPage = {
   slug: 'leading-the-team',
@@ -13,7 +14,7 @@ export const LEADING_THE_TEAM: ShortPage = {
   roleTag: 'Design Manager',
   period: '2024–2026',
   description:
-    'Two years managing the designers for Intuit’s enterprise data platform: where I spent my time, one intake and one research base for nine product areas, AI tools in my own work first, what the team shipped, and the people.',
+    'Two years managing the designers for Intuit’s enterprise data platform: the scope, how I ran it, AI tools in my own work first, what the team shipped, and the people.',
   context: {
     system: 'Intuit’s enterprise data platform: 9 product areas · about 550 engineers and 16 PMs · 6,673 monthly users.',
     steps: [
@@ -26,10 +27,38 @@ export const LEADING_THE_TEAM: ShortPage = {
     current: 4,
   },
   facts: [
-    { label: 'Duration', value: 'August 2024 to July 2026' },
-    { label: 'My role', value: 'Design manager for the data platform. I set the strategy and the shared research base, and kept designing' },
-    { label: 'Team', value: 'Three product designers, across nine product areas, with about 550 engineers and 16 product managers' },
-    { label: 'Tools', value: 'A research repository, help-channel mining, Amplitude, one intake and project tracker, v0 and Figma Make, NotebookLM, a promotion case framework' },
+    {
+      label: 'Role',
+      lines: [
+        { text: 'Product Design Manager', note: 'Aug 2024 to Jul 2026' },
+        { text: 'Kept designing', note: 'search, the agent' },
+      ],
+    },
+    {
+      label: 'Scope',
+      lines: [
+        { text: 'Three product designers' },
+        { text: 'Nine product areas' },
+        { text: 'About 550 engineers, 16 product managers' },
+      ],
+    },
+    {
+      label: 'Research',
+      lines: [
+        { text: 'One research base', note: '2,890 notes' },
+        { text: 'Six months of user visits' },
+        { text: 'Eight surveys, eleven mined help channels' },
+      ],
+    },
+    {
+      label: 'Shipped',
+      lines: [
+        { text: 'Six access launches', note: 'Dec 2024 to Sep 2025' },
+        { text: 'Collections', note: 'Aug 2025' },
+        { text: 'Fourth-level certification', note: 'Nov 2025' },
+        { text: 'Column-level lineage', note: 'tax year 2025' },
+      ],
+    },
   ],
   stats: [
     { value: '1 : 85', label: 'Designers to engineers across the data design group' },
@@ -38,18 +67,8 @@ export const LEADING_THE_TEAM: ShortPage = {
   ],
   visuals: [
     {
-      id: 'collections',
-      after: 'time',
-      lead: true,
-      src: '/work/agentic-discovery/collections-2025.jpg',
-      width: 1920,
-      height: 990,
-      alt: 'The My Collections page with a Create new collection dialog open: a name, a description and a choice between private and public.',
-      caption: 'Collections, shipped August 2025 by a designer on my team. It was not on the roadmap until I argued for it.',
-    },
-    {
       id: 'tracker',
-      after: 'intake',
+      after: 'running',
       lead: true,
       src: '/work/leading-the-team/tracker-2025.jpg',
       width: 2000,
@@ -59,8 +78,7 @@ export const LEADING_THE_TEAM: ShortPage = {
     },
     {
       id: 'research',
-      after: 'research',
-      lead: true,
+      after: 'running',
       src: '/work/leading-the-team/marvin-2025.jpg',
       width: 2000,
       height: 1087,
@@ -78,9 +96,18 @@ export const LEADING_THE_TEAM: ShortPage = {
       caption: 'A frame from the AI-made launch video for Collections, August 2025. Engineering copied the format for its own launches.',
     },
     {
-      id: 'maturity',
+      id: 'collections',
       after: 'shipped',
       lead: true,
+      src: '/work/agentic-discovery/collections-2025.jpg',
+      width: 1920,
+      height: 990,
+      alt: 'The My Collections page with a Create new collection dialog open: a name, a description and a choice between private and public.',
+      caption: 'Collections, shipped August 2025 by a designer on my team. It was not on the roadmap until I argued for it.',
+    },
+    {
+      id: 'maturity',
+      after: 'shipped',
       src: '/work/catalog-data-map-lineage/maturity-2026.jpg',
       width: 2150,
       height: 940,
@@ -101,71 +128,24 @@ export const LEADING_THE_TEAM: ShortPage = {
             'From August 2024 I managed the designers for Intuit’s data platform: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion. Across the data design group that was one designer for every 85 engineers. They shipped the work. I set the strategy and the shared research base, and kept designing. The nine areas sit on the seven stages of the data lifecycle, drawn below: what I designed myself, what I led, and where I set the strategy.',
         },
         { type: 'wheel' },
-        {
-          type: 'cards',
-          items: [
-            { value: '9', title: 'product areas, all nine named above', text: 'About 550 engineers and 16 product managers sent design requests.' },
-            { value: '3', title: 'product designers, each owning two or three areas', text: 'A summer 2023 intern I had mentored joined the team full-time.' },
-            { value: '24', title: 'launches with design in them, 2024 to 2026', text: 'Across access, lineage, certification, discovery and the agent.' },
-          ],
-        },
       ],
     },
     {
-      id: 'time',
-      eyebrow: 'Where I spent my time',
-      short: 'My time',
-      heading: 'The meetings where a problem gets framed',
+      id: 'running',
+      eyebrow: 'How I ran it',
+      short: 'How I ran it',
+      heading: 'One intake, one tracker, one research base',
       blocks: [
         {
           type: 'p',
           text:
-            'My first change as a manager was where I spent my time: in the meetings where a problem was being framed, before a specification existed, asking questions. Two features the roadmap did not have came out of that, a view of the queries other people run against a table and a person’s saved working set of data. My team designed both.',
-        },
-        {
-          type: 'quotes',
-          items: [
-            { text: 'Your thoroughness in bringing customer conversations, whether it was a month ago or two years ago, always kept us grounded.', who: 'The engineering lead for data understanding, after the offsite', when: 'January 2025' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'intake',
-      eyebrow: 'Focus',
-      short: 'Intake',
-      heading: 'One intake and one tracker',
-      blocks: [
-        {
-          type: 'p',
-          text:
-            'Requests came from nine areas and sixteen product managers, so I set up a single intake path and one tracker of what each designer was on. I pushed back when leadership wanted to spread the access designer across instrumentation as well. When a decision stalled, I got the engineering leads and the product managers into one room.',
+            'Requests came from nine areas and sixteen product managers, so I set up a single intake path and one tracker of what each designer was on, visible to every PM. I spent my own time in the meetings where a problem was being framed, before a specification existed. Technical users rarely sit for repeated interviews, so the designers pooled six months of user visits, eight surveys and eleven mined help channels into one research base that engineers and product managers used directly in pitch decks and requirements.',
         },
         {
           type: 'tension',
           items: [
-            { tension: 'Sixteen PMs each asked their nearest designer.', decision: 'One intake path and one tracker, visible to every PM, with the requirements document linked on each row.' },
-            { tension: 'Leadership wanted the access designer to cover instrumentation as well.', decision: 'No. The designer stayed on access, shipped six launches in a year, and wrote the tracker requirements while the PM was away.' },
-            { tension: 'Certification requirements differed across several production paths.', decision: 'PMs and designers in one room until they agreed, so fourth-level certification launched the same way everywhere.' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'research',
-      eyebrow: 'Evidence',
-      short: 'Research base',
-      heading: 'One research base',
-      blocks: [
-        {
-          type: 'p',
-          text:
-            'Technical users rarely sit for repeated interviews, so I had the designers pool six months of user visits, eight targeted surveys and eleven mined help channels into one repository. Engineers and product managers used it directly in pitch decks and requirements. My manager wrote that it showed in what was added to the roadmap.',
-        },
-        {
-          type: 'quotes',
-          items: [
-            { text: 'The feedback summary is great (Ouch!) and I think ALL the platform PMs need to sit down and read this together.', who: 'A platform product manager, on the research summary', when: '2025' },
+            { tension: 'Sixteen PMs each asked their nearest designer.', decision: 'One intake path and one tracker, with the requirements document linked on each row.' },
+            { tension: 'Leadership wanted the access designer to cover instrumentation as well.', decision: 'No. The designer stayed on access and shipped six launches in a year.' },
           ],
         },
       ],
@@ -179,15 +159,7 @@ export const LEADING_THE_TEAM: ShortPage = {
         {
           type: 'p',
           text:
-            'Coded prototypes in v0 and Figma Make, so a flow can be used before it is specified; research synthesis in NotebookLM; AI-made launch videos in place of recorded walkthroughs. I used each in my own design work first. My manager wrote that he then saw every designer on my team adopt them. Three practices started on the team from there: coded prototypes with developers, AI-made launch videos that engineering copied, and a design sign-off before release.',
-        },
-        {
-          type: 'cards',
-          items: [
-            { value: '90%', title: 'less development time on one redesign', text: 'A designer on my team prototyped it in code with the developers instead of handing over a spec.' },
-            { value: '1 day', title: 'from twenty transcripts to one set of findings, instead of a week', text: 'Synthesis in NotebookLM, checked against the repository.' },
-            { value: '4 rules', title: 'the agent answers by, written as text where it reads them', text: 'For the agent in Cursor and Claude, the specification lives in the repository rather than in a deck.' },
-          ],
+            'Coded prototypes in v0 and Figma Make, research synthesis in NotebookLM, AI-made launch videos in place of recorded walkthroughs: I used each in my own design work first, and my manager wrote that he then saw every designer on the team adopt them. One redesign, prototyped in code with the developers instead of handed over as a spec, took 90% less development time. Twenty transcripts became one set of findings in a day instead of a week.',
         },
       ],
     },
@@ -195,12 +167,12 @@ export const LEADING_THE_TEAM: ShortPage = {
       id: 'shipped',
       eyebrow: 'What the team shipped',
       short: 'Shipped',
-      heading: 'Access, lineage, certification, discovery',
+      heading: '24 launches: access, lineage, certification, discovery',
       blocks: [
         {
           type: 'p',
           text:
-            'The team built on the data product model the catalog already ran on: access requested from the table a person is looking at, lineage for incident work, certification to the clean-data standard’s fourth level, and the search and collections work the agent now answers from.',
+            'The team built on the data product model the catalog already ran on. Two of the launches were not on the roadmap until I argued for them from the research: a view of the queries other people run against a table, and Collections, a person’s saved working set of data, which the agent now answers from.',
         },
         {
           type: 'table',
@@ -216,27 +188,14 @@ export const LEADING_THE_TEAM: ShortPage = {
     },
     {
       id: 'people',
-      eyebrow: 'The people',
+      eyebrow: 'The people and the results',
       short: 'People',
       heading: 'Every designer who reported to me was promoted',
       blocks: [
         {
           type: 'p',
           text:
-            'I wrote a six-slide promotion case framework that every designer on the team used. My designers told my manager what they valued: clarity when requirements were unclear, boundaries when work kept changing, and getting the right people into one room to settle a decision. I also hired for the wider design team. We ran a weekly design sync with the tracker on screen, a research readout each time a study closed, and offsites in January 2025 and later that year.',
-        },
-      ],
-    },
-    {
-      id: 'impact',
-      eyebrow: 'Results',
-      short: 'Results',
-      heading: 'Results, with attribution',
-      blocks: [
-        {
-          type: 'p',
-          text:
-            'Monthly users of the platform grew from 2,664 to 6,673 while I managed its design, a result many teams share. The results below are the team’s, with my part named in each.',
+            'I wrote a six-slide promotion case framework that every designer on the team used. My designers told my manager what they valued: clarity when requirements were unclear, boundaries when work kept changing, and the right people in one room to settle a decision. The results below are the team’s, with my part named in each. Monthly users of the platform grew from 2,664 to 6,673 in the same period, a result many teams share.',
         },
         {
           type: 'table',
