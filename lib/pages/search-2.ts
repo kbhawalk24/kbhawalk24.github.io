@@ -407,7 +407,7 @@ export const SEARCH_2: ShortPage = {
   ],
   next: {
     text: 'The rebuilt search gave the catalog results people could judge. The next question was where the search should live: in a chat window, or inside the tools where people already work.',
-    label: 'Building the data discovery agent for Cursor and Claude',
+    label: 'Beyond the chatbot: designing the data discovery agent for Cursor and Claude',
     href: '/work/agentic-discovery',
   },
 }

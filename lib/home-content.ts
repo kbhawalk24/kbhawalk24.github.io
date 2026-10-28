@@ -75,13 +75,13 @@ export const ARCS: Arc[] = [
       {
         slug: 'agentic-discovery',
         org: 'Intuit',
-        title: 'Building the data discovery agent for Cursor and Claude',
+        title: 'Beyond the chatbot: designing the data discovery agent for Cursor and Claude',
         period: '2023–2026',
         roleTag: 'Principal Product Designer → Design Manager',
         role: 'Principal IC → manager',
         track: 'strategy',
         line:
-          'Why the 2023 chatbot faded, and what the agent does differently: it lives where people work, checks their own collections first, and never shows a query it has not run.',
+          'Replaced a siloed web chat with an agent inside Cursor and Claude, backed by a person’s own Collections and a three-intent response specification, so engineers get a verified answer without leaving their editor.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         cover: {
           src: '/work/agentic-discovery/hero-poster.jpg',

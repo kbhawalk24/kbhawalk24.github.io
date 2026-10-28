@@ -10,6 +10,7 @@ Reference material for the case studies and the Team page. Not site copy as it s
 - **New figures with no source seen yet:** ignore them. Not on any page: Copilot "2.2x on single-table queries", NPS 26 → 31, −41% documentation complaints, ~2,000 curated tables, AI tracking-plan review 2 weeks → under 1 day, "$20M+ to $30M+" booked revenue, "won the org innovation award".
 - **Client names** (AMC Networks, Discovery, the Killing Eve example): allowed inside case studies, never on the landing page.
 - **605 title:** not a promotion; it was a title change. Do not write "promoted from Interaction Designer & Researcher".
+- **Precision within collections, 99%:** confirmed by Kanchi on 28 October 2026 for the agent page ("we can keep precision with collections"); no document in docs/ carries it.
 - **Em dashes:** ignore the kit's punctuation; site copy is rewritten in the site's own style.
 - **`07-site-content.ts`:** not used. It would replace the site's content system and duplicates files 2 to 4 below, so it is not saved here.
 
