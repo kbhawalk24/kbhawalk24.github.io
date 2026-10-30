@@ -101,7 +101,7 @@ export const SIX_O_FIVE: ShortPage = {
       width: 2880,
       height: 3022,
       alt: 'The Impact overview page: a summary table of conversion, lift, reach, impressions and frequency, delivery charts by week and by frequency, and conversion mosaics for exposed, control and unexposed households.',
-      caption: 'Impact after the 2020 redesign: one overview page with delivery and conversion, in place of 32 separate reports. Demo data.',
+      caption: 'Impact after the 2020 redesign: the overview page of the two-page view, with delivery and conversion, in place of 32 separate reports. Demo data.',
     },
   ],
   sections: [
@@ -177,7 +177,7 @@ export const SIX_O_FIVE: ShortPage = {
         {
           type: 'p',
           text:
-            'Indxr lets a network define an audience from hundreds of attributes and see its size and shape, replacing manual program-ranking pulls that took a day to two weeks. Five networks tested the first prototype. Its search, export and sign-in were reused across all three products. More than half of every session went to questions about where the data came from.',
+            'Indxr lets a network define an audience from 200 attributes and see its size and shape, replacing manual program-ranking pulls that took a day to two weeks. Five networks tested the first prototype. Its search, export and sign-in were reused across all three products. Half of every session went to questions about where the data came from.',
         },
         {
           type: 'tension',

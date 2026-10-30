@@ -51,7 +51,7 @@ const REACH = { start: 1886, designed: 2664, manager: 6673 }
 // One sourced line under a product, where there is one (docs/source-kit.md).
 const METRIC: Record<string, string> = {
   'Catalog and search': '10,000 data products searchable',
-  'Plain-language assistant': '500+ people a month, 2023 to 2024',
+  'Data Copilot': '500+ people a month, 2023 to 2024',
   Lineage: '450–500 people a month, Jul 2024',
 }
 

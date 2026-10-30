@@ -49,48 +49,26 @@ export function useActiveSection(ids: string[]) {
 
 export function SectionNav({
   chapters,
-  variant = 'rail',
-  label = 'On this page',
+  label = 'Contents',
   className,
 }: {
   chapters: Chapter[]
-  variant?: 'rail' | 'row'
   label?: string
   className?: string
 }) {
   const active = useActiveSection(chapters.map((c) => c.id))
   if (chapters.length === 0) return null
 
-  if (variant === 'row') {
-    return (
-      <nav aria-label={label} className={cn('w-full max-w-full overflow-x-auto overflow-y-hidden [scrollbar-width:none]', className)} style={{ contain: 'inline-size' }}>
-        <ol className="flex w-max gap-2">
-          {chapters.map((c) => {
-            const isActive = c.id === active
-            return (
-              <li key={c.id}>
-                <a
-                  href={`#${c.id}`}
-                  aria-current={isActive ? 'location' : undefined}
-                  className={cn(
-                    'inline-flex min-h-9 items-center whitespace-nowrap rounded-full px-3.5 py-1.5 font-sans text-sm transition-colors',
-                    isActive ? 'bg-primary font-semibold text-primary-foreground' : 'bg-card-soft text-foreground hover:bg-card',
-                  )}
-                >
-                  {c.title}
-                </a>
-              </li>
-            )
-          })}
-        </ol>
-      </nav>
-    )
-  }
-
+  // One nav in the HTML: a scrolling row of pills below 1024px, a labelled rail
+  // with a left rule from 1024px up. Rendering it once keeps text readers and
+  // screen readers from meeting the contents list twice.
   return (
-    <nav aria-label={label} className={className}>
-      <p className="label-micro text-muted-foreground">{label}</p>
-      <ol className="mt-3 border-l border-foreground/10">
+    <nav
+      aria-label={label}
+      className={cn('w-full max-w-full overflow-x-auto overflow-y-hidden [scrollbar-width:none] lg:overflow-visible', className)}
+    >
+      <p className="label-micro hidden text-muted-foreground lg:block">{label}</p>
+      <ol className="flex w-max gap-2 lg:mt-3 lg:block lg:w-auto lg:border-l lg:border-foreground/10">
         {chapters.map((c) => {
           const isActive = c.id === active
           return (
@@ -99,10 +77,11 @@ export function SectionNav({
                 href={`#${c.id}`}
                 aria-current={isActive ? 'location' : undefined}
                 className={cn(
-                  '-ml-px block border-l-2 py-1.5 pl-4 pr-2 font-sans text-sm leading-snug transition-colors',
+                  'inline-flex min-h-9 items-center whitespace-nowrap rounded-full px-3.5 py-1.5 font-sans text-sm transition-colors',
+                  'lg:-ml-px lg:block lg:min-h-0 lg:whitespace-normal lg:rounded-none lg:border-l-2 lg:bg-transparent lg:py-1.5 lg:pl-4 lg:pr-2 lg:leading-snug lg:hover:bg-transparent',
                   isActive
-                    ? 'border-accent-brand font-semibold text-foreground'
-                    : 'border-transparent text-muted-foreground hover:border-foreground/25 hover:text-foreground',
+                    ? 'bg-primary font-semibold text-primary-foreground lg:border-accent-brand lg:text-foreground'
+                    : 'bg-card-soft text-foreground hover:bg-card lg:border-transparent lg:text-muted-foreground lg:hover:border-foreground/25 lg:hover:text-foreground',
                 )}
               >
                 {c.title}
@@ -115,19 +94,16 @@ export function SectionNav({
   )
 }
 
-/** Two-column page body: the content, with the rail on the right from 1024px up and the row above the content below that. */
+/** Two-column page body: the content, with the contents nav as a row above it below 1024px and as a sticky rail on the right from 1024px up. The nav is rendered once and placed by the grid. */
 export function WithSectionNav({ chapters, children }: { chapters: Chapter[]; children: React.ReactNode }) {
   return (
     <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_11rem] lg:gap-12 xl:gap-16">
-      <div className="min-w-0">
-        <SectionNav chapters={chapters} variant="row" className="mb-8 lg:hidden" />
-        {children}
-      </div>
-      <aside className="hidden lg:block">
-        <div className="sticky top-28 rounded-[14px] bg-card p-5 shadow-soft">
-          <SectionNav chapters={chapters} variant="rail" label="Contents" />
+      <aside className="mb-8 lg:col-start-2 lg:row-start-1 lg:mb-0">
+        <div className="lg:sticky lg:top-28 lg:rounded-[14px] lg:bg-card lg:p-5 lg:shadow-soft">
+          <SectionNav chapters={chapters} />
         </div>
       </aside>
+      <div className="min-w-0 lg:col-start-1 lg:row-start-1">{children}</div>
     </div>
   )
 }

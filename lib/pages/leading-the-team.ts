@@ -188,7 +188,7 @@ export const LEADING_THE_TEAM: ShortPage = {
           rows: [
             ['Access to data · one designer', 'Unified request tracker; stream access; restricted tax data; table and encrypted-column requests; bulk access; owner auto-approval', 'Manual requests 25% faster; streams 2–3 weeks → 3 days, 61% approved automatically; 85% fewer ineligible tax-data denials; decryption 9 → 3 days; 5,000 tables in a week, 200+ hours saved; internal data 24 hours → near-instant', 'Launch posts, Dec 2024 to Sep 2025; FY25 review'],
             ['Lineage for incidents · one designer, a second from 2026', 'List-based dependency summary; column-level lineage with readable impact reports, after six user visits and a one-week, seven-concept sprint', 'Root-cause investigations about 4 hours → minutes; 19 marketing data incidents resolved in one tax season', 'FY26 mid-year review'],
-            ['Certifying clean data · my team with the data design group', 'Guided fourth-level certification across several production paths', 'Clean data under 1% → 80% of the estate; P0 and P1 incidents 17 → 0 in tax year 2025 · shared', 'Launch post, Nov 2025; AWS re:Invent 2025'],
+            ['Certifying clean data · my team with the data design group', 'Guided fourth-level certification across several production paths', 'Most of the estate certified, from almost none (the figure is in the results below); P0 and P1 incidents 17 → 0 in tax year 2025 · shared', 'Launch post, Nov 2025; AWS re:Invent 2025'],
             ['Discovery and the agent · my team', 'Query insights; stream and marketing-attribute search; Collections; the agent’s response patterns; coded prototypes with developers', '99.99% first-result precision on stream and marketing search; 90% less development time on one redesign; the agent’s results are on its own page', 'Launch posts, May 2025 to Mar 2026; FY26 mid-year review'],
           ],
         },
@@ -211,7 +211,7 @@ export const LEADING_THE_TEAM: ShortPage = {
           rows: [
             ['General Executives Day, 2025: Intuit’s founder and the executive team', 'As the sole designer on an agentic AI platform for tax experts, I built the before-and-after story with coded prototypes in v0 and end-to-end storyboards, including the mobile experience for customers, under startup-like ambiguity.', 'The founder’s immediate response was about how to monetise it. My manager cited it as a highlight of the organisation’s year; the director of product management and the director of AI science both named it in their reviews.'],
             ['Leadership review, mid FY25: the state of discovery and Search 2.0', 'A strategy presentation to cross-functional leadership and the design team, during heavy delivery pressure on two platform programmes: the behavioural findings from the follow-me-home research, and Search 2.0 framed as an architectural change rather than a UI refresh.', 'Search 2.0, query insights and Collections all shipped in 2025. The engineering manager’s note on it is below.'],
-            ['Investor Day, August 2023', 'I wrote the design script and user narrative for Data Copilot: natural language to SQL and conversational data exploration, shown on stage by the CTO.', 'The platform’s AI tooling was shown to investors; Data Copilot went on to 500+ monthly users.'],
+            ['Investor Day, August 2023', 'I wrote the design script and user narrative for Data Copilot: natural language to SQL and conversational data exploration, shown on stage by the CTO.', 'The platform’s AI tooling was shown to investors on stage; the clip is on the agent page.'],
           ],
         },
         {
@@ -245,7 +245,7 @@ export const LEADING_THE_TEAM: ShortPage = {
             ['Dec 2024 to Sep 2025', 'Access requests, six launches', 'Streams 2–3 weeks → 3 days; decryption 9 → 3 days', 'The access designer on my team; I kept the designer on access'],
             ['Aug 7, 2025', 'Collections shipped', 'A saved working set of data, now the agent’s context', 'My strategy; designed by my team'],
             ['Tax year 2025', 'Incident investigations with column-level lineage', 'About 4 hours → minutes', 'The lineage designer on my team'],
-            ['Nov 2025', 'Clean data in the estate, with fourth-level certification', 'Under 1% → 80%', 'Platform-wide; my team designed the certification flow'],
+            ['Nov 2025', 'Share of the data estate meeting the clean-data standard, fourth-level certification', 'Under 1% → 80%', 'Platform-wide; my team designed the certification flow'],
             ['FY25', 'Development time on one redesign, prototyped in code', '90% less', 'A designer on my team; the practice I set'],
             ['Jul 2024 to Mar 2026', 'Monthly users of the platform', '2,664 → 6,673', 'Shared'],
           ],

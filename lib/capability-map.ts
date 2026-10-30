@@ -74,7 +74,7 @@ export const STAGES: Stage[] = [
     products: [
       'Catalog and search',
       'Data Map',
-      'Plain-language assistant',
+      'Data Copilot',
       'Lineage',
       'Access requests and control',
       'Collections',

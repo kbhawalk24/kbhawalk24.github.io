@@ -58,7 +58,7 @@ export const ARCS: Arc[] = [
         title: 'Rebuilding search for Intuit’s data catalog',
         period: '2024–2025',
         roleTag: 'Principal Product Designer',
-        role: 'Principal IC',
+        role: 'Principal designer',
         track: 'ic',
         line:
           'Data workers were stitching together six tools to verify one table, because search returned millions of unranked results. After shadowing 20 of them and analysing 1,392 help-channel questions, I redesigned search around physical object types, dynamic facets and strict trust signals.',
@@ -78,7 +78,7 @@ export const ARCS: Arc[] = [
         title: 'Beyond the chatbot: designing the data discovery agent for Cursor and Claude',
         period: '2023–2026',
         roleTag: 'Principal Product Designer → Design Manager',
-        role: 'Principal IC → manager',
+        role: 'Principal designer, then design manager',
         track: 'strategy',
         line:
           'Replaced a siloed web chat with an agent inside Cursor and Claude, backed by a person’s own Collections and a three-intent response specification, so engineers get a verified answer without leaving their editor.',

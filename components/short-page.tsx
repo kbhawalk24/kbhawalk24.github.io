@@ -322,22 +322,34 @@ function BlockView({ block }: { block: Block }) {
                 <img src={item.image.src} width={item.image.width} height={item.image.height} alt={item.image.alt} loading="lazy" decoding="async" className="h-auto max-h-[26rem] w-full rounded-[6px] object-contain" />
               </div>
             )}
-            <div className={cn(item.image && 'flex flex-col gap-5')}>
-              <div>
-                <p className={cn(SMALL, 'font-semibold')}>What the evidence said</p>
-                <p className={cn(BODY, 'mt-2')}>{item.tension}</p>
-              </div>
-              <div className={cn(!item.image && 'md:hidden')}>
-                <p className={cn(SMALL, 'font-semibold text-accent-brand')}>What I decided, and what it cost</p>
-                <p className={cn(BODY, 'mt-2')}>{item.decision}</p>
-              </div>
-            </div>
-            {!item.image && (
-              <div className="hidden md:block">
-                <p className={cn(SMALL, 'font-semibold text-accent-brand')}>What I decided, and what it cost</p>
-                <p className={cn(BODY, 'mt-2')}>{item.decision}</p>
-              </div>
-            )}
+            {/* Evidence and decision are rendered once each. Without an image they are
+                two grid cells, stacked on phones and side by side from md; with an
+                image they stack in the column beside it. */}
+            {(() => {
+              const evidence = (
+                <div>
+                  <p className={cn(SMALL, 'font-semibold')}>What the evidence said</p>
+                  <p className={cn(BODY, 'mt-2')}>{item.tension}</p>
+                </div>
+              )
+              const decision = (
+                <div>
+                  <p className={cn(SMALL, 'font-semibold text-accent-brand')}>What I decided</p>
+                  <p className={cn(BODY, 'mt-2')}>{item.decision}</p>
+                </div>
+              )
+              return item.image ? (
+                <div className="flex flex-col gap-5">
+                  {evidence}
+                  {decision}
+                </div>
+              ) : (
+                <>
+                  {evidence}
+                  {decision}
+                </>
+              )
+            })()}
           </li>
         ))}
       </ol>

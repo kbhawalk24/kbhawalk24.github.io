@@ -54,7 +54,7 @@ export const SEARCH_2: ShortPage = {
   ],
   stats: [
     { value: '81.31% → 89.24%', label: 'First-result precision on Data Map search, Mar 2025; MRR 0.81 → 0.89; P99 latency 50.59 s → 1.93 s' },
-    { value: '32% → 63%', label: 'Searches that ended in a click, Jan 2024 to Jan 2026; time to discover data 14.2 h → 8.9 h' },
+    { value: '32% → 63%', label: 'Searches that ended in a click, Jan 2024 to Jan 2026; time to discover data 14.2 h → 9.4 h, Aug 2024 to Jul 2025' },
     { value: '8 of 8', label: 'Research findings that became launches, FY25 to FY26' },
   ],
   hero: {
@@ -64,7 +64,7 @@ export const SEARCH_2: ShortPage = {
     height: 872,
     tint: TINTS.platform2026,
     alt: 'A screen recording of the shipped search, 2026: a query typed into the Tables tab, results with their owner, last refresh and queries run, and the maturity score opened on the first result.',
-    caption: 'The search as it shipped, recorded May 2026: a tab for each kind of data, facets that change with the query, and five lines of signal on every result. Sped up 1.5 times.',
+    caption: 'The search as it shipped, recorded May 2026: a tab for each kind of data, facets that change with the query, and five lines of signal on every result. The recording plays at 1.5× speed.',
   },
   visuals: [
     {
@@ -135,7 +135,7 @@ export const SEARCH_2: ShortPage = {
           rows: [
             ['Table Search 2.0, Nov 14, 2024, 320,000 tables', 'Keyword and semantic precision', '+12.5% keyword; +58% semantic', 'My design; the search-model team built the ranking. Nov 2024 launch post'],
             ['Data Map Search 2.0, Mar 26, 2025, 10,000 data products and 460,000 attributes', 'First-result precision; MRR; P99 latency; average response', '81.31% → 89.24%; 0.81 → 0.89; 50.59 s → 1.93 s; 15.88 s → 1.24 s', 'My design and specification; carried to launch by a designer on my team; speed by search engineering. Mar 2025 launch post'],
-            ['Search 1.0 sunset and discovery conversion, Jan 2024 to Jan 2026', 'Searches ending in a click; time to discover and access data; monthly users, Mar 2026', '32% (Jan 2024) → 41% (Aug 2024) → 61% (Jul 2025, Search 1.0 switched off) → 63% (Jan 2026); 14.2 h → 9.4 h → 8.9 h; 6,673 monthly users, 3,843 of them searching', 'Platform-wide; the team’s KPI tracker, Amplitude and AWS re:Invent 2025'],
+            ['Search 1.0 sunset and discovery conversion, Jan 2024 to Jan 2026', 'Searches ending in a click; time to discover and access data; monthly users, Mar 2026', '32% (Jan 2024) → 41% (Aug 2024) → 61% (Jul 2025) → 63% (Jan 2026), Search 1.0 switched off Sep 19, 2025; 14.2 h (Aug 2024) → 9.4 h (Jul 2025) → 8.9 h (Jan 2026); 6,673 monthly users, 3,843 of them searching', 'Platform-wide; the team’s KPI tracker, Amplitude and AWS re:Invent 2025'],
             ['Downstream reuse: stream search Jun 15, 2025; marketing-attribute search Aug 12, 2025', 'First-result precision', '99.99% on both', 'Built on the six-tab, four-facet specification; designed by my team; ranking by engineering'],
           ],
           caption: 'Intuit’s public figure for the whole discovery path, including access and exploration, was 20 days in 2023; 14.2 hours is the catalog’s own measure of the search step.',

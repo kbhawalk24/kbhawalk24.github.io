@@ -53,7 +53,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     width: 1600,
     height: 872,
     alt: 'A screen recording of the data discovery platform, May 2026: the home page with three ways in and recently viewed data, then a table page with its columns, owners, tags, usage statistics and table statistics.',
-    caption: 'The platform in May 2026: the home page, then a table with its columns, owners, usage and statistics on one screen. Sped up 1.8 times.',
+    caption: 'The platform in May 2026: the home page, then a table with its columns, owners, usage and statistics on one screen. The recording plays at 1.8× speed.',
   },
   visuals: [
     {
@@ -134,7 +134,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
           type: 'tension',
           items: [
             { tension: 'Keeping the warehouse, schema and table layout and adding filters would have been quicker, and no catalog we evaluated organised by meaning.', decision: 'Rework the home page, browsing, search, results and detail pages around the data product. It took about 20 feedback sessions to land.' },
-            { tension: 'My team’s 2025 research found people still think in physical objects and searched the map less than tables.', decision: 'The 2024 search rebuild kept the map as one tab beside the physical kinds instead of forcing it on everyone.' },
+            { tension: 'Research in 2025, by the team I then managed, found people still think in physical objects and searched the map less than tables.', decision: 'The 2024 search rebuild kept the map as one tab beside the physical kinds instead of forcing it on everyone.' },
           ],
         },
       ],
@@ -233,7 +233,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
         {
           type: 'p',
           text:
-            'By March 2026 the catalog had 6,673 monthly users across 320,000 tables, a platform figure many teams share. The results below are from the years I designed it myself. The time-to-data figures are on the Search 2.0 page and the team’s results on the Management page.',
+            'By March 2026 the catalog had 6,673 monthly users across 320,000 tables, a platform figure many teams share. Each result below names whose work it was. The time-to-data figures are on the Search 2.0 page and the team’s results on the Management page.',
           links: [
             { text: 'the Search 2.0 page', href: '/work/search-2' },
             { text: 'the Management page', href: '/work/leading-the-team' },

@@ -73,7 +73,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     width: 1340,
     height: 994,
     alt: 'A screen recording of the agent in Cursor. Asked for the usage of the top features in the data discovery app, it searches for tables, writes a SQL query, shows it before running, then runs it and a category breakdown in Databricks.',
-    caption: 'The agent inside Cursor, 2026: it finds the right tables, shows the query before it runs, then runs it. Sped up 2.5 times.',
+    caption: 'The agent inside Cursor, 2026: it finds the right tables, shows the query before it runs, then runs it. The recording plays at 2.5× speed.',
   },
   visuals: [
     {
@@ -125,7 +125,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       width: 1600,
       height: 872,
       alt: 'A screen recording of the catalog, May 2026. The home page offers three ways in: a specific asset, a business question, or data for a use case, with a link to open the agent directly. Then a data product page, and a table search with its facets.',
-      caption: 'The web catalog in May 2026: the shareable record and the visual surface, linked from every agent answer. Three ways in on the home page, then a data product and a search. Sped up 1.8 times.',
+      caption: 'The web catalog in May 2026: the shareable record and the visual surface, linked from every agent answer. Three ways in on the home page, then a data product and a search. The recording plays at 1.8× speed.',
     },
     {
       id: 'agent-immersive',
@@ -228,10 +228,10 @@ export const AGENTIC_DISCOVERY: ShortPage = {
         {
           type: 'tension',
           items: [
-            { tension: 'The agent interrogated people first: a four-part, 13-field context template (role, experience, org, product, domain, PRD, KPIs, constraints) before it called a single tool.', decision: 'No gate. The agent runs the catalog tools on the first prompt and offers the template only as a fallback when the first five tables do not match.' },
+            { tension: 'The agent interrogated people first: a context template asking for role, experience, org, product, domain, PRD, KPIs and constraints before it called a single tool.', decision: 'No gate. The agent runs the catalog tools on the first prompt and offers the template only as a fallback when the first five tables do not match.' },
             { tension: 'Answers were a wall of markdown: key columns, endorsements, storage formats and the model’s reasoning, with the clarifying question buried at the bottom, so people did not realise the agent was waiting.', decision: 'Progressive disclosure. Reasoning collapsed by default, secondary metadata only on request, the question last and visible.' },
             { tension: 'The agent called search in loops, and showed sample SQL that failed in Databricks.', decision: 'Stop once the tool payloads return. Put queries at the end. Never show SQL that has not been verified against Databricks.' },
-            { tension: 'Raw backend facets leaked into the chat: field names and status codes nobody outside engineering would recognise.', decision: 'Two vocabularies. The agent talks in eleven plain filter names (clean data, production, maturity, recent usage, intended use, lifecycle stage, data tier) and translates them into facet payloads underneath, confirming with the person before applying any filter.' },
+            { tension: 'Raw backend facets leaked into the chat: field names and status codes nobody outside engineering would recognise.', decision: 'Two vocabularies. The agent talks in plain filter names (clean data, production, maturity, recent usage, intended use, lifecycle stage, data tier) and translates them into facet payloads underneath, confirming with the person before applying any filter.' },
           ],
         },
       ],
