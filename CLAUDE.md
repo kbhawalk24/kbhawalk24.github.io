@@ -20,7 +20,7 @@ Dashboard: https://cloud.umami.is (Kanchi's account).
 
 - Colleagues are credited by role, never by name. No names, emails, avatars or faces in screenshots; blur them.
 - Client names appear in case studies only, never on the landing page.
-- Figures only when sourced; the sources are in `docs/`. Keep figures consistent across pages.
+- Figures only when sourced; the sources are in `docs/` and in `private/` (gitignored: the repo is public, and `private/source-kit.md` holds review quotes and the job-search files). Keep figures consistent across pages.
 - The nine Intuit product areas are always listed in full: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion. Never summarised as a range.
 - "Every designer who reported to me was promoted" stays as that sentence, never a count.
 - No em-dashes anywhere in site copy. Plain, factual headings.

@@ -7,7 +7,7 @@ import { TINTS } from '@/lib/tint'
 // specification, the guardrails (links and access), the surfaces, the
 // three chat modes, and the results. Each section is one paragraph, one
 // visual and at most one supporting block. Figures and sources are in
-// docs/FINDING-DATA-NARRATIVE.md and docs/source-kit.md; the 99% figure
+// docs/FINDING-DATA-NARRATIVE.md and private/source-kit.md (not in the repo); the 99% figure
 // for precision within collections was confirmed by Kanchi on 28 Oct 2026.
 
 export const AGENTIC_DISCOVERY: ShortPage = {

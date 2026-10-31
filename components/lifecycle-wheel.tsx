@@ -48,7 +48,7 @@ const EMPTY = 'var(--stripe-a)'
 // here: it is for the whole data design group and lives in the stat card.
 const REACH = { start: 1886, designed: 2664, manager: 6673 }
 
-// One sourced line under a product, where there is one (docs/source-kit.md).
+// One sourced line under a product, where there is one (private/source-kit.md, not in the repo).
 const METRIC: Record<string, string> = {
   'Catalog and search': '10,000 data products searchable',
   'Data Copilot': '500+ people a month, 2023 to 2024',

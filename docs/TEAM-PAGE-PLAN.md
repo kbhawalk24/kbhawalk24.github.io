@@ -27,7 +27,7 @@ Search 2.0 split out of Finding data on 24 October: it is the IC craft story, th
 - Kanchi's list of rituals and documents for section 4.
 - Screenshots: from ~/Documents/Work/Intuit (2021-2026)/Media/Screenshots; crop browser chrome, blur names; three crops done in the session scratchpad (agent answer, Amplitude click depth, research repository).
 
-## Decisions of 23 October 2026 (see docs/source-kit.md)
+## Decisions of 23 October 2026 (see private/source-kit.md, kept out of the public repo)
 - Every direct report was promoted.
 - No Limits / influence passage anywhere.
 - Headcount is allowed now, to show how many people the work supported.
