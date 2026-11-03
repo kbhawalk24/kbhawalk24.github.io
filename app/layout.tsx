@@ -23,9 +23,9 @@ const plexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Kanchi Bhawalkar, Product Design Leader',
+  title: 'Kanchi Bhawalkar, product designer for data platforms and AI agents',
   description:
-    'Product Design Manager and Principal Designer for data and AI tools. Founding designer of Intuit’s data platform, then the manager of its design team at one designer for every 85 engineers. Five case studies with exact, sourced figures.',
+    'I design data platforms and AI agents engineers trust. Founding designer of Intuit’s data catalog and first designer at 605, then design manager for the platform’s nine product areas. Five case studies with exact, sourced figures.',
 
 }
 

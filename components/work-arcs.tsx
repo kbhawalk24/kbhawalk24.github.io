@@ -158,7 +158,7 @@ function Card({ card }: { card: WorkCard }) {
 function ArcSection({ arc, index }: { arc: Arc; index: number }) {
   return (
     <div className={index === 0 ? undefined : 'mt-16 md:mt-24'}>
-      <Reveal className="mb-12">
+      <Reveal className="mb-6">
         <h3 className="font-heading text-2xl font-semibold tracking-tight md:text-3xl">{arc.heading}</h3>
         {arc.thesis && <p className="mt-2 text-pretty font-sans text-base leading-relaxed text-muted-foreground">{arc.thesis}</p>}
       </Reveal>
@@ -176,8 +176,8 @@ function ArcSection({ arc, index }: { arc: Arc; index: number }) {
 export function WorkArcs() {
   return (
     <section id="work" className="relative z-10 scroll-mt-28">
-      <div className="mx-auto max-w-6xl px-6 pt-16 md:px-10 md:pt-24 lg:px-14">
-        <Reveal className="mb-10 md:mb-12">
+      <div className="mx-auto max-w-6xl px-6 pt-10 md:px-10 md:pt-12 lg:px-14">
+        <Reveal className="mb-6 md:mb-8">
           <h2 className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">
             Selected work
             <HeadingDot />
