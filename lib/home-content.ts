@@ -128,6 +128,35 @@ export const ARCS: Arc[] = [
     ],
   },
   {
+    id: 'team',
+    heading: 'Leading the design team',
+    period: '2024–2026',
+    cards: [
+      {
+        slug: 'leading-the-team',
+        org: 'Intuit',
+        title: 'Leading the designers behind Intuit’s enterprise data platform',
+        period: '2024–2026',
+        roleTag: 'Design Manager',
+        role: 'Design manager',
+        track: 'management',
+        line:
+          'How I built one research repository in Marvin, one intake tracker and an AI prototyping culture across nine product areas, managing at one designer to 85 engineers.',
+        visualNote: 'The design project tracker.',
+        cover: {
+          src: '/work/leading-the-team/tracker-2025.jpg',
+          tint: TINTS.platform2026,
+          width: 2000,
+          height: 1087,
+          alt: 'The design project tracker: every design request across nine product areas with its status and designer',
+        },
+        stats: [{ value: '1 : 85', label: 'Designer to engineer ratio I ran design at, across nine product areas' }],
+        status: 'live',
+        href: '/work/leading-the-team',
+      },
+    ],
+  },
+  {
     id: 'early',
     heading: 'Before Intuit',
     period: '2017–2021',
@@ -157,66 +186,19 @@ export const ARCS: Arc[] = [
       },
     ],
   },
-  {
-    id: 'team',
-    heading: 'Leading the design team',
-    period: '2024–2026',
-    cards: [
-      {
-        slug: 'leading-the-team',
-        org: 'Intuit',
-        title: 'Leading the designers behind Intuit’s enterprise data platform',
-        period: '2024–2026',
-        roleTag: 'Design Manager',
-        role: 'Design manager',
-        track: 'management',
-        line:
-          'How I built one research repository in Marvin, one intake tracker and an AI prototyping culture across nine product areas, managing at one designer to 85 engineers.',
-        visualNote: 'The design project tracker.',
-        cover: {
-          src: '/work/leading-the-team/tracker-2025.jpg',
-          tint: TINTS.platform2026,
-          width: 2000,
-          height: 1087,
-          alt: 'The design project tracker: every design request across nine product areas with its status and designer',
-        },
-        stats: [{ value: '1 : 85', label: 'Designer to engineer ratio I ran design at, across nine product areas' }],
-        status: 'live',
-        href: '/work/leading-the-team',
-      },
-    ],
-  },
 ]
 
 
-// The hero's words: the eyebrow with the name, the headline that says what
-// she designs, one sentence of background and scale, two buttons.
+// The hero's words and the Intuit chapter diagram under it.
 
 export const HERO = {
-  eyebrow: 'Hi, I am',
-  name: 'Kanchi Bhawalkar',
-  headline: { lead: 'I design', rest: 'data platforms and AI agents engineers trust' },
-  subtitle: {
-    before: 'Product designer and former backend engineer, twice the first designer, turning ambiguous data systems into tools engineers use every day. Most recently Intuit’s data platform: ',
-    figures: '320,000 tables, 6,673 people a month',
-    after: '.',
-  },
-  buttons: { work: 'See selected work', resume: 'Resume' },
-}
-
-// About, after Selected work: the paragraphs that used to open the site,
-// the experience rows with the actual titles, the skills, the links.
-
-export const ABOUT = {
-  eyebrow: 'About',
-  heading: 'Twice the first designer, once the manager',
   /** The intro: the fields are set in the accent colour. */
   intro: {
     before: 'I’m a product design leader with 12+ years of experience turning complex data infrastructure into tools people trust and use. I started as a backend software engineer, which means I’m happiest untangling messy systems, debating trade-offs with engineers, and designing ',
     fields: 'AI workflows that go deeper than a chat box',
     after: '.',
   },
-  /** One paragraph per employer. */
+  /** The history as one paragraph, one sentence per employer. */
   history: [
     {
       org: 'Intuit',
@@ -231,54 +213,6 @@ export const ABOUT = {
       before: 'Before that, at ',
       after: ', from 2017 to 2021, I designed three 0-to-1 TV analytics products that brought in more than $20M in new revenue.',
     },
-  ],
-  /** The actual titles, and one line of what each role shipped. Figures as on the resume and in private/source-kit.md. */
-  experience: [
-    {
-      org: 'Intuit',
-      title: 'Product Design Manager and principal IC',
-      years: '2024 to 2026',
-      what: 'Three designers across nine product areas and about 550 engineers. Wrote the agent’s answer specification and argued Collections onto the roadmap; the team shipped both.',
-    },
-    {
-      org: 'Intuit',
-      title: 'Principal Product Designer',
-      years: '2024',
-      what: 'Twenty observed sessions across nine business units that set the FY25 roadmap, and the Search 2.0 specification.',
-    },
-    {
-      org: 'Intuit',
-      title: 'Senior Product Designer',
-      years: '2021 to 2024',
-      what: 'Founding designer of the data catalog: the Data Map, lineage in four weeks, Data Copilot as sole design lead.',
-    },
-    {
-      org: '605',
-      title: 'Product Designer, first design hire',
-      years: '2017 to 2021',
-      what: 'Three TV analytics products from first concept to commercial launch, over $20M booked by 2021.',
-    },
-    {
-      org: 'TIBCO Software',
-      title: 'Software Developer',
-      years: '2012 to 2015',
-      what: 'Java back-end developer on an enterprise integration platform.',
-    },
-  ],
-  skills: [
-    'Agentic AI interaction design',
-    'Human-AI trust patterns',
-    'Object models and information architecture',
-    'Data visualization',
-    'Research-led strategy',
-    'Prototyping in code',
-    'Executive communication',
-    'Design leadership',
-  ],
-  links: [
-    { key: 'resume', label: 'Resume', href: '/kanchi-bhawalkar-resume.pdf', external: true },
-    { key: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/kanchib', external: true },
-    { key: 'timeline', label: 'Career timeline', href: '/timeline', external: false },
   ],
 }
 
@@ -295,14 +229,14 @@ export const INTUIT_CHAPTER = {
         title: 'Data discovery',
         icon: 'search',
         tone: 'ic',
-        text: 'Catalog and search, Data Map, Data Copilot, lineage views, the agent in Cursor and Claude.',
+        text: 'Catalog & search, Data Map, plain-language assistant, lineage views, the agent in Cursor & Claude.',
         href: '#search-2',
       },
       {
         title: 'Platform design strategy',
         icon: 'compass',
         tone: 'strategy',
-        text: 'Clean-data standard, fine-grained access model, and agentic AI and tool-server workflows across the platform.',
+        text: 'Clean-data standard, fine-grained access model, and agentic AI & MCP workflows across the platform.',
         href: '#agentic-discovery',
       },
     ],
