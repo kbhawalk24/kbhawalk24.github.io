@@ -211,8 +211,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
         {
           type: 'p',
           text:
-            'From August 2024 the designers I managed carried the platform on, on the same model: access requested from the table on screen, certification to the standard’s fourth level, and column-level lineage. That work is on the Management page. At AWS re:Invent 2025 Intuit showed the catalog on stage, with owners, quality rating, lineage and self-service access on one screen.',
-          links: [{ text: 'the Leadership page', href: '/leadership' }],
+            'From August 2024 the designers I managed carried the platform on, on the same model: access requested from the table on screen, certification to the standard’s fourth level, and column-level lineage. At AWS re:Invent 2025 Intuit showed the catalog on stage, with owners, quality rating, lineage and self-service access on one screen.',
         },
         {
           type: 'video',
@@ -233,11 +232,8 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
         {
           type: 'p',
           text:
-            'By March 2026 the catalog had 6,673 monthly users across 320,000 tables, a platform figure many teams share. Each result below names whose work it was. The time-to-data figures are on the Search 2.0 page and the team’s results on the Management page.',
-          links: [
-            { text: 'the Search 2.0 page', href: '/work/search-2' },
-            { text: 'the Leadership page', href: '/leadership' },
-          ],
+            'By March 2026 the catalog had 6,673 monthly users across 320,000 tables, a platform figure many teams share. Each result below names whose work it was. The time-to-data figures are on the Search 2.0 page.',
+          links: [{ text: 'the Search 2.0 page', href: '/work/search-2' }],
         },
         {
           type: 'table',
