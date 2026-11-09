@@ -1,6 +1,12 @@
-import { Forward } from '@/components/forward'
+import type { Metadata } from 'next'
+import { ShortPageLayout } from '@/components/short-page'
+import { LEADING_THE_TEAM } from '@/lib/pages/leading-the-team'
 
-/** The old page lived here; its content moved. */
+export const metadata: Metadata = {
+  title: `${LEADING_THE_TEAM.title} | Kanchi Bhawalkar`,
+  description: LEADING_THE_TEAM.description,
+}
+
 export default function Page() {
-  return <Forward to="/#work" label="the work on the homepage" />
+  return <ShortPageLayout page={LEADING_THE_TEAM} />
 }

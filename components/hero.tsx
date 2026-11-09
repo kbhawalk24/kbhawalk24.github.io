@@ -56,7 +56,7 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
             className="group inline-flex items-center gap-3 rounded-full bg-primary py-1.5 pl-6 pr-1.5 text-sm font-medium text-primary-foreground shadow-cta transition-[box-shadow,transform] hover:shadow-cta-hover active:scale-[0.98]"
           >
             Work
-            <span aria-hidden="true" className="flex size-8 items-center justify-center rounded-full bg-primary-foreground/15 transition-transform duration-150 group-hover:translate-y-0.5">
+            <span aria-hidden="true" className="flex size-8 items-center justify-center rounded-full bg-primary-foreground/15 transition-transform duration-200 group-hover:translate-y-0.5">
               ↓
             </span>
           </a>

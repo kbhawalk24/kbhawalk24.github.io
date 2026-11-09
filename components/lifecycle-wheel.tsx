@@ -133,7 +133,7 @@ function Artboard({ T, hover, setHover, settled }: { T: number; hover: Hover; se
   const timed = (k: number) => Math.max(windowed(T, RINGS[k].s - 0.8, RINGS[k].e), summary)
   const focus = (k: number) => (hover.ring == null ? timed(k) : hover.ring === k ? 1 : 0.12)
   const stageO = (i: number) => (hover.stage == null || hover.stage === i ? 1 : 0.3)
-  const ease = settled ? 'transition-opacity duration-150 ease-out' : undefined
+  const ease = settled ? 'transition-opacity duration-200 ease-out' : undefined
 
   const designedCount = draw(T, CUES.Designed + 2.0, 2.2)
   const managerCount = draw(T, CUES.Manager + 1.0, 3.5)
@@ -414,7 +414,7 @@ export function LifecycleWheel({ className }: { className?: string }) {
               onClick={toggle}
               aria-pressed={!playing}
               {...event('wheel', { button: ended ? 'play' : playing ? 'pause' : 'play' })}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-full px-3 label-micro text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-full px-3 label-micro text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
             >
               {playing && !ended ? <Pause className="size-3.5" aria-hidden="true" /> : <Play className="size-3.5" aria-hidden="true" />}
               {playing && !ended ? 'Pause' : 'Play'}
@@ -423,7 +423,7 @@ export function LifecycleWheel({ className }: { className?: string }) {
               type="button"
               onClick={replay}
               {...event('wheel', { button: 'replay' })}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-full px-3 label-micro text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-full px-3 label-micro text-muted-foreground transition-colors duration-200 ease-out hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
             >
               <RotateCcw className="size-3.5" aria-hidden="true" />
               Replay

@@ -13,11 +13,11 @@ import { TINTS } from '@/lib/tint'
 export const AGENTIC_DISCOVERY: ShortPage = {
   slug: 'agentic-discovery',
   href: '/work/agentic-discovery',
-  title: 'Beyond the chatbot: designing the data discovery agent for Cursor and Claude',
+  title: 'The evolution of the data agent at Intuit over three years',
   roleTag: 'Principal Product Designer → Design Manager',
   period: '2023–2026',
   description:
-    'A conversational assistant is only as trustworthy as the metadata under it and only as useful as the place it lives. After the 2023 web chatbot hit a ceiling, 726 support questions showed the problem had moved from finding tables to understanding columns and joins, so the catalog moved into Cursor and Claude as an agent with Collections as its memory and a three-intent specification for how it answers.',
+    'Three years in three acts. A text-to-SQL copilot in a browser tab hit a ceiling, and 726 support questions showed the problem had moved from finding tables to understanding columns and joins. So the answers were grounded in a person’s Collections and a three-intent specification, and the catalog moved into Cursor and Claude as an agent.',
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
@@ -141,7 +141,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
   sections: [
     {
       id: 'copilot',
-      eyebrow: '2023 to 2024',
+      eyebrow: 'Act 1 · 2023 to 2024',
       short: 'Data Copilot',
       heading: 'Data Copilot shipped in four months and hit a ceiling',
       blocks: [
@@ -175,7 +175,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'support',
-      eyebrow: '2025',
+      eyebrow: 'Act 1 · 2025',
       short: 'What was left',
       heading: 'Search solved finding; 726 support questions showed what was left',
       blocks: [
@@ -197,7 +197,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'collections',
-      eyebrow: 'Collections',
+      eyebrow: 'Act 2 · Collections',
       short: 'Collections',
       heading: 'Collections: the agent’s first step',
       blocks: [
@@ -216,7 +216,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'audit',
-      eyebrow: 'The first prototype',
+      eyebrow: 'Act 2 · The first prototype',
       short: 'The audit',
       heading: 'Four things wrong with the first prototype, and the fix for each',
       blocks: [
@@ -238,7 +238,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'spec',
-      eyebrow: 'The specification',
+      eyebrow: 'Act 2 · The specification',
       short: 'Three intents',
       heading: 'Three intents, one answer shape for each',
       blocks: [
@@ -260,7 +260,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'guardrails',
-      eyebrow: 'Guardrails',
+      eyebrow: 'Act 2 · Guardrails',
       short: 'Guardrails',
       heading: 'Verified links and six access states',
       blocks: [
@@ -284,7 +284,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'surfaces',
-      eyebrow: 'Surfaces',
+      eyebrow: 'Act 3 · Surfaces',
       short: 'Surfaces',
       heading: 'Cursor and Claude, and the web catalog as the record',
       blocks: [
@@ -304,14 +304,14 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'modes',
-      eyebrow: 'Chat modes',
+      eyebrow: 'Act 3 · Chat modes',
       short: 'Chat modes',
       heading: 'Lookup, side panel, immersive',
       blocks: [
         {
           type: 'p',
           text:
-            'For a consistent experience across surfaces the chat has three modes, each with its own entry point, saved and resumable threads, and the same inline cards for metadata, lineage and SQL previews. The agent’s context has three tiers: local, the tables, streams or topics the person has selected or landed on; attached, the documents and schema files they add; and global, their Collections, which travel with them across the catalog, the developer portal and the editor. The aim is to close the loop from finding data to getting access to querying it without leaving the tool.',
+            'For a consistent experience across surfaces the chat has three modes, each with its own entry point, saved and resumable threads, and the same inline cards for metadata, lineage and SQL previews. The aim is to close the loop from finding data to getting access to querying it without leaving the tool.',
         },
         {
           type: 'cards',
@@ -325,7 +325,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
     {
       id: 'impact',
-      eyebrow: 'Results',
+      eyebrow: 'Act 3 · Results',
       short: 'Results',
       heading: 'Results, with attribution',
       blocks: [
@@ -346,11 +346,33 @@ export const AGENTIC_DISCOVERY: ShortPage = {
         },
       ],
     },
+    {
+      id: 'concept',
+      eyebrow: 'Next · A concept',
+      short: 'Next',
+      heading: 'Next, as a concept: three layers of context',
+      blocks: [
+        {
+          type: 'p',
+          text:
+            'An agent is only as trustworthy as what it is grounded in. My concept for the next step, not shipped, gives the agent three layers of context, each visible to the person, and ends every answer with a receipt of which ones it used.',
+        },
+        {
+          type: 'list',
+          items: [
+            { lead: 'Local.', text: 'The tables, streams or topics the person has selected or landed on, so they can ask about what is on screen without naming it.' },
+            { lead: 'Attached.', text: 'The documents and schema files the person adds to the conversation.' },
+            { lead: 'Global.', text: 'Their Collections, which travel with them across the catalog, the developer portal and the editor.' },
+            { lead: 'The receipt.', text: 'Under each answer, the sources it drew on: the table on screen, the attached files, the collections.' },
+          ],
+        },
+      ],
+    },
   ],
   next: {
-    text: 'The agent was built by a team I managed. Next: how I ran that team, across nine product areas.',
-    label: 'Leading the designers behind Intuit’s enterprise data platform',
-    href: '/work/leading-the-team',
+    text: 'The agent reads a catalog I designed first. Next: how it went from a list of tables to a platform.',
+    label: 'Replacing a commercial catalog with Intuit’s own, 2021 to 2026',
+    href: '/work/catalog-data-map-lineage',
   },
   credits:
     'The 2023 assistant, the Collections strategy, the audit, the three-intent specification, the link rule and the access states are mine. Designers on my team designed Collections and built and benchmarked the agent’s response patterns. Engineers built the MCP servers and everything that shipped.',

@@ -34,7 +34,7 @@ export function PrototypeEmbed({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={poster} alt={alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-          <span className="absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-foreground px-4 py-2.5 font-sans text-sm font-semibold text-background shadow-soft transition-transform duration-150 ease-out group-hover:-translate-y-0.5 group-active:scale-95">
+          <span className="absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-foreground px-4 py-2.5 font-sans text-sm font-semibold text-background shadow-soft transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-active:scale-95">
             <MousePointerClick className="size-4" aria-hidden="true" />
             Try the prototype
           </span>

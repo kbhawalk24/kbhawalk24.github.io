@@ -10,10 +10,10 @@ import {
   type Variants,
 } from 'motion/react'
 
-// Sitewide entrance curve — a soft ease-out. Every Motion transition that
+// Sitewide entrance curve: weighted, decelerating into place. Every Motion transition that
 // needs a custom (non-spring) curve should import this rather than
 // retyping the array, so there is one place to retune the site's feel.
-export const EASE_OUT: [number, number, number, number] = [0.21, 0.47, 0.32, 0.98]
+export const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },

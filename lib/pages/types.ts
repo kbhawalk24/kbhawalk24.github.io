@@ -150,6 +150,8 @@ export interface ShortPage {
   visuals?: PageVisual[]
   sections: PageSection[]
   next: NextHandoff
+  /** 'leadership' drops the case-study framing (read time). Default: a case study. */
+  kind?: 'case' | 'leadership'
   /** Kept in the data as a record; no longer rendered on the page. */
   credits?: string
   sources?: string

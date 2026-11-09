@@ -1,6 +1,6 @@
 import type { ShortPage } from './types'
 
-// Case study: leading design for the data platform, August 2024 to July
+// The Leadership page (not a case study): leading design for the data platform, August 2024 to July
 // 2026. Five sections: the scope (with the lifecycle wheel), how I managed
 // it (five things I put in place), what the team shipped, how the work was
 // presented to executives, the people and the results. Figures are from
@@ -9,7 +9,8 @@ import type { ShortPage } from './types'
 
 export const LEADING_THE_TEAM: ShortPage = {
   slug: 'leading-the-team',
-  href: '/work/leading-the-team',
+  href: '/leadership',
+  kind: 'leadership',
   title: 'Leading the designers behind Intuit’s enterprise data platform',
   roleTag: 'Design Manager',
   period: '2024–2026',
@@ -254,9 +255,9 @@ export const LEADING_THE_TEAM: ShortPage = {
     },
   ],
   next: {
-    text: 'The team’s work sits on a catalog I designed first. Next: how it went from a list of tables to a platform.',
-    label: 'Building the data discovery platform, 2021 to 2026',
-    href: '/work/catalog-data-map-lineage',
+    text: 'The case studies show the work itself, from search to the agent to the catalog.',
+    label: 'Selected work',
+    href: '/#work',
   },
   credits:
     'The strategy, the intake and tracker, the research base, the promotion framework and the practices are mine. The designers on my team designed and shipped the launches named here. Engineers built everything that shipped; the platform organisation defined the clean-data standard.',

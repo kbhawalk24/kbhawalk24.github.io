@@ -37,7 +37,7 @@ export function VideoEmbed({ id, start = 0, title }: { id: string; start?: numbe
           <span className="absolute inset-0 bg-foreground/10 transition-colors group-hover:bg-foreground/20" aria-hidden="true" />
           <span
             aria-hidden="true"
-            className="absolute left-1/2 top-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-cta transition-transform duration-150 ease-out motion-safe:group-hover:scale-105"
+            className="absolute left-1/2 top-1/2 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-cta transition-transform duration-200 ease-out motion-safe:group-hover:scale-105"
           >
             <Play className="ml-0.5 size-6" fill="currentColor" />
           </span>

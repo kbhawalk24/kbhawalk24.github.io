@@ -465,7 +465,7 @@ export function ShortPageLayout({ page }: { page: ShortPage }) {
           <article className="max-w-[68rem]">
             <header>
               <p className="label-micro text-accent-brand">
-                {page.roleTag} <span className="text-muted-foreground">· {page.period} · {readMinutes(page)} min read</span>
+                {page.roleTag} <span className="text-muted-foreground">· {page.period}{page.kind === 'leadership' ? null : ` · ${readMinutes(page)} min read`}</span>
               </p>
               <h1 className="mt-4 font-heading text-4xl font-extrabold tracking-tight md:text-5xl">{page.title}</h1>
               <p className="mt-4 text-pretty font-sans text-lg leading-[1.6] text-muted-foreground">{page.description}</p>

@@ -16,6 +16,8 @@
 }
 
 @theme inline {
+  /* One weighted curve for every transition: decelerates into place. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);

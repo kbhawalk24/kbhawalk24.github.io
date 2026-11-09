@@ -3,15 +3,18 @@
 import { motion } from 'motion/react'
 import { fadeUp, stagger } from '@/components/motion-primitives'
 import { HeadingDot } from '@/components/heading-dot'
+import { event } from '@/lib/analytics'
 
 const LINKS = [
-  { label: 'kbhawalk@gmail.com', href: 'mailto:kbhawalk@gmail.com' },
+  { id: 'email', label: 'kbhawalk@gmail.com', href: 'mailto:kbhawalk@gmail.com' },
   {
+    id: 'linkedin',
     label: 'linkedin.com/in/kanchib',
     href: 'https://linkedin.com/in/kanchib',
     external: true,
   },
-  { label: '+1 (734) 747-3800', href: 'tel:+17347473800' },
+  { id: 'resume', label: 'Resume (PDF)', href: '/kanchi-bhawalkar-resume.pdf', external: true },
+  { id: 'phone', label: '+1 (734) 747-3800', href: 'tel:+17347473800' },
 ]
 
 export function ContactFooter() {
@@ -28,7 +31,7 @@ export function ContactFooter() {
           variants={fadeUp}
           className="font-heading text-4xl font-extrabold tracking-tight md:text-5xl"
         >
-          Building something complex with data? Let&rsquo;s <em>talk</em>.
+          Building developer tools or complex data systems? Let&rsquo;s talk.
           <HeadingDot />
         </motion.h2>
         <motion.div
@@ -42,6 +45,7 @@ export function ContactFooter() {
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noopener noreferrer' : undefined}
               className="group relative -my-2 inline-flex min-h-11 items-center py-2 font-sans text-sm tabular-nums"
+              {...event('contact', { link: link.id })}
             >
               {link.label}
               {link.external && <span className="sr-only"> (opens in a new tab)</span>}

@@ -25,7 +25,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: 'Kanchi Bhawalkar, Product Design Leader',
   description:
-    'Product Design Manager and Principal Designer for data and AI tools. Founding designer of Intuit’s data platform, then the manager of its design team at one designer for every 85 engineers. Five case studies with exact, sourced figures.',
+    'Product Design Manager and Principal Designer for data and AI tools. Founding designer of Intuit’s data platform, then the manager of its design team at one designer for every 85 engineers. Four case studies with exact, sourced figures, and how I led the design team.',
 
 }
 
@@ -45,6 +45,14 @@ export default function RootLayout({
       className={`bg-background ${mulish.variable} ${leagueSpartan.variable} ${plexMono.variable}`}
     >
       <body className="antialiased">
+        {/* For keyboard users: the first Tab stop jumps past the header to
+            the page's <main id="main">. Hidden until focused. */}
+        <a
+          href="#main"
+          className="sr-only rounded-full bg-foreground px-4 py-2 font-sans text-sm font-semibold text-background focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:outline-none focus:ring-2 focus:ring-accent-brand focus:ring-offset-2"
+        >
+          Skip to content
+        </a>
         {/* The wash, locked to the viewport. The ground itself carries a
             faint violet base (--background) and this fixed layer adds the
             bloom on top, so the gradient reads the same on every screen

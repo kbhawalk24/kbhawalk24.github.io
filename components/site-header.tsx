@@ -8,7 +8,7 @@ import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { EASE_OUT } from '@/components/motion-primitives'
 
-/** Floating pill nav, on every page from load: Work / Management / Timeline /
+/** Floating pill nav, on every page from load: Work / Leadership / Timeline /
  *  Resume / LinkedIn / Contact. Section navigation lives on the page
  *  itself (components/section-nav.tsx), not here. */
 export function SiteHeader({ onHome = true }: { onHome?: boolean }) {
@@ -16,7 +16,7 @@ export function SiteHeader({ onHome = true }: { onHome?: boolean }) {
 
   const links: NavItem[] = [
     { label: 'Work', href: `${home}#work` },
-    { label: 'Management', href: '/work/leading-the-team' },
+    { label: 'Leadership', href: '/leadership' },
     { label: 'Timeline', href: '/timeline' },
     { label: 'Resume', href: '/kanchi-bhawalkar-resume.pdf', external: true },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/kanchib', external: true },

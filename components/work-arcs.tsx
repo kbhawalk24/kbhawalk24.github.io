@@ -74,7 +74,7 @@ function ThumbVideo({ cover }: { cover: NonNullable<WorkCard['cover']> }) {
         type="button"
         onClick={toggle}
         aria-label={playing ? 'Pause the preview' : 'Play the preview'}
-        className="pointer-events-auto absolute bottom-2.5 right-2.5 inline-flex size-9 items-center justify-center rounded-full bg-foreground/75 text-background shadow-soft transition-[background-color,transform] duration-150 ease-out hover:bg-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brand focus-visible:ring-offset-2"
+        className="pointer-events-auto absolute bottom-2.5 right-2.5 inline-flex size-9 items-center justify-center rounded-full bg-foreground/75 text-background shadow-soft transition-[background-color,transform] duration-200 ease-out hover:bg-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brand focus-visible:ring-offset-2"
       >
         {playing ? <Pause className="size-3.5" aria-hidden="true" /> : <Play className="size-3.5 translate-x-px" aria-hidden="true" />}
       </button>

@@ -76,7 +76,7 @@ export function HeroVideo({ hero, className }: { hero: PageHero; className?: str
           type="button"
           onClick={toggle}
           aria-label={playing ? 'Pause the prototype video' : 'Play the prototype video'}
-          className="absolute bottom-3 right-3 inline-flex size-10 items-center justify-center rounded-full bg-foreground/80 text-background shadow-soft transition-[background-color,transform] duration-150 ease-out hover:bg-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brand focus-visible:ring-offset-2"
+          className="absolute bottom-3 right-3 inline-flex size-10 items-center justify-center rounded-full bg-foreground/80 text-background shadow-soft transition-[background-color,transform] duration-200 ease-out hover:bg-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brand focus-visible:ring-offset-2"
         >
           {playing ? <Pause className="size-4" aria-hidden="true" /> : <Play className="size-4 translate-x-px" aria-hidden="true" />}
         </button>

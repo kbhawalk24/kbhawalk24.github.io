@@ -214,7 +214,7 @@ export const SIX_O_FIVE: ShortPage = {
     },
   ],
   next: {
-    text: 'That is the five case studies. The homepage has them side by side.',
+    text: 'That is the four case studies. The homepage has them side by side.',
     label: 'All the work',
     href: '/#work',
   },

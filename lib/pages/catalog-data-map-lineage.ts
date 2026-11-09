@@ -8,7 +8,7 @@ import { TINTS } from '@/lib/tint'
 export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
   slug: 'catalog-data-map-lineage',
   href: '/work/catalog-data-map-lineage',
-  title: 'Building the data discovery platform, 2021 to 2026',
+  title: 'Replacing a commercial catalog with Intuit’s own, 2021 to 2026',
   roleTag: 'Founding Product Designer → Principal → Design Manager',
   period: '2021–2026',
   description:
@@ -212,7 +212,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
           type: 'p',
           text:
             'From August 2024 the designers I managed carried the platform on, on the same model: access requested from the table on screen, certification to the standard’s fourth level, and column-level lineage. That work is on the Management page. At AWS re:Invent 2025 Intuit showed the catalog on stage, with owners, quality rating, lineage and self-service access on one screen.',
-          links: [{ text: 'the Management page', href: '/work/leading-the-team' }],
+          links: [{ text: 'the Leadership page', href: '/leadership' }],
         },
         {
           type: 'video',
@@ -236,7 +236,7 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
             'By March 2026 the catalog had 6,673 monthly users across 320,000 tables, a platform figure many teams share. Each result below names whose work it was. The time-to-data figures are on the Search 2.0 page and the team’s results on the Management page.',
           links: [
             { text: 'the Search 2.0 page', href: '/work/search-2' },
-            { text: 'the Management page', href: '/work/leading-the-team' },
+            { text: 'the Leadership page', href: '/leadership' },
           ],
         },
         {

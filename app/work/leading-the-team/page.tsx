@@ -1,12 +1,6 @@
-import type { Metadata } from 'next'
-import { ShortPageLayout } from '@/components/short-page'
-import { LEADING_THE_TEAM } from '@/lib/pages/leading-the-team'
+import { Forward } from '@/components/forward'
 
-export const metadata: Metadata = {
-  title: `${LEADING_THE_TEAM.title} | Kanchi Bhawalkar`,
-  description: LEADING_THE_TEAM.description,
-}
-
+/** The leadership page moved to /leadership; old links forward there. */
 export default function Page() {
-  return <ShortPageLayout page={LEADING_THE_TEAM} />
+  return <Forward to="/leadership" label="the Leadership page" />
 }

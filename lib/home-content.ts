@@ -61,27 +61,27 @@ export const ARCS: Arc[] = [
         role: 'Principal designer',
         track: 'ic',
         line:
-          'Data workers were stitching together six tools to verify one table, because search returned millions of unranked results. After shadowing 20 of them and analysing 1,392 help-channel questions, I redesigned search around physical object types, dynamic facets and strict trust signals.',
+          'Data workers were stitching together six tools to verify one table, because search returned millions of unranked results. After shadowing 20 of them and analysing 1,392 questions from the help channel, I redesigned search around physical object types, dynamic facets and strict trust signals.',
         visualNote: 'The Search 2.0 design for table results.',
         cover: {
           src: '/work/search-2/tables-tab-design.jpg',
           tint: TINTS.search2design,
           alt: 'The Search 2.0 design for table results, with tabs per object type, facets on the left and metadata on every result',
         },
-        stats: [{ value: '81.31% → 89.24%', label: 'First-result precision; P99 latency 50.59 s → 1.93 s; discovery time 14.2 h → 9.4 h' }],
+        stats: [{ value: '81.31% → 89.24%', label: 'Precision of the first result; P99 latency 50.59 s → 1.93 s; discovery time 14.2 h → 9.4 h' }],
         status: 'live',
         href: '/work/search-2',
       },
       {
         slug: 'agentic-discovery',
         org: 'Intuit',
-        title: 'Beyond the chatbot: designing the data discovery agent for Cursor and Claude',
+        title: 'The evolution of the data agent at Intuit over three years',
         period: '2023–2026',
         roleTag: 'Principal Product Designer → Design Manager',
         role: 'Principal designer, then design manager',
         track: 'strategy',
         line:
-          'Replaced a siloed web chat with an agent inside Cursor and Claude, backed by a person’s own Collections and a three-intent response specification, so engineers get a verified answer without leaving their editor.',
+          'From a copilot in a browser tab that turned questions into SQL, to an agent inside Cursor and Claude that reads a person’s Collections first and shows its query before it runs.',
         visualNote: 'The agent answering a multi-table query inside Cursor.',
         cover: {
           src: '/work/agentic-discovery/hero-poster.jpg',
@@ -105,13 +105,13 @@ export const ARCS: Arc[] = [
       {
         slug: 'catalog-data-map-lineage',
         org: 'Intuit',
-        title: 'Building the data discovery platform, 2021 to 2026',
+        title: 'Replacing a commercial catalog with Intuit’s own, 2021 to 2026',
         period: '2021–2026',
         roleTag: 'Founding Product Designer → Principal → Design Manager',
         role: 'Founding designer',
         track: 'ic',
         line:
-          'Five years from a list of table names to the platform Intuit showed on stage at AWS re:Invent: signals to judge a table, the data product model, lineage in four weeks, self-service onboarding.',
+          'Five years from a list of table names to the platform Intuit showed on stage at AWS re:Invent: signals to judge a table, the data product model, lineage in four weeks, onboarding teams run themselves.',
         visualNote: 'A data product page in the 2026 platform.',
         cover: {
           src: '/work/catalog-data-map-lineage/hero-poster.jpg',
@@ -124,35 +124,6 @@ export const ARCS: Arc[] = [
         stats: [{ value: '1,886 → 6,673', label: 'People using the platform each month, Jul 2023 to Mar 2026, across 320,000 tables' }],
         status: 'live',
         href: '/work/catalog-data-map-lineage',
-      },
-    ],
-  },
-  {
-    id: 'team',
-    heading: 'Leading the design team',
-    period: '2024–2026',
-    cards: [
-      {
-        slug: 'leading-the-team',
-        org: 'Intuit',
-        title: 'Leading the designers behind Intuit’s enterprise data platform',
-        period: '2024–2026',
-        roleTag: 'Design Manager',
-        role: 'Design manager',
-        track: 'management',
-        line:
-          'How I built one research repository in Marvin, one intake tracker and an AI prototyping culture across nine product areas, managing at one designer to 85 engineers.',
-        visualNote: 'The design project tracker.',
-        cover: {
-          src: '/work/leading-the-team/tracker-2025.jpg',
-          tint: TINTS.platform2026,
-          width: 2000,
-          height: 1087,
-          alt: 'The design project tracker: every design request across nine product areas with its status and designer',
-        },
-        stats: [{ value: '1 : 85', label: 'Designer to engineer ratio I ran design at, across nine product areas' }],
-        status: 'live',
-        href: '/work/leading-the-team',
       },
     ],
   },
@@ -189,14 +160,27 @@ export const ARCS: Arc[] = [
 ]
 
 
+// Leadership: its own section after Selected work, not a case-study card.
+// The link goes to the Leadership page.
+
+export const LEADERSHIP = {
+  heading: 'Leadership',
+  text: 'From 2024 to 2026 I managed the designers behind Intuit’s enterprise data platform while staying inside the technical work: one research repository in Marvin, one intake tracker, and every designer who reported to me was promoted.',
+  stats: [
+    { value: '1 : 85', label: 'Designers to engineers across the data design group' },
+    { value: '2,664 → 6,673', label: 'Monthly users of the platform, Jul 2024 to Mar 2026 · shared' },
+  ],
+  link: { label: 'How I led the team', href: '/leadership' },
+} as const
+
 // The hero's words and the Intuit chapter diagram under it.
 
 export const HERO = {
   /** The intro: the fields are set in the accent colour. */
   intro: {
-    before: 'I’m a product design leader with 12+ years of experience turning complex data infrastructure into tools people trust and use. I started as a backend software engineer, which means I’m happiest untangling messy systems, debating trade-offs with engineers, and designing ',
-    fields: 'AI workflows that go deeper than a chat box',
-    after: '.',
+    before: 'I’m a product design leader with 12+ years of experience shaping ',
+    fields: 'developer platforms, agentic AI and enterprise data systems',
+    after: '. I started as a backend software engineer, so I take platform work from the API up to the interface people use, and work with engineers as a technical peer.',
   },
   /** The history as one paragraph, one sentence per employer. */
   history: [
@@ -211,7 +195,7 @@ export const HERO = {
     {
       org: '605',
       before: 'Before that, at ',
-      after: ', from 2017 to 2021, I designed three 0-to-1 TV analytics products that brought in more than $20M in new revenue.',
+      after: ', from 2017 to 2021, I designed three TV analytics products from scratch.',
     },
   ],
 }
