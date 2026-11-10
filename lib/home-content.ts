@@ -168,7 +168,7 @@ export const LEADERSHIP = {
   text: 'From 2024 to 2026 I managed the designers behind Intuit’s enterprise data platform while staying inside the technical work: one research repository in Marvin, one intake tracker, and every designer who reported to me was promoted.',
   stats: [
     { value: '1 : 85', label: 'Designers to engineers across the data design group' },
-    { value: '2,664 → 6,673', label: 'Monthly users of the platform, Jul 2024 to Mar 2026 · shared' },
+    { value: '24', label: 'Launches the team shipped, 2024 to 2026: access, lineage, certification, discovery' },
   ],
   link: { label: 'How I led the team', href: '/leadership' },
 } as const
@@ -180,22 +180,19 @@ export const HERO = {
   intro: {
     before: 'I’m a product design leader with 12+ years of experience shaping ',
     fields: 'developer platforms, agentic AI and enterprise data systems',
-    after: '. I started as a backend software engineer, so I take platform work from the API up to the interface people use, and work with engineers as a technical peer.',
+    after: '.',
   },
   /** The history as one paragraph, one sentence per employer. */
   history: [
     {
       org: 'Intuit',
-      before: 'Most recently at ',
-      after: ', from 2021 to 2026, my work came in three parts:',
-      /** The three phrases set in the accent colour match the three groups under Selected work. */
-      pills: [{ label: 'data discovery' }, { label: 'the data platform' }, { label: 'leading the design team' }],
-      tail: '. The platform had nine product areas and I designed, or directed the design of, every one: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion.',
+      before: 'My most recent role was at ',
+      after: ', where I spent five years, from 2021 to 2026, building out the data platform and later managing its design team. I started as the lead designer on the data catalog, working as an individual contributor with most of my focus on data search. Then I moved on to Data Copilot and the data agent. The platform had nine product areas and I designed, or directed the design of, every one: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion.',
     },
     {
       org: '605',
       before: 'Before that, at ',
-      after: ', from 2017 to 2021, I designed three TV analytics products from scratch.',
+      after: ', from 2017 to 2021, I designed three B2B SaaS analytics products for TV networks from scratch. Pitches that used the new designs brought $2M in additional booked revenue. Earlier still, I started my career as a backend software engineer.',
     },
   ],
 }

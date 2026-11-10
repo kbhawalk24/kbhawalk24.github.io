@@ -35,15 +35,6 @@ function About({ ctaRef }: { ctaRef: React.RefObject<HTMLDivElement | null> }) {
             {h.before}
             <span translate="no" className="font-semibold">{h.org}</span>
             {h.after}
-            {'pills' in h &&
-              h.pills?.map((pl, i, all) => (
-                <span key={pl.label}>
-                  {' '}
-                  <span className="font-semibold text-accent-brand">{pl.label}</span>
-                  {i < all.length - 2 ? ',' : i === all.length - 2 ? ' and' : ''}
-                </span>
-              ))}
-            {'tail' in h && h.tail}
           </p>
         ))}
 
