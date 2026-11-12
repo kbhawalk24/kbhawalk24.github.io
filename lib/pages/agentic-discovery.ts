@@ -177,7 +177,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
       id: 'support',
       eyebrow: 'Act 1 · 2025',
       short: 'What was left',
-      heading: 'Search solved finding; 726 support questions showed what was left',
+      heading: 'After Search 2.0, 68.2% of 726 support questions were about what data means, not where it is',
       blocks: [
         {
           type: 'p',
@@ -355,7 +355,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
         {
           type: 'p',
           text:
-            'An agent is only as trustworthy as what it is grounded in. My concept for the next step, not shipped, gives the agent three layers of context, each visible to the person, and ends every answer with a receipt of which ones it used.',
+            'My concept for the next step, not shipped, gives the agent three layers of context, each visible to the person, and ends every answer with a receipt of which ones it used.',
         },
         {
           type: 'list',
@@ -370,7 +370,7 @@ export const AGENTIC_DISCOVERY: ShortPage = {
     },
   ],
   next: {
-    text: 'The agent reads a catalog I designed first. Next: how it went from a list of tables to a platform.',
+    text: 'The agent reads from a catalog I designed before it. Next: how it went from a list of tables to a platform.',
     label: 'Replacing a commercial catalog with Intuit’s own, 2021 to 2026',
     href: '/work/catalog-data-map-lineage',
   },

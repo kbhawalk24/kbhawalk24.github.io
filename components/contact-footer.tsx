@@ -2,20 +2,16 @@
 
 import { motion } from 'motion/react'
 import { fadeUp, stagger } from '@/components/motion-primitives'
-import { HeadingDot } from '@/components/heading-dot'
 import { event } from '@/lib/analytics'
 
 const LINKS = [
   { id: 'email', label: 'kbhawalk@gmail.com', href: 'mailto:kbhawalk@gmail.com' },
-  {
-    id: 'linkedin',
-    label: 'linkedin.com/in/kanchib',
-    href: 'https://linkedin.com/in/kanchib',
-    external: true,
-  },
-  { id: 'resume', label: 'Resume (PDF)', href: '/kanchi-bhawalkar-resume.pdf', external: true },
-  { id: 'phone', label: '+1 (734) 747-3800', href: 'tel:+17347473800' },
+  { id: 'resume', label: 'Resume', href: '/kanchi-bhawalkar-resume.pdf', external: true },
+  { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/kanchib', external: true },
 ]
+
+const PILL =
+  'inline-flex min-h-11 items-center gap-2 rounded-full px-5 font-sans text-sm font-semibold tabular-nums transition-[background-color,box-shadow]'
 
 export function ContactFooter() {
   return (
@@ -25,50 +21,37 @@ export function ContactFooter() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}
-        className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28 lg:px-14"
+        className="mx-auto max-w-6xl px-6 pb-24 pt-20 md:px-10 lg:px-14"
       >
         <motion.h2
           variants={fadeUp}
-          className="font-heading text-4xl font-extrabold tracking-tight md:text-5xl"
+          className="font-heading text-[clamp(2rem,4.4vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.025em]"
         >
           Building developer tools or complex data systems? Let&rsquo;s talk.
-          <HeadingDot />
         </motion.h2>
-        <motion.div
-          variants={fadeUp}
-          className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3"
-        >
-          {LINKS.map((link) => (
+        <motion.p variants={fadeUp} className="mt-5 font-sans text-base text-muted-foreground">
+          Open to principal or staff product design roles and design manager roles in the San Francisco Bay Area.
+        </motion.p>
+        <motion.div variants={fadeUp} className="mt-6 flex flex-wrap items-center gap-2.5">
+          {LINKS.map((link, i) => (
             <a
               key={link.href}
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noopener noreferrer' : undefined}
-              className="group relative -my-2 inline-flex min-h-11 items-center py-2 font-sans text-sm tabular-nums"
+              className={
+                i === 0
+                  ? `${PILL} bg-primary text-primary-foreground shadow-cta hover:shadow-cta-hover`
+                  : `${PILL} bg-card text-foreground ring-1 ring-border hover:bg-secondary hover:ring-foreground/25`
+              }
               {...event('contact', { link: link.id })}
             >
               {link.label}
+              {link.external && <span aria-hidden="true">↗</span>}
               {link.external && <span className="sr-only"> (opens in a new tab)</span>}
-              <span
-                aria-hidden="true"
-                className="absolute bottom-1.5 left-0 h-px w-full origin-left scale-x-100 bg-foreground transition-transform duration-300 group-hover:scale-x-0"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute bottom-1.5 left-0 h-px w-full origin-right scale-x-0 bg-muted-foreground transition-transform delay-100 duration-300 group-hover:scale-x-100"
-              />
             </a>
           ))}
         </motion.div>
-        <motion.p variants={fadeUp} className="mt-8 max-w-[52ch] font-sans text-sm text-muted-foreground">
-          Open to Staff and founding product design roles, and design leadership roles.
-        </motion.p>
-        <motion.p
-          variants={fadeUp}
-          className="mt-10 font-sans text-xs text-muted-foreground"
-        >
-          <span translate="no">Kanchi Bhawalkar</span> · San Francisco Bay Area
-        </motion.p>
       </motion.div>
     </footer>
   )

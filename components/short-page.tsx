@@ -601,9 +601,9 @@ const FACT_ICONS: Record<string, React.ComponentType<{ className?: string; style
  *  each with a tinted icon and its label on top and short facts stacked
  *  beneath, the date or count of each in muted type on its own line.
  *  Hairline dividers between columns; two columns on tablets, one on phones. */
-function Facts({ facts, tint }: { facts: PageFact[]; tint: string }) {
+export function Facts({ facts, tint, className = 'mt-12' }: { facts: PageFact[]; tint: string; className?: string }) {
   return (
-    <dl className={cn(CARD, 'mt-12 grid overflow-hidden p-0 sm:grid-cols-2 lg:grid-cols-4')}>
+    <dl className={cn(CARD, 'grid overflow-hidden p-0 sm:grid-cols-2 lg:grid-cols-4', className)}>
       {facts.map((f, i) => {
         const Icon = FACT_ICONS[f.label]
         return (

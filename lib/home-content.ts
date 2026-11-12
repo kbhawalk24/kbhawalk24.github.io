@@ -58,7 +58,7 @@ export const ARCS: Arc[] = [
         title: 'Rebuilding search for Intuit’s data catalog',
         period: '2024–2025',
         roleTag: 'Principal Product Designer',
-        role: 'Principal designer',
+        role: 'Principal Product Designer',
         track: 'ic',
         line:
           'Data workers were stitching together six tools to verify one table, because search returned millions of unranked results. After shadowing 20 of them and analysing 1,392 questions from the help channel, I redesigned search around physical object types, dynamic facets and strict trust signals.',
@@ -105,13 +105,13 @@ export const ARCS: Arc[] = [
       {
         slug: 'catalog-data-map-lineage',
         org: 'Intuit',
-        title: 'Replacing a commercial catalog with Intuit’s own, 2021 to 2026',
-        period: '2021–2026',
+        title: 'Founding designer of Intuit’s data catalog',
+        period: '2021–2024',
         roleTag: 'Founding Product Designer → Principal → Design Manager',
-        role: 'Founding designer',
+        role: 'Senior → Principal Product Designer',
         track: 'ic',
         line:
-          'Five years from a list of table names to the platform Intuit showed on stage at AWS re:Invent: signals to judge a table, the data product model, lineage in four weeks, onboarding teams run themselves.',
+          'From a list of tables to the place people judge data, trace it and get it.',
         visualNote: 'A data product page in the 2026 platform.',
         cover: {
           src: '/work/catalog-data-map-lineage/hero-poster.jpg',
@@ -121,7 +121,7 @@ export const ARCS: Arc[] = [
           height: 872,
           alt: 'The data discovery platform: the home page, then a table page with its columns, owners and statistics',
         },
-        stats: [{ value: '1,886 → 6,673', label: 'People using the platform each month, Jul 2023 to Mar 2026, across 320,000 tables' }],
+        stats: [{ value: '1,886 → 6,673', label: 'Monthly users, Jul 2023 to Mar 2026.' }],
         status: 'live',
         href: '/work/catalog-data-map-lineage',
       },
@@ -135,13 +135,13 @@ export const ARCS: Arc[] = [
       {
         slug: '605-tv-analytics',
         org: '605',
-        title: 'Designing three TV analytics products at 605',
+        title: '605: three analytics products for TV advertising',
         period: '2017–2021',
         roleTag: 'First Product Designer',
-        role: 'First designer',
+        role: 'Lead designer, the company’s first',
         track: 'ic',
         line:
-          'Three analytics products from first concept to launch, and the rule that made them work: design to the common case, not the limit.',
+          'Multi-audience reports, delivered in two months under a render-time constraint.',
         visualNote: 'The 605 Platform main dashboard.',
         cover: {
           src: '/work/605-tv-analytics/hero-poster.jpg',
@@ -151,7 +151,7 @@ export const ARCS: Arc[] = [
           height: 820,
           alt: 'The 605 Platform main dashboard: networks by rating, household reach and time-shifted viewing',
         },
-        stats: [{ value: '$2M', label: 'Additional booked revenue from pitches on the new designs' }],
+        stats: [{ value: '$2M booked', label: 'Additional revenue from pitches on the new designs.' }],
         status: 'live',
         href: '/work/605-tv-analytics',
       },
@@ -160,42 +160,100 @@ export const ARCS: Arc[] = [
 ]
 
 
-// Leadership: its own section after Selected work, not a case-study card.
-// The link goes to the Leadership page.
-
-export const LEADERSHIP = {
-  heading: 'Leadership',
-  text: 'From 2024 to 2026 I managed the designers behind Intuit’s enterprise data platform while staying inside the technical work: one research repository in Marvin, one intake tracker, and every designer who reported to me was promoted.',
-  stats: [
-    { value: '1 : 85', label: 'Designers to engineers across the data design group' },
-    { value: '24', label: 'Launches the team shipped, 2024 to 2026: access, lineage, certification, discovery' },
-  ],
-  link: { label: 'How I led the team', href: '/leadership' },
-} as const
-
-// The hero's words and the Intuit chapter diagram under it.
+// Copy from the tabbed landing mock (Landing01, 11 Nov 2026), with the content
+// rules applied: sourced figures only, the promotion sentence as written,
+// family-only personal line. Sources: lib/pages/leading-the-team.ts.
 
 export const HERO = {
-  /** The intro: the fields are set in the accent colour. */
-  intro: {
-    before: 'I’m a product design leader with 12+ years of experience shaping ',
-    fields: 'developer platforms, agentic AI and enterprise data systems',
-    after: '.',
-  },
-  /** The history as one paragraph, one sentence per employer. */
-  history: [
-    {
-      org: 'Intuit',
-      before: 'My most recent role was at ',
-      after: ', where I spent five years, from 2021 to 2026, building out the data platform and later managing its design team. I started as the lead designer on the data catalog, working as an individual contributor with most of my focus on data search. Then I moved on to Data Copilot and the data agent. The platform had nine product areas and I designed, or directed the design of, every one: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion.',
-    },
-    {
-      org: '605',
-      before: 'Before that, at ',
-      after: ', from 2017 to 2021, I designed three B2B SaaS analytics products for TV networks from scratch. Pitches that used the new designs brought $2M in additional booked revenue. Earlier still, I started my career as a backend software engineer.',
-    },
+  /** The intro, between the mock's three sentences and the earlier three
+   *  long paragraphs (11 Nov 2026). The hero sets every phrase in one style;
+   *  `accent` only marks the key facts for the experimental pages. */
+  intro: [
+    [
+      { text: 'I’m a product design leader for ' },
+      { text: 'data and AI tools', accent: true },
+      { text: ', with ' },
+      { text: '12+ years', accent: true },
+      { text: ' shaping developer platforms, agentic AI and enterprise data systems.' },
+    ],
+    [
+      { text: 'I was the ' },
+      { text: 'founding designer of Intuit’s data platform', accent: true },
+      { text: ' from 2021 to 2026, and designed or directed ' },
+      { text: 'all seven of its product areas', accent: true },
+      { text: ': discovery, access, lineage, observability, data maturity, instrumentation and pipeline authoring. I led search, then Data Copilot and the data agent, and from 2024 I was ' },
+      { text: 'manager of its design team', accent: true },
+      { text: '.' },
+    ],
+    [
+      { text: 'Before that, at 605, I designed three analytics products for TV networks, and pitches using them brought ' },
+      { text: '$2M in additional booked revenue', accent: true },
+      { text: '. Before that, I was a backend software engineer.' },
+    ],
   ],
 }
+
+/** Two talks the work was shown in. Placeholders until the links and
+ *  thumbnails arrive: not shippable as they are. */
+export const TALKS = [
+  { kicker: 'On stage', title: 'AWS re:Invent 2025', text: 'Intuit showed the catalog I founded.' },
+  { kicker: 'Presented by the CTO', title: 'Intuit Investor Day 2023', text: 'The data assistant I led design for.' },
+] as const
+
+export const MANAGEMENT = {
+  heading: 'Managing the designers behind Intuit’s enterprise data platform',
+  text: 'From 2024 to 2026 I managed the product designers on Intuit’s enterprise data platform, and kept designing myself.',
+  led: {
+    statement: 'I did the work first, and my team followed.',
+    items: [
+      { title: 'I set the direction', text: 'I wrote the strategy for rebuilding search and the design rules for AI agents. My designers extended both into new areas.' },
+      { title: 'I used the new tools before asking anyone else', text: 'Coded prototypes, AI research synthesis and AI-made videos, in my own design work. Every designer on my team adopted them.' },
+      { title: 'I got two features onto the roadmap', text: 'A view of the queries others run on a table, and saved working sets of data. Nobody had asked for either. Both launched in 2025.' },
+    ],
+  },
+  shipped: {
+    // The mock's "22 launches in 2025, with one designer for every four
+    // product managers" is not in the sources; the sourced line is used.
+    statement: '24 launches from 2024 to 2026, with one designer for every 85 engineers.',
+    lead: { label: 'Certified clean data', value: '<1% → 80%', before: 'Before: under 1%', after: 'After: 80%', text: 'of Intuit’s data estate, through guided certification workflows. A shared result.' },
+    figures: [
+      { value: '17 → 0', text: 'P0 and P1 incidents in tax year 2025, a shared result' },
+      { value: '2–3 weeks → 3 days', text: 'to get access to a data stream; 61% auto-approved' },
+      { value: '~4 hours → minutes', text: 'to find the root cause of a data incident' },
+    ],
+    areasHeading: 'Across four areas',
+    areas: [
+      { label: 'Access', text: 'Six launches in ten months. Access to a data stream went from 2–3 weeks to 3 days.' },
+      { label: 'Incidents', text: 'Finding the root cause of a data incident went from about 4 hours to minutes.' },
+      { label: 'Clean data', text: 'Certified clean data went from under 1% to 80%. A shared result, with the wider data design group.' },
+      { label: 'Search', text: 'Search for streams and marketing data, where the first result is the right one.' },
+    ],
+  },
+  managed: {
+    statement: 'Five habits kept a small team shipping, and the people on it grew.',
+    habits: [
+      { lead: 'Design where the problem is defined.', text: 'I sat in the framing meetings, before requirements were written.' },
+      { lead: 'One shared research base.', text: 'Visits, recordings, surveys and help threads in one place anyone could search.' },
+      { lead: 'One intake list.', text: 'Every request through one door, so priority and staffing were weighed together.' },
+      { lead: 'Decisions that get made.', text: 'When one stalled, I put engineering leads and product managers in one room.' },
+      { lead: 'A six-slide promotion case.', text: 'One format every designer used to make their case.' },
+    ],
+    // The mock's promotion counts are replaced by the standing sentence.
+    people: [
+      { value: 'Intern → full-time', text: 'My summer 2023 intern, converted.' },
+      { value: 'Every designer who reported to me was promoted', text: '' },
+    ],
+    quote: { text: '“… [two features] … would not have happened if not for Kanchi’s persistence and design sponsorship.”', who: 'Engineering manager, Intuit' },
+  },
+  link: { label: 'Read the full case study', href: '/leadership' },
+}
+
+export const EXPERIENCE = [
+  { org: 'Intuit', title: 'Product Design Manager', period: '2024–2026' },
+  { org: 'Intuit', title: 'Senior, then Principal Product Designer', period: '2021–2024' },
+  { org: '605', title: 'Lead designer, the company’s first', period: '2017–2021' },
+] as const
+
 
 export const INTUIT_CHAPTER = {
   eyebrow: 'Inside the Intuit chapter',

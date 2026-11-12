@@ -93,11 +93,11 @@ export const STAGES: Stage[] = [
   },
   {
     n: 6,
-    name: 'Test & ensure quality',
-    wheelName: 'Test & ensure data quality',
-    what: 'Quality checks, reliability, monitoring',
+    name: 'Certify & monitor',
+    wheelName: 'Certify & monitor data',
+    what: 'Maturity scoring, certification, observability',
     mine: 'management',
-    products: ['Data quality checks', 'Data reliability and monitoring'],
+    products: ['Data maturity', 'Observability'],
     initiatives: ['clean', 'access'],
   },
   {

@@ -37,3 +37,7 @@ _staging/
 
 # Job-search working files: application notes, resume drafts. Never pushed; the repo is public.
 private/
+
+# Impeccable live-mode sessions and hook cache (local tooling state)
+.impeccable/live/
+.impeccable/hook.cache.json

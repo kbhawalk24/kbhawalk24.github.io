@@ -67,7 +67,7 @@ interface Ring {
 
 const RINGS: Ring[] = [
   { label: 'Designed hands-on', tag: '2021 to 2024 · founding designer', color: GREEN, f: STAGES.map((s) => s.mine === 'ic'), rad: 170, s: CUES.Designed + 0.8, e: CUES.Manager },
-  { label: 'Led as design manager', tag: '2024 to 2026 · three designers, nine product areas', color: PURPLE, f: STAGES.map((s) => s.mine !== 'none'), rad: 225, s: CUES.Manager + 0.8, e: CUES.Strategy },
+  { label: 'Led as design manager', tag: '2024 to 2026 · three designers, seven product areas', color: PURPLE, f: STAGES.map((s) => s.mine !== 'none'), rad: 225, s: CUES.Manager + 0.8, e: CUES.Strategy },
   { label: 'Set platform strategy', tag: 'Every stage, 2023 to 2026', color: ORANGE, f: STAGES.map(() => true), rad: 280, s: CUES.Strategy + 0.6, e: CUES.Summary },
 ]
 const INITIATIVES: { name: string; m: string[]; s: number }[] = [

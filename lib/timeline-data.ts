@@ -73,7 +73,7 @@ export const ROLES: TimelineRole[] = [
     companyLogo: '/images/intuit-logo.jpg',
     location: 'Mountain View, CA',
     summary:
-      'I led UX strategy and the product designers for Intuit’s enterprise data platform, across nine areas: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion.',
+      'I led UX strategy and the product designers for Intuit’s enterprise data platform, across seven areas: discovery, access, lineage, observability, data maturity, instrumentation and pipeline authoring.',
     entries: [
       {
         track: 'management',

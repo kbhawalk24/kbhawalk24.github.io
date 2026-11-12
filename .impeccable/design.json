@@ -1,0 +1,211 @@
+{
+ "schemaVersion": 2,
+ "generatedAt": "2026-11-11T23:20:55.473387+00:00",
+ "title": "Design System: Kanchi Bhawalkar portfolio",
+ "extensions": {
+  "colorMeta": {
+   "ledger-blue": {
+    "role": "primary",
+    "displayName": "Ledger Blue",
+    "canonical": "#1f4a8a",
+    "tonalRamp": [
+     "#0c1d38",
+     "#14305a",
+     "#1f4a8a",
+     "#3a64a6",
+     "#6488c2",
+     "#94b0da",
+     "#c4d6f0",
+     "#eef4fd"
+    ]
+   },
+   "notebook-ink": {
+    "role": "neutral",
+    "displayName": "Notebook Ink",
+    "canonical": "#141414"
+   },
+   "graphite": {
+    "role": "neutral",
+    "displayName": "Graphite",
+    "canonical": "#5f5f5b"
+   },
+   "paper": {
+    "role": "neutral",
+    "displayName": "Paper",
+    "canonical": "#ffffff"
+   },
+   "margin-grey": {
+    "role": "neutral",
+    "displayName": "Margin Grey",
+    "canonical": "#f5f5f5"
+   },
+   "rule-line": {
+    "role": "neutral",
+    "displayName": "Rule Line",
+    "canonical": "#e5e5e5"
+   },
+   "sky-wash": {
+    "role": "neutral",
+    "displayName": "Sky Wash",
+    "canonical": "#dfeafe"
+   },
+   "band-blue": {
+    "role": "neutral",
+    "displayName": "Band Blue",
+    "canonical": "#eff5ff"
+   }
+  },
+  "typographyMeta": {
+   "display": {
+    "displayName": "Display",
+    "purpose": "The name in the hero only."
+   },
+   "headline": {
+    "displayName": "Headline",
+    "purpose": "Section headings with the heading dot."
+   },
+   "title": {
+    "displayName": "Title",
+    "purpose": "Case-card titles."
+   },
+   "body": {
+    "displayName": "Body",
+    "purpose": "Paragraphs, full column width."
+   },
+   "label": {
+    "displayName": "Label",
+    "purpose": "Uppercase org, period and column labels."
+   }
+  },
+  "shadows": [
+   {
+    "name": "soft",
+    "value": "0 1px 2px rgb(23 21 28 / 0.04), 0 14px 34px -18px rgb(23 21 28 / 0.16)",
+    "purpose": "Resting cards."
+   },
+   {
+    "name": "float",
+    "value": "0 20px 40px -22px rgb(23 21 28 / 0.28)",
+    "purpose": "Nav pill and menu."
+   },
+   {
+    "name": "cta",
+    "value": "0 18px 30px -16px rgb(23 21 28 / 0.55)",
+    "purpose": "Primary buttons."
+   }
+  ],
+  "motion": [
+   {
+    "name": "ease-out",
+    "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+    "purpose": "Every transition decelerates into place."
+   }
+  ],
+  "breakpoints": [
+   {
+    "name": "sm",
+    "value": "640px"
+   },
+   {
+    "name": "md",
+    "value": "768px"
+   },
+   {
+    "name": "lg",
+    "value": "1024px"
+   }
+  ]
+ },
+ "components": [
+  {
+   "name": "Primary Button",
+   "kind": "button",
+   "refersTo": "button-primary",
+   "description": "Dark pill for the main in-page action.",
+   "html": "<a class=\"ds-btn-primary\" href=\"#\">Work <span aria-hidden=\"true\">↓</span></a>",
+   "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:9999px;background:#141414;color:#fff;font:600 14px Mulish,system-ui,sans-serif;text-decoration:none;box-shadow:0 18px 30px -16px rgb(23 21 28/.55);transition:box-shadow .2s,transform .2s}.ds-btn-primary:hover{box-shadow:0 22px 38px -14px rgb(23 21 28/.6)}.ds-btn-primary:active{transform:scale(.98)}.ds-btn-primary:focus-visible{outline:2px solid #1f4a8a;outline-offset:2px}"
+  },
+  {
+   "name": "Outline Button",
+   "kind": "button",
+   "refersTo": "button-outline",
+   "description": "Secondary pill: resume, LinkedIn, contact links.",
+   "html": "<a class=\"ds-btn-outline\" href=\"#\">Resume <span aria-hidden=\"true\">↗</span></a>",
+   "css": ".ds-btn-outline{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:9999px;background:#fff;color:#141414;font:600 14px Mulish,system-ui,sans-serif;text-decoration:none;box-shadow:inset 0 0 0 1px #e5e5e5;transition:background-color .2s,box-shadow .2s}.ds-btn-outline:hover{background:#f5f5f5;box-shadow:inset 0 0 0 1px rgb(20 20 20/.25)}.ds-btn-outline:focus-visible{outline:2px solid #1f4a8a;outline-offset:2px}"
+  },
+  {
+   "name": "Tab",
+   "kind": "chip",
+   "refersTo": "tab-selected",
+   "description": "Leadership tabs; selected fills ledger blue.",
+   "html": "<div class=\"ds-tabs\"><button class=\"ds-tab\" aria-selected=\"true\">Role and scope</button><button class=\"ds-tab\" aria-selected=\"false\">Systems</button></div>",
+   "css": ".ds-tabs{display:flex;gap:10px}.ds-tab{min-height:48px;padding:0 20px;border-radius:9999px;border:2px solid #1f4a8a;background:#fff;color:#141414;font:700 15px Mulish,system-ui,sans-serif;cursor:pointer}.ds-tab[aria-selected=true]{background:#1f4a8a;color:#fff}.ds-tab:focus-visible{outline:2px solid #1f4a8a;outline-offset:2px}"
+  },
+  {
+   "name": "Work Card",
+   "kind": "card",
+   "refersTo": "work-card",
+   "description": "Case study card: tinted panel with the framed screenshot, text beside it.",
+   "html": "<article class=\"ds-card\"><div class=\"ds-panel\"><div class=\"ds-shot\"></div></div><div class=\"ds-body\"><p class=\"ds-label\">Intuit · 2024–2025</p><h3 class=\"ds-title\">Rebuilding search for Intuit’s data catalog</h3><p class=\"ds-fig\">81.31% → 89.24%</p><a class=\"ds-link\" href=\"#\">Read the case study →</a></div></article>",
+   "css": ".ds-card{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;padding:16px;border-radius:18px;background:#fff;box-shadow:0 1px 2px rgb(23 21 28/.04),0 14px 34px -18px rgb(23 21 28/.16);font-family:Mulish,system-ui,sans-serif;color:#141414}.ds-panel{border-radius:12px;padding:7%;background:linear-gradient(160deg,#eef3f9,#d2e0ef)}.ds-shot{height:140px;border-radius:8px;background:#fff;box-shadow:0 24px 48px -16px rgb(20 20 20/.28)}.ds-body{display:flex;flex-direction:column;justify-content:center;gap:10px}.ds-label{margin:0;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.09em;text-transform:uppercase;color:#5f5f5b}.ds-title{margin:0;font:600 24px/1.25 'League Spartan',sans-serif;letter-spacing:-.025em}.ds-fig{margin:0;font:600 22px 'League Spartan',sans-serif;color:#1c5ca0}.ds-link{color:#1c5ca0;font-weight:600;text-decoration:none}.ds-link:hover{text-decoration:underline}"
+  },
+  {
+   "name": "Nav Pill",
+   "kind": "nav",
+   "description": "Floating site nav.",
+   "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-name\" href=\"#\">Kanchi Bhawalkar</a><a href=\"#\">Work</a><a href=\"#\">Leadership</a><a href=\"#\">Timeline</a><a href=\"#\">Contact</a></nav>",
+   "css": ".ds-nav{display:inline-flex;align-items:center;gap:4px;padding:6px 6px 6px 18px;border-radius:9999px;background:rgb(255 255 255/.8);box-shadow:0 20px 40px -22px rgb(23 21 28/.28),0 0 0 1px rgb(20 20 20/.07);font:14px Mulish,system-ui,sans-serif}.ds-nav a{color:#5f5f5b;text-decoration:none;padding:8px 12px;border-radius:9999px}.ds-nav a:hover{color:#141414}.ds-nav .ds-nav-name{color:#141414;font-weight:600;padding-left:0}"
+  }
+ ],
+ "narrative": {
+  "northStar": "The Engineer's Notebook",
+  "overview": "A calm white page with one deep-blue ink, where the evidence is the real work: product screenshots and prototype clips, sourced figures, plain headings. It reads like the notebook of a designer who used to be an engineer, precise and quiet, with nothing on the page that is not doing a job.",
+  "keyCharacteristics": [
+   "White ground with a soft blue wash across the top of the viewport, never a flat tint.",
+   "One accent, ledger blue, for links, the heading dot, selected tabs and figures.",
+   "White cards held off the white ground by soft shadow, not borders.",
+   "Screenshots framed on panels tinted with the prototype's own colour.",
+   "Text spans its column end to end; no reading-measure caps."
+  ],
+  "rules": [
+   {
+    "name": "The One Ink Rule",
+    "body": "Ledger blue is the only accent the page itself owns. Any other colour on screen belongs to a product being shown.",
+    "section": "colors"
+   },
+   {
+    "name": "The Wash-Is-A-Gradient Rule",
+    "body": "The blue wash is always two soft radial blooms on a fixed layer; a flat tinted ground is never used.",
+    "section": "colors"
+   },
+   {
+    "name": "The Two Faces Rule",
+    "body": "League Spartan and Mulish carry everything; Plex Mono is a label face, never a voice.",
+    "section": "typography"
+   },
+   {
+    "name": "The End-To-End Rule",
+    "body": "No heading or paragraph gets a max-width or text-balance.",
+    "section": "typography"
+   },
+   {
+    "name": "The No-Border Card Rule",
+    "body": "Cards never carry a border; the soft shadow alone holds them off the ground.",
+    "section": "elevation"
+   }
+  ],
+  "dos": [
+   "Do frame real product screenshots on a panel tinted with that product's own colour.",
+   "Do keep one figure per card, sourced, set in the prototype's colour.",
+   "Do tag every link, button and card with its analytics event (CLAUDE.md).",
+   "Do keep 44px touch targets and the single 2px ledger-blue focus ring."
+  ],
+  "donts": [
+   "Don't add borders to cards or a coloured left border to anything.",
+   "Don't use a flat tinted page ground; the wash is a gradient.",
+   "Don't cap text width or balance headings.",
+   "Don't put a facts table of icon-and-label columns on the homepage (removed 11 Nov 2026).",
+   "Don't use em-dashes in copy, eyebrows above headings, or emoji as icons."
+  ]
+ }
+}

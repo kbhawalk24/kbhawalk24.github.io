@@ -53,9 +53,8 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        {/* The wash, locked to the viewport. The ground itself carries a
-            faint violet base (--background) and this fixed layer adds the
-            bloom on top, so the gradient reads the same on every screen
+        {/* The wash, locked to the viewport. The ground is white (--background) and this fixed
+            layer adds two blue blooms across the top, so the gradient reads the same on every screen
             instead of scrolling away with the hero. Inert and behind all
             content; nothing animates, so it costs one paint. */}
         <div
@@ -63,7 +62,7 @@ export default function RootLayout({
           className="pointer-events-none fixed inset-0 -z-10"
           style={{
             background:
-              'radial-gradient(circle 1100px at 0% 100%, var(--wash-bloom) 0%, transparent 72%), radial-gradient(circle 900px at 100% 0%, var(--wash-bloom-far) 0%, transparent 70%)',
+              'radial-gradient(900px 620px at 0% 4%, var(--wash-bloom) 0%, transparent 62%), radial-gradient(900px 700px at 100% 12%, var(--wash-bloom-far) 0%, transparent 62%)',
           }}
         />
         {children}

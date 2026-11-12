@@ -17,7 +17,7 @@ export const LEADING_THE_TEAM: ShortPage = {
   description:
     'Two years managing the designers for Intuit’s enterprise data platform at one designer to 85 engineers: the scope, the five things I ran the team on, what the team shipped, how the work was presented to executives, and the people.',
   context: {
-    system: 'Intuit’s enterprise data platform: 9 product areas · about 550 engineers and 16 PMs · 6,673 monthly users.',
+    system: 'Intuit’s enterprise data platform: 7 product areas · about 550 engineers and 16 PMs · 6,673 monthly users.',
     steps: [
       { label: 'Catalog search', href: '/work/search-2' },
       { label: 'The agent', href: '/work/agentic-discovery' },
@@ -38,7 +38,7 @@ export const LEADING_THE_TEAM: ShortPage = {
     {
       label: 'Scope',
       lines: [
-        { text: 'Nine product areas' },
+        { text: 'Seven product areas' },
         { text: 'About 550 engineers, 16 product managers', note: '1 : 85' },
         { text: 'Three product designers' },
       ],
@@ -47,7 +47,7 @@ export const LEADING_THE_TEAM: ShortPage = {
       label: 'Systems',
       lines: [
         { text: 'One research base in Marvin', note: '2,890 notes' },
-        { text: 'One intake tracker', note: 'all nine areas' },
+        { text: 'One intake tracker', note: 'all seven areas' },
         { text: 'Six-slide promotion framework' },
       ],
     },
@@ -74,7 +74,7 @@ export const LEADING_THE_TEAM: ShortPage = {
       width: 2000,
       height: 1087,
       alt: 'The design project tracker: a table of design projects with their product area, status from backlog to shipped, status date, assigned designer and due date, and a link to the requirements document.',
-      caption: 'The one tracker, 2025: every design request across the nine areas, with its status, its designer and its requirements. Names blurred.',
+      caption: 'The one tracker, 2025: every design request across the seven areas, with its status, its designer and its requirements. Names blurred.',
     },
     {
       id: 'research',
@@ -119,12 +119,12 @@ export const LEADING_THE_TEAM: ShortPage = {
       id: 'scope',
       eyebrow: 'The scope',
       short: 'Scope',
-      heading: 'Nine product areas, three designers',
+      heading: 'Seven product areas, three designers',
       blocks: [
         {
           type: 'p',
           text:
-            'From August 2024 I managed the designers for Intuit’s data platform: finding and understanding data, access, lineage, health monitoring, reliability, usage tracking, pipeline authoring, publishing and ingestion. Across the data design group that was one designer for every 85 engineers. They shipped the work. I set the strategy and the shared research base, and kept designing. The nine areas sit on the seven stages of the data lifecycle, drawn below: what I designed myself, what I led, and where I set the strategy.',
+            'From August 2024 I managed the designers for Intuit’s data platform: discovery, access, lineage, observability, data maturity, instrumentation and pipeline authoring. Across the data design group that was one designer for every 85 engineers. They shipped the work. I set the strategy and the shared research base, and kept designing. The seven areas sit on the seven stages of the data lifecycle, drawn below: what I designed myself, what I led, and where I set the strategy.',
         },
         { type: 'wheel' },
       ],
@@ -138,7 +138,7 @@ export const LEADING_THE_TEAM: ShortPage = {
         {
           type: 'p',
           text:
-            'One designer for every 85 engineers meant I could not scale by reviewing screens or routing tickets. Five things kept the team on the work that mattered.',
+            'One designer for every 85 engineers meant I could not scale by reviewing screens or routing tickets. I ran the team on five things instead.',
         },
         {
           type: 'list',
@@ -204,7 +204,7 @@ export const LEADING_THE_TEAM: ShortPage = {
         {
           type: 'p',
           text:
-            'Three times the work had to be told to people outside the platform, each time as a before-and-after story rather than a feature list. What I did in each room and what came of it.',
+            'Three times the work had to be told to people outside the platform, each time as a before-and-after story rather than a feature list.',
         },
         {
           type: 'table',

@@ -1,0 +1,638 @@
+/* Overdrive: Film. The base rules are the static page (cards stacked, every
+   word readable). The film itself lives in the @supports block at the end:
+   CSS scroll timelines only, on desktop and tablet, without reduced motion.
+   One motion language: --film-ease, and only transform, opacity and
+   clip-path animate. */
+
+.film {
+  --film-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --film-shadow: 0 1px 2px rgb(var(--shadow-ink) / 0.04), 0 14px 34px -18px rgb(var(--shadow-ink) / 0.16);
+  --film-heading: var(--font-league-spartan), system-ui, sans-serif;
+  --film-gutter: 1.5rem;
+  overflow-x: clip;
+  color: var(--foreground);
+}
+
+/* ---------- Opening shot (static) ---------- */
+
+.film-open {
+  position: relative;
+  z-index: 1;
+  padding: 7rem var(--film-gutter) 3rem;
+}
+
+.film-open-stage {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2.5rem;
+}
+
+.film-open-label {
+  color: var(--muted-foreground);
+}
+
+.film-name {
+  margin-top: 1rem;
+  font-family: var(--film-heading);
+  font-weight: 800;
+  font-size: clamp(3.25rem, 15vw, 12.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+}
+
+.film-open-sub {
+  margin-top: 1.5rem;
+}
+
+.film-open-role {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.film-open-intro {
+  margin-top: 0.75rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.film-photo {
+  position: relative;
+  width: min(14rem, 62%);
+}
+
+.film-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: var(--accent-brand);
+  transform: translate(14px, 14px);
+}
+
+.film-photo img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: var(--film-shadow);
+}
+
+.film-hint {
+  display: none;
+}
+
+/* ---------- Case scenes (static: a card each) ---------- */
+
+.film-scene,
+.film-mgmt {
+  scroll-margin-top: 5rem;
+}
+
+.film-scene {
+  position: relative;
+  padding: 1rem var(--film-gutter);
+}
+
+.film-card {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: var(--film-shadow);
+}
+
+.film-panel {
+  border-radius: 12px;
+  padding: clamp(0.75rem, 2.5vw, 1.5rem);
+}
+
+.film-shot {
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px -18px rgb(var(--shadow-ink) / 0.4);
+}
+
+.film-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.film-copy {
+  padding: 0.25rem 0.5rem 0.75rem;
+  min-width: 0;
+}
+
+.film-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  color: var(--muted-foreground);
+}
+
+.film-meta-index {
+  color: var(--accent-brand);
+}
+
+.film-title {
+  margin-top: 0.75rem;
+  font-family: var(--film-heading);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3.2vw, 2.625rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.film-line {
+  margin-top: 0.875rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.film-stat {
+  margin-top: 1.5rem;
+}
+
+.film-figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.3em;
+  font-family: var(--film-heading);
+  font-weight: 800;
+  font-size: clamp(2.25rem, 7vw, 4.75rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent-brand);
+  font-variant-numeric: tabular-nums;
+}
+
+.film-before,
+.film-after {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.film-arrow {
+  font-weight: 600;
+  color: color-mix(in oklab, var(--accent-brand) 55%, var(--card));
+}
+
+.film-stat-label {
+  margin-top: 0.625rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+.film-cta {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0 1.25rem;
+  border-radius: 9999px;
+  background: var(--foreground);
+  color: var(--card);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: transform 0.2s var(--film-ease), box-shadow 0.2s var(--film-ease);
+}
+
+.film-cta:hover {
+  box-shadow: 0 18px 30px -16px rgb(var(--shadow-ink) / 0.55);
+}
+
+.film-cta:active {
+  transform: scale(0.98);
+}
+
+.film-rail {
+  display: none;
+}
+
+/* ---------- Management (static) ---------- */
+
+.film-mgmt {
+  position: relative;
+  margin-top: 3rem;
+}
+
+.film-cut-band {
+  background: var(--band, #eff5ff);
+}
+
+.film-mgmt-inner {
+  padding: 4rem var(--film-gutter);
+}
+
+.film-mgmt-label {
+  color: var(--accent-brand);
+}
+
+.film-mgmt-title {
+  margin-top: 1rem;
+  font-family: var(--film-heading);
+  font-weight: 700;
+  font-size: clamp(2rem, 5.2vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.film-mgmt-text {
+  margin-top: 1.25rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.film-mgmt-cta {
+  align-self: flex-start;
+}
+
+.film-mgmt-statement {
+  margin-top: 0.5rem;
+  color: var(--muted-foreground);
+}
+
+/* Tablet and up, still static. */
+@media (min-width: 768px) {
+  .film {
+    --film-gutter: 2.5rem;
+  }
+  .film-open-stage {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .film-photo {
+    flex: none;
+    width: min(22rem, 32vw);
+  }
+  .film-card {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: center;
+    gap: 2rem;
+    padding: 1.25rem;
+  }
+}
+
+/* ---------- The film ---------- */
+
+@supports (animation-timeline: view()) {
+  @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    /* A stage pinned for the section's height. Each later section starts
+       100vh early (negative margin) so it rises over the pinned one; the
+       stage is translated back so it holds in place, and a clip-path wipe
+       is the cut. */
+    .film-stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      animation: film-hold linear both;
+      animation-timeline: --scene;
+      animation-range: entry 0% entry 100%;
+    }
+
+    .film-cut {
+      height: 100%;
+      position: relative;
+      background: var(--background);
+      animation: film-wipe var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: entry 72% entry 100%;
+    }
+
+    .film-cut-band {
+      background: var(--band, #eff5ff);
+    }
+
+    /* Opening shot: 300vh, pinned for 200vh. */
+    .film-open {
+      --fs: clamp(5rem, 13vw, 13rem);
+      --photo: min(24rem, 28vw, 44vh);
+      height: 300vh;
+      padding: 0;
+      view-timeline: --open block;
+    }
+
+    .film-open-stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: block;
+      padding: 0 clamp(2.5rem, 5vw, 5rem);
+    }
+
+    .film-open-text {
+      position: absolute;
+      left: clamp(2.5rem, 5vw, 5rem);
+      right: clamp(2.5rem, 5vw, 5rem);
+      top: 0;
+      bottom: 0;
+    }
+
+    .film-open-label {
+      position: absolute;
+      top: 7.5rem;
+      left: 0;
+      animation: film-fade-out var(--film-ease) both;
+      animation-timeline: --open;
+      animation-range: contain 0% contain 20%;
+    }
+
+    .film-name {
+      position: absolute;
+      left: 0;
+      bottom: 9vh;
+      margin: 0;
+      font-size: var(--fs);
+      transform-origin: 0 100%;
+      animation: film-name var(--film-ease) both;
+      animation-timeline: --open;
+      animation-range: contain 0% contain 42%;
+    }
+
+    .film-open-sub {
+      position: absolute;
+      left: 0;
+      right: 44%;
+      top: calc(7rem + var(--fs) * 0.648 + 2.5rem);
+      margin: 0;
+      animation: film-rise var(--film-ease) both;
+      animation-timeline: --open;
+      animation-range: contain 26% contain 46%;
+    }
+
+    .film-open-role {
+      font-size: clamp(1.25rem, 1.8vw, 1.625rem);
+    }
+
+    .film-open-intro {
+      font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+    }
+
+    .film-photo {
+      position: absolute;
+      right: clamp(2.5rem, 5vw, 5rem);
+      top: 6.5rem;
+      width: var(--photo);
+      animation: film-photo var(--film-ease) both;
+      animation-timeline: --open;
+      animation-range: contain 0% contain 46%;
+    }
+
+    .film-photo::before {
+      transform: none;
+      animation: film-block var(--film-ease) both;
+      animation-timeline: --open;
+      animation-range: contain 0% contain 46%;
+    }
+
+    .film-hint {
+      display: flex;
+      gap: 0.5rem;
+      position: absolute;
+      left: 50%;
+      bottom: 2rem;
+      translate: -50% 0;
+      color: var(--muted-foreground);
+      animation: film-fade-out var(--film-ease) both;
+      animation-timeline: --open;
+      animation-range: contain 0% contain 8%;
+    }
+
+    /* Case scenes: 320vh, pinned 220vh. The last 100vh of the pin is under
+       the next scene's rise, so the choreography finishes by 55%. */
+    .film-scene {
+      height: 320vh;
+      margin-top: -100vh;
+      padding: 0;
+      view-timeline: --scene block;
+    }
+
+    .film-card {
+      height: 100%;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      grid-template-areas: 'copy panel';
+      gap: clamp(2rem, 4vw, 4.5rem);
+      align-items: center;
+      padding: 6.5rem clamp(4rem, 6vw, 6.5rem) 3.5rem clamp(2.5rem, 4.5vw, 4.5rem);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .film-panel {
+      grid-area: panel;
+      border-radius: 18px;
+      padding: clamp(1rem, 2.2vw, 2rem);
+      transform-origin: 60% 50%;
+      animation: film-frame var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 0% contain 24%;
+    }
+
+    .film-shot img {
+      max-height: calc(100vh - 14rem);
+      object-fit: cover;
+      object-position: top;
+      transform-origin: var(--focus, 50% 35%);
+      animation: film-zoom var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 20% contain 58%;
+    }
+
+    .film-copy {
+      grid-area: copy;
+      padding: 0;
+    }
+
+    .film-meta,
+    .film-title {
+      animation: film-slide var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 3% contain 18%;
+    }
+
+    .film-line {
+      animation: film-slide var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 9% contain 24%;
+    }
+
+    .film-stat {
+      margin-top: clamp(1.25rem, 3vh, 2.25rem);
+    }
+
+    .film-figure {
+      font-size: clamp(2.5rem, 3.6vw, 4.25rem);
+    }
+
+    .film-before {
+      animation: film-reveal var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 24% contain 36%;
+    }
+
+    .film-after {
+      animation: film-reveal var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 36% contain 48%;
+    }
+
+    .film-stat-label {
+      animation: film-rise var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 42% contain 52%;
+    }
+
+    .film-cta {
+      animation: film-rise var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 48% contain 56%;
+    }
+
+    /* The scene rail: index, progress through this scene, all four ticks. */
+    .film-rail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      position: absolute;
+      right: clamp(1.25rem, 2vw, 2rem);
+      top: 50%;
+      translate: 0 -50%;
+      color: var(--accent-brand);
+    }
+
+    .film-rail-total {
+      color: var(--muted-foreground);
+    }
+
+    .film-rail-track {
+      position: relative;
+      width: 2px;
+      height: 7rem;
+      border-radius: 2px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .film-rail-fill {
+      position: absolute;
+      inset: 0;
+      background: var(--accent-brand);
+      transform-origin: top;
+      animation: film-fill linear both;
+      animation-timeline: --scene;
+      animation-range: contain 0% contain 56%;
+    }
+
+    .film-rail-ticks {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      margin-top: 0.5rem;
+    }
+
+    .film-rail-ticks span {
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+      background: var(--border);
+    }
+
+    .film-rail-ticks .is-on {
+      background: var(--accent-brand);
+    }
+
+    /* Management: 200vh, pinned 100vh, then the footer. */
+    .film-mgmt {
+      height: 200vh;
+      margin-top: -100vh;
+      view-timeline: --scene block;
+    }
+
+    .film-mgmt-inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem clamp(2.5rem, 5vw, 5rem) 4rem;
+    }
+
+    .film-mgmt-label,
+    .film-mgmt-title {
+      animation: film-slide var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 0% contain 40%;
+    }
+
+    .film-mgmt-text {
+      animation: film-rise var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 20% contain 55%;
+    }
+
+    .film-mgmt-cta {
+      animation: film-rise var(--film-ease) both;
+      animation-timeline: --scene;
+      animation-range: contain 40% contain 70%;
+    }
+
+    @keyframes film-hold {
+      from { transform: translateY(-100vh); }
+      to { transform: none; }
+    }
+    @keyframes film-wipe {
+      from { clip-path: inset(0 0 0 100%); }
+      to { clip-path: inset(0 0 0 0); }
+    }
+    @keyframes film-name {
+      to { transform: translateY(calc(7rem + var(--fs) * 0.648 - 91vh)) scale(0.36); }
+    }
+    @keyframes film-photo {
+      to { transform: translate(-2vw, 16vh) scale(0.84); }
+    }
+    @keyframes film-block {
+      from { transform: translate(0, 0); }
+      to { transform: translate(22px, 22px); }
+    }
+    @keyframes film-fade-out {
+      to { opacity: 0; }
+    }
+    @keyframes film-rise {
+      from { opacity: 0; transform: translateY(1.5rem); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes film-slide {
+      from { opacity: 0; transform: translateX(-3rem); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes film-frame {
+      from { transform: scale(0.6); }
+      to { transform: none; }
+    }
+    @keyframes film-zoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.55); }
+    }
+    @keyframes film-reveal {
+      from { clip-path: inset(0 100% 0 0); transform: translateY(0.25em); }
+      to { clip-path: inset(0 -0.1em 0 0); transform: none; }
+    }
+    @keyframes film-fill {
+      from { transform: scaleY(0); }
+      to { transform: none; }
+    }
+  }
+}

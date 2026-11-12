@@ -104,7 +104,7 @@ export const SEARCH_2: ShortPage = {
       width: 2048,
       height: 1147,
       alt: 'The 2024 search results for “company status”: 1,838,670 results under a Data Catalog tab, nine columns named company_status from different schemas with the same description before the first table, and eight filter pills across the top.',
-      caption: '“Company status” in the old search, 2024: 1,838,670 results, nine identically named columns before a single table, and eight filter pills nobody used. The search returned everything and proved nothing.',
+      caption: '“Company status” in the old search, 2024: 1,838,670 results, nine identically named columns before a single table, and eight filter pills nobody used.',
     },
     {
       id: 'click-depth',
@@ -151,7 +151,7 @@ export const SEARCH_2: ShortPage = {
         {
           type: 'p',
           text:
-            'The search box was not the problem. The index behind it returned everything and proved nothing: people found a candidate table in minutes, then spent days finding out whether to believe it, through each other. Four of the six steps happened outside the catalog.',
+            'The problem was the index behind the search box, not the box: it returned everything, and people found a candidate table in minutes, then spent days finding out whether to believe it, through each other. Four of the six steps happened outside the catalog.',
         },
         {
           type: 'journey',
@@ -180,7 +180,7 @@ export const SEARCH_2: ShortPage = {
       id: 'research',
       eyebrow: '3 · Research findings, spring 2024',
       short: 'Research',
-      heading: 'Twenty sessions, nine business units, three findings',
+      heading: 'Twenty sessions, nine business units, three headline findings',
       blocks: [
         {
           type: 'p',
@@ -375,7 +375,7 @@ export const SEARCH_2: ShortPage = {
       id: 'after',
       eyebrow: '7 · What it set up, 2025 to 2026',
       short: 'What it set up',
-      heading: 'Search solved locating data. Comprehension and the coding agent came next.',
+      heading: 'After the rebuild, questions turned from finding data to understanding it',
       blocks: [
         {
           type: 'p',
