@@ -163,14 +163,6 @@ export const AGENTIC_DISCOVERY: ShortPage = {
             },
           ],
         },
-        {
-          type: 'video',
-          youtube: 'kfpmtVe2OFY',
-          start: 2505,
-          title: 'Intuit Investor Day 2023',
-          caption: 'Intuit Investor Day 2023, from 41:45: the CTO presenting the assistant I designed, describing analysts working up to twice as fast.',
-          href: 'https://youtu.be/kfpmtVe2OFY?t=2505',
-        },
       ],
     },
     {

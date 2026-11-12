@@ -158,7 +158,7 @@ export function Hero({ fx }: { fx?: HeroFx } = {}) {
           {fx === 'cursor' && <CursorField stageRef={stageRef} />}
         </div>
         {(!fx || fx === 'thread') && animate && <LineageThread stageRef={stageRef} fromRef={nodeRef} toRef={photoRef} fade={nodeChrome} />}
-        <div className="relative flex flex-col-reverse md:grid md:h-full md:grid-cols-[56fr_44fr]">
+        <div className="relative flex flex-col-reverse md:grid md:h-full md:grid-cols-[60fr_40fr]">
           {/* Left: name, title, then the intro and buttons. */}
           <div ref={columnRef} className="relative flex flex-col justify-center px-6 pb-12 pt-10 md:pb-8 md:pl-10 md:pr-10 md:pt-24 lg:pl-[max(3.5rem,calc((100vw-72rem)/2+3.5rem))]">
             <motion.div ref={nameRef} style={{ y: nameY }}>
@@ -174,7 +174,7 @@ export function Hero({ fx }: { fx?: HeroFx } = {}) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={enter(0.5)}
-                className="relative w-full px-6 pb-5 pt-6 md:px-7"
+                className="relative w-full px-6 pb-4 pt-6 md:px-7"
               >
               <motion.div
                 aria-hidden="true"
@@ -202,12 +202,12 @@ export function Hero({ fx }: { fx?: HeroFx } = {}) {
                   </span>
                 ))}
               </motion.h1>
-              <motion.span aria-hidden="true" style={{ opacity: still ? 0 : nodeChrome }} className="relative mt-5 block h-px bg-foreground/10" />
+              <motion.span aria-hidden="true" style={{ opacity: still ? 0 : nodeChrome }} className="relative mt-4 block h-px bg-foreground/10" />
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={enter(0.6, 0.45)}
-                className="relative pt-4 font-sans text-lg tracking-[0.01em] text-foreground"
+                className="relative pt-3 font-sans text-lg tracking-[0.01em] text-foreground"
               >
                 Product Design Manager and Principal Designer
               </motion.p>
@@ -218,7 +218,7 @@ export function Hero({ fx }: { fx?: HeroFx } = {}) {
               style={still ? undefined : { opacity: bioOpacity, filter: bioFilter, visibility: bioVisibility }}
               // Inset by the card's padding, so the intro and buttons start on
               // the same line as the name above them.
-              className="mt-6 pl-6 md:pl-7"
+              className="mt-2 pl-6 md:pl-7"
             >
               <Intro />
               <Buttons />

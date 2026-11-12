@@ -193,11 +193,26 @@ export const HERO = {
   ],
 }
 
-/** Two talks the work was shown in. Placeholders until the links and
- *  thumbnails arrive: not shippable as they are. */
+/** Two talks the work was shown in, linked at the moment Intuit's segment
+ *  starts (moved here from the catalog and data-agent case studies, 12 Nov
+ *  2026). Thumbnails are YouTube's own frames. */
 export const TALKS = [
-  { kicker: 'On stage', title: 'AWS re:Invent 2025', text: 'Intuit showed the catalog I founded.' },
-  { kicker: 'Presented by the CTO', title: 'Intuit Investor Day 2023', text: 'The data assistant I led design for.' },
+  {
+    id: 'reinvent-2025',
+    kicker: 'On stage',
+    title: 'AWS re:Invent 2025',
+    text: 'Intuit showed the catalog I founded.',
+    youtube: 'L_Q7LPB5HcA',
+    href: 'https://www.youtube.com/watch?v=L_Q7LPB5HcA&t=1430',
+  },
+  {
+    id: 'investor-day-2023',
+    kicker: 'Presented by the CTO',
+    title: 'Intuit Investor Day 2023',
+    text: 'The data assistant I led design for.',
+    youtube: 'kfpmtVe2OFY',
+    href: 'https://youtu.be/kfpmtVe2OFY?t=2505',
+  },
 ] as const
 
 export const MANAGEMENT = {

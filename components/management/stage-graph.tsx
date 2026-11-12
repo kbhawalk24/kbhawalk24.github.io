@@ -200,7 +200,7 @@ export function StageGraph() {
         <div className="flex flex-col md:justify-center">
           <p className="mb-3 label-micro text-accent-brand md:hidden">Me</p>
           <button {...nodeProps('me')} className={cn(PILL, 'self-start px-4 py-2.5', ring('me'), !on('me') && 'opacity-35')}>
-            <span className="label-micro block whitespace-nowrap text-muted-foreground">{mgr.title} · {mgr.period}</span>
+            <span className="label-micro block whitespace-nowrap text-muted-foreground">{mgr.title}</span>
             <span className="mt-0.5 flex items-center gap-2 whitespace-nowrap font-sans text-[16px] font-semibold text-foreground">
               <span aria-hidden="true" className="size-2 rounded-full bg-foreground" />
               Intuit data platform

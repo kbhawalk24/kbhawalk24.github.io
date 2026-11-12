@@ -29,7 +29,7 @@ export function ManagementSection() {
           <h2 className="font-heading text-3xl font-semibold leading-[1.1] tracking-[-0.02em] md:text-4xl">{M.heading}</h2>
           <p className="font-sans text-lg leading-[1.55] text-[#3a3a37]">{M.text}</p>
         </Reveal>
-        <div className="mt-8">
+        <div className="mt-14 md:mt-20">
           <StageGraph />
         </div>
       </div>

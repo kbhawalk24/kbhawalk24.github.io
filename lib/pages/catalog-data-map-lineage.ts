@@ -213,14 +213,6 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
           text:
             'From August 2024 the designers I managed carried the platform on, on the same model: access requested from the table on screen, certification to the standard’s fourth level, and column-level lineage. At AWS re:Invent 2025 Intuit showed the catalog on stage, with owners, quality rating, lineage and self-service access on one screen.',
         },
-        {
-          type: 'video',
-          youtube: 'L_Q7LPB5HcA',
-          start: 1430,
-          title: 'AWS re:Invent 2025, INV201: Harnessing analytics for humans and AI',
-          caption: 'AWS re:Invent 2025, from 23:50: Intuit’s segment, with the catalog on stage.',
-          href: 'https://www.youtube.com/watch?v=L_Q7LPB5HcA&t=1430',
-        },
       ],
     },
     {
