@@ -42,7 +42,23 @@ export type Block =
   /** Three or four short cards in a row: insights, outcomes, learnings. */
   | { type: 'cards'; items: { title: string; text: string; value?: string }[] }
   /** What the evidence said, beside what I decided and what it cost. */
-  | { type: 'tension'; items: { tension: string; decision: string; image?: { src: string; width: number; height: number; alt: string } }[] }
+  /** One research finding carried to the screen: what we saw (the old UI and
+   *  what people said), what I designed in answer, and what shipped. The two
+   *  images sit side by side, labelled Before and After. */
+  | {
+      type: 'finding'
+      items: {
+        title: string
+        saw: string
+        quote?: { text: string; who: string }
+        before?: { src: string; width: number; height: number; alt: string }
+        did: string
+        after?: { src: string; width: number; height: number; alt: string }
+        shipped: string
+      }[]
+    }
+  /** `labels` renames the two halves, e.g. ['What I cut', 'What it cost']. */
+  | { type: 'tension'; labels?: [string, string]; items: { tension: string; decision: string; image?: { src: string; width: number; height: number; alt: string } }[] }
   /** A path through stages, each with the tools it ran through, one thing
    *  someone said (credited by role) and, where known, how long it took. */
   | { type: 'steps'; caption?: string; items: { title: string; tools: string; quote?: string; who?: string; time?: string }[] }

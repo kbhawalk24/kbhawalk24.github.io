@@ -1,15 +1,16 @@
 import type { ShortPage } from './types'
 import { TINTS } from '@/lib/tint'
 
-// Case study: Search 2.0, in the order of the October 2026 master findings
-// document: scorecard, problem (index pollution and trust), research,
-// research to roadmap, the June 2024 specification as four positions,
-// architectural trade-offs and failure modes, what it set up. One argument runs through them: search
-// answered the navigation question, and the real question was comprehension. Sources: the June 2024 design document and its review
-// notes, the April 2024 session boards, the Nov 2024 and Mar 2025 launch
-// posts, the FY24 year-end review, the Data Genius Bar summary (726
-// questions), the help-channel analysis (666 questions), Amplitude, and the
-// public figures from AWS re:Invent 2025. People are credited by role.
+// Case study: Search 2.0. Edited 13 Nov 2026 from the deck-ordered readout
+// (13 sections, about 4,200 words) into eight sections led by decisions:
+// the problem; the research; three decisions (split by kind of data, a
+// result you can judge, filters people can see), each with the finding from
+// the July 2024 design review deck that led to it; one framework for five
+// searches; what was cut to ship; results and what it set up. One table.
+// Sources: that deck and its images, the June 2024 design document, the
+// design frames in public/work/search-2, the May 2026 recording, launch
+// posts, the 726-question help desk summary, Amplitude. People are credited
+// by role, never by name; names in screenshots are blurred or cropped out.
 
 export const SEARCH_2: ShortPage = {
   slug: 'search-2',
@@ -18,7 +19,7 @@ export const SEARCH_2: ShortPage = {
   roleTag: 'Principal Product Designer → Design Manager',
   period: '2024–2025',
   description:
-    'The team called it Search 2.0. Fixing how 6,600 people find data meant going past the search box: suppressing 295,000 dirty tables from the index, aligning the information architecture with how people physically search rather than with the business model I had designed in 2022, constraining dynamic facets to what the Vertex AI service supported, and holding every result to a five-line trust card. Eight launches followed over eighteen months.',
+    'Search 2.0 rebuilt search in Intuit’s data catalog, used by about 6,600 people a month. I led the research and wrote the design specification in 2024, then managed the designers who extended it. Results are now split by kind of data, each shows five lines of evidence to judge it by, and first-result precision rose from 81.31% to 89.24%.',
   context: {
     system: 'Part of Intuit’s enterprise data platform (320,000 tables · 6,673 monthly users).',
     steps: [
@@ -42,20 +43,21 @@ export const SEARCH_2: ShortPage = {
     ] },
     { label: 'Research', lines: [
       { text: '20 Follow-Me-Home sessions', note: '9 business units' },
+      { text: 'An in-person design workshop' },
       { text: '666 Slack help threads' },
-      { text: '726 Genius Bar queries' },
+      { text: '726 help-desk questions' },
     ] },
     { label: 'Shipped', lines: [
       { text: 'Table search', note: 'Nov 2024' },
       { text: 'Data Map search', note: 'Mar 2025' },
-      { text: 'Stream and marketing search', note: 'Jun to Aug 2025' },
-      { text: 'Collections', note: 'Aug 2025' },
+      { text: 'Stream, CDC and marketing search', note: 'Jun to Aug 2025' },
+      { text: 'Old search switched off', note: 'Sep 2025' },
     ] },
   ],
   stats: [
-    { value: '81.31% → 89.24%', label: 'First-result precision on Data Map search, Mar 2025; MRR 0.81 → 0.89; P99 latency 50.59 s → 1.93 s' },
-    { value: '32% → 63%', label: 'Searches that ended in a click, Jan 2024 to Jan 2026; time to discover data 14.2 h → 9.4 h, Aug 2024 to Jul 2025' },
-    { value: '8 of 8', label: 'Research findings that became launches, FY25 to FY26' },
+    { value: '81.31% → 89.24%', label: 'First-result precision, Data Map search, Mar 2025' },
+    { value: '32% → 63%', label: 'Searches that ended in a click, Jan 2024 to Jan 2026' },
+    { value: '14.2 h → 9.4 h', label: 'Time to discover data, Aug 2024 to Jul 2025' },
   ],
   hero: {
     src: '/work/search-2/hero.mp4',
@@ -68,129 +70,144 @@ export const SEARCH_2: ShortPage = {
   },
   visuals: [
     {
+      id: 'before',
+      src: '/work/search-2/f/before-same-names.jpg',
+      width: 1330,
+      height: 470,
+      alt: 'The old results for “company status”: rows of columns all named company_status with identical descriptions, a single table among them, and an empty Details column.',
+      caption: 'Before, 2024: a search for “company status”. The same name and the same description on row after row, and an empty Details column.',
+    },
+    {
+      id: 'after',
+      src: '/work/search-2/f/after-design.jpg',
+      width: 1440,
+      height: 972,
+      alt: 'The table search as designed in June 2024: a Tables tab, a filter column on the left with every control visible, and results that each show the name, path, description and badges on the left and the owner, last refreshed date, size, queries and lineage on the right.',
+      caption: 'After, as designed in June 2024: results split by kind of data, filters in view, and evidence on every result.',
+    },
+    {
+      id: 'haystack',
+      after: 'problem',
+      lead: true,
+      src: '/work/search-2/journey-haystack-2024.jpg',
+      width: 2048,
+      height: 1466,
+      alt: 'A swimlane map of one marketing manager’s search for data across Slack, institutional knowledge, Google Drive, Jira, subject matter experts, the catalog, CDC Explorer, Postman and Databricks, with notes on where the catalog could take over each step.',
+      caption: 'One marketing manager’s path to find and validate one dataset. In the readout I called the pile they were searching “the haystack”.',
+    },
+    {
       id: 'raw-notes',
       after: 'research',
       lead: true,
       src: '/work/search-2/raw-notes-board-2024.jpg',
       width: 2400,
       height: 619,
-      alt: 'The raw-notes board from the April 2024 sessions: twenty columns of sticky notes, one column per person, each note a thing they said or did, with the ones that recurred marked in purple.',
-      caption: 'The raw notes from the twenty sessions, April 2024: one row per person, one note per observation, the recurring ones in purple.',
+      alt: 'The synthesis board from the April 2024 sessions: one row of sticky notes per person, grouped by role, data analysts 1 to 8, software engineers 1 to 4, data engineers, marketing managers, a solutions architect, product managers and machine-learning engineers.',
+      caption: 'Every session’s notes on one board, a row per person, grouped by role.',
     },
     {
-      id: 'haystack',
+      id: 'd4d-votes',
       after: 'research',
-      src: '/work/search-2/journey-haystack-2024.jpg',
-      width: 2048,
-      height: 1466,
-      alt: 'A swimlane map of one marketing manager’s search for data across Slack, institutional knowledge, Google Drive, Jira, subject matter experts, the catalog, CDC Explorer, Postman and Databricks, with notes on where the catalog could take over each step.',
-      caption: 'One person’s path through six tools to trust one result, from my research board. Four of the six steps happen outside the catalog. The notes on the right became roadmap items.',
+      src: '/work/search-2/d4d-votes-2024.jpg',
+      width: 1396,
+      height: 1570,
+      alt: 'A whiteboard from the design workshop listing ideas with dot votes beside each: people as first-class objects or a social network, 5; index enterprise docs and tools, 6; Stack Overflow, Twitter or Reddit style, 3; personalise with suggested filters by team and domain, 6; connect with experts, 3; use cases as a first-class object; bounties to find or create data, a data marketplace, 7; next-action coaching if you do not find something, 3; embed with a team or domain; “do it for me” AI data butler, 5.',
+      caption: 'The workshop’s ideas with the team’s votes, April 2024.',
+    },
+    {
+      id: 'annotated',
+      after: 'tabs',
+      lead: true,
+      src: '/work/search-2/design-annotated-2024.png',
+      width: 2000,
+      height: 1446,
+      alt: 'The table search design, annotated. Nine tabs across the top, noted “Separate search results by object type, as people often know broadly what they are looking for”. Type pills for Schemas, Tables and Columns with a clean-data toggle, noted “Remove dropdowns to improve discoverability of filters”. A filter column with a searchable Schema list, noted “Search within a specific schema”, business-unit tags, noted “BU Tags”, and Data Maturity stars. Four results, a table, two columns and a schema: queries run and times joined are noted “Social trust”, the column’s type and profile “Additional metadata”, and the path line “Longer names and descriptions on hover”.',
+      caption: 'The design I presented in the readout. Each yellow note names the finding that change answers.',
     },
     {
       id: 'tabs',
-      after: 'spec',
-      lead: true,
+      after: 'tabs',
       src: '/work/search-2/decision-tabs.png',
       width: 820,
       height: 240,
-      alt: 'The shipped search, 2026: one tab per kind of object, Data Map, Tables, CDC Attributes and Topics, with the first table result under it.',
-      caption: 'The shipped search: one tab per kind of object. The Data Map, which I had designed as the catalog’s organising idea in 2022, is one tab among them.',
+      alt: 'The shipped search, 2026: four tabs, Data Map, Tables, CDC Attributes and Topics, with the first table result under them.',
+      caption: 'The shipped tabs, 2026: Data Map, Tables, CDC Attributes and Topics.',
     },
     {
-      id: 'search-1',
-      after: 'problem',
+      id: 'result',
+      after: 'result',
       lead: true,
-      src: '/work/search-2/search-1-results-2024.jpg',
-      width: 2048,
-      height: 1147,
-      alt: 'The 2024 search results for “company status”: 1,838,670 results under a Data Catalog tab, nine columns named company_status from different schemas with the same description before the first table, and eight filter pills across the top.',
-      caption: '“Company status” in the old search, 2024: 1,838,670 results, nine identically named columns before a single table, and eight filter pills nobody used.',
+      src: '/work/search-2/decision-result.png',
+      width: 1030,
+      height: 520,
+      alt: 'Four table results in the second design iteration. Each has a type icon, the name with an endorsement mark and maturity stars, the path, a two-line description and badges on the left; on the right the owning team, last refreshed date, column and row counts with a health ring, queries by users, and upstream and downstream lineage counts. Rows without data say “No queries run in the last 30 days” and “Lineage not available”.',
+      caption: 'The result in its second iteration: what the thing is on the left, whether to believe it on the right, and a plain sentence wherever a signal is missing.',
     },
     {
-      id: 'click-depth',
-      after: 'tradeoffs',
+      id: 'filters',
+      after: 'facets',
       lead: true,
-      src: '/work/search-2/click-depth.jpg',
-      width: 2087,
-      height: 930,
-      alt: 'Stacked monthly bars showing which search result people clicked, November 2025 to May 2026, with the first result the large majority every month.',
-      caption: 'Which result people clicked, November 2025 to May 2026. The first result took about four clicks in five every month.',
+      src: '/work/search-2/decision-filters.png',
+      width: 660,
+      height: 470,
+      alt: 'The filter column of the table search design beside the first results: Only show tables in data map; Hidden Results with Hide temporary data and Hide deprecated data; Compliance with 7216 and SOX; Usage.',
+      caption: 'The filter column as designed: every control visible with its state, in the words people used.',
+    },
+    {
+      id: 'datamap',
+      after: 'framework',
+      lead: true,
+      src: '/work/search-2/decision-datamap.png',
+      width: 1440,
+      height: 1050,
+      alt: 'The Data Map tab design: the same layout as table search, with Data Products and Attributes pills, facets for Datamap folders, Data Freshness, CDC, Hosting Location and Type on the left, and results whose right side lists where each product lives: Datalake tables, Kafka topics and CDC attributes, by environment. A Search 2.0 toggle sits in the header.',
+      caption: 'Data Map search on the same skeleton. The right side answers a different question: where does this data product physically live?',
+    },
+    {
+      id: 'spec-columns',
+      after: 'cuts',
+      lead: true,
+      src: '/work/search-2/spec-table-results-2024.jpg',
+      width: 1110,
+      height: 940,
+      alt: 'The table results as designed in June 2024: the Tables tab with a filter column on the left, a table result followed by two column results for customer_account_id and a schema result, each with its own details.',
+      caption: 'The Tables tab as designed: columns and schemas as their own results, each with their own evidence. Both were cut before launch.',
     },
   ],
   sections: [
     {
-      id: 'scorecard',
-      eyebrow: '1 · Quantitative impact',
-      short: 'Scorecard',
-      heading: 'The scorecard, with attribution',
-      blocks: [
-        {
-          type: 'p',
-          text:
-            'Data discovery was the single longest phase of any data lifecycle at Intuit; that was the business case for rebuilding the information architecture rather than polishing the search box. Engineering built the ranking and the indexing; the specification defined what was searchable, how objects were separated, how facets behaved and the five lines on every card. Each row names whose work the number is.',
-        },
-        {
-          type: 'table',
-          head: ['Launch and scope', 'Metric', 'Before → after', 'Attribution and source'],
-          rows: [
-            ['Table Search 2.0, Nov 14, 2024, 320,000 tables', 'Keyword and semantic precision', '+12.5% keyword; +58% semantic', 'My design; the search-model team built the ranking. Nov 2024 launch post'],
-            ['Data Map Search 2.0, Mar 26, 2025, 10,000 data products and 460,000 attributes', 'First-result precision; MRR; P99 latency; average response', '81.31% → 89.24%; 0.81 → 0.89; 50.59 s → 1.93 s; 15.88 s → 1.24 s', 'My design and specification; carried to launch by a designer on my team; speed by search engineering. Mar 2025 launch post'],
-            ['Search 1.0 sunset and discovery conversion, Jan 2024 to Jan 2026', 'Searches ending in a click; time to discover and access data; monthly users, Mar 2026', '32% (Jan 2024) → 41% (Aug 2024) → 61% (Jul 2025) → 63% (Jan 2026), Search 1.0 switched off Sep 19, 2025; 14.2 h (Aug 2024) → 9.4 h (Jul 2025) → 8.9 h (Jan 2026); 6,673 monthly users, 3,843 of them searching', 'Platform-wide; the team’s KPI tracker, Amplitude and AWS re:Invent 2025'],
-            ['Downstream reuse: stream search Jun 15, 2025; marketing-attribute search Aug 12, 2025', 'First-result precision', '99.99% on both', 'Built on the six-tab, four-facet specification; designed by my team; ranking by engineering'],
-          ],
-          caption: 'Intuit’s public figure for the whole discovery path, including access and exploration, was 20 days in 2023; 14.2 hours is the catalog’s own measure of the search step.',
-        },
-      ],
-    },
-    {
       id: 'problem',
-      eyebrow: '2 · The problem',
-      short: 'Problem',
-      heading: 'Index pollution and a trust deficit',
+      eyebrow: 'The problem',
+      short: 'The problem',
+      heading: 'Finding data was the longest phase of a project, and it ran through six tools',
       blocks: [
         {
           type: 'p',
           text:
-            'The problem was the index behind the search box, not the box: it returned everything, and people found a candidate table in minutes, then spent days finding out whether to believe it, through each other. Four of the six steps happened outside the catalog.',
+            'Data discovery was the longest phase in the projects our users ran. The catalog had been built around analysts: in early 2024, 61% of analysts found data in it, against 13% of software developers and 5% of technical marketers. We did not know enough about anyone else.',
         },
         {
-          type: 'journey',
-          items: [
-            { title: 'Search the catalog' },
-            { title: 'Ask in the data help channel', outside: true },
-            { title: 'Message whoever last wrote the pipeline', outside: true },
-            { title: 'Request access and wait', outside: true },
-            { title: 'Sample the columns in a notebook', outside: true },
-            { title: 'Start over with the next candidate' },
-          ],
-          caption: 'The discovery path observed in the 2024 sessions, from my research board.',
-        },
-        {
-          type: 'cards',
-          items: [
-            { value: '320,000', title: 'tables in the lake, with 10,000 data products and 460,000 attributes', text: 'Cutting the time to find data was a company goal for 2024.' },
-            { value: '1 of 20', title: 'people had ever tried the catalog’s AI search', text: 'It was visible on every page. An uncurated index made its answers untrustworthy.' },
-            { value: '73%', title: 'of 666 help-channel questions needed a specific human to resolve', text: '43% were people trying to locate data. Marketers’ searches ended in a click 5% of the time, analysts’ 61%.' },
-            { value: '295,000', title: 'dirty tables hidden from default results before the redesign began', text: 'The prerequisite I designed in FY24: 13 business-unit tags covering 74% of the lake, and Data Marts surfacing 2,000 clean tables while suppressing 85% of non-consumable ones.' },
-          ],
+          type: 'p',
+          text:
+            'People on average jumped across six different tools to find and validate data, because one tool lacks the context of the other. Inside the catalog, a search returned hundreds of results, many with the same name and the same description, and nothing on the row to judge them by.',
         },
       ],
     },
     {
       id: 'research',
-      eyebrow: '3 · Research findings, spring 2024',
+      eyebrow: 'Research',
       short: 'Research',
-      heading: 'Twenty sessions, nine business units, three headline findings',
+      heading: 'Twenty sessions, one question, and three things search could fix now',
       blocks: [
         {
           type: 'p',
           text:
-            'Twenty Follow-Me-Home sessions across nine business units, with engineers observing, synthesised in HeyMarvin and a workshop with the team. The group product manager later wrote that the series was “a major contributor to our FY25 roadmap.”',
+            'I led twenty Follow-Me-Home sessions with the product manager across nine business units, and the catalog engineering team sat in. We asked each person to walk us through a recent time they successfully found data at Intuit. An in-person design workshop then turned the findings into ideas and ranked them. The product manager later called the series “a major contributor to our FY25 roadmap.”',
         },
         {
           type: 'chips',
           items: [
-            { count: '8', label: 'analysts', icon: 'chart' },
+            { count: '8', label: 'data analysts', icon: 'chart' },
             { count: '4', label: 'software engineers', icon: 'code' },
             { count: '2', label: 'data engineers', icon: 'wrench' },
             { count: '2', label: 'ML engineers', icon: 'brain' },
@@ -200,207 +217,234 @@ export const SEARCH_2: ShortPage = {
           ],
         },
         {
-          type: 'cards',
+          type: 'list',
           items: [
-            { title: '1 · Asset type known up front', text: 'People arrived knowing whether they needed a table, a stream, a feature set or a dashboard. The exceptions: marketers and ML engineers moving data between systems.' },
-            { title: '2 · The 60-second trust window', text: 'Only the top two results got looked at. Analysts trusted curated tables over raw ones; ML engineers wanted a fast no.' },
-            { title: '3 · 80% re-finding, 20% discovery', text: 'Four sessions in five went back to tables vetted weeks earlier. Search was a bookmark bar.' },
+            { lead: 'Too many results looked the same.', text: 'Same name, same description, no way to tell which one to open.' },
+            { lead: 'People did not use the filters.', text: 'The useful ones were missing, and the rest were nested, hidden or named in the catalog’s terms.' },
+            { lead: 'Trust came from people, not the page.', text: 'They started in Slack with someone they trusted, and messaged an expert again before believing a result.' },
           ],
         },
         {
-          type: 'statement',
-          who: 'One of the twenty: a machine-learning engineer on QuickBooks, April 2024, from my synthesis board. The onboarding model had taken three months to find 7 of its 11 attributes.',
-          rows: [
-            { label: 'I am', text: 'a machine-learning engineer building an onboarding model for QuickBooks,' },
-            { label: 'trying to', text: 'find the eleven attributes the model needs, and then the real-time equivalent of each one,' },
-            { label: 'but', text: 'three months in I have found seven, and the catalog lists tables, streams and dead pipelines in one list with no freshness or production signal,' },
-            { label: 'because', text: 'the search index treats every storage object the same, so I ask in Slack before I write a line of code.' },
-          ],
+          type: 'p',
+          text:
+            'I split the findings in two: what search could fix now, which became Search 2.0, and the workshop’s larger ideas, which went to a later track.',
         },
       ],
     },
     {
-      id: 'roadmap',
-      eyebrow: '4 · Research to roadmap',
-      short: 'Roadmap',
-      heading: 'Eight findings became eight launches',
+      id: 'tabs',
+      eyebrow: 'Decision 1',
+      short: 'Split by kind',
+      heading: 'I split results by kind of data, and made my own Data Map one tab among several',
       blocks: [
         {
           type: 'p',
           text:
-            'The findings went to the roadmap as eight items, and all eight shipped between November 2024 and August 2025. Two of them, query insights and Collections, had to be argued for repeatedly; the engineering manager wrote that they “would not have happened if not for Kanchi’s persistence and design sponsorship.” I designed and specified the first launches; my team carried the rest after I became their manager in August 2024.',
+            'A search for “company status” listed nine columns named company_status before the first table. People know broadly what they are looking for, a table, a column, a data product, so each kind got its own tab, with type pills inside it.',
         },
         {
-          type: 'table',
-          head: ['Finding', 'Shipped capability', 'When', 'Attribution and scope'],
-          rows: [
-            ['1 · Asset type known up front', 'Object-specific search tabs', 'Nov 14, 2024', 'My design and specification'],
-            ['2 · Trust decided in 60 seconds', 'Five-line card with operational and social proof', 'Nov 14, 2024', 'My specification'],
-            ['3 · People search in business language', 'Data Map and marketing-attribute search', 'Mar 26 and Aug 12, 2025', 'My specification; carried by my team'],
-            ['4 · Re-finding existing assets (80%)', 'Data Collections, saved working sets', 'Aug 7, 2025', 'My sponsorship; my team’s design'],
-            ['5 · Context-switching to verify data', 'Embedded query insights', 'May 2025', 'My sponsorship; my team’s design'],
-            ['6 · Unclear object governance', 'Clean-data maturity star ratings', 'Nov 14, 2024', 'My design'],
-            ['7 · Unfiltered, irrelevant results', 'Dynamic, query-aware facet bar', 'Q2–Q3 FY25', 'My specification'],
-            ['8 · Fragmented ingestion models', 'Real-time stream search', 'Jun 15, 2025', 'My team’s design, same framework'],
-          ],
-          caption: 'Dates from the team’s launch posts and roadmap tracker.',
+          type: 'p',
+          text:
+            'It meant giving up my own structure. I had designed the Data Map in 2022 as the catalog’s organising idea; here it became one tab. Every name and its path got a full line each, so long schema names stopped being cut off, with the full text on hover.',
         },
       ],
     },
     {
-      id: 'spec',
-      eyebrow: '5 · The June 2024 design specification',
-      short: 'Specification',
-      heading: 'Four positions I took in the design document',
+      id: 'result',
+      eyebrow: 'Decision 2',
+      short: 'The result',
+      heading: 'A result you can judge without opening it: five lines of evidence, one question each',
       blocks: [
         {
           type: 'p',
           text:
-            'The June 2024 design document is what search engineering built from, after three senior engineers reviewed it. Four positions in it decided the shape of what shipped.',
-        },
-        { type: 'subhead', number: '01', text: 'Giving up the 2022 Data Map structure: object taxonomy mapping' },
-        {
-          type: 'p',
-          text:
-            'In 2022 I had designed the Data Map around business concepts, Customer or Invoice, with every physical copy nested underneath. By 2024 the research showed that working engineers and analysts search by the physical object they need to query. So I mapped every searchable object to where it is hosted and gave each kind its own tab. The map I had argued for became one tab among six. Reviewers pushed the split further: tables, columns and schemas each got their own section.',
+            'The specification listed about twenty things a table result could show, each one asked for by some team. I capped the result at five lines of evidence and gave every line one question to answer.',
         },
         {
-          type: 'table',
-          head: ['Tab', 'Objects grouped under it', 'Evidence shown on a result', 'Shipped'],
-          rows: [
-            ['Tables', 'Tables · columns · schemas', 'Owner · domain · last refresh · maturity stars · queries in 30 days', 'Nov 14, 2024'],
-            ['Data Map', 'Data products · attributes', 'Business meaning · owner · every physical copy beneath it', 'Mar 26, 2025'],
-            ['Real-time streams', 'Kafka topics · attributes', 'Producer · consumers · schema', 'Jun 15, 2025'],
-            ['CDC attributes', 'Change-data-capture attributes', 'Source · consumers', 'Aug 2025'],
-            ['Feature sets', 'Feature sets · features', 'Owning team · model', 'Framework in place'],
-            ['Dashboards', 'Dashboards', 'Author · views · last updated', 'Framework in place'],
-            ['Marketing attributes', 'Marketing attributes', 'Owner · freshness', 'Aug 12, 2025'],
-            ['Queries (future in spec)', 'Queries', 'Who ran it · against which table', 'Query insights, May 2025'],
-            ['Enterprise tools (future in spec)', 'Slack · GitHub · Google Docs · wiki', 'The thread or document itself', 'Slack insights, FY25'],
+          type: 'list',
+          items: [
+            { lead: 'Name, with maturity stars:', text: 'is this the clean one? The stars open into the six criteria behind the score.' },
+            { lead: 'Path:', text: 'which of the same-named ones is this? Analysts trusted data-mart schemas over raw ones.' },
+            { lead: 'Badges:', text: 'can I rule it out without opening it? View, compliance (7216, SOX), temporary or internal.' },
+            { lead: 'Last refreshed:', text: 'is it still alive?' },
+            { lead: 'Queries and people in the last 30 days:', text: 'does anyone else rely on it?' },
           ],
-          caption: 'The object taxonomy from the June 2024 specification: each searchable object assigned to the tab for where it is hosted, with the evidence that kind of object needs. Dates from the launch posts.',
         },
-        { type: 'subhead', number: '02', text: 'Separating filters from facets: API cardinality and facet constraints' },
+        {
+          type: 'finding',
+          items: [
+            {
+              title: 'Team-based ownership made the right expert hard to reach',
+              saw: 'A table’s owner was a team, and the team opened to 94 people in five roles.',
+              quote: { text: 'One of this team will be owning this. But I don’t see a specific ownership here.', who: 'A senior data engineer' },
+              before: { src: '/work/search-2/f/before-owner.jpg', width: 700, height: 790, alt: 'The old Team Members dialog on a table page: Data-Steward 3, Admin 5, DevManager 1, Developer 39, Devops 46, with names blurred.' },
+              did: 'The owner is named on the result itself, so the first question, who do I ask, is answered before opening anything.',
+              after: { src: '/work/search-2/f/after-result.jpg', width: 1250, height: 200, alt: 'The redesigned table result: name with endorsement and maturity stars, path, two-line description and badges on the left; business owner, last refreshed, queries run, row count and data product on the right.' },
+              shipped: 'The owning team is on every result, one click from its page. It is still a team, not a person.',
+            },
+            {
+              title: 'AI descriptions lowered trust beside the owner’s own',
+              saw: 'AI-generated descriptions were useful when nothing else existed. Shown next to a steward’s description, they lacked key context and reduced trust in the feature overall.',
+              before: { src: '/work/search-2/f/before-descriptions.jpg', width: 2048, height: 455, alt: 'A table page in the old catalog: the Business Owner description, and directly beneath it an AI-generated description of the same table with thumbs up and down.' },
+              did: 'One description per result, two lines. The owner’s words if they exist; an AI description only when none does, marked with the AI icon.',
+              shipped: 'Shipped as the rule for every search tab.',
+            },
+          ],
+        },
         {
           type: 'p',
           text:
-            'The old interface treated every narrowing control the same. The specification drew a line between the two, then defined four facet behaviours by the cardinality and hierarchy of the values, every one inside what the Vertex AI search service did out of the box.',
+            'Two small rules did the rest. Labels came off: “Last refreshed: May 17, 2024” became “Last refreshed on May 17, 2024”, which gave the width back to the name and description. And a missing signal is said, never left blank: “No queries run in the last 30 days”.',
+        },
+      ],
+    },
+    {
+      id: 'facets',
+      eyebrow: 'Decision 3',
+      short: 'Filters',
+      heading: 'Filters people can see: no dropdowns, their words, and behaviour set by how many values a facet holds',
+      blocks: [
+        {
+          type: 'p',
+          text:
+            'I split the narrowing controls in two. Filters are the kind of object, set once. Facets are properties of the results, and their values change with the tab, the query and each other. Applied values stay visible as chips, and people recognise a value instead of recalling it.',
         },
         {
-          type: 'compare',
-          panels: [
-            { label: 'Filters', text: 'The kind of object. Static: chosen before or after the query, never changed by it.', pills: ['Tables', 'Data Map', 'Streams', 'Feature sets', 'Dashboards'] },
-            { label: 'Facets', text: 'A property of the returned results. Dynamic: values change with the active tab and the query.', pills: ['Domain', 'Owner', 'Last refresh', 'Maturity ★★★★', 'Schema'], accent: true },
+          type: 'finding',
+          items: [
+            {
+              title: 'People did not use the filters',
+              saw: 'Product, schema and domain were missing. To find data marts you opened search results, then Data Product Type, then Data Mart.',
+              quote: { text: 'There is a need for improved search capabilities for column names within a specific schema.', who: 'A staff business data analyst' },
+              before: { src: '/work/search-2/f/before-filters.jpg', width: 1080, height: 420, alt: 'The old Data Map search with the Data Product Type dropdown open: Clickstream, Data Mart, Derived Data, Domain Entity, Raw Database Table, Reporting Table.' },
+              did: 'Removed the dropdowns. Every filter is visible in a left column, and the schema facet, about a thousand values, has its own search box.',
+              after: { src: '/work/search-2/f/after-schema.jpg', width: 330, height: 380, alt: 'The redesigned filter column: a Schema group with a count of 1000, a search box and a list of schema names with checkboxes; a long schema name wraps onto two lines.' },
+              shipped: 'The visible filter column and schema search shipped with table search, Nov 14, 2024.',
+            },
+            {
+              title: 'No search as you browse',
+              saw: 'People could open a Data Map domain and browse its folders, but not search inside the domain they were in.',
+              quote: { text: 'Need to add domain specific search.', who: 'A marketing manager' },
+              before: { src: '/work/search-2/f/before-browse.jpg', width: 1560, height: 420, alt: 'The old Data Map browse page for the Enterprise domain: a list of subdomain folders with descriptions and no search box for the domain.' },
+              did: 'Data Map folders became a facet you can type into; typing matches a folder at any level.',
+              shipped: 'Shipped with Data Map search, Mar 26, 2025.',
+            },
           ],
         },
         {
           type: 'clips',
           items: [
             { src: '/work/search-2/facet-single.webm', width: 520, height: 560, title: 'One value: apply at once', text: 'A facet group with a single value applies itself.', alt: 'The filter column: a single-value facet applying automatically when the query returns one schema.' },
-            { src: '/work/search-2/facet-low.webm', width: 520, height: 560, title: 'Few values: show them all', text: 'Five or fewer values sit inline, one click to clear.', alt: 'The filter column: a low-cardinality facet showing every value inline, with the Show clean tables toggle above.' },
-            { src: '/work/search-2/facet-multi.webm', width: 520, height: 560, title: 'Many values: pick, then apply', text: 'A searchable multi-select with a group-level Apply.', alt: 'The filter column: three schemas selected in a searchable dropdown and applied together as chips.' },
-            { src: '/work/search-2/facet-nested.webm', width: 520, height: 560, title: 'Nested values: search, not browse', text: 'Tree browsing was cut from release one; typing matches any node.', alt: 'The filter column: typing into the Data Map folders facet matches nodes at any level.' },
+            { src: '/work/search-2/facet-low.webm', width: 520, height: 560, title: 'Few values: show them all', text: 'Every value sits in the list; no dropdown to open.', alt: 'The filter column: a low-cardinality facet showing every value inline, with the Show clean tables toggle above.' },
+            { src: '/work/search-2/facet-multi.webm', width: 520, height: 560, title: 'Many values: pick, then apply', text: 'A searchable list; choose several, then one Apply for the group.', alt: 'The filter column: three schemas selected in a searchable dropdown and applied together as chips.' },
+            { src: '/work/search-2/facet-nested.webm', width: 520, height: 560, title: 'Nested values: search, not browse', text: 'Typing matches any level of the tree.', alt: 'The filter column: typing into the Data Map folders facet matches nodes at any level.' },
           ],
           caption: 'The four facet behaviours, from the prototype attached to the June 2024 specification.',
         },
-        { type: 'subhead', number: '03', text: 'Five-line result card anatomy: a payload budget, and AI fallback guardrails' },
         {
-          type: 'anatomy',
-          kind: 'Table',
-          name: 'customer_account',
-          groups: ['Operational', 'Social'],
-          lines: [
-            { text: 'data lake / enterprise_monetization · steward: data platform', group: 'Operational' },
-            { text: 'Clean-data maturity ★★★★ · controlled', group: 'Operational' },
-            { text: 'Last refreshed today, 5:30 AM', group: 'Operational' },
-            { text: '1,224 queries · 86 people in the last 30 days', group: 'Social' },
-            { text: 'Steward-written description · Slack insights', group: 'Social' },
-          ],
-          caption: 'Five lines per result, fixed in the specification as a payload budget. People decided within 60 seconds on the top two results, and cards had become a dumping ground for every field a team wanted to promote. Everything else went to a side panel per object type.',
-        },
-        {
-          type: 'tension',
+          type: 'list',
           items: [
-            {
-              image: { src: '/work/search-2/decision-filters.png', width: 660, height: 470, alt: 'The filter column of the design beside the first results: hidden results, compliance, usage and schema, every filter visible with its state.' },
-              tension: 'Two of the first three reviewers said AI-written descriptions felt untrustworthy mixed in with human ones.',
-              decision: 'Steward-written descriptions by default. An AI description only as a labelled fallback when no human one exists, inside the same five-line budget, editable inline by the owner.',
-            },
-          ],
-        },
-        { type: 'subhead', number: '04', text: 'Leaving tags open, championing Data Collections' },
-        {
-          type: 'tension',
-          items: [
-            {
-              image: { src: '/work/search-2/decision-datamap.png', width: 1440, height: 1050, alt: 'The Data Map tab design: data products with their freshness, hosting location and type filters down the left.' },
-              tension: 'Stakeholders asked for user-applied tags. A principal engineer pointed out in review that freeform tags rot into inconsistent noise.',
-              decision: 'I left tags versus collections open in the specification rather than ship a system that would decay, then championed Data Collections, a saved and shareable working set, onto the FY26 roadmap for the 80% re-finding behaviour. Shipped August 7, 2025.',
-            },
+            { lead: 'Six usage states became two checkboxes.', text: 'Refreshed in the last 120 days, used in the last 120 days. Nobody could tell “stale and actively used” from “fresh and unused” at a glance.' },
+            { lead: 'A four-value taxonomy became two switches.', text: '“Hide temporary data” and “Hide deprecated data”. People wanted those two gone, not a taxonomy.' },
+            { lead: 'One facet narrows the others.', text: 'An ML engineer had spent three months finding 7 of the 11 attributes his model needed. With facets that narrow each other, a few choices show quickly that the data is not there.' },
+            { lead: 'Clear to change.', text: 'Once a group is applied you clear it to pick again. That is how the search service works, and I accepted it rather than ask for a custom backend.' },
           ],
         },
       ],
     },
     {
-      id: 'tradeoffs',
-      eyebrow: '6 · Architectural trade-offs and failure modes',
+      id: 'framework',
+      eyebrow: 'Scale',
+      short: 'Framework',
+      heading: 'The same skeleton carried five searches',
+      blocks: [
+        {
+          type: 'p',
+          text:
+            'Table search was the template: a tab, type pills, facets on the left, and a result with identity on the left and evidence on the right. Every later search changed only the evidence that kind of data needs. I designed tables and the Data Map, which a designer on my team carried to launch; my team designed the other three on the same specification without a new structure.',
+        },
+        {
+          type: 'table',
+          head: ['Search', 'Evidence on a result', 'Shipped'],
+          rows: [
+            ['Tables', 'Owner · last refreshed · queries in 30 days · maturity stars', 'Nov 14, 2024'],
+            ['Data Map', 'Owner · where it lives: lake tables, Kafka topics and CDC attributes · the entity that matched', 'Mar 26, 2025'],
+            ['Real-time streams', 'Producer · consumers · schema', 'Jun 15, 2025'],
+            ['CDC attributes', 'Source · consumers', 'Aug 2025'],
+            ['Marketing attributes', 'Owner · freshness', 'Aug 12, 2025'],
+          ],
+          caption: 'Dates from the team’s launch posts.',
+        },
+        {
+          type: 'p',
+          text:
+            'Rollout was a toggle in the header, so people could move between old and new while both ran. About 70% had made the new one their main search before the old was switched off in September 2025.',
+        },
+      ],
+    },
+    {
+      id: 'cuts',
+      eyebrow: 'Trade-offs',
       short: 'Trade-offs',
-      heading: 'Three trade-offs, what each cost, and what was mine',
+      heading: 'What I cut to ship, and what each cut cost',
       blocks: [
         {
-          type: 'p',
-          text:
-            'Table search launched in November 2024, Data Map search in March 2025, and the old search was switched off in September 2025 with the new one primary for about 70% of users. Three trade-offs shaped the result.',
-        },
-        {
           type: 'tension',
+          labels: ['What I cut', 'What it cost, and what shipped anyway'],
           items: [
             {
-              tension: 'Telemetry-driven exact-match routing. Tuning for semantic recall let semantic neighbours outrank an exact table name, and the default tab added a click. Top-five click-through fell from 96% to 94% in July 2025. From the poll: “If I search for an exact table name it defaults to Data Map, resulting in an extra click.”',
-              decision: 'Amplitude isolated the exact-string queries; search engineering built a deterministic exact-match fast path and the tab routing changed. Back to 95% by January 2026. The cost that is mine: instrumentation was not in the first scope, so this was measured after launch, not designed for before it.',
+              tension: 'Columns as results. The design gave a column its own row: the table it belongs to, how often it is joined on, how much of it is profiled. A search engineer’s reason for the cut: “too many results because of the size of the dataset.” One column name matches across thousands of tables.',
+              decision: 'Columns never came back to search. Of 726 help-desk questions in early 2025, two in three ended at a specific column, and 158 that one table could have answered went to an expert. Table search shipped on November 14, 2024.',
             },
             {
-              tension: 'Information architecture against cognitive load. Enterprise taxonomies favour deep trees, and the business-domain facet was one. Exposing it inside a query-dependent facet was the costliest item in the engineering review and the slowest control to refine with.',
-              decision: 'Tree browsing came out of release one; flat keyword matching of any node shipped instead. Taxonomy completeness traded for speed. Column-name search still returned table-level relevance, so the comprehension gap narrowed rather than closed.',
+              tension: 'Two of the five evidence lines: size with its health ring, and lineage counts.',
+              decision: 'The shipped result carries owner, last refresh and queries. Lineage, which marketers valued most, is visible only inside the maturity score.',
             },
             {
-              tension: 'AI fallback against the payload budget. Unverified LLM summaries threatened the trust the redesign was meant to restore, and every line they took was a line of evidence lost.',
-              decision: 'Steward-written documentation overrides the AI fallback everywhere; the fallback is labelled and held inside the five lines. The rule held through the later launches and is the model the agent follows.',
+              tension: 'Measurement. It was not in the first scope.',
+              decision: 'My miss. An exact-name ranking problem reached launch and was fixed afterwards with an exact-match fast path.',
             },
           ],
         },
       ],
     },
     {
-      id: 'after',
-      eyebrow: '7 · What it set up, 2025 to 2026',
-      short: 'What it set up',
-      heading: 'After the rebuild, questions turned from finding data to understanding it',
+      id: 'results',
+      eyebrow: 'Results',
+      short: 'Results',
+      heading: 'First-result precision rose from 81.31% to 89.24%',
       blocks: [
+        {
+          type: 'cards',
+          items: [
+            { value: '81.31% → 89.24%', title: 'first-result precision, Data Map search, Mar 2025', text: 'Across 10,000 data products and 460,000 attributes. My design and specification, carried to launch by a designer on my team; ranking by search engineering.' },
+            { value: '+58%', title: 'semantic precision, table search, Nov 2024', text: '+12.5% for keyword searches, across 320,000 tables. My design; the search-model team built the ranking.' },
+            { value: '32% → 63%', title: 'of searches ended in a click, Jan 2024 to Jan 2026', text: '41% in Aug 2024, 61% in Jul 2025. Platform-wide, tracked in Amplitude.' },
+            { value: '14.2 h → 9.4 h', title: 'time to discover data, Aug 2024 to Jul 2025', text: 'Platform-wide; Intuit’s public figure, AWS re:Invent 2025.' },
+          ],
+        },
+        {
+          type: 'quotes',
+          items: [
+            { text: 'Through multiple iterations we were able to deliver completely new user experience and delight our customers.', who: 'A staff software engineer on the catalog', when: 'Jan 2025' },
+          ],
+        },
+        { type: 'subhead', text: 'What it set up' },
         {
           type: 'p',
           text:
-            'Fixing search changed the questions people asked. A year on, the help desk’s questions were about understanding data, not finding it, and most could be answered by a single-table lookup if column-level context reached the person where they worked. That finding, plus Collections, set up the catalog inside Cursor and Claude, where the object model from this page is the schema the agent’s tools answer with. That story is on the next page.',
+            'A year on, help-desk questions were about what data means, not where it is, and most could be answered from one table’s column details. That is the question the data agent in Cursor and Claude answers, using the same object model as its schema. That story is on the next page.',
           links: [{ text: 'the next page', href: '/work/agentic-discovery' }],
         },
         {
           type: 'donut',
           total: '726 questions',
           segments: [
-            { value: 68.2, label: 'Comprehension', text: 'What a column means, how two tables join, which filters to apply' },
-            { value: 16, label: 'Locating data', text: '“Where is this dataset?”' },
+            { value: 68.2, label: 'Understanding', text: 'What a column means, how two tables join' },
+            { value: 16, label: 'Finding', text: '“Where is this dataset?”' },
             { value: 15.8, label: 'Other', text: 'Ownership, access, pipelines' },
           ],
-          note: 'Data Genius Bar questions analysed after the rebuild. 74.1% could be answered by one table’s column-level context.',
-        },
-        {
-          type: 'timeline',
-          items: [
-            { when: 'FY24 Q3', title: 'The research', text: 'Twenty sessions, seven roles. The first behavioural evidence on how people search for data; a major contributor to the FY25 roadmap.' },
-            { when: 'Nov 2024 to Mar 2025', title: 'Catalog search rebuilt', text: 'Typed, facet-indexed objects: tables, Data Map, streams, attributes, each with its own evidence. First-result precision 81% → 89%.' },
-            { when: 'Aug 2025', title: 'Collections', text: 'A saved working set on the same object model, for the four searches in five that go back to known data.' },
-            { when: 'Mar 2026', title: 'The agent in Cursor and Claude', text: 'The object model is the tool schema. Checks Collections first. Question to answer 45 min → 4 min.', state: 'Next page' },
-          ],
+          note: '74.1% could be answered from one table’s column details.',
         },
       ],
     },

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
 import type { Block, ChipIcon, InlineLink, PageFact, PageVisual, ShortPage } from '@/lib/pages/types'
-import { Boxes, Brain, ChartColumn, ClipboardList, Code, KeyRound, Megaphone, MessageSquare, Rocket, RotateCcw, Search, Table2, UserRound, Wrench } from 'lucide-react'
+import { Boxes, Brain, ChartColumn, ClipboardList, Code, KeyRound, Megaphone, MessageSquare, RotateCcw, Search, Table2, UserRound, Wrench } from 'lucide-react'
 import { TINTS, tintPanel, tintText } from '@/lib/tint'
 import { Reveal } from '@/components/motion-primitives'
 import { ContactFooter } from '@/components/contact-footer'
@@ -310,6 +310,56 @@ function BlockView({ block }: { block: Block }) {
       </ul>
     )
   }
+  if (block.type === 'finding') {
+    const Shot = ({ label, img }: { label: string; img: { src: string; width: number; height: number; alt: string } }) => (
+      <figure className="min-w-0">
+        <figcaption className="label-micro mb-2 text-muted-foreground">{label}</figcaption>
+        <div className="flex items-center justify-center rounded-[10px] bg-card-soft p-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={img.src} width={img.width} height={img.height} alt={img.alt} loading="lazy" decoding="async" className="h-auto max-h-[22rem] w-auto max-w-full rounded-[6px]" />
+        </div>
+      </figure>
+    )
+    return (
+      <ol className="grid gap-5">
+        {block.items.map((item, i) => (
+          <li key={item.title} className={cn(CARD, 'grid gap-5 p-6')}>
+            <h3 className="font-heading text-xl font-semibold leading-snug tracking-[-0.01em] text-foreground">
+              <span className="mr-2.5 font-mono text-sm font-normal text-accent-brand">{String(i + 1).padStart(2, '0')}</span>
+              {item.title}
+            </h3>
+            {(item.before || item.after) && (
+              <div className={cn('grid gap-4', item.before && item.after && 'md:grid-cols-2')}>
+                {item.before && <Shot label="Before, 2024" img={item.before} />}
+                {item.after && <Shot label="After, as designed" img={item.after} />}
+              </div>
+            )}
+            <dl className="grid gap-x-8 gap-y-4 md:grid-cols-3">
+              <div>
+                <dt className={cn(SMALL, 'font-semibold')}>What we saw</dt>
+                <dd className={cn(BODY, 'mt-1.5')}>
+                  {item.saw}
+                  {item.quote && (
+                    <span className="mt-2 block text-foreground">
+                      “{item.quote.text}” <span className="text-muted-foreground">{item.quote.who}</span>
+                    </span>
+                  )}
+                </dd>
+              </div>
+              <div>
+                <dt className={cn(SMALL, 'font-semibold text-accent-brand')}>What I designed</dt>
+                <dd className={cn(BODY, 'mt-1.5')}>{item.did}</dd>
+              </div>
+              <div>
+                <dt className={cn(SMALL, 'font-semibold')}>What shipped</dt>
+                <dd className={cn(BODY, 'mt-1.5')}>{item.shipped}</dd>
+              </div>
+            </dl>
+          </li>
+        ))}
+      </ol>
+    )
+  }
   if (block.type === 'tension') {
     return (
       <ol className={cn(CARD, 'divide-y divide-border p-0')}>
@@ -328,13 +378,13 @@ function BlockView({ block }: { block: Block }) {
             {(() => {
               const evidence = (
                 <div>
-                  <p className={cn(SMALL, 'font-semibold')}>What the evidence said</p>
+                  <p className={cn(SMALL, 'font-semibold')}>{block.labels?.[0] ?? 'What the evidence said'}</p>
                   <p className={cn(BODY, 'mt-2')}>{item.tension}</p>
                 </div>
               )
               const decision = (
                 <div>
-                  <p className={cn(SMALL, 'font-semibold text-accent-brand')}>What I decided</p>
+                  <p className={cn(SMALL, 'font-semibold text-accent-brand')}>{block.labels?.[1] ?? 'What I decided'}</p>
                   <p className={cn(BODY, 'mt-2')}>{item.decision}</p>
                 </div>
               )
@@ -593,44 +643,31 @@ function Visuals({ visuals, className }: { visuals: PageVisual[]; className?: st
   )
 }
 
-const FACT_ICONS: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties; 'aria-hidden'?: boolean }>> = {
-  Role: UserRound, Scope: Boxes, Research: Search, Shipped: Rocket, Team: UserRound, Systems: ClipboardList, Outcomes: ChartColumn,
-}
-
-/** The opening facts: four columns across, Role, Scope, Research, Shipped,
- *  each with a tinted icon and its label on top and short facts stacked
- *  beneath, the date or count of each in muted type on its own line.
- *  Hairline dividers between columns; two columns on tablets, one on phones. */
-export function Facts({ facts, tint, className = 'mt-12' }: { facts: PageFact[]; tint: string; className?: string }) {
+/** The opening facts (12 Nov 2026): a light four-column strip, as the
+ *  CLAUDE.md layout rule asks. A blue micro-label on each column, short
+ *  stacked lines beneath, the date or count set lighter in brackets. No card
+ *  and no icons: hairlines above and below, and between columns on wide
+ *  screens. Two columns on tablets and phones. `tint` is kept for callers. */
+export function Facts({ facts, className = 'mt-12' }: { facts: PageFact[]; tint?: string; className?: string }) {
   return (
-    <dl className={cn(CARD, 'grid overflow-hidden p-0 sm:grid-cols-2 lg:grid-cols-4', className)}>
-      {facts.map((f, i) => {
-        const Icon = FACT_ICONS[f.label]
-        return (
-          <div key={f.label} className={cn('px-5 py-5', i > 0 && 'border-t border-border sm:border-t-0', i % 2 === 1 && 'sm:border-l sm:border-border', i >= 2 && 'sm:border-t sm:border-border lg:border-t-0', i > 0 && 'lg:border-l lg:border-border')}>
-            <dt className="flex items-center gap-3">
-              {Icon && (
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: `color-mix(in oklab, ${tint} 12%, var(--card))` }}>
-                  <Icon className="size-4" style={tintText(tint)} aria-hidden />
-                </span>
-              )}
-              <span className="font-heading text-base font-semibold tracking-tight text-foreground">{f.label}</span>
-            </dt>
-            {f.lines ? (
-              <dd className="mt-4 grid gap-3">
-                {f.lines.map((line) => (
-                  <div key={line.text + (line.note ?? '')}>
-                    <p className="font-sans text-[15px] font-medium leading-snug text-foreground">{line.text}</p>
-                    {line.note && <p className="mt-0.5 font-sans text-[13px] leading-snug text-muted-foreground">{line.note}</p>}
-                  </div>
-                ))}
-              </dd>
-            ) : (
-              <dd className="mt-4 text-pretty font-sans text-[15px] leading-relaxed text-foreground">{f.value}</dd>
-            )}
-          </div>
-        )
-      })}
+    <dl className={cn('grid grid-cols-2 gap-x-6 gap-y-7 border-y border-foreground/10 py-6 lg:grid-cols-4 lg:gap-x-0', className)}>
+      {facts.map((f, i) => (
+        <div key={f.label} className={cn('min-w-0', i > 0 && 'lg:border-l lg:border-foreground/10 lg:pl-6', i < facts.length - 1 && 'lg:pr-6')}>
+          <dt className="label-micro text-accent-brand">{f.label}</dt>
+          {f.lines ? (
+            <dd className="mt-3 grid gap-1.5">
+              {f.lines.map((line) => (
+                <p key={line.text + (line.note ?? '')} className="font-sans text-[15px] leading-snug text-foreground">
+                  {line.text}
+                  {line.note && <span className="text-muted-foreground"> ({line.note})</span>}
+                </p>
+              ))}
+            </dd>
+          ) : (
+            <dd className="mt-3 text-pretty font-sans text-[15px] leading-snug text-foreground">{f.value}</dd>
+          )}
+        </div>
+      ))}
     </dl>
   )
 }
