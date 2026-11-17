@@ -151,16 +151,22 @@ function Card({ card }: { card: WorkCard }) {
   )
 }
 
-export function WorkArcs() {
+/** `heading={false}` drops the visible label and heading: on the catalog
+ *  homepage the open tab already says "Design work" (16 Nov 2026). */
+export function WorkArcs({ heading = true }: { heading?: boolean }) {
   // The arcs stay in the data for order; the page shows one run of cards.
   const cards = ARCS.flatMap((arc) => arc.cards)
   return (
     <section id="work" className="relative z-10 scroll-mt-28">
-      <div className="mx-auto max-w-6xl px-6 pb-8 pt-20 md:px-10 lg:px-14">
-        <Reveal className="mb-8">
-          <p className="label-micro text-muted-foreground">Individual design · 2017–2026</p>
-          <h2 className="mt-3 font-heading text-3xl font-semibold leading-[1.1] tracking-[-0.02em] md:text-4xl">Design work</h2>
-        </Reveal>
+      <div className={`mx-auto max-w-6xl px-6 pb-8 md:px-10 lg:px-14 ${heading ? 'pt-20' : 'pt-8'}`}>
+        {heading ? (
+          <Reveal className="mb-8">
+            <p className="label-micro text-muted-foreground">Individual design · 2017–2026</p>
+            <h2 className="mt-3 font-heading text-3xl font-semibold leading-[1.1] tracking-[-0.02em] md:text-4xl">Design work</h2>
+          </Reveal>
+        ) : (
+          <h2 className="sr-only">Design work</h2>
+        )}
         <ol className="grid gap-8">
           {cards.map((card) => (
             <Reveal key={card.slug} as="li">

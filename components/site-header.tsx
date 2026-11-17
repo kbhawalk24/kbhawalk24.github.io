@@ -10,9 +10,27 @@ import { EASE_OUT } from '@/components/motion-primitives'
 
 /** Floating pill nav, on every page from load: Design work / Management /
  *  Timeline / Resume / LinkedIn / Contact (the landing mock, 11 Nov 2026). Section navigation lives on the page
- *  itself (components/section-nav.tsx), not here. */
-export function SiteHeader({ onHome = true }: { onHome?: boolean }) {
+ *  itself (components/section-nav.tsx), not here.
+ *
+ *  `hideOver` names an element (the catalog hero, which carries its own tab
+ *  row) that the nav stays out of: it is hidden while any of that element is
+ *  on screen and appears once it has scrolled out of view. Other pages pass
+ *  nothing and show the nav from load. */
+export function SiteHeader({ onHome = true, hideOver }: { onHome?: boolean; hideOver?: string }) {
   const home = onHome ? '' : '/'
+  const [shown, setShown] = useState(!hideOver)
+
+  useEffect(() => {
+    if (!hideOver) return
+    const el = document.getElementById(hideOver)
+    if (!el) {
+      setShown(true)
+      return
+    }
+    const io = new IntersectionObserver(([entry]) => setShown(!entry.isIntersecting))
+    io.observe(el)
+    return () => io.disconnect()
+  }, [hideOver])
 
   const links: NavItem[] = [
     { label: 'Design work', href: `${home}#work` },
@@ -24,18 +42,18 @@ export function SiteHeader({ onHome = true }: { onHome?: boolean }) {
   ]
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4 md:top-6">
+    <header inert={!shown} className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4 md:top-6">
       {/* Content scrolling under the pill fades out before it reaches it. */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 -top-4 h-24 md:-top-6 md:h-28"
+        className={cn('absolute inset-x-0 -top-4 h-24 transition-opacity duration-200 ease-out md:-top-6 md:h-28', !shown && 'opacity-0')}
         style={{ background: 'linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 85%, transparent) 45%, transparent 100%)' }}
       />
       <motion.nav
         aria-label="Site"
         initial={{ y: -12, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.3, ease: EASE_OUT }}
+        animate={shown ? { y: 0, opacity: 1 } : { y: -12, opacity: 0 }}
+        transition={hideOver ? { duration: shown ? 0.25 : 0.18, ease: EASE_OUT } : { duration: 0.4, delay: 0.3, ease: EASE_OUT }}
         className="pointer-events-auto flex w-max max-w-full items-center gap-1 rounded-full bg-card/80 py-1.5 pl-4 pr-1.5 shadow-float ring-1 ring-foreground/[7%] backdrop-blur-xl sm:gap-2 sm:pl-5"
       >
         <Link
@@ -156,6 +174,7 @@ function NavMenu({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.98 }}
             transition={{ duration: 0.16, ease: EASE_OUT }}
+            style={{ transformOrigin: 'top center' }}
             className="absolute left-1/2 top-[calc(100%+10px)] max-h-[70vh] w-60 -translate-x-1/2 overflow-y-auto rounded-[14px] bg-card p-1.5 shadow-float ring-1 ring-foreground/[7%]"
           >
             {items.map((l) => (

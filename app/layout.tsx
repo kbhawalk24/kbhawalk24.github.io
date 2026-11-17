@@ -9,6 +9,8 @@ import './globals.css'
 const mulish = Mulish({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
+  // The italic is used by the catalog page's footer line.
+  style: ['normal', 'italic'],
   variable: '--font-mulish',
 })
 const leagueSpartan = League_Spartan({
@@ -25,7 +27,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: 'Kanchi Bhawalkar, Product Design Leader',
   description:
-    'Product Design Manager and Principal Designer for data and AI tools. Founding designer of Intuit’s data platform, then the manager of its design team at one designer for every 85 engineers. Four case studies with exact, sourced figures, and how I led the design team.',
+    'Product Design Manager and Principal Designer for data and AI tools. Founding designer of Intuit’s data catalog, then the manager of its data platform’s design team at one designer for every 85 engineers. Four case studies with exact, sourced figures, and how I led the design team.',
 
 }
 
@@ -45,6 +47,11 @@ export default function RootLayout({
       className={`bg-background ${mulish.variable} ${leagueSpartan.variable} ${plexMono.variable}`}
     >
       <body className="antialiased">
+        {/* The catalog homepage hides its stage until the client knows
+            whether the opening plays; without scripts, show it. */}
+        <noscript>
+          <style>{'#catalog-stage{visibility:visible!important}'}</style>
+        </noscript>
         {/* For keyboard users: the first Tab stop jumps past the header to
             the page's <main id="main">. Hidden until focused. */}
         <a

@@ -83,20 +83,21 @@
      shadow rather than a fill, since the ground under them is white too;
      panels nested inside a card step down to --card-soft. */
   --background: #ffffff;
-  --foreground: #141414;
+  /* Ink, not black (14 Nov 2026): a deep blue-grey, so type sits softer on the page. */
+  --foreground: #1e2738;
   --card: #ffffff;
-  --card-foreground: #141414;
+  --card-foreground: #1e2738;
   --popover: #ffffff;
-  --popover-foreground: #141414;
+  --popover-foreground: #1e2738;
   /* Primary: ink */
-  --primary: #141414;
+  --primary: #1e2738;
   --primary-foreground: #ffffff;
   --secondary: #f5f5f5;
-  --secondary-foreground: #141414;
+  --secondary-foreground: #1e2738;
   --muted: #f5f5f5;
   --muted-foreground: #5f5f5b;
   --accent: #f5f5f5;
-  --accent-foreground: #141414;
+  --accent-foreground: #1e2738;
   --destructive: oklch(0.577 0.245 27.325);
   --border: #e5e5e5;
   --input: #e5e5e5;
@@ -255,3 +256,44 @@
   }
 }
 
+
+/* Catalog page (14 Nov 2026): a tab's panel fades in when it is swapped in.
+   Opacity only, and short: tabs are pressed often. */
+.catalog-panel {
+  animation: catalog-panel-in 180ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes catalog-panel-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .catalog-panel {
+    animation: none;
+  }
+}
+
+/* The catalog page keeps the pale blue ground but has no dot grid. */
+.hero-ground.catalog-ground::before {
+  content: none;
+}
+
+/* Paper grain (14 Nov 2026): one fine layer of noise over the whole site,
+   multiplied into whatever is under it, so flat fills read as paper instead
+   of screen. Fixed and inert: it never scrolls or takes a click. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: multiply;
+  opacity: 0.26;
+}
+@media print {
+  body::after {
+    display: none;
+  }
+}

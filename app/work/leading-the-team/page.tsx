@@ -1,6 +1,7 @@
 import { Forward } from '@/components/forward'
 
-/** The leadership page moved to /leadership; old links forward there. */
+/** The Management case study is now the homepage's Management tab (16 Nov
+ *  2026); old links forward there. */
 export default function Page() {
-  return <Forward to="/leadership" label="the Leadership page" />
+  return <Forward to="/#management" label="the Management section" />
 }

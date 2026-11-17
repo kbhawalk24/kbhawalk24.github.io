@@ -28,25 +28,25 @@ const ROWS: Row[] = [
     label: 'Discovery',
     kind: 'area',
     wins: [
-      { id: 'search', value: card('search-2').stats[0].value, caption: 'Search 2.0 precision', tag: 'mine' },
-      { id: 'agent', value: card('agentic-discovery').stats[0].value, caption: 'The agent, to an answer', tag: 'mine' },
-      { id: 'users', value: '2,664 → 6,673', caption: 'Monthly users, Jul 2024 to Mar 2026', tag: 'shared' },
+      { id: 'search', value: card('search-2').stats[0].value, caption: 'How often the first result was the right one, Data Map search at launch, Mar 2025' },
+      { id: 'agent', value: card('agentic-discovery').stats[0].value, caption: 'Time from a question to a verified answer, with the data agent, Mar 2026' },
+      { id: 'users', value: '2,664 → 6,673', caption: 'Monthly users of the data catalog, Jul 2024 to Mar 2026' },
     ],
   },
-  { id: 'access', label: 'Access', kind: 'area', wins: [{ id: 'streams', value: fig('2–3 weeks → 3 days'), caption: 'Stream access, 61% auto-approved' }] },
-  { id: 'lineage', label: 'Lineage', kind: 'area', wins: [{ id: 'rootcause', value: fig('~4 hours → minutes'), caption: 'Root cause of a data incident', also: ['observability'] }] },
+  { id: 'access', label: 'Access', kind: 'area', wins: [{ id: 'streams', value: fig('2–3 weeks → 3 days'), caption: 'Time to get access to a real-time data stream; 61% of requests were approved automatically' }] },
+  { id: 'lineage', label: 'Lineage', kind: 'area', wins: [{ id: 'rootcause', value: fig('~4 hours → minutes'), caption: 'Time to find the root cause of a data incident', also: ['observability'] }] },
   { id: 'observability', label: 'Observability', kind: 'area', wins: [] },
   {
     id: 'maturity',
     label: 'Data maturity',
     kind: 'area',
     wins: [
-      { id: 'clean', value: MANAGEMENT.shipped.lead.value, caption: 'Certified clean data', tag: 'shared' },
-      { id: 'p0', value: fig('17 → 0'), caption: 'P0 and P1 incidents, 2025', tag: 'shared' },
+      { id: 'clean', value: MANAGEMENT.shipped.lead.value, caption: 'Share of the company’s data certified to the clean-data standard, by Nov 2025' },
+      { id: 'p0', value: fig('17 → 0'), caption: 'Most severe data incidents during tax season, tax year 2025' },
     ],
   },
-  { id: 'instrumentation', label: 'Instrumentation', kind: 'area', wins: [{ id: 'tracking', value: '2 weeks → under 2 days', caption: 'Tracking-plan review' }] },
-  { id: 'pipelines', label: 'Pipeline authoring', kind: 'area', wins: [{ id: 'debug', value: '1,000+ hours', caption: 'Saved by AI debug assist, by mid-2025' }] },
+  { id: 'instrumentation', label: 'Instrumentation', kind: 'area', wins: [{ id: 'tracking', value: '2 weeks → under 2 days', caption: 'Time to approve an instrumentation tracking plan, once approvals were automated' }] },
+  { id: 'pipelines', label: 'Pipeline authoring', kind: 'area', wins: [] },
   { id: 'team', label: 'The team', kind: 'team', wins: [{ id: 'promoted', value: 'Every designer who reported to me was promoted', caption: '' }] },
 ]
 
@@ -150,7 +150,11 @@ export function StageGraph() {
     if (row) for (const w of row.wins) set.add(`w-${w.id}`)
     return set
   }, [focus])
-  const on = (id: string) => !lit || lit.has(id)
+  // Nodes fade only when the visitor picks one (hover, focus or pin). The
+  // resting tour lights a lineage without dimming the other results, so
+  // every figure stays readable (17 Nov 2026).
+  const picked = hover ?? pinned
+  const on = (id: string) => !lit || !picked || lit.has(id)
 
   const nodeProps = (id: string) => ({
     ref: (el: HTMLElement | null) => {
@@ -212,7 +216,7 @@ export function StageGraph() {
         <div>
           <div className="mb-3 hidden grid-cols-[12.5rem_minmax(0,1fr)] gap-x-10 md:grid">
             <p className="label-micro text-accent-brand">The seven areas</p>
-            <p className="label-micro text-accent-brand">What changed</p>
+            <p className="label-micro text-accent-brand">Highlights</p>
           </div>
           <ul className="flex flex-col gap-1.5">
             {ROWS.map((r) => (
@@ -240,13 +244,13 @@ export function StageGraph() {
                     <button
                       key={w.id}
                       {...nodeProps(`w-${w.id}`)}
-                      className={cn(PILL, 'px-3 py-1.5', ring(`w-${w.id}`), !on(`w-${w.id}`) && 'opacity-35')}
+                      className={cn(PILL, 'max-w-full px-3 py-1.5', ring(`w-${w.id}`), !on(`w-${w.id}`) && 'opacity-35')}
                     >
                       <span className={cn('block font-heading font-bold leading-[1.15] tracking-[-0.01em] text-accent-brand', 'text-[16px]')}>
                         {w.value}
                       </span>
                       {(w.caption || w.tag) && (
-                        <span className="flex items-center gap-1.5 whitespace-nowrap font-sans text-[12px] text-muted-foreground">
+                        <span className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-sans text-[14px] leading-[1.35] text-muted-foreground">
                           {w.caption}
                           {w.tag && (
                             <span className={cn('rounded-full px-1.5 py-px label-micro', w.tag === 'mine' ? 'bg-accent-brand/10 text-accent-brand' : 'bg-foreground/[0.06] text-muted-foreground')}>

@@ -408,7 +408,7 @@ function BlockView({ block }: { block: Block }) {
   if (block.type === 'clips') {
     return (
       <figure>
-        <ul className={cn('grid gap-4', block.items.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3')}>
+        <ul className={cn('grid gap-4', block.items.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : block.items.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3')}>
           {block.items.map((c) => (
             <li key={c.src} className={cn(CARD, 'flex flex-col p-3')}>
               <video src={c.src} width={c.width} height={c.height} className="w-full rounded-[8px] bg-card-soft" autoPlay muted loop playsInline preload="metadata" aria-label={c.alt} />

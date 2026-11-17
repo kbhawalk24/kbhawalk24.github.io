@@ -1,28 +1,11 @@
-'use client'
+import { CatalogPage } from '@/components/overdrive/catalog/catalog-page'
 
-import { MotionConfig } from 'motion/react'
-import { SiteHeader } from '@/components/site-header'
-import { Hero } from '@/components/hero'
-import { WorkArcs } from '@/components/work-arcs'
-import { TalksRow } from '@/components/talks-row'
-import { ManagementSection } from '@/components/management/management-section'
-import { ContactFooter } from '@/components/contact-footer'
-
-// The landing page (rebuilt 11 Nov 2026 from the tabbed landing mock): the
-// static hero, Design work, the talks row (placeholders), Management as a lineage graph on its
-// blue band, then the contact footer. (Experience and About removed 11 Nov.)
+// The landing page (14 Nov 2026): Kanchi's own entry in a data catalog. It
+// loads on the split hero's opening screen, and scrolling turns that into the
+// tabbed catalog page: the header, the tab row (Overview, Design work,
+// Management, Leveraging AI, Talks) and the Overview with her description
+// beside the wheel of clips and project stills (16 Nov 2026). The earlier scrolling homepage's sections are the tabs' panels.
 
 export default function Page() {
-  return (
-    <MotionConfig reducedMotion="user">
-      <SiteHeader />
-      <main id="main">
-        <Hero />
-        <WorkArcs />
-        <TalksRow />
-        <ManagementSection />
-      </main>
-      <ContactFooter />
-    </MotionConfig>
-  )
+  return <CatalogPage option="band" />
 }

@@ -11,7 +11,7 @@ describe('Hero', () => {
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Kanchi Bhawalkar')
     expect(screen.getByText('Product Design Manager and Principal Designer')).toBeTruthy()
     const text = document.body.textContent ?? ''
-    expect(text).toContain('I’m a product design leader for data and AI tools, with 12+ years')
+    expect(text).toContain('I design data and AI tools, and I manage the designers who build them.')
     for (const area of ['discovery', 'access', 'lineage', 'observability', 'data maturity', 'instrumentation', 'pipeline authoring']) {
       expect(text).toContain(area)
     }

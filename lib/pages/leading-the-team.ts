@@ -9,7 +9,9 @@ import type { ShortPage } from './types'
 
 export const LEADING_THE_TEAM: ShortPage = {
   slug: 'leading-the-team',
-  href: '/leadership',
+  // The page at /leadership was removed on 16 Nov 2026; this data still feeds
+  // the Leveraging AI tab and the experimental pages.
+  href: '/#management',
   kind: 'leadership',
   title: 'Leading the designers behind Intuit’s enterprise data platform',
   roleTag: 'Design Manager',

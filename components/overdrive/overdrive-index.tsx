@@ -40,6 +40,12 @@ const VERSIONS = [
     title: 'Scroll-driven case film',
     text: 'Each case study plays as a scene as you scroll: the product zooms in, the figure lands, then a cut to the next.',
   },
+  {
+    id: 'annotated',
+    href: '/overdrive/annotated',
+    title: 'Annotated landing',
+    text: 'One long page: the catalog’s home screen with labels pinned to it, the seven areas as dictionary entries, then the case studies.',
+  },
 ] as const
 
 export function OverdriveIndex() {

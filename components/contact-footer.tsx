@@ -29,9 +29,6 @@ export function ContactFooter() {
         >
           Building developer tools or complex data systems? Let&rsquo;s talk.
         </motion.h2>
-        <motion.p variants={fadeUp} className="mt-5 font-sans text-base text-muted-foreground">
-          Open to principal or staff product design roles and design manager roles in the San Francisco Bay Area.
-        </motion.p>
         <motion.div variants={fadeUp} className="mt-6 flex flex-wrap items-center gap-2.5">
           {LINKS.map((link, i) => (
             <a

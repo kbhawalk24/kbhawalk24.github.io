@@ -65,7 +65,6 @@ const PAGES: { page: ShortPage; short: string; org: string }[] = [
   { page: AGENTIC_DISCOVERY, short: 'Data agent', org: 'Intuit' },
   { page: CATALOG_DATA_MAP_LINEAGE, short: 'Data catalog', org: 'Intuit' },
   { page: SIX_O_FIVE, short: '605', org: '605' },
-  { page: LEADING_THE_TEAM, short: 'Management', org: 'Intuit' },
 ]
 
 function build(): IndexItem[] {
@@ -97,7 +96,7 @@ function build(): IndexItem[] {
     kicker: LEADING_THE_TEAM.roleTag,
     title: LEADING_THE_TEAM.title,
     text: MANAGEMENT.text,
-    href: slash(LEADING_THE_TEAM.href),
+    href: '/#management',
     org: 'Intuit',
     period: LEADING_THE_TEAM.period,
     years: yearsOf(LEADING_THE_TEAM.period),
@@ -162,7 +161,7 @@ function build(): IndexItem[] {
       kicker: 'Intuit product area',
       title: area.charAt(0).toUpperCase() + area.slice(1),
       text: `One of the seven product areas of ${AREAS_SENTENCE}`,
-      href: '/leadership/#scope',
+      href: '/#management',
       org: 'Intuit',
       period: '2021–2026',
       years: yearsOf('2021–2026'),
@@ -170,7 +169,7 @@ function build(): IndexItem[] {
   })
 
   // Management figures from the homepage.
-  const mg = { kicker: 'Management', href: '/leadership/', org: 'Intuit', period: '2024–2026', years: yearsOf('2024–2026') }
+  const mg = { kicker: 'Management', href: '/#management', org: 'Intuit', period: '2024–2026', years: yearsOf('2024–2026') }
   items.push({ id: 'mg-launches', type: 'Figure', title: '24 launches', text: MANAGEMENT.shipped.statement, ...mg })
   items.push({ id: 'mg-lead', type: 'Figure', title: MANAGEMENT.shipped.lead.value, text: `${MANAGEMENT.shipped.lead.label}, ${MANAGEMENT.shipped.lead.text}`, ...mg })
   MANAGEMENT.shipped.figures.forEach((f, i) => items.push({ id: `mg-fig-${i}`, type: 'Figure', title: f.value, text: f.text, ...mg }))

@@ -10,7 +10,7 @@ import { Reveal } from '@/components/motion-primitives'
 
 export function TalksRow() {
   return (
-    <section aria-label="Talks" className="relative z-10">
+    <section id="talks" aria-label="Talks" className="relative z-10 scroll-mt-28">
       <div className="mx-auto max-w-6xl px-6 pb-20 md:px-10 lg:px-14">
         <Reveal>
           <ul className="flex flex-wrap gap-x-12 gap-y-7 rounded-[18px] bg-card px-8 py-7 shadow-soft">

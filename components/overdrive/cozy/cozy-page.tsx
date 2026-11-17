@@ -117,9 +117,6 @@ function CozyFooter() {
           <h2 className="font-heading text-[clamp(2rem,4.2vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-[var(--foreground)]">
             Building developer tools or complex data systems? Let&rsquo;s talk.
           </h2>
-          <p className="mt-5 font-sans text-base text-[var(--muted-foreground)]">
-            Open to principal or staff product design roles and design manager roles in the San Francisco Bay Area.
-          </p>
           <div className="mt-6 flex flex-wrap items-center gap-2.5">
             {LINKS.map((l, i) => (
               <a
