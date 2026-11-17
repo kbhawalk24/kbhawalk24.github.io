@@ -34,8 +34,11 @@ export const CATALOG_TABS: { id: CatalogTab; label: string }[] = [
   { id: 'overview', label: 'Overview' },
   { id: 'work', label: 'Design work' },
   { id: 'management', label: 'Management' },
-  { id: 'ai', label: 'Leveraging AI' },
-  { id: 'talks', label: 'Talks' },
+  // The Leveraging AI tab is off the page for now (17 Nov 2026, her call);
+  // its panel (components/catalog-ai.tsx) is kept. Put this line back to show it:
+  // { id: 'ai', label: 'Leveraging AI' },
+  // The Talks tab is off the page for now too (17 Nov 2026, her call):
+  // { id: 'talks', label: 'Talks' },
 ]
 
 /** The three questions, in the order she gave them. Each has the short answer
