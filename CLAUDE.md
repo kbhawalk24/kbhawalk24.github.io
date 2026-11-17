@@ -42,6 +42,8 @@ Dashboard: https://cloud.umami.is (Kanchi's account).
 
 - The catalog case study's video is her product tour of the rebuilt catalog prototype (17 Nov 2026): `public/work/catalog-data-map-lineage/product-tour.mp4`, compressed from her recording, with its title card as the poster. It is both the cover of the "Founding designer of Intuit's data catalog" card on the Design work tab and the hero of /work/catalog-data-map-lineage, captioned as a prototype with sample data. The earlier `hero.mp4` is unused. The floating nav has no Timeline item since the same day ("remove timeline as entry from here"): it reads Design work, Management, Resume, LinkedIn; the /timeline page still exists, unlinked.
 
+- Management tab, shorter (17 Nov 2026, "a little less verbose" then "cut further"): the Problem, Bet and Outcome lines under each part's heading are no longer rendered (each part's `gist` stays in `HOW_I_MANAGE`), so a part is its heading, its diagram, then its paragraphs and artifacts. The paragraphs had a light trim that removed no fact. The artifacts are larger: 4:3 frames and narrower gaps between the columns and beside the Contents card.
+
 ## Layout rules
 
 - **Everything spans end to end.** No heading and no paragraph, on any page, gets a max-width or `text-balance`; text runs the full width of its column and wraps where the column ends. No reading-measure caps.

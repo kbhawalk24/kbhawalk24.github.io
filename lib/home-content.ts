@@ -397,8 +397,8 @@ export const HOW_I_MANAGE = {
       rows: [
         {
           paras: [
-            'Managing design across the whole platform meant replacing case-by-case coordination with a few fixed routines. The first was intake. Every design request came through one door into one tracker, a shared table of every design project with its status and designer, that every product manager could see, so priority and staffing were weighed in the open.',
-            'The tracker also let me protect focus. Each designer owned a fixed set of product areas and was not moved between them. When leadership wanted the designer for data access to cover instrumentation, an unrelated area, as well, I said no, and that designer shipped six launches in ten months. When a decision stalled, I ran a resolution session: the product managers and the engineering leads in one room until the decision was made.',
+            'I replaced case-by-case coordination with a few fixed routines, starting with intake. Every design request went into one tracker, a shared table of every design project with its status and designer, that every product manager could see, so priority and staffing were weighed in the open.',
+            'Each designer owned a fixed set of product areas and was not moved between them. When leadership wanted the designer for data access to cover instrumentation, an unrelated area, as well, I said no, and that designer shipped six launches in ten months. When a decision stalled, I ran a resolution session, with the product managers and the engineering leads in one room until it was made.',
           ],
           figure: {
             src: '/work/leading-the-team/tracker-2025.jpg',
@@ -415,7 +415,7 @@ export const HOW_I_MANAGE = {
         {
           paras: [
             'Technical users rarely sit for repeated interviews, so I had the team pool six months of research into one searchable research base: user visits, eight surveys and the questions people asked in Slack help channels, 2,890 tagged notes in all. Engineers and product managers pulled from it directly for their requirements and pitch decks.',
-            'That evidence put two features on the roadmap that had not been on it: Query insights, a view of the queries other people run against a table, and Collections, a person’s saved working set of data. Both shipped in 2025. I kept the same rigour with the team itself. Every weekly 1:1 followed one template: blockers, shipping status, growth goals and career.',
+            'That evidence put two features on the roadmap that had not been on it: Query insights, a view of the queries other people run against a table, and Collections, a person’s saved working set of data. Both shipped in 2025. Every weekly 1:1 followed one template: blockers, shipping status, growth goals and career.',
           ],
           figure: {
             src: '/work/leading-the-team/marvin-2025.jpg',
@@ -444,8 +444,8 @@ export const HOW_I_MANAGE = {
       rows: [
         {
           paras: [
-            'With seven product areas and three designers, I had to settle the open questions early so the designers could get on with the design. So once intake was under control, I moved my own time into the early meetings where product managers and engineers frame a problem, before a specification exists. I also wrote the strategy the designers worked from. I had written the specification for Search 2.0, the rebuild of search in Intuit’s data catalog, in June 2024, two months before I became manager. I also wrote the design strategy for access to data and the rules for the data agent, an AI assistant inside Cursor and Claude that answers questions about the company’s data. My designers extended the search specification and the agent’s rules into new areas.',
-            'I kept designing as well. I designed table search for Search 2.0, across 320,000 tables, and it shipped in November 2024. When a partner team lost its designer, I designed the screens for creating tables and schemas in Intuit’s developer portal, where engineers author pipelines and create services, and that design shipped.',
+            'With seven product areas and three designers, I had to settle the open questions early. So I moved my own time into the early meetings where product managers and engineers frame a problem, before a specification exists, and I wrote the strategy the designers worked from. I had written the specification for Search 2.0, the rebuild of search in Intuit’s data catalog, in June 2024, two months before I became manager. I also wrote the design strategy for access to data and the rules for the data agent, an AI assistant inside Cursor and Claude that answers questions about the company’s data. My designers extended the search specification and the agent’s rules into new areas.',
+            'I kept designing as well. My design for table search in Search 2.0, across 320,000 tables, shipped in November 2024. When a partner team lost its designer, I designed the screens for creating tables and schemas in Intuit’s developer portal, where engineers author pipelines and create services, and that design shipped.',
           ],
           link: { label: 'Read the Search 2.0 case study', href: '/work/search-2/', card: 'search-2' },
           figure: {
@@ -463,7 +463,7 @@ export const HOW_I_MANAGE = {
         },
         {
           paras: [
-            'Collections shows what joining early made possible. Twenty sessions I had led in April 2024, where people walked us through a recent time they looked for data, showed that three in four searches go back to data the person already knows: a working set of ten to fifteen vetted tables kept in spreadsheets and Slack bookmarks. A way to save that set was not on the roadmap, and engineering was sceptical of one.',
+            'Twenty sessions I had led in April 2024, where people walked us through a recent time they looked for data, showed that three in four searches go back to data the person already knows: a working set of ten to fifteen vetted tables kept in spreadsheets and Slack bookmarks. A way to save that set was not on the roadmap, and engineering was sceptical of one.',
             'I used the research base to argue for it, and it went onto the roadmap for fiscal 2025, the year that began in August 2024, as private bookmarks plus the first way to share a set of tables with colleagues. Designers on my team shipped it on August 7, 2025, and it became the first thing the data agent reads before it searches.',
           ],
           link: { label: 'Read the data agent case study, which covers Collections', href: '/work/agentic-discovery/', card: 'agentic-discovery' },
@@ -493,14 +493,14 @@ export const HOW_I_MANAGE = {
       rows: [
         {
           paras: [
-            'A small team has to choose the right problems, so I pushed the designers to check a problem before building and to measure the outcome after shipping. They did not wait for an analyst. Before designing, they sized the problem with interviews, their own SQL against the platform’s logs, and funnels in Amplitude, a product analytics tool. After launch, they tracked how the feature was used and iterated on what they saw.',
+            'A small team has to choose the right problems, so I pushed the designers to check a problem before building and to measure the outcome after shipping. Before designing, without waiting for an analyst, they sized the problem with interviews, their own SQL against the platform’s logs, and funnels in Amplitude, a product analytics tool. After launch, they tracked how the feature was used and iterated on what they saw.',
           ],
           slots: ['A dashboard or a query one of the designers wrote'],
         },
         {
           paras: [
             'I went first on new tools. I built coded prototypes with Claude, Cursor, v0 and Figma and used AI to synthesise research in my own design work before I asked anyone else to. Every designer then adopted both. I also coached the designers to test rough concepts before engineering committed to building one.',
-            'The redesign of lineage, the view of what feeds a table, shows these practices at work. After six user visits, a designer on my team tested seven concepts in a one-week sprint, and a summary list helped people find the cause of a data incident faster than a graph did. On the same redesign a designer on my team prototyped in code alongside the developers, and development took 90% less time. Finding the root cause of an incident went from about 4 hours to minutes. The designers added a practice of their own: a design sign-off before each release.',
+            'The redesign of lineage, the view of what feeds a table, shows these practices at work. After six user visits, a designer on my team tested seven concepts in a one-week sprint and found that a summary list helped people find the cause of a data incident faster than a graph did. On the same redesign a designer prototyped in code alongside the developers, and development took 90% less time. Finding the root cause of an incident went from about 4 hours to minutes. The designers added a practice of their own: a design sign-off before each release.',
           ],
           slots: ['A coded prototype beside the screen that shipped', 'The seven lineage concepts from the sprint'],
         },
@@ -539,8 +539,8 @@ export const HOW_I_MANAGE = {
         },
         {
           paras: [
-            'The people using the platform needed a different kind of explanation from a release note. I started making short AI-made videos, and the team took the practice up. Each launch got a video of what was new, starting with Collections, and engineering later copied the format for its own launches.',
-            'Some changes to a workflow are hard to explain in words at all. For those we made a walkthrough video before the change arrived: when the tools for requesting access to data were merged into one, and when certification to level four of the five-level clean-data standard rolled out.',
+            'The people using the platform needed more than a release note. I started making a short AI-made video of what was new for each launch, starting with Collections. The team took the practice up, and engineering later copied the format for its own launches.',
+            'For a change to a workflow that is hard to explain in words, we made a walkthrough video before it arrived: when the tools for requesting access to data were merged into one, and when certification to level four of the five-level clean-data standard rolled out.',
           ],
           // The walkthrough deck sits with the paragraph about walkthroughs.
           figures: [
@@ -559,7 +559,7 @@ export const HOW_I_MANAGE = {
         },
         {
           paras: [
-            'I asked the designers to make the case for their own work as well. I wrote one six-slide format for a promotion case, from problem framing to executive storytelling, and each of them used it. One of the three had been my intern in summer 2023 and joined the team full time. Every designer who reported to me was promoted.',
+            'I asked the designers to make the case for their own work as well. I wrote one six-slide format for a promotion case, and each of them used it. One of the three had been my intern in summer 2023 and joined the team full time. Every designer who reported to me was promoted.',
           ],
           slides: [
             'Problem framing and scoping',

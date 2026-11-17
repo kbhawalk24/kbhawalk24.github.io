@@ -60,7 +60,7 @@ function Artifact({ f }: { f: Fig }) {
       <div
         role="img"
         aria-label={f.alt}
-        className={`overflow-hidden rounded-xl bg-white bg-no-repeat shadow-soft ring-1 ring-foreground/[9%] ${f.wide ? '' : 'aspect-[16/10]'}`}
+        className={`overflow-hidden rounded-xl bg-white bg-no-repeat shadow-soft ring-1 ring-foreground/[9%] ${f.wide ? '' : 'aspect-[4/3]'}`}
         style={{ backgroundImage: `url(${f.src})`, backgroundSize: `${f.zoom} auto`, backgroundPosition: f.at, aspectRatio: f.wide ? `${f.width} / ${f.height}` : undefined }}
       />
       <figcaption className={CAPTION}>{f.caption}</figcaption>
@@ -158,7 +158,7 @@ export function HowIManage() {
   }
 
   return (
-    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_11rem] lg:gap-12 xl:gap-16">
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_10rem] lg:gap-8 xl:gap-10">
       <aside className="mb-8 lg:col-start-2 lg:row-start-1 lg:mb-0">
         <div className="lg:sticky lg:top-28 lg:rounded-[14px] lg:bg-card lg:p-5 lg:shadow-soft">
           <nav aria-label="Contents" className="w-full max-w-full overflow-x-auto overflow-y-hidden [scrollbar-width:none] lg:overflow-visible">
@@ -228,20 +228,13 @@ export function HowIManage() {
               </h3>
               {/* The part's point as a drawing, then its paragraphs with their
                   artifacts: side by side when the part has two stretches. */}
-              {'gist' in part && (
-                <dl className="mt-4 grid gap-x-10 gap-y-3 border-y border-foreground/10 py-4 md:grid-cols-3">
-                  {(['problem', 'bet', 'outcome'] as const).map((k) => (
-                    <div key={k} className="flex flex-col gap-1">
-                      <dt className="label-micro text-accent-brand">{k}</dt>
-                      <dd className="font-sans text-base leading-[1.45] text-foreground">{part.gist[k]}</dd>
-                    </div>
-                  ))}
-                </dl>
-              )}
+              {/* The Problem, Bet and Outcome lines are off the page since
+                  17 Nov 2026 ("cut further"): they restated the paragraphs
+                  below. Each part's `gist` stays in HOW_I_MANAGE, unrendered. */}
               <div className="mt-5">
                 <PartDiagram id={part.id} />
               </div>
-              <div className={`mt-8 grid gap-x-12 gap-y-10 ${part.rows.length > 1 ? 'md:grid-cols-2' : ''}`}>
+              <div className={`mt-8 grid gap-x-8 gap-y-10 ${part.rows.length > 1 ? 'md:grid-cols-2' : ''}`}>
                 {part.rows.map((row) => (
                   <StoryRow key={row.paras[0]} row={row} paired={part.rows.some((r: Row) => !!(r.figure || r.figures || r.slides || (SHOW_SLOTS && r.slots?.length)))} />
                 ))}
