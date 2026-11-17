@@ -7,12 +7,13 @@ import { event } from '@/lib/analytics'
 import { useActiveSection } from '@/components/section-nav'
 import { HOW_I_MANAGE } from '@/lib/home-content'
 import { StageGraph } from './stage-graph'
-import { PartDiagram } from './diagrams'
-import { Sketch, drawAreas, drawLifecycle, drawSlide, drawSlot } from './sketch'
+import { AreaIcon, PartVisual } from './visuals'
+import { Sketch, drawSlot } from './sketch'
 
 // "How I manage" on the homepage's Management tab: one story in six parts, in
 // the order things happened (16 Nov 2026, fourth pass). Each part is a plain
-// heading and connected paragraphs in full sentences; the real artifacts sit
+// heading, a clean moving picture of its point (visuals.tsx) and connected
+// paragraphs in full sentences; the real artifacts sit
 // beside the paragraph they prove, and the last part is the lineage graph and
 // what she learned. No lists of bold facts: Kanchi asked for a story.
 // From lg up a Contents card on the right, the same one the case studies have,
@@ -86,10 +87,9 @@ function Slides({ steps }: { steps: readonly string[] }) {
   return (
     <ol className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {steps.map((s, i) => (
-        <li key={s} className={`relative flex min-h-[5.25rem] flex-col justify-between gap-2 px-3.5 py-3 ${i % 2 ? 'rotate-1' : '-rotate-1'}`}>
-          <Sketch w={160} h={100} draw={drawSlide} stretch seed={40 + i} className="absolute inset-0 size-full" />
-          <span className="relative font-heading text-lg font-semibold leading-none tabular-nums text-accent-brand">{i + 1}</span>
-          <span className="relative font-sans text-sm font-semibold leading-[1.25] text-foreground">{s}</span>
+        <li key={s} className="flex min-h-[5.5rem] flex-col justify-between gap-2 rounded-lg border-2 border-[#1e2738] bg-white px-3.5 py-3">
+          <span className="font-heading text-lg font-semibold leading-none tabular-nums text-accent-brand">{i + 1}</span>
+          <span className="font-sans text-sm font-semibold leading-[1.25] text-foreground">{s}</span>
         </li>
       ))}
     </ol>
@@ -206,11 +206,15 @@ export function HowIManage() {
             each, its name and a few words on what it is. On a phone they are
             a list, each picture beside its name. */}
         <div className="relative mt-10">
-          <Sketch w={1400} h={40} draw={drawLifecycle} stretch seed={5} className="absolute inset-x-0 top-3 hidden h-10 w-full lg:block" />
-          <ol className="relative grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-7 lg:gap-0">
-            {H.areas.map((a, i) => (
+          <ol className="relative grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-7 lg:gap-0 lg:border-t-2 lg:border-[#1e2738]">
+            {H.areas.map((a) => (
               <li key={a.name} className="flex items-center gap-3.5 lg:flex-col lg:gap-2.5 lg:px-1.5 lg:text-center">
-                <Sketch w={64} h={64} draw={drawAreas[a.name]} seed={70 + i} className="size-12 flex-none lg:size-16" />
+                {/* From lg up each area hangs from the one line by a short stem. */}
+                <span aria-hidden="true" className="hidden flex-col items-center lg:flex">
+                  <span className="h-4 w-0.5 bg-[#1e2738]" />
+                  <span className="size-2 rounded-full bg-[#1e2738]" />
+                </span>
+                <AreaIcon name={a.name} className="size-12 flex-none lg:size-16" />
                 <span className="flex flex-col gap-0.5">
                   <span className="font-sans text-[15px] font-semibold leading-[1.3] text-foreground">{a.name}</span>
                   <span className="font-sans text-sm leading-[1.35] text-muted-foreground">{a.gloss}</span>
@@ -232,7 +236,7 @@ export function HowIManage() {
                   17 Nov 2026 ("cut further"): they restated the paragraphs
                   below. Each part's `gist` stays in HOW_I_MANAGE, unrendered. */}
               <div className="mt-5">
-                <PartDiagram id={part.id} />
+                <PartVisual id={part.id} />
               </div>
               <div className={`mt-8 grid gap-x-8 gap-y-10 ${part.rows.length > 1 ? 'md:grid-cols-2' : ''}`}>
                 {part.rows.map((row) => (

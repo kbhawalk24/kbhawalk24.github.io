@@ -44,6 +44,8 @@ Dashboard: https://cloud.umami.is (Kanchi's account).
 
 - Management tab, shorter (17 Nov 2026, "a little less verbose" then "cut further"): the Problem, Bet and Outcome lines under each part's heading are no longer rendered (each part's `gist` stays in `HOW_I_MANAGE`), so a part is its heading, its diagram, then its paragraphs and artifacts. The paragraphs had a light trim that removed no fact. The artifacts are larger: 4:3 frames and narrower gaps between the columns and beside the Contents card.
 
+- Management tab visuals (17 Nov 2026, "take inspiration from the dynamic visuals, not the text" of her management deck and her "what I designed" overview): the hand-drawn Rough.js diagrams are replaced by clean, moving pictures in `components/management/visuals.tsx` (`PartVisual`, `AreaIcon`): flat shapes with a dark outline, the site's blue, grey bars where a screen would have words, and one small loop of motion per picture, left out for reduced motion. Every label comes from the tab's own copy, never from the deck, whose facts are out of date. The seven areas hang from one straight line by short stems; the six promotion slides are plain outlined cards. `components/management/diagrams.tsx` is deleted; `sketch.tsx` stays for the localhost-only artifact placeholders and the Leveraging AI panel.
+
 ## Layout rules
 
 - **Everything spans end to end.** No heading and no paragraph, on any page, gets a max-width or `text-balance`; text runs the full width of its column and wraps where the column ends. No reading-measure caps.
