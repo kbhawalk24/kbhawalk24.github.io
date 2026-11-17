@@ -119,12 +119,14 @@ export const ARCS: Arc[] = [
           'From a list of tables to the place people judge data, trace it and get it.',
         visualNote: 'A data product page in the 2026 platform.',
         cover: {
-          src: '/work/catalog-data-map-lineage/hero-poster.jpg',
-          video: '/work/catalog-data-map-lineage/hero.mp4',
+          // Her product tour of the rebuilt catalog prototype (17 Nov 2026),
+          // compressed from recording/dde-product-tour.mp4. The poster is its title card.
+          src: '/work/catalog-data-map-lineage/product-tour-poster.jpg',
+          video: '/work/catalog-data-map-lineage/product-tour.mp4',
           tint: TINTS.platform2026,
           width: 1600,
           height: 872,
-          alt: 'The data discovery platform: the home page, then a table page with its columns, owners and statistics',
+          alt: 'A product tour of the data catalog, rebuilt as a prototype with sample data: a title card, then search results, a table’s lineage graph, a request for access and a data owner’s list of gaps to fix, each with a one-line caption.',
         },
         stats: [{ value: '1,886 → 6,673', label: 'Monthly users, Jul 2023 to Mar 2026.' }],
         status: 'live',

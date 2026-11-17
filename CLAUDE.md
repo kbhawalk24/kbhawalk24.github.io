@@ -40,6 +40,8 @@ Dashboard: https://cloud.umami.is (Kanchi's account).
 
 - Management tab artifacts from her own files (17 Nov 2026): in "Then I moved design upstream", the ground rules page of her design brief for AI chat in the data catalog (she calls it the agent rules) and the first page of her Collections strategy document replace the Search 2.0 specification screenshot and the Collections dialog ("remove this please and just add screenshots of strategy documents (agent rules and collections, not scrolling video)"); in "I made sure the work was understood", a frame of the Data 3.0 deck and a slide of the walkthrough deck for a change to data access fill two former placeholders. A scrolling-window version was built and removed the same day at her request; do not bring it back. None of the four names a colleague.
 
+- The catalog case study's video is her product tour of the rebuilt catalog prototype (17 Nov 2026): `public/work/catalog-data-map-lineage/product-tour.mp4`, compressed from her recording, with its title card as the poster. It is both the cover of the "Founding designer of Intuit's data catalog" card on the Design work tab and the hero of /work/catalog-data-map-lineage, captioned as a prototype with sample data. The earlier `hero.mp4` is unused. The floating nav has no Timeline item since the same day ("remove timeline as entry from here"): it reads Design work, Management, Resume, LinkedIn; the /timeline page still exists, unlinked.
+
 ## Layout rules
 
 - **Everything spans end to end.** No heading and no paragraph, on any page, gets a max-width or `text-balance`; text runs the full width of its column and wraps where the column ends. No reading-measure caps.

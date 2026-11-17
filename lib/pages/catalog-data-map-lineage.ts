@@ -47,13 +47,15 @@ export const CATALOG_DATA_MAP_LINEAGE: ShortPage = {
     { value: '4 weeks', label: 'From the brief to the lineage launch, Dec 2023' },
   ],
   hero: {
-    src: '/work/catalog-data-map-lineage/hero.mp4',
-    poster: '/work/catalog-data-map-lineage/hero-poster.jpg',
+    // Her product tour of the rebuilt catalog prototype (17 Nov 2026), the same
+    // file as the Design work card. The poster is its title card.
+    src: '/work/catalog-data-map-lineage/product-tour.mp4',
+    poster: '/work/catalog-data-map-lineage/product-tour-poster.jpg',
     tint: TINTS.platform2026,
     width: 1600,
     height: 872,
-    alt: 'A screen recording of the data discovery platform, May 2026: the home page with three ways in and recently viewed data, then a table page with its columns, owners, tags, usage statistics and table statistics.',
-    caption: 'The platform in May 2026: the home page, then a table with its columns, owners, usage and statistics on one screen. The recording plays at 1.8× speed.',
+    alt: 'A product tour of the data catalog, rebuilt as a prototype with sample data: a title card, then search results, a table’s lineage graph, a request for access and a data owner’s list of gaps to fix, each with a one-line caption.',
+    caption: 'A tour of the data catalog, rebuilt as a prototype with sample data: search, a table’s lineage, a request for access and a data owner’s list of gaps to fix.',
   },
   visuals: [
     {

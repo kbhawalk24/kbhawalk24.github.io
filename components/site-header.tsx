@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
 import { EASE_OUT } from '@/components/motion-primitives'
 
 /** Floating pill nav, on every page from load: Design work / Management /
- *  Leveraging AI / Talks / Timeline / Resume / LinkedIn: the homepage's tabs in order, then the other pages (17 Nov 2026; Contact was dropped, Resume and LinkedIn are the contact). Section navigation lives on the page
+ *  Resume / LinkedIn (17 Nov 2026: the nav follows the homepage's tabs; Contact and Timeline were dropped at her request, and the Timeline page is still at /timeline). Section navigation lives on the page
  *  itself (components/section-nav.tsx), not here.
  *
  *  `hideOver` names an element (the catalog hero, which carries its own tab
@@ -35,7 +35,6 @@ export function SiteHeader({ onHome = true, hideOver }: { onHome?: boolean; hide
   const links: NavItem[] = [
     { label: 'Design work', href: `${home}#work` },
     { label: 'Management', href: `${home}#management` },
-    { label: 'Timeline', href: '/timeline' },
     { label: 'Resume', href: '/kanchi-bhawalkar-resume.pdf', external: true },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/kanchib', external: true },
   ]
