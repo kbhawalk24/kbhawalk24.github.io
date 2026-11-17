@@ -87,7 +87,7 @@ function Slides({ steps }: { steps: readonly string[] }) {
   return (
     <ol className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {steps.map((s, i) => (
-        <li key={s} className="flex min-h-[5.5rem] flex-col justify-between gap-2 rounded-lg border-2 border-[#1e2738] bg-white px-3.5 py-3">
+        <li key={s} className="flex min-h-[5.5rem] flex-col justify-between gap-2 rounded-xl bg-white px-3.5 py-3 shadow-soft ring-1 ring-foreground/[9%]">
           <span className="font-heading text-lg font-semibold leading-none tabular-nums text-accent-brand">{i + 1}</span>
           <span className="font-sans text-sm font-semibold leading-[1.25] text-foreground">{s}</span>
         </li>
@@ -206,13 +206,13 @@ export function HowIManage() {
             each, its name and a few words on what it is. On a phone they are
             a list, each picture beside its name. */}
         <div className="relative mt-10">
-          <ol className="relative grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-7 lg:gap-0 lg:border-t-2 lg:border-[#1e2738]">
+          <ol className="relative grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-7 lg:gap-0 lg:border-t-[1.5px] lg:border-[#1e2738]/30">
             {H.areas.map((a) => (
               <li key={a.name} className="flex items-center gap-3.5 lg:flex-col lg:gap-2.5 lg:px-1.5 lg:text-center">
                 {/* From lg up each area hangs from the one line by a short stem. */}
                 <span aria-hidden="true" className="hidden flex-col items-center lg:flex">
-                  <span className="h-4 w-0.5 bg-[#1e2738]" />
-                  <span className="size-2 rounded-full bg-[#1e2738]" />
+                  <span className="h-3 w-[1.5px] bg-[#1e2738]/30" />
+                  <span className="size-2 rounded-full bg-accent-brand" />
                 </span>
                 <AreaIcon name={a.name} className="size-12 flex-none lg:size-16" />
                 <span className="flex flex-col gap-0.5">
@@ -224,9 +224,9 @@ export function HowIManage() {
           </ol>
         </div>
 
-        <div className="mt-16 flex flex-col gap-20 md:mt-24 md:gap-28">
+        <div className="mt-16 flex flex-col gap-16 md:mt-20 md:gap-20">
           {H.parts.map((part) => (
-            <section key={part.id} id={`manage-${part.id}`} aria-labelledby={`manage-${part.id}-h`} className="scroll-mt-24">
+            <section key={part.id} id={`manage-${part.id}`} aria-labelledby={`manage-${part.id}-h`} className="scroll-mt-24 border-t border-foreground/10 pt-10 md:pt-12">
               <h3 id={`manage-${part.id}-h`} className={PART}>
                 {part.heading}
               </h3>
@@ -246,7 +246,7 @@ export function HowIManage() {
             </section>
           ))}
 
-          <section id={`manage-${H.impact.id}`} aria-labelledby="manage-impact-h" className="scroll-mt-24">
+          <section id={`manage-${H.impact.id}`} aria-labelledby="manage-impact-h" className="scroll-mt-24 border-t border-foreground/10 pt-10 md:pt-12">
             <h3 id="manage-impact-h" className={PART}>
               {H.impact.heading}
             </h3>

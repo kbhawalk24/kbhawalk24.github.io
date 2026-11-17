@@ -46,6 +46,8 @@ Dashboard: https://cloud.umami.is (Kanchi's account).
 
 - Management tab visuals (17 Nov 2026, "take inspiration from the dynamic visuals, not the text" of her management deck and her "what I designed" overview): the hand-drawn Rough.js diagrams are replaced by clean, moving pictures in `components/management/visuals.tsx` (`PartVisual`, `AreaIcon`): flat shapes with a dark outline, the site's blue, grey bars where a screen would have words, and one small loop of motion per picture, left out for reduced motion. Every label comes from the tab's own copy, never from the deck, whose facts are out of date. The seven areas hang from one straight line by short stems; the six promotion slides are plain outlined cards. `components/management/diagrams.tsx` is deleted; `sketch.tsx` stays for the localhost-only artifact placeholders and the Leveraging AI panel.
 
+- Management tab, one visual language (17 Nov 2026, impeccable polish pass): drawings have a dark 2.2 outline, the site's blue and pale fills, and no dark-filled blocks; they sit on the pale band with no caption under them. Real artifacts, the six promotion slides and the Highlights figures sit on one quiet white card (soft shadow, hairline ring). The Highlights graph's area chips are outlined and carry the area's icon; its column labels are sans, not mono. Each part starts on a hairline rule. No part numbers: the headings already carry the order.
+
 ## Layout rules
 
 - **Everything spans end to end.** No heading and no paragraph, on any page, gets a max-width or `text-balance`; text runs the full width of its column and wraps where the column ends. No reading-measure caps.

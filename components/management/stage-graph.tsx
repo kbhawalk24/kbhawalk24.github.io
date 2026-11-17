@@ -5,6 +5,7 @@ import { useReducedMotion } from 'motion/react'
 import { event } from '@/lib/analytics'
 import { ARCS, EXPERIENCE, MANAGEMENT } from '@/lib/home-content'
 import { cn } from '@/lib/utils'
+import { AreaIcon } from './visuals'
 
 // The Management lineage (12 Nov 2026): one root box (me, on the Intuit data
 // platform) → each of the seven areas → that area's own wins, with a last row for what came from
@@ -86,7 +87,8 @@ function lineageOf(id: string) {
 
 const track = (item: string) => event('management', { item })
 
-const PILL = 'relative rounded-[14px] bg-card text-left shadow-soft transition-[opacity,box-shadow] duration-300'
+const PILL = 'relative rounded-xl bg-white text-left shadow-soft ring-1 ring-foreground/[9%] transition-[opacity,box-shadow] duration-300'
+const HEAD = 'font-sans text-sm font-semibold text-muted-foreground'
 
 export function StageGraph() {
   const reduced = useReducedMotion()
@@ -169,7 +171,7 @@ export function StageGraph() {
     onClick: () => setPinned((p) => (p === id ? null : id)),
     ...track(`node-${id}`),
   })
-  const ring = (id: string) => (hover === id || pinned === id ? 'ring-2 ring-accent-brand' : 'ring-1 ring-transparent')
+  const ring = (id: string) => (hover === id || pinned === id ? 'ring-2 ring-accent-brand' : '')
 
   return (
     <div ref={wrapRef} className="relative">
@@ -184,13 +186,13 @@ export function StageGraph() {
                 d={d}
                 fill="none"
                 strokeLinecap="round"
-                stroke={isLit ? 'var(--accent-brand)' : 'color-mix(in oklab, var(--accent-brand) 30%, var(--band))'}
-                strokeWidth={isLit ? 2.25 : 1.5}
-                opacity={lit && !isLit ? 0.45 : 1}
+                stroke={isLit ? 'var(--accent-brand)' : '#c9ced8'}
+                strokeWidth={isLit ? 2.4 : 1.8}
+                opacity={1}
                 className="transition-[stroke,opacity] duration-300"
               />
               {isLit && !reduced && (
-                <circle r="3.5" fill="var(--accent-brand)">
+                <circle r="4.5" fill="var(--accent-brand)">
                   <animateMotion dur="1.2s" repeatCount="indefinite" path={d} />
                 </circle>
               )}
@@ -202,11 +204,11 @@ export function StageGraph() {
       <div className="relative grid gap-y-6 md:grid-cols-[auto_minmax(0,1fr)] md:gap-x-12 lg:gap-x-16">
         {/* The root: me, on the platform, centred on the rows */}
         <div className="flex flex-col md:justify-center">
-          <p className="mb-3 label-micro text-accent-brand md:hidden">Me</p>
-          <button {...nodeProps('me')} className={cn(PILL, 'self-start px-4 py-2.5', ring('me'), !on('me') && 'opacity-35')}>
-            <span className="label-micro block whitespace-nowrap text-muted-foreground">{mgr.title}</span>
+          <p className={cn(HEAD, 'mb-3 md:hidden')}>Me</p>
+          <button {...nodeProps('me')} className={cn('relative self-start rounded-xl border-[1.5px] border-[#1e2738] bg-white px-4 py-2.5 text-left transition-[opacity,box-shadow] duration-300', ring('me'), !on('me') && 'opacity-35')}>
+            <span className="block whitespace-nowrap font-sans text-sm text-muted-foreground">{mgr.title}</span>
             <span className="mt-0.5 flex items-center gap-2 whitespace-nowrap font-sans text-[16px] font-semibold text-foreground">
-              <span aria-hidden="true" className="size-2 rounded-full bg-foreground" />
+              <span aria-hidden="true" className="size-2 rounded-full bg-accent-brand" />
               Intuit data platform
             </span>
           </button>
@@ -215,8 +217,8 @@ export function StageGraph() {
         {/* One row per area, then the team row */}
         <div>
           <div className="mb-3 hidden grid-cols-[12.5rem_minmax(0,1fr)] gap-x-10 md:grid">
-            <p className="label-micro text-accent-brand">The seven areas</p>
-            <p className="label-micro text-accent-brand">Highlights</p>
+            <p className={HEAD}>The seven areas</p>
+            <p className={HEAD}>Highlights</p>
           </div>
           <ul className="flex flex-col gap-1.5">
             {ROWS.map((r) => (
@@ -230,13 +232,14 @@ export function StageGraph() {
                 <button
                   {...nodeProps(`r-${r.id}`)}
                   className={cn(
-                    'min-h-9 rounded-[10px] px-3 py-1.5 text-left font-sans text-[14px] font-semibold leading-tight text-foreground transition-[opacity,box-shadow] duration-300',
-                    r.kind === 'area' ? 'bg-card/70' : 'bg-transparent outline outline-[1.5px] outline-dashed outline-foreground/30',
-                    hover === `r-${r.id}` || pinned === `r-${r.id}` ? 'ring-2 ring-accent-brand' : r.kind === 'area' ? 'ring-1 ring-foreground/[0.07]' : '',
+                    'flex min-h-11 items-center gap-2.5 rounded-[10px] px-2.5 py-1.5 text-left font-sans text-[14px] font-semibold leading-tight text-foreground transition-[opacity,box-shadow] duration-300',
+                    r.kind === 'area' ? 'border-[1.5px] border-[#1e2738] bg-white' : 'border-[1.5px] border-dashed border-[#1e2738]/50 bg-transparent',
+                    (hover === `r-${r.id}` || pinned === `r-${r.id}`) && 'ring-2 ring-accent-brand',
                     !on(`r-${r.id}`) && 'opacity-35',
                   )}
                   aria-label={`${r.label}${r.wins.length || FEEDS.some((e) => e[0] === `r-${r.id}`) ? '' : ', no figure'}`}
                 >
+                  {r.kind === 'area' && <AreaIcon name={r.label} className="size-7 flex-none" />}
                   {r.label}
                 </button>
                 <div className="flex flex-wrap items-center gap-2">

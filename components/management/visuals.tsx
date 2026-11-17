@@ -159,7 +159,6 @@ function ResearchBase({ still }: { still: boolean }) {
 }
 
 const BAND = 'rounded-2xl bg-accent-brand/[6%] px-5 py-6 sm:px-8 sm:py-7'
-const CAPTION = 'mt-3 font-sans text-sm leading-[1.45] text-muted-foreground'
 const NAME = 'font-sans text-[15px] font-semibold leading-[1.3] text-foreground'
 const SMALL = 'font-sans text-sm leading-[1.4] text-muted-foreground'
 
@@ -265,16 +264,16 @@ function Collection({ still }: { still: boolean }) {
 }
 
 // 4. How the team worked: the five steps of a project, one small picture each.
-const STEP = 'h-auto w-full'
+const STEP = 'h-auto w-full max-w-[13.75rem]'
 function StepSize({ still }: { still: boolean }) {
   return (
     <svg viewBox="0 0 200 120" aria-hidden="true" className={STEP}>
-      <rect x="14" y="16" width="96" height="88" rx="10" fill={INK} />
+      <rect x="14" y="16" width="96" height="88" rx="10" fill="#fff" stroke={INK} strokeWidth="2.2" />
       {[
-        [26, 32, 44, MID],
-        [36, 48, 62, '#fff'],
-        [36, 64, 40, PALE],
-        [26, 80, 54, MID],
+        [26, 32, 44, B],
+        [36, 48, 62, LINE],
+        [36, 64, 40, MID],
+        [26, 80, 54, B],
       ].map(([x, y, w, c]) => (
         <rect key={String(y)} x={x as number} y={y as number} width={w as number} height="8" rx="4" fill={c as string} />
       ))}
@@ -302,13 +301,13 @@ function StepPrototype({ still }: { still: boolean }) {
       <rect x="20" y="86" width="30" height="8" rx="4" fill={B} />
       <line x1="90" y1="60" x2="110" y2="60" stroke={INK} strokeWidth="2" />
       <path d="M105 54 l6 6 l-6 6" fill="none" stroke={INK} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="116" y="20" width="74" height="80" rx="9" fill={INK} />
+      <rect x="116" y="20" width="74" height="80" rx="9" fill={PALE} stroke={INK} strokeWidth="2.2" />
       {[
-        [126, 34, 30, MID],
+        [126, 34, 30, B],
         [134, 48, 46, '#fff'],
-        [134, 62, 34, PALE],
-        [142, 76, 38, MID],
-        [126, 88, 20, '#fff'],
+        [134, 62, 34, B],
+        [142, 76, 38, '#fff'],
+        [126, 88, 20, B],
       ].map(([x, y, w, c]) => (
         <rect key={String(y)} x={x as number} y={y as number} width={w as number} height="7" rx="3.5" fill={c as string} />
       ))}
@@ -391,10 +390,10 @@ function MadeDeck({ still }: { still: boolean }) {
 function MadeLaunch({ still }: { still: boolean }) {
   return (
     <svg viewBox="0 0 220 130" aria-hidden="true" className={STEP}>
-      <rect x="10" y="14" width="130" height="100" rx="10" fill={INK} />
-      <path d="M64 44 L90 59 L64 74 Z" fill="#fff" />
-      <rect x="24" y="96" width="102" height="5" rx="2.5" fill="#5d6677" />
-      <rect x="24" y="96" width="68" height="5" rx="2.5" fill={MID}>
+      <rect x="10" y="14" width="130" height="100" rx="10" fill={PALE} stroke={INK} strokeWidth="2.2" />
+      <path d="M64 44 L90 59 L64 74 Z" fill={B} />
+      <rect x="24" y="96" width="102" height="5" rx="2.5" fill="#fff" />
+      <rect x="24" y="96" width="68" height="5" rx="2.5" fill={B}>
         {!still && <animate attributeName="width" values="6;102" dur="5s" repeatCount="indefinite" />}
       </rect>
       {[14, 68].map((y) => (
@@ -437,27 +436,23 @@ export function PartVisual({ id }: { id: string }) {
     )
   if (id === 'visible')
     return (
-      <div className={`grid gap-x-10 gap-y-8 md:grid-cols-2 ${BAND}`}>
+      <div className={`grid items-center gap-x-10 gap-y-8 md:grid-cols-2 ${BAND}`}>
         <figure>
           <Tracker still={still} />
-          <figcaption className={CAPTION}>Every request goes into one tracker, and each designer keeps a fixed set of areas.</figcaption>
         </figure>
         <figure>
           <ResearchBase still={still} />
-          <figcaption className={CAPTION}>Six months of research pooled into one base that product managers and engineers search themselves.</figcaption>
         </figure>
       </div>
     )
   if (id === 'upstream')
     return (
-      <div className={`grid gap-x-10 gap-y-8 md:grid-cols-2 ${BAND}`}>
+      <div className={`grid items-center gap-x-10 gap-y-8 md:grid-cols-2 ${BAND}`}>
         <figure>
           <Upstream still={still} />
-          <figcaption className={CAPTION}>Design moved from after the specification to the meetings where the problem is framed.</figcaption>
         </figure>
         <figure>
           <Collection still={still} />
-          <figcaption className={CAPTION}>Collections, a person’s saved set of tables, shipped on August 7, 2025 and is the first thing the data agent reads.</figcaption>
         </figure>
       </div>
     )
